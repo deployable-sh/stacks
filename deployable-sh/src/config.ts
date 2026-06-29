@@ -3,7 +3,7 @@ export const SITE = {
   url: 'https://deployable.sh',
   tagline: 'Self-hostable stacks. Zero babysitting.',
   description:
-    'A curated catalogue of production-shaped Docker Compose stacks - Kafka, n8n, Supabase, Keycloak, MongoDB and more - deployable in one step to Miget, or runnable locally with plain docker compose up.',
+    'A curated catalogue of production-shaped Docker Compose stacks (Kafka, n8n, Supabase, Keycloak, MongoDB and more), deployable in one step to Miget, or runnable locally with plain docker compose up.',
   repoUrl: 'https://github.com/deployable-sh/stacks',
   migetUrl: 'https://miget.com',
   migetAppUrl: 'https://app.miget.com',
