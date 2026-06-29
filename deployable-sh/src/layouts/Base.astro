@@ -31,11 +31,11 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE.url).href;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={new URL('/og.png', SITE.url).href} />
+    <meta property="og:image" content={new URL('/ogv2.png', SITE.url).href} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/og.png', SITE.url).href} />
+    <meta name="twitter:image" content={new URL('/ogv2.png', SITE.url).href} />
 
     {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
   </head>
