@@ -1,0 +1,32 @@
+services:
+  server:
+    x-miget:
+      ram: "1024"
+    environment:
+      PG_DATABASE_URL: ${{db.url}}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?}
+      SERVER_URL: ${MIGET_PUBLIC_URL}
+
+  worker:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment:
+      PG_DATABASE_URL: ${{db.url}}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?}
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  serverdata:
+    x-miget: { size: "5000", type: RWX }

@@ -1,0 +1,42 @@
+services:
+  web:
+    x-miget:
+      ram: "2048"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      NEXTAUTH_URL: ${MIGET_PUBLIC_URL}
+
+  worker:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment:
+      DATABASE_URL: ${{db.url}}
+
+  clickhouse:
+    x-miget:
+      ram: "2048"
+      private: true
+
+  cache:
+    x-miget:
+      ram: "512"
+      private: true
+
+  blob:
+    x-miget:
+      ram: "512"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  chdata:
+    x-miget: { size: "20000", type: RWO }
+  blobdata:
+    x-miget: { size: "10000", type: RWO }

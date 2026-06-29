@@ -1,0 +1,17 @@
+x-node-miget: &node-miget
+  x-miget:
+    ram: "256"
+    private: true
+
+services:
+  nats-0: *node-miget
+  nats-1: *node-miget
+  nats-2: *node-miget
+
+volumes:
+  natsdata-0:
+    x-miget: { size: "5000", type: RWO }
+  natsdata-1:
+    x-miget: { size: "5000", type: RWO }
+  natsdata-2:
+    x-miget: { size: "5000", type: RWO }

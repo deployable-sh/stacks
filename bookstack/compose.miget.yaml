@@ -1,0 +1,15 @@
+services:
+  bookstack:
+    x-miget:
+      ram: "1024"
+
+  db:
+    x-miget:
+      ram: "1024"
+      private: true
+
+volumes:
+  config:
+    x-miget: { size: "5000", type: RWO }
+  dbdata:
+    x-miget: { size: "5000", type: RWO }

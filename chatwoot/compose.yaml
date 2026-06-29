@@ -1,0 +1,83 @@
+x-chatwoot: &chatwoot
+  image: chatwoot/chatwoot:v4.15.1-ce
+  restart: unless-stopped
+
+x-chatwoot-env: &chatwoot-env
+  SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+  FRONTEND_URL: ${FRONTEND_URL:-http://localhost:5000}
+  RAILS_ENV: production
+  NODE_ENV: production
+  INSTALLATION_ENV: docker
+  RAILS_LOG_TO_STDOUT: "true"
+  POSTGRES_HOST: db
+  POSTGRES_PORT: "5432"
+  POSTGRES_USERNAME: chatwoot
+  POSTGRES_PASSWORD: chatwoot-local-only
+  POSTGRES_DATABASE: chatwoot
+  REDIS_URL: redis://broker:6379
+  REDIS_PASSWORD: ${REDIS_AUTH}
+  ACTIVE_STORAGE_SERVICE: local
+  ENABLE_ACCOUNT_SIGNUP: ${ENABLE_ACCOUNT_SIGNUP:-true}
+  MAILER_SENDER_EMAIL: ${MAILER_SENDER_EMAIL:-Chatwoot <support@example.com>}
+  SMTP_ADDRESS: ${SMTP_ADDRESS:-}
+  SMTP_PORT: ${SMTP_PORT:-587}
+  SMTP_USERNAME: ${SMTP_USERNAME:-}
+  SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+
+services:
+  web:
+    <<: *chatwoot
+    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+    environment:
+      <<: *chatwoot-env
+      PORT: "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      - db
+      - broker
+
+  worker:
+    <<: *chatwoot
+    command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+    environment: *chatwoot-env
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      - db
+      - broker
+
+  migrate:
+    <<: *chatwoot
+    command: ["sh", "-c", "bundle exec rails db:chatwoot_prepare && sleep infinity"]
+    environment: *chatwoot-env
+    depends_on:
+      - db
+
+  broker:
+    image: valkey/valkey:8
+    command: ["sh", "-c", "exec valkey-server --maxmemory-policy noeviction --requirepass \"$REDIS_PASSWORD\""]
+    environment:
+      REDIS_PASSWORD: ${REDIS_AUTH}
+    restart: unless-stopped
+    ports:
+      - "6379"
+
+  db:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_USER: chatwoot
+      POSTGRES_PASSWORD: chatwoot-local-only
+      POSTGRES_DB: chatwoot
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  storage:
+  dbdata:

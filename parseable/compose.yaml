@@ -1,0 +1,22 @@
+services:
+  parseable:
+    build: .
+    restart: unless-stopped
+    environment:
+      P_ADDR: 0.0.0.0:5000
+      P_USERNAME: ${P_USERNAME:-admin}
+      P_PASSWORD: ${P_PASSWORD}
+      P_STAGING_DIR: /data/staging
+      P_FS_DIR: /data/store
+      P_S3_URL: ${P_S3_URL:-}
+      P_S3_ACCESS_KEY: ${P_S3_ACCESS_KEY:-}
+      P_S3_SECRET_KEY: ${P_S3_SECRET_KEY:-}
+      P_S3_REGION: ${P_S3_REGION:-us-east-1}
+      P_S3_BUCKET: ${P_S3_BUCKET:-}
+    ports:
+      - "5000:5000"
+    volumes:
+      - parseabledata:/data
+
+volumes:
+  parseabledata:

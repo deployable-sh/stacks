@@ -1,0 +1,104 @@
+x-api-env: &api-env
+  SECRET_KEY: ${SECRET_KEY}
+  DATABASE_URL: postgres://saleor:saleor-local-only@db:5432/saleor
+  DEBUG: "False"
+  ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,api}
+  ALLOWED_CLIENT_HOSTS: ${ALLOWED_CLIENT_HOSTS:-localhost}
+  CELERY_BROKER_URL: redis://broker:6379/1
+  CACHE_URL: redis://broker:6379/0
+  EMAIL_URL: ${EMAIL_URL:-consolemail://}
+  PUBLIC_URL: ${PUBLIC_URL:-http://localhost:5000}
+  DASHBOARD_URL: ${DASHBOARD_URL:-http://localhost:5001}
+  DEFAULT_CHANNEL_SLUG: default-channel
+
+services:
+  api:
+    image: ghcr.io/saleor/saleor:3.23
+    restart: unless-stopped
+    command:
+      - sh
+      - -c
+      - 'export RSA_PRIVATE_KEY="$(openssl genrsa 2048 2>/dev/null)"; exec uvicorn saleor.asgi:application --host=0.0.0.0 --port=8000 --workers=2 --lifespan=auto --ws=none --no-server-header --no-access-log --timeout-keep-alive=35 --timeout-graceful-shutdown=30 --limit-max-requests=10000'
+    environment: *api-env
+    ports:
+      - "8000"
+    volumes:
+      - media:/app/media
+    depends_on:
+      - db
+      - broker
+
+  worker:
+    image: ghcr.io/saleor/saleor:3.23
+    restart: unless-stopped
+    command:
+      - sh
+      - -c
+      - 'export RSA_PRIVATE_KEY="$(openssl genrsa 2048 2>/dev/null)"; exec celery -A saleor --app=saleor.celeryconf:app worker -E -B'
+    environment: *api-env
+    volumes:
+      - media:/app/media
+    depends_on:
+      - db
+      - broker
+
+  migrate:
+    image: ghcr.io/saleor/saleor:3.23
+    restart: unless-stopped
+    command:
+      - sh
+      - -c
+      - 'export RSA_PRIVATE_KEY="$(openssl genrsa 2048 2>/dev/null)"; python3 manage.py migrate && (python3 manage.py createsuperuser --noinput || true) && sleep infinity'
+    environment:
+      <<: *api-env
+      DJANGO_SUPERUSER_EMAIL: ${ADMIN_EMAIL}
+      DJANGO_SUPERUSER_PASSWORD: ${ADMIN_PASSWORD}
+    depends_on:
+      - db
+
+  dashboard:
+    image: ghcr.io/saleor/saleor-dashboard:3.23
+    restart: unless-stopped
+    environment:
+      API_URL: ${API_URL:-http://localhost:5000/graphql/}
+    ports:
+      - "80"
+
+  web-api:
+    image: caddy:2-alpine
+    command: ["caddy", "reverse-proxy", "--from", ":5000", "--to", "api:8000"]
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    depends_on:
+      - api
+
+  web-dashboard:
+    image: caddy:2-alpine
+    command: ["caddy", "reverse-proxy", "--from", ":5000", "--to", "dashboard:80"]
+    restart: unless-stopped
+    ports:
+      - "5001:5000"
+    depends_on:
+      - dashboard
+
+  broker:
+    image: valkey/valkey:8
+    command: ["valkey-server", "--maxmemory-policy", "noeviction", "--protected-mode", "no"]
+    restart: unless-stopped
+    ports:
+      - "6379"
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: saleor
+      POSTGRES_PASSWORD: saleor-local-only
+      POSTGRES_DB: saleor
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  media:
+  dbdata:

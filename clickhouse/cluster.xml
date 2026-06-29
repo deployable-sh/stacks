@@ -1,0 +1,44 @@
+<!-- 3-node ClickHouse cluster: each node runs the server plus an embedded
+     Keeper (Raft). Per-node identity comes from env (KEEPER_ID,
+     REPLICA_NAME) via from_env so all nodes share one image. -->
+<clickhouse>
+    <listen_host>0.0.0.0</listen_host>
+
+    <keeper_server>
+        <tcp_port>9181</tcp_port>
+        <server_id from_env="KEEPER_ID"/>
+        <log_storage_path>/var/lib/clickhouse/coordination/log</log_storage_path>
+        <snapshot_storage_path>/var/lib/clickhouse/coordination/snapshots</snapshot_storage_path>
+        <raft_configuration>
+            <server><id>1</id><hostname>ch-1</hostname><port>9234</port></server>
+            <server><id>2</id><hostname>ch-2</hostname><port>9234</port></server>
+            <server><id>3</id><hostname>ch-3</hostname><port>9234</port></server>
+        </raft_configuration>
+    </keeper_server>
+
+    <zookeeper>
+        <node><host>ch-1</host><port>9181</port></node>
+        <node><host>ch-2</host><port>9181</port></node>
+        <node><host>ch-3</host><port>9181</port></node>
+    </zookeeper>
+
+    <remote_servers>
+        <main>
+            <shard>
+                <internal_replication>true</internal_replication>
+                <replica><host>ch-1</host><port>9000</port></replica>
+                <replica><host>ch-2</host><port>9000</port></replica>
+                <replica><host>ch-3</host><port>9000</port></replica>
+            </shard>
+        </main>
+    </remote_servers>
+
+    <macros>
+        <shard>01</shard>
+        <replica from_env="REPLICA_NAME"/>
+    </macros>
+
+    <!-- Replication fetches must advertise the service name, not the pod
+         hostname. -->
+    <interserver_http_host from_env="REPLICA_NAME"/>
+</clickhouse>

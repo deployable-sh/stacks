@@ -1,0 +1,77 @@
+services:
+  valkey-node-1:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: node
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_ANNOUNCE_HOST: valkey-node-1
+    volumes: [node1-data:/data]
+
+  valkey-node-2:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: node
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_ANNOUNCE_HOST: valkey-node-2
+    volumes: [node2-data:/data]
+
+  valkey-node-3:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: node
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_ANNOUNCE_HOST: valkey-node-3
+    volumes: [node3-data:/data]
+
+  valkey-node-4:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: node
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_ANNOUNCE_HOST: valkey-node-4
+    volumes: [node4-data:/data]
+
+  valkey-node-5:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: node
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_ANNOUNCE_HOST: valkey-node-5
+    volumes: [node5-data:/data]
+
+  valkey-node-6:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: node
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_ANNOUNCE_HOST: valkey-node-6
+    volumes: [node6-data:/data]
+
+  valkey-init:
+    build: .
+    restart: "no"
+    environment:
+      VALKEY_ROLE: init
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      CLUSTER_NODES: "valkey-node-1:6379 valkey-node-2:6379 valkey-node-3:6379 valkey-node-4:6379 valkey-node-5:6379 valkey-node-6:6379"
+    depends_on:
+      - valkey-node-1
+      - valkey-node-2
+      - valkey-node-3
+      - valkey-node-4
+      - valkey-node-5
+      - valkey-node-6
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:
+  node4-data:
+  node5-data:
+  node6-data:

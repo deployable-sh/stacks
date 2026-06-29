@@ -1,0 +1,22 @@
+services:
+  roundcube:
+    x-miget:
+      ram: "512"
+      private: true
+    environment:
+      ROUNDCUBEMAIL_DB_HOST: ${{db.host}}
+      ROUNDCUBEMAIL_DB_PORT: ${{db.port}}
+      ROUNDCUBEMAIL_DB_USER: ${{db.username}}
+      ROUNDCUBEMAIL_DB_PASSWORD: ${{db.password}}
+      ROUNDCUBEMAIL_DB_NAME: ${{db.database}}
+
+  web:
+    x-miget:
+      ram: "128"
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

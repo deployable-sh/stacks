@@ -1,0 +1,8 @@
+services:
+  memos:
+    x-miget:
+      ram: "256"
+
+volumes:
+  memosdata:
+    x-miget: { size: "2000", type: RWO }

@@ -1,0 +1,20 @@
+services:
+  garage:
+    x-miget:
+      ram: "1024"
+      private: true
+
+  webui:
+    x-miget:
+      ram: "256"
+      private: true
+
+  web:
+    x-miget:
+      ram: "128"
+
+volumes:
+  garagemeta:
+    x-miget: { size: "1000", type: RWO }
+  garagedata:
+    x-miget: { size: "20000", type: RWO }

@@ -1,0 +1,17 @@
+services:
+  keycloak:
+    x-miget:
+      ram: "2048"
+    environment:
+      KC_DB_URL_HOST: ${{db.host}}
+      KC_DB_URL_PORT: ${{db.port}}
+      KC_DB_URL_DATABASE: ${{db.database}}
+      KC_DB_USERNAME: ${{db.username}}
+      KC_DB_PASSWORD: ${{db.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

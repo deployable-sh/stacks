@@ -1,0 +1,17 @@
+services:
+  jellyfin:
+    build: .
+    restart: unless-stopped
+    environment:
+      JELLYFIN_PublishedServerUrl: ${PUBLISHED_SERVER_URL:-http://localhost:5000}
+    ports:
+      - "5000:5000"
+    volumes:
+      - config:/config
+      - cache:/cache
+      - media:/media
+
+volumes:
+  config:
+  cache:
+  media:

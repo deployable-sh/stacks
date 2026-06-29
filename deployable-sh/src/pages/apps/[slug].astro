@@ -1,0 +1,260 @@
+---
+import Base from '../../layouts/Base.astro';
+import PlanRec from '../../components/PlanRec.astro';
+import CompareTables from '../../components/CompareTables.astro';
+import { APPS } from '../../data/apps';
+import { hobbyFit, fmtRam } from '../../lib/sizing';
+import { SITE } from '../../config';
+
+export function getStaticPaths() {
+  return APPS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+const { app } = Astro.props;
+const hobby = hobbyFit(app);
+const pageUrl = `${SITE.url}/apps/${app.slug}/`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: app.name,
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Docker / Miget',
+    description: app.seoDescription,
+    url: pageUrl,
+    offers: {
+      '@type': 'Offer',
+      price: hobby.fit.usd.toFixed(2),
+      priceCurrency: 'USD',
+      description: `Runs on the Miget ${fmtRam(hobby.fit.ramMiB)} plan`,
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: app.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'deployable.sh', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: app.category, item: `${SITE.url}/#catalogue` },
+      { '@type': 'ListItem', position: 3, name: app.name, item: pageUrl },
+    ],
+  },
+];
+---
+
+<Base
+  title={`${app.seoTitle} · deployable.sh`}
+  description={app.seoDescription}
+  keywords={app.keywords}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">deployable.sh</a> <span>/</span>
+      <a href="/#catalogue">{app.category.toLowerCase()}</a> <span>/</span>
+      <span class="crumb-here">{app.slug}</span>
+    </nav>
+
+    <header class="app-hero">
+      <div class="hero-badges">
+        <span class="badge badge-accent">{app.category}</span>
+        {app.status === 'experimental' && <span class="badge badge-amber">experimental</span>}
+        <span class="badge">{app.services} {app.services === 1 ? 'service' : 'services'}</span>
+        <span class="badge">{fmtRam(app.ramMiB)} RAM</span>
+        <span class="badge">{app.diskGB} GB disk</span>
+      </div>
+      <h1>{app.name}</h1>
+      <p class="hero-tag">{app.tagline}</p>
+      <div class="hero-ctas">
+        <a class="deploy-badge" href={`https://miget.com/deploy?repo=${SITE.repoUrl}&path=${app.slug}&type=stack`} rel="noopener" aria-label="Deploy to Miget" style="display:inline-flex;align-items:center">
+          <img src="/deploy-to-miget.svg" alt="Deploy to Miget" width="174" height="40" style="display:block" />
+        </a>
+        <a class="btn btn-ghost" href={`${SITE.repoUrl}/tree/main/${app.slug}`} rel="noopener">View template source</a>
+      </div>
+      <p style="color:var(--text-dim);font-size:0.85rem;margin:0.7rem 0 0;font-family:var(--mono)">One-click deploy, from ${hobby.fit.usd}/mo on a Miget plan.</p>
+    </header>
+
+    <section class="intro">
+      {app.intro.map((p) => <p>{p}</p>)}
+      <p class="upstream-link">
+        Upstream project: <a href={app.upstreamUrl} rel="noopener">{app.upstream}</a>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>what you get</h2>
+      <ul class="features">
+        {app.features.map((f) => <li>{f}</li>)}
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>topology</h2>
+      <div class="table-scroll">
+        <table class="data">
+          <thead><tr><th>Service</th><th>Role</th><th>Public</th></tr></thead>
+          <tbody>
+            {app.topology.map((t) => (
+              <tr><td>{t.service}</td><td>{t.role}</td><td>{t.isPublic}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>miget sizing</h2>
+      <PlanRec app={app} />
+    </section>
+
+    <CompareTables app={app} />
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>deploy it</h2>
+      <div class="deploy-grid">
+        <div class="panel">
+          <h3 class="deploy-h">On Miget</h3>
+          <ol class="deploy-steps">
+            <li>Create a <strong>Compose Stack</strong> in <a href={SITE.migetAppUrl} rel="noopener">app.miget.com</a> pointing at the templates repository</li>
+            <li>Set the stack <em>path</em> to <code>{app.slug}</code></li>
+            {app.requiredVars.length > 0 ? (
+              <li>
+                Set the required {app.requiredVars.length === 1 ? 'variable' : 'variables'}:
+                <ul class="vars">
+                  {app.requiredVars.map((v) => (
+                    <li><code>{v.name}</code>, {v.what}</li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>No required variables - deploy as-is</li>
+            )}
+            <li>Deploy. Miget layers <code>compose.miget.yaml</code> (RAM, privacy, volumes, managed services) automatically</li>
+          </ol>
+        </div>
+        <div class="panel">
+          <h3 class="deploy-h">Locally first?</h3>
+          <p class="deploy-local">
+            Every template is portable, vanilla Docker Compose - the Miget overrides are ignored locally:
+          </p>
+          <pre><code>git clone {SITE.repoUrl}
+cd {'miget-compose-templates/' + app.slug}
+docker compose up -d</code></pre>
+          <p class="deploy-local">
+            Same files, same behavior. The <a href={`${SITE.repoUrl}/tree/main/${app.slug}`} rel="noopener">template README</a> covers connection strings and scaling notes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>faq</h2>
+      <div class="faq">
+        {app.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="final-cta panel">
+      <h2>Ship {app.name} today</h2>
+      <p>
+        One compose stack, {fmtRam(app.ramMiB)} of RAM, from ${hobby.fit.usd}/month flat, and it runs on your laptop
+        with the same files.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href={SITE.migetAppUrl} rel="noopener">Deploy on Miget</a>
+        <a class="btn btn-ghost" href="/#catalogue">Browse the catalogue</a>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .crumbs {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 1.5rem 0 0;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .crumbs a { color: var(--text-dim); }
+  .crumbs a:hover { color: var(--accent); }
+  .crumb-here { color: var(--text-muted); }
+
+  .app-hero { margin: 1.5rem 0 0; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+  .app-hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin: 0 0 0.5rem; }
+  .hero-tag { font-size: 1.1rem; color: var(--text-muted); max-width: 64ch; margin: 0 0 1.5rem; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+  .intro { margin-top: 2.5rem; }
+  .intro p { max-width: 76ch; color: var(--text); }
+  .upstream-link { font-size: 0.875rem; color: var(--text-dim) !important; }
+
+  .features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 0.6rem 1.5rem;
+  }
+  .features li {
+    padding-left: 1.4rem;
+    position: relative;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .features li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .deploy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 760px) { .deploy-grid { grid-template-columns: 1fr; } }
+  .deploy-h { margin: 0 0 0.75rem; font-size: 1rem; }
+  .deploy-steps { margin: 0; padding-left: 1.25rem; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .vars { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+  .vars li { margin-bottom: 0.25rem; }
+  .deploy-local { color: var(--text-muted); font-size: 0.9rem; }
+  .deploy-grid pre { margin: 0.75rem 0; }
+
+  .faq { display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq details {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1.2rem;
+  }
+  .faq details[open] { border-color: var(--border-bright); }
+  .faq summary {
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .faq summary::marker { color: var(--accent); }
+  .faq p { color: var(--text-muted); font-size: 0.92rem; margin: 0.75rem 0 0; max-width: 76ch; }
+
+  .final-cta { margin-top: 3.5rem; text-align: center; padding: 2.5rem 1.5rem; border-color: var(--accent-dim); }
+  .final-cta h2 { margin: 0 0 0.5rem; }
+  .final-cta p { color: var(--text-muted); max-width: 56ch; margin: 0 auto 1.25rem; }
+  .final-cta .hero-ctas { justify-content: center; }
+</style>

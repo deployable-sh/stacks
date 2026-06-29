@@ -1,0 +1,9 @@
+services:
+  ollama:
+    x-miget:
+      ram: "4096"
+      private: true
+
+volumes:
+  models:
+    x-miget: { size: "50000", type: RWO }

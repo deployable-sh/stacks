@@ -1,0 +1,102 @@
+---
+import type { AppData } from '../data/types';
+import { hobbyFit, paasEstimates, fmtRam } from '../lib/sizing';
+import { SITE } from '../config';
+
+interface Props {
+  app: AppData;
+}
+
+const { app } = Astro.props;
+const hobby = hobbyFit(app);
+const paas = paasEstimates(app).sort((a, b) => b.usd - a.usd);
+---
+
+{app.saasCompare.length > 0 && (
+  <section>
+    <h2 class="section-title" id="vs-saas"><span class="hash">#</span>vs. the managed service</h2>
+    <p class="lead">
+      What the hosted equivalents charge, against the flat Miget plan this stack fits on. Prices as of {SITE.pricingAsOf},
+      sources linked.
+    </p>
+    <div class="table-scroll">
+      <table class="data">
+        <thead>
+          <tr><th>Service</th><th>Plan</th><th>Monthly</th><th>What you get</th></tr>
+        </thead>
+        <tbody>
+          <tr class="row-miget">
+            <td>{app.name} on Miget <span class="pick">★</span></td>
+            <td>{fmtRam(hobby.fit.ramMiB)} plan</td>
+            <td><strong>${hobby.fit.usd}</strong></td>
+            <td>this whole stack, flat - no usage meters, and room left for your own apps</td>
+          </tr>
+          {app.saasCompare.map((row) => (
+            <tr>
+              <td><a href={row.url} rel="noopener nofollow">{row.name}</a></td>
+              <td>{row.plan}</td>
+              <td>{row.usd === null ? 'usage-based' : `~$${row.usd}`}</td>
+              <td>{row.priceNote}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {app.saasCompareNote && <p class="foot">{app.saasCompareNote}</p>}
+  </section>
+)}
+
+<section>
+  <h2 class="section-title" id="vs-paas"><span class="hash">#</span>vs. other PaaS</h2>
+  <p class="lead">
+    Estimated monthly cost of running this exact stack ({fmtRam(app.ramMiB)} RAM, {app.diskGB} GB disk,
+    {' '}{app.services} {app.services === 1 ? 'container' : 'containers'}) elsewhere, from published {SITE.pricingAsOf} rates.
+  </p>
+  <div class="table-scroll">
+    <table class="data">
+      <thead>
+        <tr><th>Platform</th><th>Est. monthly</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr class="row-miget">
+          <td>Miget <span class="pick">★</span></td>
+          <td><strong>${hobby.fit.usd}</strong> flat</td>
+          <td>
+            compose stacks first-class: one deploy, dedicated vCPU, managed Postgres/Valkey, volumes and TLS all
+            included in the plan
+          </td>
+        </tr>
+        {paas.map((p) => (
+          <tr>
+            <td><a href={p.url} rel="noopener nofollow">{p.name}</a></td>
+            <td>~${p.usd}</td>
+            <td>{p.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="foot">
+    Estimates assume RAM fully allocated at published on-demand rates - and sticker price isn't the whole comparison:
+    the cheaper rows buy burstable shared CPUs, per-service wiring instead of a compose deploy, and managed databases
+    billed separately. Heroku and DO App Platform have no persistent volumes at all - stateful stacks like this one
+    need workarounds there.
+  </p>
+</section>
+
+<style>
+  .lead { color: var(--text-muted); max-width: 72ch; }
+  .foot { color: var(--text-dim); font-size: 0.82rem; max-width: 72ch; }
+  .row-miget td {
+    background: var(--accent-glow);
+    border-top: 1px solid var(--accent-dim);
+    border-bottom: 1px solid var(--accent-dim) !important;
+  }
+  .row-miget td:first-child {
+    border-left: 3px solid var(--accent);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .row-miget strong { color: var(--accent); font-size: 1.05em; }
+  .pick { color: var(--accent); font-size: 0.8em; }
+</style>

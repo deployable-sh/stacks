@@ -1,0 +1,13 @@
+services:
+  hasura:
+    x-miget:
+      ram: "1024"
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: ${{db.url}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

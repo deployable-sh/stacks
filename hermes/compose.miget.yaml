@@ -1,0 +1,8 @@
+services:
+  hermes:
+    x-miget:
+      ram: "2048"
+
+volumes:
+  hermesdata:
+    x-miget: { size: "5000", type: RWO }

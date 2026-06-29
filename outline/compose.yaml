@@ -1,0 +1,47 @@
+services:
+  outline:
+    image: outlinewiki/outline:1.8.1
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      URL: ${URL:-http://localhost:5000}
+      SECRET_KEY: ${SECRET_KEY}
+      UTILS_SECRET: ${UTILS_SECRET}
+      DATABASE_URL: postgres://outline:outline-local-only@db:5432/outline
+      PGSSLMODE: disable
+      REDIS_URL: redis://broker:6379
+      FILE_STORAGE: s3
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY}
+      AWS_REGION: ${S3_REGION:-us-east-1}
+      AWS_S3_UPLOAD_BUCKET_URL: ${S3_BUCKET_URL}
+      AWS_S3_UPLOAD_BUCKET_NAME: ${S3_BUCKET_NAME}
+      AWS_S3_FORCE_PATH_STYLE: "true"
+      AWS_S3_ACL: private
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL:-}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - broker
+
+  broker:
+    build: ./broker
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: outline
+      POSTGRES_PASSWORD: outline-local-only
+      POSTGRES_DB: outline
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

@@ -1,0 +1,19 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    restart: unless-stopped
+    environment:
+      EULA: ${EULA}
+      TYPE: ${TYPE:-PAPER}
+      VERSION: ${VERSION:-LATEST}
+      MEMORY: ${MEMORY:-2G}
+      MOTD: ${MOTD:-A Miget Minecraft Server}
+    ports:
+      - "25565:25565"
+    volumes:
+      - mcdata:/data
+    stdin_open: true
+    tty: true
+
+volumes:
+  mcdata:

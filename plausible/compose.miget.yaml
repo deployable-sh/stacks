@@ -1,0 +1,22 @@
+services:
+  plausible:
+    x-miget:
+      ram: "1024"
+    environment:
+      DATABASE_URL: ${{db.url}}
+
+  clickhouse:
+    x-miget:
+      ram: "2048"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  chdata:
+    x-miget: { size: "20000", type: RWO }

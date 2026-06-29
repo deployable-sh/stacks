@@ -1,0 +1,13 @@
+services:
+  filestash:
+    x-miget:
+      ram: "512"
+      private: true
+
+  web:
+    x-miget:
+      ram: "128"
+
+volumes:
+  filestashstate:
+    x-miget: { size: "1000", type: RWO }

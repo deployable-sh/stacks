@@ -1,0 +1,10 @@
+services:
+  searxng:
+    x-miget:
+      ram: "512"
+
+volumes:
+  config:
+    x-miget: { size: "1000", type: RWO }
+  cache:
+    x-miget: { size: "2000", type: RWO }

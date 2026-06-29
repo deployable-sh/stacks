@@ -1,0 +1,49 @@
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:v2.7.5
+    restart: unless-stopped
+    environment:
+      IMMICH_PORT: "5000"
+      DB_HOSTNAME: database
+      DB_USERNAME: immich
+      DB_PASSWORD: ${DB_PASSWORD:-immich-local-only}
+      DB_DATABASE_NAME: immich
+      REDIS_HOSTNAME: redis
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+      - redis
+    volumes:
+      - library:/data
+
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:v2.7.5
+    restart: unless-stopped
+    volumes:
+      - model-cache:/cache
+
+  database:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: immich
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-immich-local-only}
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: immich
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+    ports:
+      - "5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  redis:
+    image: valkey/valkey:8-alpine
+    restart: unless-stopped
+    ports:
+      - "6379"
+
+volumes:
+  library:
+  model-cache:
+  dbdata:

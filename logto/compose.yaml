@@ -1,0 +1,41 @@
+services:
+  logto:
+    build: ./core
+    restart: unless-stopped
+    environment:
+      DB_URL: postgresql://logto:logto-local-only@db:5432/logto
+      ADMIN_PORT: "3002"
+      ENDPOINT: ${ENDPOINT:-http://localhost:5000}
+      ADMIN_ENDPOINT: ${ADMIN_ENDPOINT:-http://localhost:5001}
+      TRUST_PROXY_HEADER: "1"
+    ports:
+      - "5000:5000"
+      - "3002"
+    depends_on:
+      - db
+
+  web-admin:
+    build: ./proxy
+    restart: unless-stopped
+    environment:
+      PROXY_TARGET: http://logto:3002
+    ports:
+      - "5001:5000"
+    depends_on:
+      - logto
+
+  db:
+    ports:
+    - "5432"
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: logto
+      POSTGRES_PASSWORD: logto-local-only
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: logto
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

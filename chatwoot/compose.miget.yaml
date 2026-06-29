@@ -1,0 +1,34 @@
+services:
+  web:
+    x-miget:
+      ram: "1024"
+    environment:
+      FRONTEND_URL: ${MIGET_PUBLIC_URL}
+
+  worker:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment:
+      FRONTEND_URL: ${MIGET_PUBLIC_URL}
+
+  migrate:
+    x-miget:
+      ram: "512"
+      private: true
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      ram: "1024"
+      private: true
+
+volumes:
+  storage:
+    x-miget: { size: "5000", type: RWX }
+  dbdata:
+    x-miget: { size: "10000", type: RWO }

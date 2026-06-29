@@ -1,0 +1,53 @@
+x-twenty-env: &twenty-env
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+  SERVER_URL: ${SERVER_URL:-http://localhost:5000}
+  PG_DATABASE_URL: postgres://twenty:twenty-local-only@db:5432/twenty
+  REDIS_URL: redis://broker:6379
+  STORAGE_TYPE: local
+
+services:
+  server:
+    image: twentycrm/twenty:v2
+    restart: unless-stopped
+    environment:
+      <<: *twenty-env
+      NODE_PORT: "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - serverdata:/app/packages/twenty-server/.local-storage
+    depends_on:
+      - db
+      - broker
+
+  worker:
+    image: twentycrm/twenty:v2
+    restart: unless-stopped
+    command: ["yarn", "worker:prod"]
+    environment:
+      <<: *twenty-env
+      DISABLE_DB_MIGRATIONS: "true"
+      DISABLE_CRON_JOBS_REGISTRATION: "true"
+    volumes:
+      - serverdata:/app/packages/twenty-server/.local-storage
+    depends_on:
+      - db
+      - broker
+
+  broker:
+    build: ./broker
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: twenty
+      POSTGRES_PASSWORD: twenty-local-only
+      POSTGRES_DB: twenty
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  serverdata:
+  dbdata:

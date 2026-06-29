@@ -1,0 +1,41 @@
+services:
+  plausible:
+    build: .
+    restart: unless-stopped
+    environment:
+      HTTP_PORT: "5000"
+      BASE_URL: ${BASE_URL:-http://localhost:5000}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_URL: postgres://plausible:plausible-local-only@db:5432/plausible_db
+      CLICKHOUSE_DATABASE_URL: http://clickhouse:8123/plausible_events_db
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - clickhouse
+
+  clickhouse:
+    build: ./clickhouse
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_SKIP_USER_SETUP: "1"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    volumes:
+      - chdata:/var/lib/clickhouse
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: plausible
+      POSTGRES_PASSWORD: plausible-local-only
+      POSTGRES_DB: plausible_db
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  chdata:
+  dbdata:

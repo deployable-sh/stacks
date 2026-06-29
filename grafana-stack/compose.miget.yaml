@@ -1,0 +1,18 @@
+services:
+  grafana:
+    x-miget:
+      ram: "512"
+  prometheus:
+    x-miget:
+      ram: "512"
+  loki:
+    x-miget:
+      ram: "512"
+
+volumes:
+  grafanadata:
+    x-miget: { size: "2000", type: RWO }
+  promdata:
+    x-miget: { size: "10000", type: RWO }
+  lokidata:
+    x-miget: { size: "10000", type: RWO }

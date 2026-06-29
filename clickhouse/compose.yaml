@@ -1,0 +1,46 @@
+x-ch: &ch
+  build: .
+  image: miget-clickhouse:local
+  restart: unless-stopped
+
+x-ch-env: &ch-env
+  CLICKHOUSE_USER: app
+  CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+  CLICKHOUSE_DB: app
+  CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+
+services:
+  ch-1:
+    <<: *ch
+    environment:
+      <<: *ch-env
+      KEEPER_ID: "1"
+      REPLICA_NAME: ch-1
+    ports: ["8123:8123", "9000", "9181", "9234"]
+    volumes:
+      - chdata-1:/var/lib/clickhouse
+
+  ch-2:
+    <<: *ch
+    environment:
+      <<: *ch-env
+      KEEPER_ID: "2"
+      REPLICA_NAME: ch-2
+    ports: ["8123", "9000", "9181", "9234"]
+    volumes:
+      - chdata-2:/var/lib/clickhouse
+
+  ch-3:
+    <<: *ch
+    environment:
+      <<: *ch-env
+      KEEPER_ID: "3"
+      REPLICA_NAME: ch-3
+    ports: ["8123", "9000", "9181", "9234"]
+    volumes:
+      - chdata-3:/var/lib/clickhouse
+
+volumes:
+  chdata-1:
+  chdata-2:
+  chdata-3:

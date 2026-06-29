@@ -1,0 +1,34 @@
+services:
+  infisical:
+    image: infisical/infisical:v0.161.0
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      SITE_URL: ${SITE_URL:-http://localhost:5000}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      AUTH_SECRET: ${AUTH_SECRET}
+      DB_CONNECTION_URI: postgres://infisical:infisical-local-only@db:5432/infisical
+      REDIS_URL: redis://broker:6379
+      TELEMETRY_ENABLED: "false"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - broker
+
+  broker:
+    build: ./broker
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: infisical
+      POSTGRES_PASSWORD: infisical-local-only
+      POSTGRES_DB: infisical
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

@@ -1,0 +1,24 @@
+services:
+  zitadel:
+    x-miget:
+      ram: "1024"
+    environment:
+      ZITADEL_DATABASE_POSTGRES_HOST: ${{db.host}}
+      ZITADEL_DATABASE_POSTGRES_PORT: ${{db.port}}
+      ZITADEL_DATABASE_POSTGRES_DATABASE: ${{db.database}}
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: ${{db.username}}
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: ${{db.password}}
+      ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: require
+      ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: ${{db.username}}
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: ${{db.password}}
+      ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: require
+      ZITADEL_EXTERNALDOMAIN: ${MIGET_PUBLIC_HOST}
+      ZITADEL_EXTERNALPORT: "443"
+      ZITADEL_EXTERNALSECURE: "true"
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

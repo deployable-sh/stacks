@@ -1,0 +1,21 @@
+services:
+  flowise:
+    x-miget:
+      ram: "1024"
+    environment:
+      DATABASE_HOST: ${{db.host}}
+      DATABASE_PORT: ${{db.port}}
+      DATABASE_NAME: ${{db.database}}
+      DATABASE_USER: ${{db.username}}
+      DATABASE_PASSWORD: ${{db.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  flowisedata:
+    x-miget: { size: "5000", type: RWO }

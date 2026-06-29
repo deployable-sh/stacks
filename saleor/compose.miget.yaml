@@ -1,0 +1,51 @@
+services:
+  api:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment:
+      DATABASE_URL: ${{db.url}}
+      ALLOWED_HOSTS: "*"
+
+  worker:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment:
+      DATABASE_URL: ${{db.url}}
+
+  migrate:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment:
+      DATABASE_URL: ${{db.url}}
+
+  dashboard:
+    x-miget:
+      ram: "256"
+      private: true
+
+  web-api:
+    x-miget:
+      ram: "128"
+
+  web-dashboard:
+    x-miget:
+      ram: "128"
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  media:
+    x-miget: { size: "5000", type: RWX }

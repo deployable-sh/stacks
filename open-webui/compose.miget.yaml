@@ -1,0 +1,8 @@
+services:
+  open-webui:
+    x-miget:
+      ram: "2048"
+
+volumes:
+  webuidata:
+    x-miget: { size: "5000", type: RWO }

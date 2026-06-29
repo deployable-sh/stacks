@@ -1,0 +1,9 @@
+services:
+  valkey:
+    x-miget:
+      ram: "512"
+      private: true
+
+volumes:
+  valkeydata:
+    x-miget: { size: "5000", type: RWO }

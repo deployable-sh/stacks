@@ -1,0 +1,382 @@
+---
+import Base from '../layouts/Base.astro';
+import AppCard from '../components/AppCard.astro';
+import { appsByCategory, APPS } from '../data/apps';
+import { SITE, HOBBY_PLANS } from '../config';
+
+const categories = appsByCategory();
+const minPrice = HOBBY_PLANS[0]!.usd;
+
+const chips = [
+  { label: 'All', q: '' },
+  { label: 'Databases', q: 'database' },
+  { label: 'LLM', q: 'llm' },
+  { label: 'AI Agents', q: 'agent' },
+  { label: 'Vectors', q: 'vector' },
+  { label: 'Streaming', q: 'streaming' },
+  { label: 'Caches', q: 'cache' },
+  { label: 'Auth', q: 'auth' },
+  { label: 'Monitoring', q: 'monitoring' },
+  { label: 'Automation', q: 'automation' },
+  { label: 'CMS', q: 'cms' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'deployable.sh service catalogue',
+    numberOfItems: APPS.length,
+    itemListElement: APPS.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: a.name,
+      url: `${SITE.url}/apps/${a.slug}/`,
+    })),
+  },
+];
+---
+
+<Base
+  title="deployable.sh - self-hostable stacks, deployed in one step"
+  description={SITE.description}
+  keywords={[
+    'self-hosted apps',
+    'docker compose templates',
+    'deploy compose stack',
+    'self-host catalogue',
+    'miget templates',
+    'one-click deploy docker',
+  ]}
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="wrap">
+      <h1>
+        Everything you'd <span class="strike">self-host</span><br />
+        <span class="accent">without hosting it yourself.</span>
+      </h1>
+      <p class="hero-sub">
+        {APPS.length} production-shaped Docker Compose stacks - Kafka clusters, n8n in queue mode, Supabase, Keycloak,
+        MongoDB replica sets - deployable to <a href={SITE.migetUrl} rel="noopener">Miget</a> in one step, from
+        ${minPrice}/month flat. Open source, your data, no usage meters. And every template runs on your laptop with
+        plain <code>docker compose up</code>.
+      </p>
+      <div class="hero-term" aria-hidden="true">
+        <div class="term-bar"><span></span><span></span><span></span></div>
+        <pre class="term-body"><code><span class="t-dim"># pick a stack, point Miget at it, deploy</span>
+<span class="t-prompt">$</span> stack path: <span class="t-accent">kafka</span>
+<span class="t-dim">→ 3 brokers · KRaft · Kafbat UI · rf=3 · volumes provisioned</span>
+<span class="t-ok">✓ deployed</span> - bootstrap kafka-1:9092,kafka-2:9092,kafka-3:9092</code></pre>
+      </div>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#catalogue">Browse {APPS.length} stacks</a>
+        <a class="btn btn-ghost" href={SITE.repoUrl} rel="noopener">Templates on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="catalogue">
+    <div class="search-bar">
+      <span class="search-ico" aria-hidden="true">⌕</span>
+      <input
+        id="catalogue-search"
+        type="search"
+        placeholder={`Search ${APPS.length} stacks, try "llm", "database", "kafka", "supabase"...`}
+        aria-label="Search stacks by name, keyword, or category"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span class="search-count" id="search-count" aria-live="polite"></span>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Filter by category">
+      {chips.map((c, i) => (
+        <button type="button" class:list={['chip', { 'is-active': i === 0 }]} data-q={c.q}>{c.label}</button>
+      ))}
+    </div>
+    <p class="no-results" id="no-results" hidden>
+      No stacks match <strong></strong>. Try a broader term like <code>database</code>, <code>queue</code>, or <code>auth</code>.
+    </p>
+
+    {[...categories.entries()].map(([category, apps]) =>
+      apps.length > 0 && (
+        <div class="cat">
+          <h2 class="section-title"><span class="hash">#</span>{category.toLowerCase()}</h2>
+          <div class="grid">
+            {apps.map((app) => <AppCard app={app} />)}
+          </div>
+        </div>
+      )
+    )}
+  </section>
+
+  <section class="wrap" id="how-it-works">
+    <h2 class="section-title"><span class="hash">#</span>how it works</h2>
+    <div class="steps">
+      <div class="panel step">
+        <p class="step-n">01</p>
+        <h3>Pick a stack</h3>
+        <p>
+          Every template is a directory with portable <code>compose.yaml</code> plus
+          <code>compose.miget.yaml</code> overrides (RAM, privacy, volumes, managed services) that Miget layers on
+          automatically - and plain <code>docker compose</code> ignores.
+        </p>
+      </div>
+      <div class="panel step">
+        <p class="step-n">02</p>
+        <h3>Point Miget at it</h3>
+        <p>
+          Create a Compose Stack in <a href={SITE.migetAppUrl} rel="noopener">app.miget.com</a>, point it at the
+          templates repository, set the path to the stack's directory, fill the (few) required variables.
+        </p>
+      </div>
+      <div class="panel step">
+        <p class="step-n">03</p>
+        <h3>Deploy - that's it</h3>
+        <p>
+          Clusters form themselves, managed Postgres/Valkey get provisioned and auto-wired, volumes persist, the public
+          entrypoint gets a domain and TLS. Scaling notes live in each template's README.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="pricing-philosophy">
+    <h2 class="section-title"><span class="hash">#</span>why the math works</h2>
+    <div class="philosophy">
+      <div class="panel">
+        <h3>One flat plan, many stacks</h3>
+        <p>
+          A Miget plan is a fixed pool of vCPU, RAM, and disk. Deploy a stack into it; whatever's left runs your apps,
+          another stack, or preview environments. No per-service pricing, no per-seat pricing, no execution metering.
+        </p>
+      </div>
+      <div class="panel">
+        <h3>SaaS meters, you don't</h3>
+        <p>
+          Managed equivalents meter what you do - executions, events, MAUs, requests, eCKUs. Self-hosted stacks meter
+          nothing. Every app page on this site shows the crossover math with sourced {SITE.pricingAsOf} prices.
+        </p>
+      </div>
+      <div class="panel">
+        <h3>Exit costs: zero</h3>
+        <p>
+          The templates are vanilla Docker Compose on GitHub. They run identically on your laptop, a VPS, or any
+          compose-capable platform. If you leave, you take the files and the data with you. That's the point.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="final-cta panel">
+      <h2>$ deploy something</h2>
+      <p>From ${minPrice}/month for a full backend. The catalogue is open source, star it, fork it, PR a template.</p>
+      <div class="hero-ctas center">
+        <a class="btn btn-primary" href={SITE.migetAppUrl} rel="noopener">Open Miget</a>
+        <a class="btn btn-ghost" href="#catalogue">Back to catalogue</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const input = document.getElementById('catalogue-search') as HTMLInputElement | null;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('#catalogue .card'));
+  const cats = Array.from(document.querySelectorAll<HTMLElement>('#catalogue .cat'));
+  const countEl = document.getElementById('search-count');
+  const noResults = document.getElementById('no-results');
+  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('#chips .chip'));
+  const total = cards.length;
+
+  function syncChips(q: string) {
+    const norm = q.trim().toLowerCase();
+    chips.forEach((chip) => chip.classList.toggle('is-active', (chip.dataset.q || '') === norm));
+  }
+
+  function apply(q: string) {
+    const tokens = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    let visible = 0;
+    cards.forEach((card) => {
+      const hay = card.dataset.search || '';
+      const show = tokens.every((t) => hay.includes(t));
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    cats.forEach((cat) => {
+      const any = cat.querySelector('.card:not([style*="display: none"])');
+      cat.style.display = any ? '' : 'none';
+    });
+    if (countEl) countEl.textContent = tokens.length ? `${visible} / ${total}` : '';
+    if (noResults) {
+      noResults.hidden = visible !== 0 || tokens.length === 0;
+      const strong = noResults.querySelector('strong');
+      if (strong) strong.textContent = `"${q.trim()}"`;
+    }
+    syncChips(q);
+  }
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const q = chip.dataset.q || '';
+      if (input) input.value = q;
+      apply(q);
+    });
+  });
+
+  if (input) {
+    input.addEventListener('input', (e) => apply((e.target as HTMLInputElement).value));
+    const q = new URLSearchParams(location.search).get('q');
+    if (q) {
+      input.value = q;
+      apply(q);
+    }
+    // press "/" to focus search
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== input) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .hero { padding: 5rem 0 3rem; }
+  .hero h1 {
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    margin: 0 0 1.25rem;
+    line-height: 1.15;
+  }
+  .strike {
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 3px;
+  }
+  .accent { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 64ch;
+    margin: 0 0 2rem;
+  }
+
+  .hero-term {
+    max-width: 720px;
+    margin: 0 0 2rem;
+    border: 1px solid var(--border-bright);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+  .term-bar {
+    display: flex;
+    gap: 6px;
+    padding: 0.6rem 0.9rem;
+    background: var(--bg-raise);
+    border-bottom: 1px solid var(--border);
+  }
+  .term-bar span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--border-bright);
+  }
+  .term-bar span:first-child { background: #ff5f57; }
+  .term-bar span:nth-child(2) { background: #febc2e; }
+  .term-bar span:nth-child(3) { background: #28c840; }
+  .term-body { margin: 0; border: none; border-radius: 0; background: var(--bg-panel); }
+  .t-dim { color: var(--text-dim); }
+  .t-prompt { color: var(--accent); font-weight: 700; }
+  .t-accent { color: var(--accent); }
+  .t-ok { color: var(--accent); font-weight: 700; }
+
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .hero-ctas.center { justify-content: center; }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem 1.1rem;
+    margin-bottom: 2.5rem;
+    position: sticky;
+    top: 70px;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+  }
+  .search-bar:focus-within {
+    border-color: var(--accent-dim);
+    box-shadow: 0 0 0 1px var(--accent-glow);
+  }
+  .search-ico { color: var(--text-dim); font-size: 1.15rem; line-height: 1; }
+  #catalogue-search {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    min-width: 0;
+  }
+  #catalogue-search::placeholder { color: var(--text-dim); }
+  #catalogue-search::-webkit-search-cancel-button { -webkit-appearance: none; }
+  .search-count { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); white-space: nowrap; }
+  .no-results { font-family: var(--mono); color: var(--text-muted); margin: 0 0 3rem; font-size: 0.95rem; }
+  .no-results strong { color: var(--accent); }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: -1.4rem 0 2.5rem;
+  }
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 0.34rem 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .chip:hover { border-color: var(--accent-dim); color: var(--text); }
+  .chip.is-active {
+    color: #fff;
+    background: var(--grad);
+    border-color: transparent;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .steps, .philosophy {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 860px) { .steps, .philosophy { grid-template-columns: 1fr; } }
+  .step-n { font-family: var(--mono); color: var(--accent); font-size: 0.8rem; margin: 0 0 0.5rem; }
+  .steps h3, .philosophy h3 { margin: 0 0 0.5rem; font-size: 1.02rem; }
+  .steps p, .philosophy p { color: var(--text-muted); font-size: 0.92rem; margin: 0; }
+
+  .final-cta { margin-top: 4rem; text-align: center; padding: 3rem 1.5rem; border-color: var(--accent-dim); }
+  .final-cta h2 { margin: 0 0 0.5rem; }
+  .final-cta p { color: var(--text-muted); max-width: 52ch; margin: 0 auto 1.5rem; }
+</style>

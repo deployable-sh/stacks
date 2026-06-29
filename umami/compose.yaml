@@ -1,0 +1,25 @@
+services:
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      DATABASE_URL: postgresql://umami:umami-local-only@db:5432/umami
+      APP_SECRET: ${APP_SECRET}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: umami-local-only
+      POSTGRES_DB: umami
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

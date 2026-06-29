@@ -1,0 +1,14 @@
+services:
+  runner:
+    build: .
+    restart: unless-stopped
+    environment:
+      CI_SERVER_URL: ${CI_SERVER_URL:-https://gitlab.com}
+      CI_SERVER_TOKEN: ${CI_SERVER_TOKEN}
+    volumes:
+      - runnerconfig:/etc/gitlab-runner
+      - runnerhome:/home/gitlab-runner
+
+volumes:
+  runnerconfig:
+  runnerhome:

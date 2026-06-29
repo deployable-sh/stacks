@@ -1,0 +1,15 @@
+services:
+  kilo:
+    build: .
+    image: miget-kilo:local
+    restart: unless-stopped
+    environment:
+      KILO_SERVER_PASSWORD: ${KILO_SERVER_PASSWORD}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    ports:
+      - "5000:5000"
+    volumes:
+      - workspace:/workspace
+
+volumes:
+  workspace:

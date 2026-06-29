@@ -1,0 +1,5 @@
+services:
+  agent:
+    x-miget:
+      ram: "2048"
+      private: true

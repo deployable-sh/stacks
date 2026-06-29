@@ -1,0 +1,43 @@
+x-pxc: &pxc
+  image: percona/percona-xtradb-cluster:8.4
+  restart: unless-stopped
+  stop_grace_period: 2m
+
+services:
+  pxc-node1:
+    <<: *pxc
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      CLUSTER_NAME: pxc
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      MYSQL_USER: ${MYSQL_USER:-app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - node1-data:/var/lib/mysql
+
+  pxc-node2:
+    <<: *pxc
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      CLUSTER_NAME: pxc
+      CLUSTER_JOIN: pxc-node1
+    depends_on: [pxc-node1]
+    volumes:
+      - node2-data:/var/lib/mysql
+
+  pxc-node3:
+    <<: *pxc
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      CLUSTER_NAME: pxc
+      CLUSTER_JOIN: pxc-node1
+    depends_on: [pxc-node1]
+    volumes:
+      - node3-data:/var/lib/mysql
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:

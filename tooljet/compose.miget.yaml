@@ -1,0 +1,31 @@
+services:
+  tooljet:
+    x-miget:
+      ram: "2048"
+    environment:
+      PG_HOST: ${{db.host}}
+      PG_PORT: ${{db.port}}
+      PG_USER: ${{db.username}}
+      PG_PASS: ${{db.password}}
+      PG_DB: ${{db.database}}
+      TOOLJET_DB_HOST: ${{db.host}}
+      TOOLJET_DB_PORT: ${{db.port}}
+      TOOLJET_DB_USER: ${{db.username}}
+      TOOLJET_DB_PASS: ${{db.password}}
+      PGRST_DB_URI: postgres://${{db.username}}:${{db.password}}@${{db.host}}:${{db.port}}/tooljet_db
+      REDIS_HOST: ${{redis.host}}
+      REDIS_PORT: ${{redis.port}}
+      REDIS_PASSWORD: ${{redis.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+  redis:
+    x-miget:
+      managed: valkey
+      ram: "512Mi"
+      storage: "1Gi"

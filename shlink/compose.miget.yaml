@@ -1,0 +1,18 @@
+services:
+  shlink:
+    x-miget:
+      ram: "512"
+    environment:
+      IS_HTTPS_ENABLED: "true"
+      DB_HOST: ${{db.host}}
+      DB_PORT: ${{db.port}}
+      DB_NAME: ${{db.database}}
+      DB_USER: ${{db.username}}
+      DB_PASSWORD: ${{db.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

@@ -1,0 +1,13 @@
+services:
+  prefect:
+    x-miget:
+      ram: "1024"
+    environment:
+      PREFECT_API_DATABASE_CONNECTION_URL: postgresql+asyncpg://${{db.username}}:${{db.password}}@${{db.host}}:${{db.port}}/${{db.database}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

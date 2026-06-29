@@ -1,0 +1,12 @@
+services:
+  agent:
+    image: buildkite/agent:3-ubuntu
+    restart: unless-stopped
+    environment:
+      BUILDKITE_AGENT_TOKEN: ${BUILDKITE_AGENT_TOKEN}
+      BUILDKITE_AGENT_TAGS: ${BUILDKITE_AGENT_TAGS:-queue=miget}
+    volumes:
+      - builds:/buildkite/builds
+
+volumes:
+  builds:

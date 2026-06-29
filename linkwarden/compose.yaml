@@ -1,0 +1,30 @@
+services:
+  linkwarden:
+    image: ghcr.io/linkwarden/linkwarden:v2.14.1
+    restart: unless-stopped
+    environment:
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:5000/api/v1/auth}
+      DATABASE_URL: postgresql://linkwarden:linkwarden-local-only@db:5432/linkwarden
+      NEXT_PUBLIC_DISABLE_REGISTRATION: ${DISABLE_REGISTRATION:-false}
+      PORT: "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - linkwardendata:/data/data
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: linkwarden
+      POSTGRES_PASSWORD: linkwarden-local-only
+      POSTGRES_DB: linkwarden
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  linkwardendata:
+  dbdata:

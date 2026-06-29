@@ -1,0 +1,28 @@
+services:
+  builder:
+    x-miget:
+      ram: "1024"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      HOSTNAME: "0.0.0.0"
+      ENCRYPTION_SECRET: ${ENCRYPTION_SECRET:-0123456789abcdef0123456789abcdef}
+      NEXTAUTH_URL: ${MIGET_PUBLIC_URL}
+      NEXT_PUBLIC_VIEWER_URL: ${MIGET_PUBLIC_URL}
+      ADMIN_EMAIL: admin@example.com
+
+  viewer:
+    x-miget:
+      ram: "512"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      HOSTNAME: "0.0.0.0"
+      ENCRYPTION_SECRET: ${ENCRYPTION_SECRET:-0123456789abcdef0123456789abcdef}
+      NEXT_PUBLIC_VIEWER_URL: ${MIGET_PUBLIC_URL}
+      NEXTAUTH_URL: ${MIGET_PUBLIC_URL}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

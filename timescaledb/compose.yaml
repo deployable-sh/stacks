@@ -1,0 +1,16 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg18
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: app
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    volumes:
+      - tsdata:/var/lib/postgresql/data
+
+volumes:
+  tsdata:

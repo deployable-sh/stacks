@@ -1,0 +1,17 @@
+services:
+  listmonk:
+    x-miget:
+      ram: "512"
+    environment:
+      LISTMONK_db__host: ${{db.host}}
+      LISTMONK_db__port: ${{db.port}}
+      LISTMONK_db__user: ${{db.username}}
+      LISTMONK_db__password: ${{db.password}}
+      LISTMONK_db__database: ${{db.database}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

@@ -1,0 +1,10 @@
+services:
+  navidrome:
+    x-miget:
+      ram: "512"
+
+volumes:
+  music:
+    x-miget: { size: "50000", type: RWO }
+  navidromedata:
+    x-miget: { size: "2000", type: RWO }

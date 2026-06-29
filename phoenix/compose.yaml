@@ -1,0 +1,19 @@
+services:
+  phoenix:
+    image: arizephoenix/phoenix:version-17
+    restart: unless-stopped
+    environment:
+      PHOENIX_PORT: "5000"
+      PHOENIX_HOST: 0.0.0.0
+      PHOENIX_WORKING_DIR: /mnt/data
+      PHOENIX_ENABLE_AUTH: "True"
+      PHOENIX_SECRET: ${PHOENIX_SECRET}
+      PHOENIX_TELEMETRY_ENABLED: "false"
+    ports:
+      - "5000:5000"
+      - "4317"
+    volumes:
+      - phoenixdata:/mnt/data
+
+volumes:
+  phoenixdata:

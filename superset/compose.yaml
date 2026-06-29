@@ -1,0 +1,104 @@
+x-superset: &superset
+  image: apache/superset:6.1.0-dev
+  restart: unless-stopped
+
+x-superset-env: &superset-env
+  SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY}
+  SUPERSET_CONFIG_PATH: /tmp/superset_config.py
+  SUPERSET_CONFIG_CONTENT: |
+    import os
+    SECRET_KEY = os.environ["SUPERSET_SECRET_KEY"]
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql+psycopg2://{os.environ['DB_USER']}:{os.environ['DB_PASSWORD']}"
+        f"@{os.environ['DB_HOST']}:{os.environ['DB_PORT']}/{os.environ['DB_NAME']}"
+    )
+    _REDIS = f"redis://:{os.environ['REDIS_AUTH']}@{os.environ.get('REDIS_HOST', 'broker')}:6379"
+    class CeleryConfig:
+        broker_url = _REDIS + "/0"
+        result_backend = _REDIS + "/1"
+        imports = ("superset.sql_lab", "superset.tasks.scheduler")
+        worker_prefetch_multiplier = 1
+        task_acks_late = False
+    CELERY_CONFIG = CeleryConfig
+    CACHE_CONFIG = {
+        "CACHE_TYPE": "RedisCache",
+        "CACHE_DEFAULT_TIMEOUT": 300,
+        "CACHE_KEY_PREFIX": "superset_",
+        "CACHE_REDIS_URL": _REDIS + "/2",
+    }
+    DATA_CACHE_CONFIG = {**CACHE_CONFIG, "CACHE_KEY_PREFIX": "superset_data_"}
+    FILTER_STATE_CACHE_CONFIG = {**CACHE_CONFIG, "CACHE_KEY_PREFIX": "superset_filter_"}
+    EXPLORE_FORM_DATA_CACHE_CONFIG = {**CACHE_CONFIG, "CACHE_KEY_PREFIX": "superset_explore_"}
+  DB_HOST: db
+  DB_PORT: "5432"
+  DB_NAME: superset
+  DB_USER: superset
+  DB_PASSWORD: superset-local-only
+  REDIS_HOST: broker
+  REDIS_AUTH: ${REDIS_AUTH}
+
+services:
+  app:
+    <<: *superset
+    command: ["sh", "-c", "printf '%s' \"$SUPERSET_CONFIG_CONTENT\" > /tmp/superset_config.py && exec /app/docker/docker-bootstrap.sh app-gunicorn"]
+    environment:
+      <<: *superset-env
+      SUPERSET_PORT: "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - superset_home:/app/superset_home
+    depends_on:
+      - db
+      - broker
+
+  worker:
+    <<: *superset
+    command: ["sh", "-c", "printf '%s' \"$SUPERSET_CONFIG_CONTENT\" > /tmp/superset_config.py && exec /app/docker/docker-bootstrap.sh worker"]
+    environment: *superset-env
+    volumes:
+      - superset_home:/app/superset_home
+    depends_on:
+      - db
+      - broker
+
+  beat:
+    <<: *superset
+    command: ["sh", "-c", "printf '%s' \"$SUPERSET_CONFIG_CONTENT\" > /tmp/superset_config.py && exec /app/docker/docker-bootstrap.sh beat"]
+    environment: *superset-env
+    depends_on:
+      - db
+      - broker
+
+  init:
+    <<: *superset
+    command: ["sh", "-c", "printf '%s' \"$SUPERSET_CONFIG_CONTENT\" > /tmp/superset_config.py && /app/docker/docker-init.sh && sleep infinity"]
+    environment:
+      <<: *superset-env
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      SUPERSET_LOAD_EXAMPLES: "no"
+    depends_on:
+      - db
+
+  broker:
+    image: valkey/valkey:8
+    command: ["sh", "-c", "exec valkey-server --requirepass \"$REDIS_AUTH\" --maxmemory-policy noeviction"]
+    restart: unless-stopped
+    environment:
+      REDIS_AUTH: ${REDIS_AUTH}
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: superset-local-only
+      POSTGRES_DB: superset
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  superset_home:
+  dbdata:

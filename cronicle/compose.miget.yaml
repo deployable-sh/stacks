@@ -1,0 +1,10 @@
+services:
+  cronicle:
+    x-miget:
+      ram: "512"
+
+volumes:
+  crondata:
+    x-miget: { size: "1000", type: RWO }
+  cronlogs:
+    x-miget: { size: "1000", type: RWO }

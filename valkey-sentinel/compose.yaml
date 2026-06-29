@@ -1,0 +1,67 @@
+services:
+  valkey-master:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: master
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_MASTER_HOST: valkey-master
+      VALKEY_ANNOUNCE_HOST: valkey-master
+    volumes:
+      - master-data:/data
+
+  valkey-replica-1:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: replica
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_MASTER_HOST: valkey-master
+      VALKEY_ANNOUNCE_HOST: valkey-replica-1
+    depends_on: [valkey-master]
+    volumes:
+      - replica1-data:/data
+
+  valkey-replica-2:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: replica
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_MASTER_HOST: valkey-master
+      VALKEY_ANNOUNCE_HOST: valkey-replica-2
+    depends_on: [valkey-master]
+    volumes:
+      - replica2-data:/data
+
+  valkey-sentinel-1:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: sentinel
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_MASTER_HOST: valkey-master
+    depends_on: [valkey-master, valkey-replica-1, valkey-replica-2]
+
+  valkey-sentinel-2:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: sentinel
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_MASTER_HOST: valkey-master
+    depends_on: [valkey-master, valkey-replica-1, valkey-replica-2]
+
+  valkey-sentinel-3:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_ROLE: sentinel
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+      VALKEY_MASTER_HOST: valkey-master
+    depends_on: [valkey-master, valkey-replica-1, valkey-replica-2]
+
+volumes:
+  master-data:
+  replica1-data:
+  replica2-data:

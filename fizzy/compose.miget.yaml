@@ -1,0 +1,8 @@
+services:
+  fizzy:
+    x-miget:
+      ram: "512"
+
+volumes:
+  storage:
+    x-miget: { size: "3000", type: RWO }

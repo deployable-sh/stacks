@@ -1,0 +1,17 @@
+services:
+  searxng:
+    image: searxng/searxng:2026.6.14-b3e08f2a4
+    restart: unless-stopped
+    environment:
+      SEARXNG_PORT: "5000"
+      SEARXNG_BASE_URL: ${SEARXNG_BASE_URL:-http://localhost:5000/}
+      SEARXNG_SECRET: ${SEARXNG_SECRET}
+    ports:
+      - "5000:5000"
+    volumes:
+      - config:/etc/searxng
+      - cache:/var/cache/searxng
+
+volumes:
+  config:
+  cache:

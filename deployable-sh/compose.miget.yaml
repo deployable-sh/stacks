@@ -1,0 +1,4 @@
+services:
+  deployable-sh:
+    x-miget:
+      ram: "128"

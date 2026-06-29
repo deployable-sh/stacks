@@ -1,0 +1,10 @@
+services:
+  sftpgo:
+    x-miget:
+      ram: "512"
+
+volumes:
+  sftpgodata:
+    x-miget: { size: "1000", type: RWO }
+  sftpgohome:
+    x-miget: { size: "5000", type: RWO }

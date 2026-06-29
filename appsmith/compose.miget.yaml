@@ -1,0 +1,11 @@
+services:
+  appsmith:
+    x-miget:
+      ram: "4096"
+    environment:
+      APPSMITH_ENCRYPTION_PASSWORD: ${APPSMITH_ENCRYPTION_PASSWORD:?}
+      APPSMITH_ENCRYPTION_SALT: ${APPSMITH_ENCRYPTION_SALT:?}
+
+volumes:
+  appsmithstacks:
+    x-miget: { size: "5000", type: RWO }

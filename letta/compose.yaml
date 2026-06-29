@@ -1,0 +1,32 @@
+services:
+  letta:
+    image: letta/letta:0.16.8
+    restart: unless-stopped
+    environment:
+      LETTA_PG_URI: postgresql://letta:letta-local-only@db:5432/letta
+      SECURE: "true"
+      LETTA_SERVER_PASSWORD: ${LETTA_SERVER_PASSWORD}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      PORT: "5000"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    ports:
+    - "5432"
+    build: ./db
+    image: miget-letta-pgvector:local
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: letta
+      POSTGRES_PASSWORD: letta-local-only
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: letta
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

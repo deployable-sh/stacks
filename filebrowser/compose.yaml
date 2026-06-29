@@ -1,0 +1,20 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    restart: unless-stopped
+    environment:
+      FB_PORT: "5000"
+      FB_ADDRESS: 0.0.0.0
+      FB_DATABASE: /database/filebrowser.db
+      FB_ROOT: /srv
+      FB_USERNAME: ${FB_USERNAME:-admin}
+      FB_PASSWORD: ${FB_PASSWORD}
+    ports:
+      - "5000:5000"
+    volumes:
+      - files:/srv
+      - database:/database
+
+volumes:
+  files:
+  database:

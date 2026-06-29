@@ -1,0 +1,8 @@
+services:
+  actual:
+    x-miget:
+      ram: "256"
+
+volumes:
+  actualdata:
+    x-miget: { size: "2000", type: RWO }

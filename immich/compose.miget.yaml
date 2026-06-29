@@ -1,0 +1,27 @@
+services:
+  immich-server:
+    x-miget:
+      ram: "2048"
+
+  immich-machine-learning:
+    x-miget:
+      ram: "3072"
+      private: true
+
+  database:
+    x-miget:
+      ram: "1024"
+      private: true
+
+  redis:
+    x-miget:
+      ram: "256"
+      private: true
+
+volumes:
+  library:
+    x-miget: { size: "100000", type: RWO }
+  model-cache:
+    x-miget: { size: "10000", type: RWO }
+  dbdata:
+    x-miget: { size: "10000", type: RWO }

@@ -1,0 +1,17 @@
+x-node: &node
+  x-miget:
+    ram: "1024"
+    private: true
+
+services:
+  pxc-node1: *node
+  pxc-node2: *node
+  pxc-node3: *node
+
+volumes:
+  node1-data:
+    x-miget: { size: "10000", type: RWO }
+  node2-data:
+    x-miget: { size: "10000", type: RWO }
+  node3-data:
+    x-miget: { size: "10000", type: RWO }

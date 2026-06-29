@@ -1,0 +1,15 @@
+services:
+  rocketchat:
+    x-miget:
+      ram: "2048"
+    environment:
+      ROOT_URL: ${MIGET_PUBLIC_URL}
+
+  mongo:
+    x-miget:
+      ram: "1024"
+      private: true
+
+volumes:
+  mongodata:
+    x-miget: { size: "10000", type: RWO }

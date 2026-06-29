@@ -1,0 +1,23 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:v2.24.0
+    restart: unless-stopped
+    command: ["serve"]
+    environment:
+      NTFY_LISTEN_HTTP: :5000
+      NTFY_BASE_URL: ${NTFY_BASE_URL:-http://localhost:5000}
+      NTFY_AUTH_FILE: /var/lib/ntfy/user.db
+      NTFY_AUTH_DEFAULT_ACCESS: ${NTFY_AUTH_DEFAULT_ACCESS:-deny-all}
+      NTFY_AUTH_USERS: ${NTFY_AUTH_USERS:-}
+      NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+      NTFY_ATTACHMENT_CACHE_DIR: /var/cache/ntfy/attachments
+      NTFY_BEHIND_PROXY: "true"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ntfyauth:/var/lib/ntfy
+      - ntfycache:/var/cache/ntfy
+
+volumes:
+  ntfyauth:
+  ntfycache:

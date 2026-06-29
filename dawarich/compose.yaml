@@ -1,0 +1,66 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    environment:
+      DAWARICH_ROLE: web
+      RAILS_ENV: production
+      SELF_HOSTED: "true"
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_URL: postgis://dawarich:${DB_PASSWORD:-dawarich-local-only}@db:5432/dawarich_production
+      REDIS_URL: redis://redis:6379/0
+      APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost}
+      APPLICATION_PROTOCOL: ${APPLICATION_PROTOCOL:-http}
+      TIME_ZONE: ${TIME_ZONE:-UTC}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - storage:/var/app/storage
+      - watched:/var/app/tmp/imports/watched
+
+  sidekiq:
+    build: .
+    restart: unless-stopped
+    environment:
+      DAWARICH_ROLE: sidekiq
+      RAILS_ENV: production
+      SELF_HOSTED: "true"
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_URL: postgis://dawarich:${DB_PASSWORD:-dawarich-local-only}@db:5432/dawarich_production
+      REDIS_URL: redis://redis:6379/0
+      APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost}
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - storage:/var/app/storage
+      - watched:/var/app/tmp/imports/watched
+
+  db:
+    image: postgis/postgis:17-3.5-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dawarich
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-dawarich-local-only}
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: dawarich_production
+    shm_size: 1g
+    ports:
+      - "5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  redis:
+    image: valkey/valkey:7.2
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+
+volumes:
+  storage:
+  watched:
+  dbdata:
+  redisdata:

@@ -1,0 +1,17 @@
+services:
+  livekit:
+    image: livekit/livekit-server:latest
+    restart: unless-stopped
+    environment:
+      LIVEKIT_CONFIG: |
+        port: 5000
+        rtc:
+          tcp_port: 7881
+          udp_port: 7882
+          use_external_ip: true
+        keys:
+          ${LIVEKIT_API_KEY}: ${LIVEKIT_API_SECRET}
+    ports:
+      - "5000:5000"
+      - "7881:7881"
+      - "7882:7882/udp"

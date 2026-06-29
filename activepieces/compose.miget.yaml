@@ -1,0 +1,22 @@
+services:
+  activepieces:
+    x-miget:
+      ram: "2048"
+    environment:
+      AP_POSTGRES_HOST: ${{db.host}}
+      AP_POSTGRES_PORT: ${{db.port}}
+      AP_POSTGRES_DATABASE: ${{db.database}}
+      AP_POSTGRES_USERNAME: ${{db.username}}
+      AP_POSTGRES_PASSWORD: ${{db.password}}
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

@@ -1,0 +1,78 @@
+services:
+  api:
+    x-miget:
+      ram: "1024"
+      private: true
+    ports:
+      - "5001"
+
+  worker:
+    x-miget:
+      ram: "1024"
+      private: true
+
+  worker_beat:
+    x-miget:
+      ram: "512"
+      private: true
+
+  web:
+    x-miget:
+      ram: "512"
+      private: true
+
+  plugin_daemon:
+    x-miget:
+      ram: "512"
+      private: true
+    ports:
+      - "5002"
+
+  sandbox:
+    x-miget:
+      ram: "512"
+      private: true
+    ports:
+      - "8194"
+
+  ssrf_proxy:
+    x-miget:
+      ram: "256"
+      private: true
+    ports:
+      - "3128"
+
+  entry:
+    x-miget:
+      ram: "128"
+
+  redis:
+    x-miget:
+      ram: "256"
+      private: true
+    ports:
+      - "6379"
+
+  db:
+    x-miget:
+      ram: "1024"
+      private: true
+    ports:
+      - "5432"
+
+  vectordb:
+    x-miget:
+      ram: "1024"
+      private: true
+    ports:
+      - "6333"
+
+volumes:
+  appstorage:
+    x-miget: { size: "5000", type: RWX }
+  pluginstorage:
+    x-miget: { size: "2000", type: RWO }
+  dbdata:
+    x-miget: { size: "10000", type: RWO }
+  qdrantdata:
+    x-miget: { size: "10000", type: RWO }

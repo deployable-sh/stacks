@@ -1,0 +1,50 @@
+services:
+  backend:
+    image: ghcr.io/get-convex/convex-backend:latest
+    restart: unless-stopped
+    environment:
+      INSTANCE_NAME: ${INSTANCE_NAME:-convex-self-hosted}
+      INSTANCE_SECRET: ${INSTANCE_SECRET}
+      CONVEX_CLOUD_ORIGIN: ${CONVEX_CLOUD_ORIGIN:-http://127.0.0.1:5000}
+      CONVEX_SITE_ORIGIN: ${CONVEX_SITE_ORIGIN:-http://127.0.0.1:5001}
+    ports:
+      - "3210"
+      - "3211"
+    volumes:
+      - convexdata:/convex/data
+
+  api:
+    build: ./proxy
+    image: miget-convex-proxy:local
+    restart: unless-stopped
+    environment:
+      PROXY_TARGET: http://backend:3210
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
+
+  site:
+    build: ./proxy
+    image: miget-convex-proxy:local
+    restart: unless-stopped
+    environment:
+      PROXY_TARGET: http://backend:3211
+    ports:
+      - "5001:5000"
+    depends_on:
+      - backend
+
+  dashboard:
+    image: ghcr.io/get-convex/convex-dashboard:latest
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      NEXT_PUBLIC_DEPLOYMENT_URL: ${CONVEX_CLOUD_ORIGIN:-http://127.0.0.1:5000}
+    ports:
+      - "6791:5000"
+    depends_on:
+      - backend
+
+volumes:
+  convexdata:

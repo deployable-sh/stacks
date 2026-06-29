@@ -1,0 +1,15 @@
+services:
+  runner:
+    build: .
+    restart: unless-stopped
+    environment:
+      FORGEJO_URL: ${FORGEJO_URL:-https://codeberg.org}
+      RUNNER_UUID: ${RUNNER_UUID}
+      RUNNER_TOKEN: ${RUNNER_TOKEN}
+      RUNNER_LABELS: ${RUNNER_LABELS:-miget:host}
+      RUNNER_CAPACITY: ${RUNNER_CAPACITY:-1}
+    volumes:
+      - runnerdata:/data
+
+volumes:
+  runnerdata:

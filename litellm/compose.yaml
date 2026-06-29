@@ -1,0 +1,27 @@
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm-database:main-stable
+    restart: unless-stopped
+    command: ["--port", "5000"]
+    environment:
+      DATABASE_URL: postgresql://litellm:litellm-local-only@db:5432/litellm
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}
+      LITELLM_SALT_KEY: ${LITELLM_SALT_KEY}
+      STORE_MODEL_IN_DB: "True"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: litellm
+      POSTGRES_PASSWORD: litellm-local-only
+      POSTGRES_DB: litellm
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

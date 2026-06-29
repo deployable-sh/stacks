@@ -1,0 +1,9 @@
+services:
+  oracle:
+    x-miget:
+      ram: "3072"
+      private: true
+
+volumes:
+  oradata:
+    x-miget: { size: "20000", type: RWO }

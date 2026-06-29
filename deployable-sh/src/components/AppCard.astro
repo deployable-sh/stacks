@@ -1,0 +1,74 @@
+---
+import type { AppData } from '../data/types';
+import { hobbyFit, fmtRam } from '../lib/sizing';
+
+interface Props {
+  app: AppData;
+}
+
+const { app } = Astro.props;
+const { fit } = hobbyFit(app);
+const searchIndex = [app.name, app.tagline, app.category, app.upstream, app.slug, ...(app.keywords ?? [])]
+  .join(' ')
+  .toLowerCase();
+---
+
+<a class="card" href={`/apps/${app.slug}/`} data-search={searchIndex}>
+  <div class="card-head">
+    <h3 class="card-name">{app.name}</h3>
+    {app.status === 'experimental' && <span class="badge badge-amber">experimental</span>}
+  </div>
+  <p class="card-tag">{app.tagline}</p>
+  <div class="card-meta">
+    <span class="meta-item">{app.services} {app.services === 1 ? 'service' : 'services'}</span>
+    <span class="meta-item">{fmtRam(app.ramMiB)} RAM</span>
+    <span class="meta-price">from ${fit.usd}/mo</span>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.35rem;
+    color: var(--text);
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover {
+    text-decoration: none;
+    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--accent-glow);
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .card-name { margin: 0; font-size: 1.05rem; }
+  .card:hover .card-name::after {
+    content: ' ›';
+    color: var(--accent);
+  }
+  .card-tag {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    flex: 1;
+  }
+  .card-meta {
+    display: flex;
+    gap: 0.9rem;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+  .meta-price { margin-left: auto; color: var(--accent); font-weight: 600; }
+</style>

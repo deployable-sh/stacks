@@ -1,0 +1,21 @@
+x-broker: &broker
+  x-miget:
+    ram: "2048"
+    private: true
+
+services:
+  rp-1: *broker
+  rp-2: *broker
+  rp-3: *broker
+
+  redpanda-console:
+    x-miget:
+      ram: "512"
+
+volumes:
+  rpdata-1:
+    x-miget: { size: "10000", type: RWO }
+  rpdata-2:
+    x-miget: { size: "10000", type: RWO }
+  rpdata-3:
+    x-miget: { size: "10000", type: RWO }

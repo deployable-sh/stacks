@@ -1,0 +1,8 @@
+services:
+  mailpit:
+    x-miget:
+      ram: "256"
+
+volumes:
+  mailpitdata:
+    x-miget: { size: "1000", type: RWO }

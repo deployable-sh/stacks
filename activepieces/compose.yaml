@@ -1,0 +1,44 @@
+services:
+  activepieces:
+    image: activepieces/activepieces:0.85.2
+    restart: unless-stopped
+    environment:
+      AP_PORT: "5000"
+      AP_FRONTEND_URL: ${AP_FRONTEND_URL:-http://localhost:5000}
+      AP_ENCRYPTION_KEY: ${AP_ENCRYPTION_KEY}
+      AP_JWT_SECRET: ${AP_JWT_SECRET}
+      AP_EXECUTION_MODE: UNSANDBOXED
+      AP_DB_TYPE: POSTGRES
+      AP_POSTGRES_HOST: db
+      AP_POSTGRES_PORT: "5432"
+      AP_POSTGRES_DATABASE: activepieces
+      AP_POSTGRES_USERNAME: activepieces
+      AP_POSTGRES_PASSWORD: activepieces-local-only
+      AP_REDIS_TYPE: STANDALONE
+      AP_REDIS_HOST: broker
+      AP_REDIS_PORT: "6379"
+      AP_REDIS_PASSWORD: ${AP_REDIS_PASSWORD}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - broker
+
+  broker:
+    build: ./broker
+    restart: unless-stopped
+    environment:
+      AP_REDIS_PASSWORD: ${AP_REDIS_PASSWORD}
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: activepieces
+      POSTGRES_PASSWORD: activepieces-local-only
+      POSTGRES_DB: activepieces
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

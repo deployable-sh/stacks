@@ -1,0 +1,12 @@
+server {
+    listen 5000;
+    # Attachment uploads.
+    client_max_body_size 30m;
+
+    location / {
+        proxy_pass ${PROXY_TARGET};
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

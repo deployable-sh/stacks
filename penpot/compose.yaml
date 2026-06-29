@@ -1,0 +1,83 @@
+services:
+  frontend:
+    image: penpotapp/frontend:2.16.0
+    restart: unless-stopped
+    environment:
+      PENPOT_FLAGS: disable-registration-domain-whitelist disable-email-verification
+      PENPOT_PUBLIC_URI: ${PENPOT_PUBLIC_URI:-http://localhost:5000}
+      PENPOT_BACKEND_URI: http://backend:6060
+      PENPOT_EXPORTER_URI: http://exporter:6061
+    ports:
+      - "8080"
+    depends_on:
+      - backend
+      - exporter
+
+  web:
+    image: caddy:2-alpine
+    command: ["caddy", "reverse-proxy", "--from", ":5000", "--to", "frontend:8080"]
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    depends_on:
+      - frontend
+
+  backend:
+    image: penpotapp/backend:2.16.0
+    restart: unless-stopped
+    environment:
+      PENPOT_FLAGS: disable-registration-domain-whitelist disable-email-verification enable-prepl-server
+      PENPOT_PUBLIC_URI: ${PENPOT_PUBLIC_URI:-http://localhost:5000}
+      PENPOT_SECRET_KEY: ${PENPOT_SECRET_KEY}
+      PENPOT_DATABASE_URI: postgresql://db:5432/penpot
+      PENPOT_DATABASE_USERNAME: penpot
+      PENPOT_DATABASE_PASSWORD: penpot-local-only
+      PENPOT_REDIS_URI: redis://broker:6379/0
+      PENPOT_OBJECTS_STORAGE_BACKEND: ${PENPOT_OBJECTS_STORAGE_BACKEND:-fs}
+      PENPOT_OBJECTS_STORAGE_FS_DIRECTORY: /opt/data/assets
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY:-}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY:-}
+      PENPOT_OBJECTS_STORAGE_S3_REGION: ${S3_REGION:-us-east-1}
+      PENPOT_OBJECTS_STORAGE_S3_BUCKET: ${S3_BUCKET_NAME:-}
+      PENPOT_OBJECTS_STORAGE_S3_ENDPOINT: ${S3_ENDPOINT:-}
+      PENPOT_TELEMETRY_ENABLED: "false"
+    ports:
+      - "6060"
+    volumes:
+      - assets:/opt/data/assets
+    depends_on:
+      - db
+      - broker
+
+  exporter:
+    image: penpotapp/exporter:2.16.0
+    restart: unless-stopped
+    environment:
+      PENPOT_PUBLIC_URI: http://frontend:8080
+      PENPOT_SECRET_KEY: ${PENPOT_SECRET_KEY}
+      PENPOT_REDIS_URI: redis://broker:6379/0
+    ports:
+      - "6061"
+    depends_on:
+      - broker
+
+  broker:
+    image: valkey/valkey:8
+    command: ["valkey-server", "--maxmemory-policy", "noeviction", "--protected-mode", "no"]
+    restart: unless-stopped
+    ports:
+      - "6379"
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: penpot
+      POSTGRES_PASSWORD: penpot-local-only
+      POSTGRES_DB: penpot
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  assets:
+  dbdata:

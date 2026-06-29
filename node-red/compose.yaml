@@ -1,0 +1,15 @@
+services:
+  node-red:
+    build: .
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      NODERED_USERNAME: ${NODERED_USERNAME:-admin}
+      NODERED_PASSWORD_HASH: ${NODERED_PASSWORD_HASH}
+    ports:
+      - "5000:5000"
+    volumes:
+      - nodereddata:/data
+
+volumes:
+  nodereddata:

@@ -1,0 +1,35 @@
+services:
+  listmonk:
+    image: listmonk/listmonk:latest
+    restart: unless-stopped
+    command:
+      - sh
+      - -c
+      - "./listmonk --install --idempotent --yes --config='' && ./listmonk --upgrade --yes --config='' && exec ./listmonk --config=''"
+    environment:
+      LISTMONK_app__address: 0.0.0.0:5000
+      LISTMONK_db__host: db
+      LISTMONK_db__port: "5432"
+      LISTMONK_db__user: listmonk
+      LISTMONK_db__password: listmonk-local-only
+      LISTMONK_db__database: listmonk
+      LISTMONK_db__ssl_mode: disable
+      LISTMONK_ADMIN_USER: ${LISTMONK_ADMIN_USER:-admin}
+      LISTMONK_ADMIN_PASSWORD: ${LISTMONK_ADMIN_PASSWORD}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: listmonk
+      POSTGRES_PASSWORD: listmonk-local-only
+      POSTGRES_DB: listmonk
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

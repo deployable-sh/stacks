@@ -1,0 +1,25 @@
+services:
+  kestra:
+    x-miget:
+      ram: "3072"
+    environment:
+      # Micronaut datasource env vars override KESTRA_CONFIGURATION's datasources.postgres.*
+      # (the blob's ${DB_HOST:-db} resolves to the local default "db" at deploy time, so it
+      # can't reach the managed pg, these point it at the managed instance instead).
+      # JVM resolves AAAA first; the managed pg's dual-stack ClusterIP refuses IPv6
+      # (postgres pod listens IPv4-only) -> force the JVM onto IPv4.
+      JAVA_TOOL_OPTIONS: "-Djava.net.preferIPv4Stack=true"
+      DATASOURCES_POSTGRES_URL: jdbc:postgresql://${{db.host}}:${{db.port}}/${{db.database}}?sslmode=require
+      DATASOURCES_POSTGRES_USERNAME: ${{db.username}}
+      DATASOURCES_POSTGRES_PASSWORD: ${{db.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  kestrastorage:
+    x-miget: { size: "10000", type: RWO }

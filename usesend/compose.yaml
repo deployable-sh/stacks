@@ -1,0 +1,41 @@
+services:
+  usesend:
+    image: usesend/usesend:latest
+    command: ["sh", "-c", "cd /app && pnpx prisma@6.6.0 db push --schema ./apps/web/prisma/schema.prisma --skip-generate && node apps/web/server.js"]
+    restart: unless-stopped
+    environment:
+      HOSTNAME: "0.0.0.0"
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:5000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      DATABASE_URL: postgresql://usesend:usesend-local-only@db:5432/usesend
+      REDIS_URL: redis://broker:6379
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-us-east-1}
+      GITHUB_ID: ${GITHUB_ID:-}
+      GITHUB_SECRET: ${GITHUB_SECRET:-}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - broker
+
+  broker:
+    image: valkey/valkey:8
+    command: ["sh", "-c", "exec valkey-server --maxmemory-policy noeviction"]
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: usesend
+      POSTGRES_PASSWORD: usesend-local-only
+      POSTGRES_DB: usesend
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

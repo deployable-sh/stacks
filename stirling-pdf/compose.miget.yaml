@@ -1,0 +1,10 @@
+services:
+  stirling-pdf:
+    x-miget:
+      ram: "2048"
+    environment:
+      SECURITY_INITIALLOGIN_PASSWORD: ${ADMIN_PASSWORD:?}
+
+volumes:
+  configs:
+    x-miget: { size: "1000", type: RWO }

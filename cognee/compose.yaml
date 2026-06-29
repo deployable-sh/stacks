@@ -1,0 +1,25 @@
+services:
+  cognee:
+    image: cognee/cognee:1.1.2
+    restart: unless-stopped
+    environment:
+      HTTP_PORT: "5000"
+      BIND_ADDRESS: 0.0.0.0
+      LLM_API_KEY: ${LLM_API_KEY}
+      LLM_PROVIDER: ${LLM_PROVIDER:-openai}
+      LLM_MODEL: ${LLM_MODEL:-openai/gpt-4o-mini}
+      LLM_ENDPOINT: ${LLM_ENDPOINT:-}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-openai}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-openai/text-embedding-3-large}
+      EMBEDDING_ENDPOINT: ${EMBEDDING_ENDPOINT:-}
+      FASTAPI_USERS_JWT_SECRET: ${FASTAPI_USERS_JWT_SECRET}
+      DATA_ROOT_DIRECTORY: /data/storage
+      SYSTEM_ROOT_DIRECTORY: /data/system
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-}
+    ports:
+      - "5000:5000"
+    volumes:
+      - cogneedata:/data
+
+volumes:
+  cogneedata:

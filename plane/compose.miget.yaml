@@ -1,0 +1,42 @@
+services:
+  plane:
+    x-miget:
+      ram: "3072"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      REDIS_URL: ${{redis.url}}
+      AMQP_URL: amqp://plane:${RABBITMQ_PASSWORD}@rabbitmq:5672/plane
+      DOMAIN_NAME: ${MIGET_PUBLIC_HOST}
+      APP_PROTOCOL: https
+      WEB_URL: ${MIGET_PUBLIC_URL}
+      CORS_ALLOWED_ORIGINS: ${MIGET_PUBLIC_URL}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "1000m"
+      ram: "2Gi"
+      storage: "10Gi"
+
+  redis:
+    x-miget:
+      managed: valkey
+      ram: "512Mi"
+
+  rabbitmq:
+    x-miget:
+      ram: "512"
+      private: true
+    environment:
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+
+  minio:
+    x-miget:
+      ram: "512"
+      private: true
+
+volumes:
+  rabbitmqdata:
+    x-miget: { size: "2000", type: RWO }
+  miniodata:
+    x-miget: { size: "20000", type: RWO }

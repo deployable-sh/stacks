@@ -1,0 +1,40 @@
+services:
+  calcom:
+    image: calcom/cal.com:v6.2.0
+    restart: unless-stopped
+    command:
+      - sh
+      - -c
+      - |
+        scripts/replace-placeholder.sh "$$BUILT_NEXT_PUBLIC_WEBAPP_URL" "$$NEXT_PUBLIC_WEBAPP_URL"
+        scripts/wait-for-it.sh "$$DATABASE_HOST" -- echo "database is up"
+        npx prisma migrate deploy --schema /calcom/packages/prisma/schema.prisma
+        npx ts-node --transpile-only /calcom/scripts/seed-app-store.ts
+        exec yarn workspace @calcom/web run start
+    environment:
+      PORT: "5000"
+      NEXT_PUBLIC_WEBAPP_URL: ${NEXT_PUBLIC_WEBAPP_URL:-http://localhost:5000}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:5000/api/auth}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      CALENDSO_ENCRYPTION_KEY: ${CALENDSO_ENCRYPTION_KEY}
+      DATABASE_URL: postgresql://calcom:calcom-local-only@db:5432/calendso
+      DATABASE_DIRECT_URL: postgresql://calcom:calcom-local-only@db:5432/calendso
+      DATABASE_HOST: db:5432
+      CALCOM_TELEMETRY_DISABLED: "1"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: calcom
+      POSTGRES_PASSWORD: calcom-local-only
+      POSTGRES_DB: calendso
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

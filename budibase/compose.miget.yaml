@@ -1,0 +1,8 @@
+services:
+  budibase:
+    x-miget:
+      ram: "4096"
+
+volumes:
+  bbdata:
+    x-miget: { size: "10000", type: RWO }

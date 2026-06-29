@@ -1,0 +1,8 @@
+services:
+  beszel:
+    x-miget:
+      ram: "256"
+
+volumes:
+  data:
+    x-miget: { size: "2000", type: RWO }

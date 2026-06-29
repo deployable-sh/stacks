@@ -1,0 +1,19 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:2.35.1
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - config:/config
+      - metadata:/metadata
+      - audiobooks:/audiobooks
+      - podcasts:/podcasts
+
+volumes:
+  config:
+  metadata:
+  audiobooks:
+  podcasts:

@@ -1,0 +1,14 @@
+services:
+  unleash:
+    x-miget:
+      ram: "512"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      DATABASE_SSL: '{"rejectUnauthorized":false}'
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

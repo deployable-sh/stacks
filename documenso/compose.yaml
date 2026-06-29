@@ -1,0 +1,39 @@
+services:
+  documenso:
+    image: documenso/documenso:latest
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXT_PRIVATE_ENCRYPTION_KEY: ${NEXT_PRIVATE_ENCRYPTION_KEY}
+      NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: ${NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY}
+      NEXT_PUBLIC_WEBAPP_URL: ${NEXT_PUBLIC_WEBAPP_URL:-http://localhost:5000}
+      NEXT_PRIVATE_INTERNAL_WEBAPP_URL: http://localhost:5000
+      NEXT_PRIVATE_DATABASE_URL: postgresql://documenso:documenso-local-only@db:5432/documenso
+      NEXT_PRIVATE_DIRECT_DATABASE_URL: postgresql://documenso:documenso-local-only@db:5432/documenso
+      NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS: ${SIGNING_CERT_B64}
+      NEXT_PRIVATE_SIGNING_PASSPHRASE: ${SIGNING_PASSPHRASE:-}
+      NEXT_PRIVATE_SMTP_TRANSPORT: smtp-auth
+      NEXT_PRIVATE_SMTP_HOST: ${SMTP_HOST}
+      NEXT_PRIVATE_SMTP_PORT: ${SMTP_PORT:-587}
+      NEXT_PRIVATE_SMTP_USERNAME: ${SMTP_USERNAME:-}
+      NEXT_PRIVATE_SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      NEXT_PRIVATE_SMTP_FROM_NAME: ${SMTP_FROM_NAME:-Documenso}
+      NEXT_PRIVATE_SMTP_FROM_ADDRESS: ${SMTP_FROM_ADDRESS}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: documenso
+      POSTGRES_PASSWORD: documenso-local-only
+      POSTGRES_DB: documenso
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

@@ -1,0 +1,15 @@
+services:
+  oracle:
+    image: gvenzl/oracle-free:23
+    restart: unless-stopped
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+      APP_USER: app
+      APP_USER_PASSWORD: ${APP_USER_PASSWORD}
+    ports:
+      - "1521:1521"
+    volumes:
+      - oradata:/opt/oracle/oradata
+
+volumes:
+  oradata:

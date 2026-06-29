@@ -1,0 +1,77 @@
+services:
+  redis-node-1:
+    build: .
+    restart: unless-stopped
+    environment:
+      REDIS_ROLE: node
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_ANNOUNCE_HOST: redis-node-1
+    volumes: [node1-data:/data]
+
+  redis-node-2:
+    build: .
+    restart: unless-stopped
+    environment:
+      REDIS_ROLE: node
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_ANNOUNCE_HOST: redis-node-2
+    volumes: [node2-data:/data]
+
+  redis-node-3:
+    build: .
+    restart: unless-stopped
+    environment:
+      REDIS_ROLE: node
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_ANNOUNCE_HOST: redis-node-3
+    volumes: [node3-data:/data]
+
+  redis-node-4:
+    build: .
+    restart: unless-stopped
+    environment:
+      REDIS_ROLE: node
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_ANNOUNCE_HOST: redis-node-4
+    volumes: [node4-data:/data]
+
+  redis-node-5:
+    build: .
+    restart: unless-stopped
+    environment:
+      REDIS_ROLE: node
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_ANNOUNCE_HOST: redis-node-5
+    volumes: [node5-data:/data]
+
+  redis-node-6:
+    build: .
+    restart: unless-stopped
+    environment:
+      REDIS_ROLE: node
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_ANNOUNCE_HOST: redis-node-6
+    volumes: [node6-data:/data]
+
+  redis-init:
+    build: .
+    restart: "no"
+    environment:
+      REDIS_ROLE: init
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      CLUSTER_NODES: "redis-node-1:6379 redis-node-2:6379 redis-node-3:6379 redis-node-4:6379 redis-node-5:6379 redis-node-6:6379"
+    depends_on:
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+      - redis-node-5
+      - redis-node-6
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:
+  node4-data:
+  node5-data:
+  node6-data:

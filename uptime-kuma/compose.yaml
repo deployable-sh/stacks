@@ -1,0 +1,13 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2-slim
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - kumadata:/app/data
+
+volumes:
+  kumadata:

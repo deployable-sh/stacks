@@ -1,0 +1,19 @@
+# Dependencies and build output (deployable-sh/.gitignore also covers these)
+node_modules/
+dist/
+.astro/
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# local env files (templates ship .env.example)
+.env

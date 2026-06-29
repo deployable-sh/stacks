@@ -1,0 +1,39 @@
+services:
+  mattermost:
+    image: mattermost/mattermost-team-edition:11.8
+    restart: unless-stopped
+    environment:
+      MM_SERVICESETTINGS_LISTENADDRESS: ":5000"
+      MM_SERVICESETTINGS_SITEURL: ${MM_SITE_URL:-http://localhost:5000}
+      MM_SQLSETTINGS_DRIVERNAME: postgres
+      MM_SQLSETTINGS_DATASOURCE: "postgres://mattermost:mattermost-local-only@db:5432/mattermost?sslmode=disable&connect_timeout=10"
+    ports:
+      - "5000:5000"
+    volumes:
+      - mmconfig:/mattermost/config
+      - mmdata:/mattermost/data
+      - mmlogs:/mattermost/logs
+      - mmplugins:/mattermost/plugins
+      - mmclientplugins:/mattermost/client/plugins
+      - mmbleve:/mattermost/bleve-indexes
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mattermost
+      POSTGRES_PASSWORD: mattermost-local-only
+      POSTGRES_DB: mattermost
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  mmconfig:
+  mmdata:
+  mmlogs:
+  mmplugins:
+  mmclientplugins:
+  mmbleve:
+  dbdata:

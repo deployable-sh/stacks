@@ -1,0 +1,27 @@
+services:
+  prefect:
+    image: prefecthq/prefect:3-latest
+    restart: unless-stopped
+    command: ["prefect", "server", "start", "--host", "0.0.0.0"]
+    environment:
+      PREFECT_SERVER_API_PORT: "5000"
+      PREFECT_API_DATABASE_CONNECTION_URL: postgresql+asyncpg://prefect:prefect-local-only@db:5432/prefect
+      PREFECT_SERVER_UI_API_URL: ${PREFECT_SERVER_UI_API_URL:-http://localhost:5000/api}
+      PREFECT_SERVER_API_AUTH_STRING: ${PREFECT_AUTH_STRING}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: prefect
+      POSTGRES_PASSWORD: prefect-local-only
+      POSTGRES_DB: prefect
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

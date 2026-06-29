@@ -1,0 +1,17 @@
+services:
+  cronicle:
+    image: soulteary/cronicle:latest
+    restart: unless-stopped
+    hostname: cronicle
+    environment:
+      CRONICLE_WebServer__http_port: "5000"
+      CRONICLE_web_direct_connect: "false"
+    ports:
+      - "5000:5000"
+    volumes:
+      - crondata:/opt/cronicle/data
+      - cronlogs:/opt/cronicle/logs
+
+volumes:
+  crondata:
+  cronlogs:

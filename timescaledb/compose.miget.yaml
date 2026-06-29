@@ -1,0 +1,9 @@
+services:
+  timescaledb:
+    x-miget:
+      ram: "2048"
+      private: true
+
+volumes:
+  tsdata:
+    x-miget: { size: "20000", type: RWO }

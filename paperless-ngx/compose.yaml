@@ -1,0 +1,50 @@
+services:
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.15
+    restart: unless-stopped
+    environment:
+      PAPERLESS_PORT: "5000"
+      PAPERLESS_BIND_ADDR: 0.0.0.0
+      PAPERLESS_URL: ${PAPERLESS_URL:-http://localhost:5000}
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: db
+      PAPERLESS_DBPORT: "5432"
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: paperless
+      PAPERLESS_DBPASS: paperless-local-only
+      PAPERLESS_ADMIN_USER: ${PAPERLESS_ADMIN_USER:-admin}
+      PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD}
+      PAPERLESS_OCR_LANGUAGE: ${PAPERLESS_OCR_LANGUAGE:-eng}
+      PAPERLESS_TIME_ZONE: ${PAPERLESS_TIME_ZONE:-Etc/UTC}
+      PAPERLESS_DATA_DIR: /paperless/data
+      PAPERLESS_MEDIA_ROOT: /paperless/media
+      PAPERLESS_CONSUMPTION_DIR: /paperless/consume
+    ports:
+      - "5000:5000"
+    volumes:
+      - paperless:/paperless
+    depends_on:
+      - db
+      - broker
+
+  broker:
+    image: valkey/valkey:8
+    command: ["valkey-server", "--maxmemory-policy", "noeviction", "--protected-mode", "no"]
+    restart: unless-stopped
+    ports:
+      - "6379"
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless-local-only
+      POSTGRES_DB: paperless
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  paperless:
+  dbdata:

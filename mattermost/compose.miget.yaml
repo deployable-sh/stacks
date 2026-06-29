@@ -1,0 +1,27 @@
+services:
+  mattermost:
+    x-miget:
+      ram: "2048"
+    environment:
+      MM_SQLSETTINGS_DATASOURCE: "postgres://${{db.username}}:${{db.password}}@${{db.host}}:${{db.port}}/${{db.database}}?sslmode=require&connect_timeout=10"
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  mmconfig:
+    x-miget: { size: "500", type: RWO }
+  mmdata:
+    x-miget: { size: "20000", type: RWO }
+  mmlogs:
+    x-miget: { size: "1000", type: RWO }
+  mmplugins:
+    x-miget: { size: "1000", type: RWO }
+  mmclientplugins:
+    x-miget: { size: "1000", type: RWO }
+  mmbleve:
+    x-miget: { size: "2000", type: RWO }

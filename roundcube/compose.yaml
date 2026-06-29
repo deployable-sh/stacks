@@ -1,0 +1,44 @@
+services:
+  roundcube:
+    image: roundcube/roundcubemail:1.7.x-apache
+    restart: unless-stopped
+    environment:
+      ROUNDCUBEMAIL_DEFAULT_HOST: ${IMAP_HOST}
+      ROUNDCUBEMAIL_DEFAULT_PORT: ${IMAP_PORT:-993}
+      ROUNDCUBEMAIL_SMTP_SERVER: ${SMTP_SERVER}
+      ROUNDCUBEMAIL_SMTP_PORT: ${SMTP_PORT:-587}
+      ROUNDCUBEMAIL_DB_TYPE: pgsql
+      ROUNDCUBEMAIL_DB_HOST: db
+      ROUNDCUBEMAIL_DB_PORT: "5432"
+      ROUNDCUBEMAIL_DB_USER: roundcube
+      ROUNDCUBEMAIL_DB_PASSWORD: roundcube-local-only
+      ROUNDCUBEMAIL_DB_NAME: roundcube
+      ROUNDCUBEMAIL_SKIN: elastic
+      ROUNDCUBEMAIL_UPLOAD_MAX_FILESIZE: 25M
+    ports:
+      - "80"
+    depends_on:
+      - db
+
+  web:
+    build: ./proxy
+    restart: unless-stopped
+    environment:
+      PROXY_TARGET: http://roundcube:80
+    ports:
+      - "5000:5000"
+    depends_on:
+      - roundcube
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: roundcube
+      POSTGRES_PASSWORD: roundcube-local-only
+      POSTGRES_DB: roundcube
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

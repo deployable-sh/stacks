@@ -1,0 +1,27 @@
+services:
+  unleash:
+    image: unleashorg/unleash-server:8.0.0
+    restart: unless-stopped
+    environment:
+      HTTP_PORT: "5000"
+      HTTP_HOST: 0.0.0.0
+      DATABASE_URL: postgres://unleash:unleash-local-only@db:5432/unleash
+      DATABASE_SSL: ${DATABASE_SSL:-}
+      INIT_ADMIN_API_TOKENS: ${INIT_ADMIN_API_TOKENS:-}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: unleash
+      POSTGRES_PASSWORD: unleash-local-only
+      POSTGRES_DB: unleash
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

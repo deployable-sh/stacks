@@ -1,0 +1,8 @@
+services:
+  jenkins:
+    x-miget:
+      ram: "2048"
+
+volumes:
+  jenkins_home:
+    x-miget: { size: "10000", type: RWO }

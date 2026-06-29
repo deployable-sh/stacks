@@ -1,0 +1,14 @@
+services:
+  audiobookshelf:
+    x-miget:
+      ram: "512"
+
+volumes:
+  config:
+    x-miget: { size: "2000", type: RWO }
+  metadata:
+    x-miget: { size: "5000", type: RWO }
+  audiobooks:
+    x-miget: { size: "50000", type: RWO }
+  podcasts:
+    x-miget: { size: "20000", type: RWO }

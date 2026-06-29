@@ -1,0 +1,9 @@
+services:
+  tei:
+    x-miget:
+      ram: "1024"
+      private: true
+
+volumes:
+  modelcache:
+    x-miget: { size: "2000", type: RWO }

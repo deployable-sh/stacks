@@ -1,0 +1,139 @@
+x-api-env: &api-env
+  SECRET_KEY: ${SECRET_KEY}
+  DB_USERNAME: postgres
+  DB_PASSWORD: ${DB_PASSWORD}
+  DB_HOST: db
+  DB_PORT: "5432"
+  DB_DATABASE: dify
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD: ${REDIS_AUTH}
+  CELERY_BROKER_URL: redis://:${REDIS_AUTH}@redis:6379/1
+  VECTOR_STORE: qdrant
+  QDRANT_URL: http://vectordb:6333
+  QDRANT_API_KEY: ${QDRANT_API_KEY}
+  STORAGE_TYPE: opendal
+  OPENDAL_SCHEME: fs
+  OPENDAL_FS_ROOT: /app/api/storage
+  CODE_EXECUTION_ENDPOINT: http://sandbox:8194
+  CODE_EXECUTION_API_KEY: ${SANDBOX_API_KEY}
+  SSRF_PROXY_HTTP_URL: http://ssrf-proxy:3128
+  SSRF_PROXY_HTTPS_URL: http://ssrf-proxy:3128
+  PLUGIN_DAEMON_URL: http://plugin-daemon:5002
+  PLUGIN_DAEMON_KEY: ${PLUGIN_DAEMON_KEY}
+  PLUGIN_DIFY_INNER_API_URL: http://api:5001
+  PLUGIN_DIFY_INNER_API_KEY: ${INNER_API_KEY}
+  INNER_API_KEY_FOR_PLUGIN: ${INNER_API_KEY}
+  MIGRATION_ENABLED: "true"
+
+services:
+  api:
+    image: langgenius/dify-api:1.14.2
+    restart: unless-stopped
+    environment:
+      <<: *api-env
+      MODE: api
+    volumes:
+      - appstorage:/app/api/storage
+    depends_on: [db, redis, vectordb]
+
+  worker:
+    image: langgenius/dify-api:1.14.2
+    restart: unless-stopped
+    environment:
+      <<: *api-env
+      MODE: worker
+    volumes:
+      - appstorage:/app/api/storage
+    depends_on: [db, redis, vectordb]
+
+  worker_beat:
+    image: langgenius/dify-api:1.14.2
+    restart: unless-stopped
+    environment:
+      <<: *api-env
+      MODE: beat
+    depends_on: [db, redis]
+
+  web:
+    image: langgenius/dify-web:1.14.2
+    restart: unless-stopped
+    environment:
+      CONSOLE_API_URL: ""
+      APP_API_URL: ""
+
+  plugin_daemon:
+    image: langgenius/dify-plugin-daemon:0.4.1-local
+    restart: unless-stopped
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: dify_plugin
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_PASSWORD: ${REDIS_AUTH}
+      SERVER_PORT: "5002"
+      SERVER_KEY: ${PLUGIN_DAEMON_KEY}
+      DIFY_INNER_API_URL: http://api:5001
+      DIFY_INNER_API_KEY: ${INNER_API_KEY}
+      PLUGIN_WORKING_PATH: /app/storage/cwd
+      PLUGIN_REMOTE_INSTALLING_HOST: "0.0.0.0"
+      PLUGIN_REMOTE_INSTALLING_PORT: "5003"
+      PLUGIN_REMOTE_INSTALLING_ENABLED: "true"
+    volumes:
+      - pluginstorage:/app/storage
+    depends_on: [db, redis]
+
+  sandbox:
+    image: langgenius/dify-sandbox:0.2.12
+    restart: unless-stopped
+    environment:
+      API_KEY: ${SANDBOX_API_KEY}
+      GIN_MODE: release
+      WORKER_TIMEOUT: "15"
+      ENABLE_NETWORK: "true"
+      HTTP_PROXY: http://ssrf-proxy:3128
+      HTTPS_PROXY: http://ssrf-proxy:3128
+
+  ssrf_proxy:
+    build: ./ssrf-proxy
+    restart: unless-stopped
+
+  entry:
+    build: ./entry
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    depends_on: [api, web]
+
+  redis:
+    build: ./redis
+    restart: unless-stopped
+    environment:
+      REDIS_AUTH: ${REDIS_AUTH}
+
+  db:
+    build: ./db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: dify
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  vectordb:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY}
+    volumes:
+      - qdrantdata:/qdrant/storage
+
+volumes:
+  appstorage:
+  pluginstorage:
+  dbdata:
+  qdrantdata:

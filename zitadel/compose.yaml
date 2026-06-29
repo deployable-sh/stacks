@@ -1,0 +1,38 @@
+services:
+  zitadel:
+    build: .
+    restart: unless-stopped
+    command: start-from-init --masterkeyFromEnv --tlsMode external
+    environment:
+      ZITADEL_MASTERKEY: ${ZITADEL_MASTERKEY}
+      ZITADEL_DATABASE_POSTGRES_HOST: db
+      ZITADEL_DATABASE_POSTGRES_PORT: "5432"
+      ZITADEL_DATABASE_POSTGRES_DATABASE: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: zitadel-local-only
+      ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: disable
+      ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: zitadel
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: zitadel-local-only
+      ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: disable
+      ZITADEL_EXTERNALDOMAIN: ${ZITADEL_EXTERNALDOMAIN:-localhost}
+      ZITADEL_EXTERNALPORT: ${ZITADEL_EXTERNALPORT:-5000}
+      ZITADEL_EXTERNALSECURE: ${ZITADEL_EXTERNALSECURE:-false}
+      ZITADEL_PORT: "5000"
+      ZITADEL_TLS_ENABLED: "false"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zitadel
+      POSTGRES_PASSWORD: zitadel-local-only
+      POSTGRES_DB: zitadel
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

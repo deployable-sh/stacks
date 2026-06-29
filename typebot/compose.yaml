@@ -1,0 +1,49 @@
+x-shared-env: &shared-env
+  DATABASE_URL: postgresql://typebot:typebot-local-only@db:5432/typebot
+  ENCRYPTION_SECRET: ${ENCRYPTION_SECRET}
+  NEXT_PUBLIC_VIEWER_URL: ${NEXT_PUBLIC_VIEWER_URL:-http://localhost:5001}
+  NODE_OPTIONS: --no-node-snapshot
+
+services:
+  builder:
+    image: baptistearno/typebot-builder:3
+    restart: unless-stopped
+    environment:
+      <<: *shared-env
+      PORT: "5000"
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:5000}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      DISABLE_SIGNUP: ${DISABLE_SIGNUP:-false}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      NEXT_PUBLIC_SMTP_FROM: ${NEXT_PUBLIC_SMTP_FROM:-}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  viewer:
+    image: baptistearno/typebot-viewer:3
+    restart: unless-stopped
+    environment:
+      <<: *shared-env
+      PORT: "5000"
+    ports:
+      - "5001:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: typebot
+      POSTGRES_PASSWORD: typebot-local-only
+      POSTGRES_DB: typebot
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

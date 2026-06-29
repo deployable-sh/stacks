@@ -1,0 +1,17 @@
+services:
+  metabase:
+    x-miget:
+      ram: "2048"
+    environment:
+      MB_DB_HOST: ${{db.host}}
+      MB_DB_PORT: ${{db.port}}
+      MB_DB_DBNAME: ${{db.database}}
+      MB_DB_USER: ${{db.username}}
+      MB_DB_PASS: ${{db.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

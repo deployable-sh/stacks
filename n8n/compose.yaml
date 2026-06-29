@@ -1,0 +1,62 @@
+x-n8n: &n8n
+  image: n8nio/n8n:latest
+  restart: unless-stopped
+
+x-n8n-env: &n8n-env
+  DB_TYPE: postgresdb
+  DB_POSTGRESDB_HOST: db
+  DB_POSTGRESDB_PORT: "5432"
+  DB_POSTGRESDB_DATABASE: n8n
+  DB_POSTGRESDB_USER: n8n
+  DB_POSTGRESDB_PASSWORD: n8n-local-only
+  EXECUTIONS_MODE: queue
+  QUEUE_BULL_REDIS_HOST: queue
+  QUEUE_BULL_REDIS_PORT: "6379"
+  N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+  N8N_DIAGNOSTICS_ENABLED: "false"
+
+services:
+  n8n:
+    <<: *n8n
+    environment:
+      <<: *n8n-env
+      N8N_PORT: "5000"
+      N8N_PROXY_HOPS: "1"
+      N8N_SECURE_COOKIE: "false"
+    ports:
+      - "5000:5000"
+    volumes:
+      - n8ndata:/home/node/.n8n
+    depends_on:
+      - db
+      - queue
+
+  n8n-worker:
+    <<: *n8n
+    command:
+      - worker
+    environment:
+      <<: *n8n-env
+    deploy:
+      replicas: 2
+    depends_on:
+      - db
+      - queue
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: n8n-local-only
+      POSTGRES_DB: n8n
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  queue:
+    image: valkey/valkey:7.2
+    restart: unless-stopped
+
+volumes:
+  n8ndata:
+  dbdata:

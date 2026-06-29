@@ -1,0 +1,23 @@
+services:
+  kong:
+    x-miget:
+      ram: "1024"
+    environment:
+      KONG_PG_HOST: ${{db.host}}
+      KONG_PG_PORT: ${{db.port}}
+      KONG_PG_USER: ${{db.username}}
+      KONG_PG_PASSWORD: ${{db.password}}
+      KONG_PG_DATABASE: ${{db.database}}
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001, [::]:8001"
+      KONG_ADMIN_GUI_LISTEN: "0.0.0.0:8002, [::]:8002"
+
+  admin:
+    x-miget:
+      ram: "256"
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

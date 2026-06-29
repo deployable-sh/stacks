@@ -1,0 +1,75 @@
+x-kafka: &kafka
+  image: apache/kafka:4.0.0
+  restart: unless-stopped
+
+x-kafka-env: &kafka-env
+  KAFKA_PROCESS_ROLES: broker,controller
+  KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
+  KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+  KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+  KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+  KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+  KAFKA_LOG_DIRS: /var/lib/kafka/data
+  KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "3"
+  KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "3"
+  KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "2"
+  KAFKA_DEFAULT_REPLICATION_FACTOR: "3"
+  KAFKA_MIN_INSYNC_REPLICAS: "2"
+  KAFKA_HEAP_OPTS: -Xms256m -Xmx1g
+  CLUSTER_ID: 5L6g3nShT-eMCtK--X86sw
+
+services:
+  kafka-1:
+    <<: *kafka
+    environment:
+      <<: *kafka-env
+      KAFKA_NODE_ID: "1"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092
+    ports:
+      - "9092"
+      - "9093"
+    volumes:
+      - kafkadata-1:/var/lib/kafka/data
+
+  kafka-2:
+    <<: *kafka
+    environment:
+      <<: *kafka-env
+      KAFKA_NODE_ID: "2"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9092
+    ports:
+      - "9092"
+      - "9093"
+    volumes:
+      - kafkadata-2:/var/lib/kafka/data
+
+  kafka-3:
+    <<: *kafka
+    environment:
+      <<: *kafka-env
+      KAFKA_NODE_ID: "3"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:9092
+    ports:
+      - "9092"
+      - "9093"
+    volumes:
+      - kafkadata-3:/var/lib/kafka/data
+
+  kafka-ui:
+    image: ghcr.io/kafbat/kafka-ui:latest
+    restart: unless-stopped
+    environment:
+      KAFKA_CLUSTERS_0_NAME: kafka
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+      SERVER_PORT: "5000"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+
+volumes:
+  kafkadata-1:
+  kafkadata-2:
+  kafkadata-3:

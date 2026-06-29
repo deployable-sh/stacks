@@ -1,0 +1,13 @@
+server {
+    listen 5000;
+    # Large uploads to buckets.
+    client_max_body_size 0;
+
+    location / {
+        proxy_pass ${PROXY_TARGET};
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_request_buffering off;
+    }
+}

@@ -1,0 +1,9 @@
+services:
+  redis:
+    x-miget:
+      ram: "512"
+      private: true
+
+volumes:
+  redisdata:
+    x-miget: { size: "5000", type: RWO }

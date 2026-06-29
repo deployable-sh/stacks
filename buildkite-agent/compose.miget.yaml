@@ -1,0 +1,9 @@
+services:
+  agent:
+    x-miget:
+      ram: "2048"
+      private: true
+
+volumes:
+  builds:
+    x-miget: { size: "5000", type: RWO }

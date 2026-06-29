@@ -1,0 +1,43 @@
+services:
+  redis-node-1:
+    x-miget:
+      ram: "512"
+      private: true
+  redis-node-2:
+    x-miget:
+      ram: "512"
+      private: true
+  redis-node-3:
+    x-miget:
+      ram: "512"
+      private: true
+  redis-node-4:
+    x-miget:
+      ram: "512"
+      private: true
+  redis-node-5:
+    x-miget:
+      ram: "512"
+      private: true
+  redis-node-6:
+    x-miget:
+      ram: "512"
+      private: true
+  redis-init:
+    x-miget:
+      ram: "128"
+      private: true
+
+volumes:
+  node1-data:
+    x-miget: { size: "5000", type: RWO }
+  node2-data:
+    x-miget: { size: "5000", type: RWO }
+  node3-data:
+    x-miget: { size: "5000", type: RWO }
+  node4-data:
+    x-miget: { size: "5000", type: RWO }
+  node5-data:
+    x-miget: { size: "5000", type: RWO }
+  node6-data:
+    x-miget: { size: "5000", type: RWO }

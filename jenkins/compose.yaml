@@ -1,0 +1,14 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk21
+    restart: unless-stopped
+    environment:
+      JENKINS_OPTS: --httpPort=5000
+      JAVA_OPTS: -Xmx1536m
+    ports:
+      - "5000:5000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+volumes:
+  jenkins_home:

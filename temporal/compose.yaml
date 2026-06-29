@@ -1,0 +1,39 @@
+services:
+  temporal:
+    image: temporalio/auto-setup:1.29.7
+    restart: unless-stopped
+    environment:
+      DB: postgres12
+      DB_PORT: "5432"
+      POSTGRES_SEEDS: db
+      POSTGRES_USER: temporal
+      POSTGRES_PWD: temporal-local-only
+      DBNAME: temporal
+      VISIBILITY_DBNAME: temporal_visibility
+      SKIP_DB_CREATE: ${SKIP_DB_CREATE:-false}
+    depends_on:
+      - db
+
+  ui:
+    image: temporalio/ui:2.51.0
+    restart: unless-stopped
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_UI_PORT: "5000"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - temporal
+
+  db:
+    build: ./db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: temporal
+      POSTGRES_PASSWORD: temporal-local-only
+      POSTGRES_DB: temporal
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

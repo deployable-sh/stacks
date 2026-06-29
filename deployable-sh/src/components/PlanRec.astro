@@ -1,0 +1,65 @@
+---
+import type { AppData } from '../data/types';
+import { hobbyFit, proFit, fmtRam } from '../lib/sizing';
+import { SITE } from '../config';
+
+interface Props {
+  app: AppData;
+}
+
+const { app } = Astro.props;
+const hobby = hobbyFit(app);
+const pro = proFit(app);
+---
+
+<div class="sizing">
+  <div class="stack-needs panel">
+    <p class="needs-label">// this stack needs</p>
+    <p class="needs-figures">
+      <strong>{fmtRam(app.ramMiB)}</strong> RAM · <strong>{app.diskGB} GB</strong> disk · <strong>{app.services}</strong>
+      {app.services === 1 ? ' service' : ' services'}
+    </p>
+    {app.sizingNote && <p class="needs-note">{app.sizingNote}</p>}
+  </div>
+
+  <div class="plans">
+    <div class="plan panel plan-rec">
+      <p class="plan-tier">Hobby - recommended fit</p>
+      <p class="plan-price">${hobby.fit.usd}<span class="per">/mo</span></p>
+      <p class="plan-spec">{hobby.fit.vcpu} vCPU · {fmtRam(hobby.fit.ramMiB)} · {hobby.fit.diskGB} GiB disk</p>
+      {hobby.comfortable && (
+        <p class="plan-alt">
+          Headroom for your own apps: {fmtRam(hobby.comfortable.ramMiB)} at ${hobby.comfortable.usd}/mo
+        </p>
+      )}
+    </div>
+    <div class="plan panel">
+      <p class="plan-tier">Professional - production</p>
+      <p class="plan-price">${pro.fit.usd}<span class="per">/mo</span></p>
+      <p class="plan-spec">{pro.fit.vcpu} vCPU · {fmtRam(pro.fit.ramMiB)} · {pro.fit.diskGB} GiB disk</p>
+      <p class="plan-alt">Dedicated resources, production SLOs - <a href={SITE.migetPlansUrl} rel="noopener">plan details</a></p>
+    </div>
+  </div>
+  <p class="plans-note">
+    One Miget plan is a fixed pool of compute - the whole stack (managed databases included) deploys inside it, and
+    anything left over runs your other apps. No per-service or per-seat math.
+  </p>
+</div>
+
+<style>
+  .sizing { display: flex; flex-direction: column; gap: 1rem; }
+  .needs-label { font-family: var(--mono); color: var(--text-dim); font-size: 0.8rem; margin: 0 0 0.3rem; }
+  .needs-figures { margin: 0; font-size: 1.05rem; }
+  .needs-figures strong { color: var(--accent); font-family: var(--mono); }
+  .needs-note { color: var(--text-muted); font-size: 0.875rem; margin: 0.6rem 0 0; }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 680px) { .plans { grid-template-columns: 1fr; } }
+  .plan-rec { border-color: var(--accent-dim); }
+  .plan-tier { font-family: var(--mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); margin: 0; }
+  .plan-rec .plan-tier { color: var(--accent); }
+  .plan-price { font-family: var(--mono); font-size: 2rem; font-weight: 700; margin: 0.3rem 0 0; }
+  .plan-price .per { font-size: 0.9rem; color: var(--text-dim); font-weight: 400; }
+  .plan-spec { font-family: var(--mono); font-size: 0.85rem; color: var(--text-muted); margin: 0.2rem 0 0.6rem; }
+  .plan-alt { font-size: 0.82rem; color: var(--text-dim); margin: 0; }
+  .plans-note { font-size: 0.85rem; color: var(--text-dim); margin: 0; max-width: 70ch; }
+</style>

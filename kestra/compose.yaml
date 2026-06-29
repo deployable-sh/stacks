@@ -1,0 +1,59 @@
+services:
+  kestra:
+    image: kestra/kestra:latest-lts
+    restart: unless-stopped
+    command: server standalone
+    environment:
+      KESTRA_CONFIGURATION: |
+        micronaut:
+          server:
+            port: 5000
+        datasources:
+          postgres:
+            url: jdbc:postgresql://${DB_HOST:-db}:${DB_PORT:-5432}/${DB_NAME:-kestra}
+            username: ${DB_USER:-kestra}
+            password: ${DB_PASSWORD:-kestra-local-only}
+            driverClassName: org.postgresql.Driver
+        kestra:
+          server:
+            basic-auth:
+              enabled: true
+              username: ${KESTRA_ADMIN_EMAIL:-admin@kestra.local}
+              password: ${KESTRA_ADMIN_PASSWORD:-kestraAdmin123!}
+          repository:
+            type: postgres
+          queue:
+            type: postgres
+          storage:
+            type: local
+            local:
+              base-path: /app/storage
+          tasks:
+            tmp-dir:
+              path: /tmp/kestra-wd
+          plugins:
+            defaults:
+              - type: io.kestra.plugin.scripts
+                values:
+                  taskRunner:
+                    type: io.kestra.plugin.core.runner.Process
+    ports:
+      - "5000:5000"
+    volumes:
+      - kestrastorage:/app/storage
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kestra
+      POSTGRES_PASSWORD: kestra-local-only
+      POSTGRES_DB: kestra
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  kestrastorage:
+  dbdata:

@@ -1,0 +1,17 @@
+services:
+  documenso:
+    x-miget:
+      ram: "2048"
+    environment:
+      NEXT_PRIVATE_DATABASE_URL: ${{db.url}}
+      NEXT_PRIVATE_DIRECT_DATABASE_URL: ${{db.url}}
+      NEXT_PUBLIC_WEBAPP_URL: ${MIGET_PUBLIC_URL}
+      NEXT_PRIVATE_SMTP_HOST: smtp.example.com
+      NEXT_PRIVATE_SMTP_FROM_ADDRESS: noreply@example.com
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

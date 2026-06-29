@@ -1,0 +1,8 @@
+services:
+  campfire:
+    x-miget:
+      ram: "512"
+
+volumes:
+  storage:
+    x-miget: { size: "10000", type: RWO }

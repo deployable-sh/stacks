@@ -1,0 +1,15 @@
+services:
+  wordpress:
+    x-miget:
+      ram: "1024"
+
+  db:
+    x-miget:
+      ram: "1024"
+      private: true
+
+volumes:
+  wpdata:
+    x-miget: { size: "10000", type: RWO }
+  dbdata:
+    x-miget: { size: "5000", type: RWO }

@@ -1,0 +1,18 @@
+services:
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    restart: unless-stopped
+    command: ["/bin/sh", "-c", "[ -d /meili_data/data.ms ] && [ ! -f /meili_data/data.ms/VERSION ] && rm -rf /meili_data/data.ms; rm -rf /meili_data/lost+found 2>/dev/null; exec /bin/meilisearch"]
+    environment:
+      MEILI_ENV: production
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+      MEILI_HTTP_ADDR: 0.0.0.0:5000
+      MEILI_DB_PATH: /meili_data/data.ms
+      MEILI_NO_ANALYTICS: "true"
+    ports:
+      - "5000:5000"
+    volumes:
+      - meilidata:/meili_data
+
+volumes:
+  meilidata:

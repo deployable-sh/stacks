@@ -1,0 +1,8 @@
+services:
+  pocketbase:
+    x-miget:
+      ram: "512"
+
+volumes:
+  pbdata:
+    x-miget: { size: "2000", type: RWO }

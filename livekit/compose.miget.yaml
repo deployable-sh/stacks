@@ -1,0 +1,4 @@
+services:
+  livekit:
+    x-miget:
+      ram: "1024"

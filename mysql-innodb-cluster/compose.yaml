@@ -1,0 +1,78 @@
+x-gr: &gr
+  image: mysql:8.4
+  restart: unless-stopped
+  environment: &gr-env
+    MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  command: &gr-cmd
+    - "--server-id=1"
+    - "--log-bin"
+    - "--gtid-mode=ON"
+    - "--enforce-gtid-consistency=ON"
+    - "--log-replica-updates=ON"
+    - "--binlog-checksum=NONE"
+    - "--plugin-load-add=group_replication.so"
+    - "--loose-group-replication-group-name=a1a2a3a4-b1b2-c1c2-d1d2-e1e2e3e4e5e6"
+    - "--loose-group-replication-start-on-boot=OFF"
+    - "--loose-group-replication-ip-allowlist=AUTOMATIC"
+    - "--loose-group-replication-group-seeds=mysql-gr-1:33061,mysql-gr-2:33061,mysql-gr-3:33061"
+    - "--loose-group-replication-local-address=mysql-gr-1:33061"
+
+services:
+  mysql-gr-1:
+    <<: *gr
+    ports:
+      - "3306:3306"
+    volumes:
+      - gr1-data:/var/lib/mysql
+
+  mysql-gr-2:
+    <<: *gr
+    command:
+      - "--server-id=2"
+      - "--log-bin"
+      - "--gtid-mode=ON"
+      - "--enforce-gtid-consistency=ON"
+      - "--log-replica-updates=ON"
+      - "--binlog-checksum=NONE"
+      - "--plugin-load-add=group_replication.so"
+      - "--loose-group-replication-group-name=a1a2a3a4-b1b2-c1c2-d1d2-e1e2e3e4e5e6"
+      - "--loose-group-replication-start-on-boot=OFF"
+      - "--loose-group-replication-ip-allowlist=AUTOMATIC"
+      - "--loose-group-replication-group-seeds=mysql-gr-1:33061,mysql-gr-2:33061,mysql-gr-3:33061"
+      - "--loose-group-replication-local-address=mysql-gr-2:33061"
+    volumes:
+      - gr2-data:/var/lib/mysql
+
+  mysql-gr-3:
+    <<: *gr
+    command:
+      - "--server-id=3"
+      - "--log-bin"
+      - "--gtid-mode=ON"
+      - "--enforce-gtid-consistency=ON"
+      - "--log-replica-updates=ON"
+      - "--binlog-checksum=NONE"
+      - "--plugin-load-add=group_replication.so"
+      - "--loose-group-replication-group-name=a1a2a3a4-b1b2-c1c2-d1d2-e1e2e3e4e5e6"
+      - "--loose-group-replication-start-on-boot=OFF"
+      - "--loose-group-replication-ip-allowlist=AUTOMATIC"
+      - "--loose-group-replication-group-seeds=mysql-gr-1:33061,mysql-gr-2:33061,mysql-gr-3:33061"
+      - "--loose-group-replication-local-address=mysql-gr-3:33061"
+    volumes:
+      - gr3-data:/var/lib/mysql
+
+  mysql-init:
+    build: ./init
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_REPLICATION_PASSWORD: ${MYSQL_REPLICATION_PASSWORD}
+    depends_on:
+      - mysql-gr-1
+      - mysql-gr-2
+      - mysql-gr-3
+
+volumes:
+  gr1-data:
+  gr2-data:
+  gr3-data:

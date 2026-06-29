@@ -1,0 +1,79 @@
+services:
+  kong:
+    x-miget:
+      ram: "512"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?}
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?}
+
+  studio:
+    x-miget: { ram: "512", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
+      SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
+
+  auth:
+    x-miget: { ram: "512", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      API_EXTERNAL_URL: ${MIGET_PUBLIC_URL}
+      SITE_URL: ${MIGET_PUBLIC_URL}
+
+  rest:
+    x-miget: { ram: "512", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+
+  realtime:
+    x-miget: { ram: "1024", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+
+  storage:
+    x-miget: { ram: "512", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
+
+  meta:
+    x-miget: { ram: "512", private: true }
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
+
+  db:
+    x-miget: { ram: "2048", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  supavisor:
+    x-miget: { ram: "1024", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      VAULT_ENC_KEY: ${VAULT_ENC_KEY:-0123456789abcdef0123456789abcdef}
+
+  functions:
+    x-miget: { ram: "512", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
+
+  imgproxy:
+    x-miget: { ram: "512", private: true }
+
+volumes:
+  dbdata:
+    x-miget: { size: "20000", type: RWO }

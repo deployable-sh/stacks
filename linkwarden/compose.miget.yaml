@@ -1,0 +1,18 @@
+services:
+  linkwarden:
+    x-miget:
+      ram: "1024"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      NEXTAUTH_URL: ${MIGET_PUBLIC_URL}/api/v1/auth
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  linkwardendata:
+    x-miget: { size: "10000", type: RWO }

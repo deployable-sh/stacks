@@ -1,0 +1,40 @@
+services:
+  freescout:
+    image: nfrastack/freescout:2.1.2-php8.4
+    restart: unless-stopped
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:5000}
+      NGINX_LISTEN_PORT: "5000"
+      DB_TYPE: mysql
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: freescout
+      DB_USER: freescout
+      DB_PASS: freescout-local-only
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASS: ${ADMIN_PASS}
+      SITE_FIRSTNAME: ${ADMIN_FIRST_NAME:-Admin}
+      SITE_LASTNAME: ${ADMIN_LAST_NAME:-User}
+    ports:
+      - "5000:5000"
+    volumes:
+      - freescoutdata:/data
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root-local-only
+      MYSQL_USER: freescout
+      MYSQL_PASSWORD: freescout-local-only
+      MYSQL_DATABASE: freescout
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  freescoutdata:
+  dbdata:

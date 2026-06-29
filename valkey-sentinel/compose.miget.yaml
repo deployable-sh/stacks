@@ -1,0 +1,39 @@
+services:
+  valkey-master:
+    x-miget:
+      ram: "512"
+      private: true
+  valkey-replica-1:
+    x-miget:
+      ram: "512"
+      private: true
+  valkey-replica-2:
+    x-miget:
+      ram: "512"
+      private: true
+  valkey-sentinel-1:
+    x-miget:
+      ram: "128"
+      private: true
+    ports:
+      - "26379"
+  valkey-sentinel-2:
+    x-miget:
+      ram: "128"
+      private: true
+    ports:
+      - "26379"
+  valkey-sentinel-3:
+    x-miget:
+      ram: "128"
+      private: true
+    ports:
+      - "26379"
+
+volumes:
+  master-data:
+    x-miget: { size: "5000", type: RWO }
+  replica1-data:
+    x-miget: { size: "5000", type: RWO }
+  replica2-data:
+    x-miget: { size: "5000", type: RWO }

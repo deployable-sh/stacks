@@ -1,0 +1,34 @@
+services:
+  odoo:
+    build: .
+    restart: unless-stopped
+    environment:
+      HOST: db
+      DB_PORT: "5432"
+      DB_NAME: odoo
+      USER: odoo
+      PASSWORD: odoo-local-only
+      ODOO_ADMIN_PASSWORD: ${ODOO_ADMIN_PASSWORD}
+      ODOO_LIST_DB: ${ODOO_LIST_DB:-True}
+    ports:
+      - "5000:5000"
+    volumes:
+      - odoodata:/var/lib/odoo
+      - odooaddons:/mnt/extra-addons
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo-local-only
+      POSTGRES_DB: postgres
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  odoodata:
+  odooaddons:
+  dbdata:

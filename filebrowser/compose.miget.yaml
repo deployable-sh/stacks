@@ -1,0 +1,10 @@
+services:
+  filebrowser:
+    x-miget:
+      ram: "256"
+
+volumes:
+  files:
+    x-miget: { size: "9000", type: RWO }
+  database:
+    x-miget: { size: "100", type: RWO }

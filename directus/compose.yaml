@@ -1,0 +1,36 @@
+services:
+  directus:
+    image: directus/directus:11
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      SECRET: ${SECRET}
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:5000}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      DB_CLIENT: pg
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: directus
+      DB_USER: directus
+      DB_PASSWORD: directus-local-only
+    ports:
+      - "5000:5000"
+    volumes:
+      - uploads:/directus/uploads
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directus-local-only
+      POSTGRES_DB: directus
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  uploads:
+  dbdata:

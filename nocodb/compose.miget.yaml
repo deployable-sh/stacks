@@ -1,0 +1,17 @@
+services:
+  nocodb:
+    x-miget:
+      ram: "2048"
+    environment:
+      NC_DB: "pg://${{db.host}}:${{db.port}}?u=${{db.username}}&p=${{db.password}}&d=${{db.database}}"
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  ncdata:
+    x-miget: { size: "5000", type: RWO }

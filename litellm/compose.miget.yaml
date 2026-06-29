@@ -1,0 +1,13 @@
+services:
+  litellm:
+    x-miget:
+      ram: "2048"
+    environment:
+      DATABASE_URL: ${{db.url}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

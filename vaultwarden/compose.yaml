@@ -1,0 +1,16 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    environment:
+      ROCKET_PORT: "5000"
+      DOMAIN: ${DOMAIN:-http://localhost:5000}
+      SIGNUPS_ALLOWED: ${SIGNUPS_ALLOWED:-true}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+    ports:
+      - "5000:5000"
+    volumes:
+      - vwdata:/data
+
+volumes:
+  vwdata:

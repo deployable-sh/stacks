@@ -1,0 +1,46 @@
+x-wiring: &wiring
+  DB_HOST: ${{db.host}}
+  DB_PORT: ${{db.port}}
+  DB_NAME: ${{db.database}}
+  DB_USER: ${{db.username}}
+  DB_PASSWORD: ${{db.password}}
+
+services:
+  app:
+    x-miget:
+      ram: "2048"
+    environment: *wiring
+
+  worker:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment: *wiring
+
+  beat:
+    x-miget:
+      ram: "512"
+      private: true
+    environment: *wiring
+
+  init:
+    x-miget:
+      ram: "512"
+      private: true
+    environment: *wiring
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  superset_home:
+    x-miget: { size: "5000", type: RWX }

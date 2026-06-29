@@ -1,0 +1,16 @@
+services:
+  calcom:
+    x-miget:
+      ram: "2048"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      DATABASE_DIRECT_URL: ${{db.url}}
+      DATABASE_HOST: ${{db.host}}:${{db.port}}
+
+  db:
+    x-miget:
+      managed: postgres
+      extensions: [citext]
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "10Gi"

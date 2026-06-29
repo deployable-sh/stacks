@@ -1,0 +1,16 @@
+services:
+  appsmith:
+    image: appsmith/appsmith-ce:latest
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      APPSMITH_ENCRYPTION_PASSWORD: ${APPSMITH_ENCRYPTION_PASSWORD:-}
+      APPSMITH_ENCRYPTION_SALT: ${APPSMITH_ENCRYPTION_SALT:-}
+      APPSMITH_DISABLE_TELEMETRY: "true"
+    ports:
+      - "5000:5000"
+    volumes:
+      - appsmithstacks:/appsmith-stacks
+
+volumes:
+  appsmithstacks:

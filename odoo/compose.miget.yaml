@@ -1,0 +1,23 @@
+services:
+  odoo:
+    x-miget:
+      ram: "2048"
+    environment:
+      HOST: ${{db.host}}
+      DB_PORT: ${{db.port}}
+      DB_NAME: ${{db.database}}
+      USER: ${{db.username}}
+      PASSWORD: ${{db.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  odoodata:
+    x-miget: { size: "10000", type: RWO }
+  odooaddons:
+    x-miget: { size: "2000", type: RWO }

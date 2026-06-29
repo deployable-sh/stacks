@@ -1,0 +1,14 @@
+services:
+  miniflux:
+    x-miget:
+      ram: "128"
+    environment:
+      DATABASE_URL: ${{db.url}}
+
+  db:
+    x-miget:
+      managed: postgres
+      extensions: [hstore]
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

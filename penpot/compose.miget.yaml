@@ -1,0 +1,39 @@
+services:
+  frontend:
+    x-miget:
+      ram: "256"
+      private: true
+
+  web:
+    x-miget:
+      ram: "128"
+
+  backend:
+    x-miget:
+      ram: "1536"
+      private: true
+    environment:
+      PENPOT_DATABASE_URI: postgresql://${{db.host}}:${{db.port}}/${{db.database}}
+      PENPOT_DATABASE_USERNAME: ${{db.username}}
+      PENPOT_DATABASE_PASSWORD: ${{db.password}}
+
+  exporter:
+    x-miget:
+      ram: "1024"
+      private: true
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  assets:
+    x-miget: { size: "10000", type: RWX }

@@ -1,0 +1,12 @@
+services:
+  owncast:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "1935:1935"
+    volumes:
+      - owncastdata:/app/data
+
+volumes:
+  owncastdata:

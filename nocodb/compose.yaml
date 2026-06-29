@@ -1,0 +1,29 @@
+services:
+  nocodb:
+    image: nocodb/nocodb:latest
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      NC_DB: "pg://db:5432?u=nocodb&p=nocodb-local-only&d=nocodb"
+      NC_AUTH_JWT_SECRET: ${NC_AUTH_JWT_SECRET}
+      NC_SITE_URL: ${NC_SITE_URL:-http://localhost:5000}
+    ports:
+      - "5000:5000"
+    volumes:
+      - ncdata:/usr/app/data
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nocodb
+      POSTGRES_PASSWORD: nocodb-local-only
+      POSTGRES_DB: nocodb
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  ncdata:
+  dbdata:

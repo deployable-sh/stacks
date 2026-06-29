@@ -1,0 +1,13 @@
+services:
+  valkey:
+    build: .
+    restart: unless-stopped
+    environment:
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkeydata:/data
+
+volumes:
+  valkeydata:

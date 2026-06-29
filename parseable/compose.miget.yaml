@@ -1,0 +1,8 @@
+services:
+  parseable:
+    x-miget:
+      ram: "512"
+
+volumes:
+  parseabledata:
+    x-miget: { size: "5000", type: RWO }

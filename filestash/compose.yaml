@@ -1,0 +1,24 @@
+services:
+  filestash:
+    image: machines/filestash:latest
+    restart: unless-stopped
+    environment:
+      APPLICATION_URL: ${APPLICATION_URL:-http://localhost:5000}
+      CANARY: "true"
+    ports:
+      - "8334"
+    volumes:
+      - filestashstate:/app/data/state
+
+  web:
+    build: ./proxy
+    restart: unless-stopped
+    environment:
+      PROXY_TARGET: http://filestash:8334
+    ports:
+      - "5000:5000"
+    depends_on:
+      - filestash
+
+volumes:
+  filestashstate:

@@ -1,0 +1,20 @@
+services:
+  forgejo:
+    x-miget:
+      ram: "1024"
+    environment:
+      FORGEJO__database__HOST: ${{db.host}}:${{db.port}}
+      FORGEJO__database__NAME: ${{db.database}}
+      FORGEJO__database__USER: ${{db.username}}
+      FORGEJO__database__PASSWD: ${{db.password}}
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  forgejodata:
+    x-miget: { size: "10000", type: RWO }

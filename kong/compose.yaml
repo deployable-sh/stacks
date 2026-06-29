@@ -1,0 +1,51 @@
+services:
+  kong:
+    build: .
+    image: miget-kong:local
+    restart: unless-stopped
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: ${KONG_PG_HOST}
+      KONG_PG_PORT: "5432"
+      KONG_PG_USER: ${KONG_PG_USER}
+      KONG_PG_PASSWORD: ${KONG_PG_PASSWORD}
+      KONG_PG_DATABASE: ${KONG_PG_DATABASE}
+      KONG_PROXY_LISTEN: 0.0.0.0:5000
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+      KONG_ADMIN_GUI_LISTEN: 0.0.0.0:8002
+      KONG_ADMIN_GUI_API_URL: /api
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+    ports:
+      - "5000:5000"
+      - "8001"
+      - "8002"
+    depends_on:
+      - db
+
+  admin:
+    build: ./admin
+    image: miget-kong-admin:local
+    restart: unless-stopped
+    environment:
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    ports:
+      - "8002:5000"
+    depends_on:
+      - kong
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${KONG_PG_USER}
+      POSTGRES_PASSWORD: ${KONG_PG_PASSWORD}
+      POSTGRES_DB: ${KONG_PG_DATABASE}
+    volumes:
+      - kongdb:/var/lib/postgresql/data
+
+volumes:
+  kongdb:

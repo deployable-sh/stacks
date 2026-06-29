@@ -1,0 +1,8 @@
+services:
+  typesense:
+    x-miget:
+      ram: "1024"
+
+volumes:
+  typesensedata:
+    x-miget: { size: "5000", type: RWO }

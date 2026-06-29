@@ -1,0 +1,65 @@
+x-mongo: &mongo
+  image: mongo:8.0
+  restart: unless-stopped
+  command:
+    - mongod
+    - --replSet=rs0
+    - --bind_ip_all
+
+services:
+  mongo-1:
+    <<: *mongo
+    ports:
+      - "27017"
+    volumes:
+      - mongodata-1:/data/db
+
+  mongo-2:
+    <<: *mongo
+    ports:
+      - "27017"
+    volumes:
+      - mongodata-2:/data/db
+
+  mongo-3:
+    <<: *mongo
+    ports:
+      - "27017"
+    volumes:
+      - mongodata-3:/data/db
+
+  rs-init:
+    image: mongo:8.0
+    restart: unless-stopped
+    depends_on:
+      - mongo-1
+      - mongo-2
+      - mongo-3
+    command:
+      - bash
+      - -c
+      - |
+        until mongosh --host mongo-1 --quiet --eval 'db.runCommand({ping: 1})' >/dev/null 2>&1; do
+          echo 'waiting for mongo-1...'; sleep 5
+        done
+        mongosh --host mongo-1 --quiet --eval '
+          try {
+            rs.status()
+            print("replica set already initiated")
+          } catch (e) {
+            rs.initiate({
+              _id: "rs0",
+              members: [
+                {_id: 0, host: "mongo-1:27017"},
+                {_id: 1, host: "mongo-2:27017"},
+                {_id: 2, host: "mongo-3:27017"}
+              ]
+            })
+            print("replica set initiated")
+          }'
+        sleep infinity
+
+volumes:
+  mongodata-1:
+  mongodata-2:
+  mongodata-3:

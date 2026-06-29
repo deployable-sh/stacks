@@ -1,0 +1,22 @@
+services:
+  temporal:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment:
+      POSTGRES_SEEDS: ${{db.host}}
+      DB_PORT: ${{db.port}}
+      POSTGRES_USER: ${{db.username}}
+      POSTGRES_PWD: ${{db.password}}
+      SKIP_DB_CREATE: "true"
+
+  ui:
+    x-miget:
+      ram: "256"
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

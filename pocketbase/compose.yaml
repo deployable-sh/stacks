@@ -1,0 +1,14 @@
+services:
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    restart: unless-stopped
+    command:
+      - serve
+      - --http=0.0.0.0:5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - pbdata:/pb_data
+
+volumes:
+  pbdata:

@@ -1,0 +1,104 @@
+x-langfuse-env: &langfuse-env
+  DATABASE_URL: postgresql://langfuse:langfuse-local-only@db:5432/langfuse
+  SALT: ${SALT}
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+  CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+  CLICKHOUSE_URL: http://clickhouse:8123
+  CLICKHOUSE_USER: langfuse
+  CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+  CLICKHOUSE_CLUSTER_ENABLED: "false"
+  REDIS_HOST: cache
+  REDIS_PORT: "6379"
+  REDIS_AUTH: ${REDIS_AUTH}
+  LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+  LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://blob:9000
+  LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: langfuse
+  LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+  LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+  LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+  LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://blob:9000
+  LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: langfuse
+  LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+  LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+  TELEMETRY_ENABLED: "false"
+
+services:
+  web:
+    image: langfuse/langfuse:3
+    restart: unless-stopped
+    environment:
+      <<: *langfuse-env
+      PORT: "5000"
+      HOSTNAME: "0.0.0.0"
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:5000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - clickhouse
+      - cache
+      - blob
+
+  worker:
+    image: langfuse/langfuse-worker:3
+    restart: unless-stopped
+    environment: *langfuse-env
+    depends_on:
+      - db
+      - clickhouse
+      - cache
+      - blob
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: langfuse
+      POSTGRES_PASSWORD: langfuse-local-only
+      POSTGRES_DB: langfuse
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: langfuse
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    ports:
+      - "9000:9000"
+      - "8123:8123"
+    volumes:
+      - chdata:/var/lib/clickhouse
+
+  cache:
+    image: valkey/valkey:8
+    command: ["sh", "-c", "exec valkey-server --requirepass \"$REDIS_AUTH\" --maxmemory-policy noeviction"]
+    restart: unless-stopped
+    environment:
+      REDIS_AUTH: ${REDIS_AUTH}
+    ports:
+      - "6379:6379"
+
+  blob:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    command: ["server", "/data", "--address", ":9000"]
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: langfuse
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "9000:9000"
+    volumes:
+      - blobdata:/data
+
+volumes:
+  dbdata:
+  chdata:
+  blobdata:

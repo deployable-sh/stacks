@@ -1,0 +1,8 @@
+services:
+  node-red:
+    x-miget:
+      ram: "512"
+
+volumes:
+  nodereddata:
+    x-miget: { size: "2000", type: RWO }

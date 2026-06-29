@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Deploy to Miget button',
+    url: `${SITE.url}/button`,
+    description: 'Generate a one-click Deploy to Miget button for any public Git repository.',
+  },
+];
+---
+
+<Base
+  title="Deploy to Miget button - one-click deploy any repo"
+  description="Generate a Deploy to Miget button for any public Git repo. It auto-detects a Compose stack, a container image, or a normal app, and deploys to Miget in one click."
+  keywords={['deploy to miget button', 'one-click deploy', 'deploy button', 'miget deploy', 'deploy badge']}
+  jsonLd={jsonLd}
+>
+  <section class="wrap btn-page">
+    <h1 class="bp-title">Deploy to Miget <span class="accent">button</span></h1>
+    <p class="bp-lead">
+      A one-click deploy button for any public Git repo. Paste a repo, copy the snippet, drop it in your
+      README. Miget auto-detects what to do: a Compose stack (when a <code>compose.yaml</code> is present),
+      a container image (with <code>?image=</code>), otherwise a normal app from your git repo.
+    </p>
+
+    <div class="bp-grid">
+      <div class="panel bp-form">
+        <label class="bp-label" for="bp-repo">Repository URL</label>
+        <input id="bp-repo" class="bp-input" type="text" placeholder="https://github.com/owner/repo" autocomplete="off" spellcheck="false" />
+
+        <label class="bp-label" for="bp-path">Path <span class="bp-opt">monorepo subdir, optional</span></label>
+        <input id="bp-path" class="bp-input" type="text" placeholder="e.g. kafka" autocomplete="off" spellcheck="false" />
+
+        <label class="bp-label" for="bp-type">Type <span class="bp-opt">optional, skips detection</span></label>
+        <select id="bp-type" class="bp-input">
+          <option value="">auto-detect</option>
+          <option value="stack">stack</option>
+          <option value="app">app</option>
+          <option value="image">image</option>
+        </select>
+      </div>
+
+      <div class="panel bp-out">
+        <div class="bp-preview">
+          <a id="bp-prev-link" href="#" rel="noopener"><img id="bp-prev-img" src="/deploy-to-miget.svg" alt="Deploy to Miget" width="174" height="40" /></a>
+        </div>
+
+        <div class="bp-field">
+          <div class="bp-field-head"><span class="bp-label">Markdown</span><button class="bp-copy" data-copy="bp-md">Copy</button></div>
+          <pre class="bp-snip"><code id="bp-md"></code></pre>
+        </div>
+        <div class="bp-field">
+          <div class="bp-field-head"><span class="bp-label">HTML</span><button class="bp-copy" data-copy="bp-html">Copy</button></div>
+          <pre class="bp-snip"><code id="bp-html"></code></pre>
+        </div>
+        <div class="bp-field">
+          <div class="bp-field-head"><span class="bp-label">URL</span><button class="bp-copy" data-copy="bp-url">Copy</button></div>
+          <pre class="bp-snip"><code id="bp-url"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <p class="bp-note">Works with public repos. For a private repo, connect GitHub in the Miget dashboard after clicking the button.</p>
+  </section>
+
+  <script>
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLElement | null;
+    const SVG = 'https://miget.com/deploy-to-miget.svg';
+
+    function build() {
+      const repo = ($('bp-repo') as HTMLInputElement).value.trim();
+      const path = ($('bp-path') as HTMLInputElement).value.trim();
+      const type = ($('bp-type') as HTMLSelectElement).value;
+      let url = 'https://miget.com/deploy';
+      if (repo) {
+        url += '?repo=' + repo;
+        if (path) url += '&path=' + path;
+        if (type) url += '&type=' + type;
+      }
+      const md = `[![Deploy to Miget](${SVG})](${url})`;
+      const html = `<a href="${url}"><img src="${SVG}" alt="Deploy to Miget" height="40"></a>`;
+      ($('bp-md') as HTMLElement).textContent = repo ? md : '';
+      ($('bp-html') as HTMLElement).textContent = repo ? html : '';
+      ($('bp-url') as HTMLElement).textContent = repo ? url : '';
+      ($('bp-prev-link') as HTMLAnchorElement).href = repo ? url : '#';
+    }
+
+    ['bp-repo', 'bp-path', 'bp-type'].forEach((id) => $(id)?.addEventListener('input', build));
+    document.querySelectorAll<HTMLButtonElement>('.bp-copy').forEach((b) =>
+      b.addEventListener('click', () => {
+        const t = ($(b.dataset.copy as string) as HTMLElement).textContent || '';
+        if (!t) return;
+        navigator.clipboard.writeText(t);
+        const o = b.textContent;
+        b.textContent = 'Copied';
+        setTimeout(() => (b.textContent = o), 1200);
+      })
+    );
+    build();
+  </script>
+
+  <style>
+    .btn-page { padding-top: 3rem; }
+    .bp-title { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem; }
+    .bp-title .accent { color: var(--accent); }
+    .bp-lead { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 72ch; margin: 0 0 2.5rem; }
+    .bp-grid { display: grid; grid-template-columns: 360px 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 820px) { .bp-grid { grid-template-columns: 1fr; } }
+    .bp-form { display: flex; flex-direction: column; }
+    .bp-label { font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted); }
+    .bp-opt { color: var(--text-dim); }
+    .bp-input {
+      width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.6rem 0.8rem; color: var(--text); font-family: var(--mono); font-size: 0.9rem;
+      margin: 0.35rem 0 1rem;
+    }
+    .bp-input:focus { outline: none; border-color: var(--accent-dim); box-shadow: 0 0 0 1px var(--accent-glow); }
+    .bp-out { display: flex; flex-direction: column; gap: 1.1rem; }
+    .bp-preview {
+      display: flex; align-items: center; justify-content: center; padding: 1.6rem;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    }
+    .bp-preview img { display: block; }
+    .bp-field-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; }
+    .bp-copy {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--accent);
+      background: none; border: 1px solid var(--border); border-radius: 6px;
+      padding: 0.2rem 0.6rem; cursor: pointer;
+    }
+    .bp-copy:hover { border-color: var(--accent-dim); }
+    .bp-snip {
+      margin: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.7rem 0.9rem; overflow-x: auto; font-size: 0.8rem; min-height: 1.25rem;
+    }
+    .bp-snip code { background: none; border: none; padding: 0; color: var(--text); white-space: pre; }
+    .bp-note { color: var(--text-dim); font-size: 0.85rem; font-family: var(--mono); margin-top: 2rem; }
+  </style>
+</Base>

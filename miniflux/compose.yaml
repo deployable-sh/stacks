@@ -1,0 +1,29 @@
+services:
+  miniflux:
+    image: ghcr.io/miniflux/miniflux:2.3.1
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      BASE_URL: ${BASE_URL:-http://localhost:5000}
+      DATABASE_URL: postgres://miniflux:miniflux-local-only@db:5432/miniflux?sslmode=disable
+      RUN_MIGRATIONS: "1"
+      CREATE_ADMIN: "1"
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: miniflux
+      POSTGRES_PASSWORD: miniflux-local-only
+      POSTGRES_DB: miniflux
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

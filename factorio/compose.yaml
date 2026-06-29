@@ -1,0 +1,16 @@
+services:
+  factorio:
+    image: factoriotools/factorio:stable
+    restart: unless-stopped
+    environment:
+      LOAD_LATEST_SAVE: "true"
+      GENERATE_NEW_SAVE: "true"
+      SAVE_NAME: ${SAVE_NAME:-miget}
+      UPDATE_MODS_ON_START: ${UPDATE_MODS_ON_START:-false}
+    ports:
+      - "34197:34197/udp"
+    volumes:
+      - factoriodata:/factorio
+
+volumes:
+  factoriodata:

@@ -1,0 +1,8 @@
+services:
+  openclaw:
+    x-miget:
+      ram: "2048"
+
+volumes:
+  openclawdata:
+    x-miget: { size: "5000", type: RWO }

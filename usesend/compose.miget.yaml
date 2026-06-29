@@ -1,0 +1,24 @@
+services:
+  usesend:
+    x-miget:
+      ram: "1024"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?}
+      NEXTAUTH_URL: ${MIGET_PUBLIC_URL}
+      GITHUB_ID: ${GITHUB_ID:?GitHub OAuth Client ID, create an OAuth app at github.com/settings/developers (callback URL = your usesend public URL + /api/auth/callback/github)}
+      GITHUB_SECRET: ${GITHUB_SECRET:?GitHub OAuth Client Secret, from the same GitHub OAuth app}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?AWS access key ID, usesend uses AWS SES to send email and S3 for storage}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?AWS secret access key, paired with the access key ID above}
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

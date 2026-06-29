@@ -1,0 +1,97 @@
+x-rp: &rp
+  image: docker.redpanda.com/redpandadata/redpanda:v24.3.1
+  restart: unless-stopped
+
+services:
+  rp-1:
+    <<: *rp
+    command:
+      - redpanda
+      - start
+      - --mode=dev-container
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --seeds=rp-1:33145,rp-2:33145,rp-3:33145
+      - --kafka-addr=0.0.0.0:9092
+      - --advertise-kafka-addr=rp-1:9092
+      - --rpc-addr=0.0.0.0:33145
+      - --advertise-rpc-addr=rp-1:33145
+      - --pandaproxy-addr=0.0.0.0:8082
+      - --advertise-pandaproxy-addr=rp-1:8082
+      - --schema-registry-addr=0.0.0.0:8081
+    ports:
+      - "9092"
+      - "33145"
+      - "8081"
+      - "8082"
+    volumes:
+      - rpdata-1:/var/lib/redpanda/data
+
+  rp-2:
+    <<: *rp
+    command:
+      - redpanda
+      - start
+      - --mode=dev-container
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --seeds=rp-1:33145,rp-2:33145,rp-3:33145
+      - --kafka-addr=0.0.0.0:9092
+      - --advertise-kafka-addr=rp-2:9092
+      - --rpc-addr=0.0.0.0:33145
+      - --advertise-rpc-addr=rp-2:33145
+      - --pandaproxy-addr=0.0.0.0:8082
+      - --advertise-pandaproxy-addr=rp-2:8082
+      - --schema-registry-addr=0.0.0.0:8081
+    ports:
+      - "9092"
+      - "33145"
+      - "8081"
+      - "8082"
+    volumes:
+      - rpdata-2:/var/lib/redpanda/data
+
+  rp-3:
+    <<: *rp
+    command:
+      - redpanda
+      - start
+      - --mode=dev-container
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --seeds=rp-1:33145,rp-2:33145,rp-3:33145
+      - --kafka-addr=0.0.0.0:9092
+      - --advertise-kafka-addr=rp-3:9092
+      - --rpc-addr=0.0.0.0:33145
+      - --advertise-rpc-addr=rp-3:33145
+      - --pandaproxy-addr=0.0.0.0:8082
+      - --advertise-pandaproxy-addr=rp-3:8082
+      - --schema-registry-addr=0.0.0.0:8081
+    ports:
+      - "9092"
+      - "33145"
+      - "8081"
+      - "8082"
+    volumes:
+      - rpdata-3:/var/lib/redpanda/data
+
+  redpanda-console:
+    image: docker.redpanda.com/redpandadata/console:v2.8.0
+    restart: unless-stopped
+    environment:
+      KAFKA_BROKERS: rp-1:9092,rp-2:9092,rp-3:9092
+      SERVER_LISTENPORT: "5000"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rp-1
+      - rp-2
+      - rp-3
+
+volumes:
+  rpdata-1:
+  rpdata-2:
+  rpdata-3:

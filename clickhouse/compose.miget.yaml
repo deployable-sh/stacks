@@ -1,0 +1,17 @@
+x-node: &node
+  x-miget:
+    ram: "2048"
+    private: true
+
+services:
+  ch-1: *node
+  ch-2: *node
+  ch-3: *node
+
+volumes:
+  chdata-1:
+    x-miget: { size: "20000", type: RWO }
+  chdata-2:
+    x-miget: { size: "20000", type: RWO }
+  chdata-3:
+    x-miget: { size: "20000", type: RWO }

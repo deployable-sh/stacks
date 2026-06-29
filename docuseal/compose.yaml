@@ -1,0 +1,36 @@
+services:
+  docuseal:
+    image: docuseal/docuseal:latest
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      DATABASE_URL: postgresql://docuseal:docuseal-local-only@db:5432/docuseal
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      HOST: ${HOST:-localhost:5000}
+      FORCE_SSL: ${FORCE_SSL:-}
+      SMTP_ADDRESS: ${SMTP_ADDRESS:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_AUTHENTICATION: ${SMTP_AUTHENTICATION:-plain}
+    ports:
+      - "5000:5000"
+    volumes:
+      - docusealdata:/data/docuseal
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: docuseal
+      POSTGRES_PASSWORD: docuseal-local-only
+      POSTGRES_DB: docuseal
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  docusealdata:
+  dbdata:

@@ -1,0 +1,70 @@
+x-galera-env: &galera-env
+  MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+
+x-galera-common: &galera-common
+  restart: unless-stopped
+  stop_grace_period: 2m
+  healthcheck:
+    test: ["CMD", "healthcheck.sh", "--connect", "--galera_online"]
+    interval: 10s
+    timeout: 5s
+    retries: 12
+    start_period: 90s
+
+services:
+  galera-1:
+    <<: *galera-common
+    build: ./bootstrap
+    command:
+      - mariadbd
+      - --wsrep_on=ON
+      - --wsrep_provider=/usr/lib/galera/libgalera_smm.so
+      - --wsrep_cluster_name=galera
+      - --wsrep_cluster_address=gcomm://galera-1,galera-2,galera-3
+      - --wsrep_node_name=galera-1
+      - --binlog_format=ROW
+      - --innodb_autoinc_lock_mode=2
+    environment:
+      <<: *galera-env
+      MARIADB_DATABASE: app
+      MARIADB_USER: app
+      MARIADB_PASSWORD: ${MARIADB_APP_PASSWORD}
+    volumes:
+      - galeradata-1:/var/lib/mysql
+
+  galera-2:
+    <<: *galera-common
+    image: mariadb:11.8
+    command:
+      - mariadbd
+      - --wsrep_on=ON
+      - --wsrep_provider=/usr/lib/galera/libgalera_smm.so
+      - --wsrep_cluster_name=galera
+      - --wsrep_cluster_address=gcomm://galera-1,galera-2,galera-3
+      - --wsrep_node_name=galera-2
+      - --binlog_format=ROW
+      - --innodb_autoinc_lock_mode=2
+    environment: *galera-env
+    volumes:
+      - galeradata-2:/var/lib/mysql
+
+  galera-3:
+    <<: *galera-common
+    image: mariadb:11.8
+    command:
+      - mariadbd
+      - --wsrep_on=ON
+      - --wsrep_provider=/usr/lib/galera/libgalera_smm.so
+      - --wsrep_cluster_name=galera
+      - --wsrep_cluster_address=gcomm://galera-1,galera-2,galera-3
+      - --wsrep_node_name=galera-3
+      - --binlog_format=ROW
+      - --innodb_autoinc_lock_mode=2
+    environment: *galera-env
+    volumes:
+      - galeradata-3:/var/lib/mysql
+
+volumes:
+  galeradata-1:
+  galeradata-2:
+  galeradata-3:

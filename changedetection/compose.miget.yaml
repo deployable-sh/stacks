@@ -1,0 +1,8 @@
+services:
+  changedetection:
+    x-miget:
+      ram: "512"
+
+volumes:
+  datastore:
+    x-miget: { size: "2000", type: RWO }

@@ -1,0 +1,10 @@
+services:
+  ntfy:
+    x-miget:
+      ram: "256"
+
+volumes:
+  ntfyauth:
+    x-miget: { size: "100", type: RWO }
+  ntfycache:
+    x-miget: { size: "2000", type: RWO }

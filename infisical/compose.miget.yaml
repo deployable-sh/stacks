@@ -1,0 +1,21 @@
+services:
+  infisical:
+    x-miget:
+      ram: "1536"
+    environment:
+      DB_CONNECTION_URI: ${{db.url}}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?}
+      AUTH_SECRET: ${AUTH_SECRET:?}
+      SITE_URL: ${MIGET_PUBLIC_URL}
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"

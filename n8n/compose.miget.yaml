@@ -1,0 +1,39 @@
+x-wiring: &wiring
+  DB_POSTGRESDB_HOST: ${{db.host}}
+  DB_POSTGRESDB_PORT: ${{db.port}}
+  DB_POSTGRESDB_DATABASE: ${{db.database}}
+  DB_POSTGRESDB_USER: ${{db.username}}
+  DB_POSTGRESDB_PASSWORD: ${{db.password}}
+  QUEUE_BULL_REDIS_HOST: ${{queue.host}}
+  QUEUE_BULL_REDIS_PORT: ${{queue.port}}
+  QUEUE_BULL_REDIS_PASSWORD: ${{queue.password}}
+
+services:
+  n8n:
+    x-miget:
+      ram: "1024"
+    environment:
+      <<: *wiring
+      N8N_SECURE_COOKIE: "true"
+
+  n8n-worker:
+    x-miget:
+      ram: "1024"
+      private: true
+    environment: *wiring
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+  queue:
+    x-miget:
+      managed: valkey
+      ram: "256Mi"
+
+volumes:
+  n8ndata:
+    x-miget: { size: "1000", type: RWO }

@@ -1,0 +1,32 @@
+services:
+  app:
+    x-miget:
+      ram: "3072"
+    environment:
+      OM_INIT_SUPERADMIN_EMAIL: ${OM_INIT_SUPERADMIN_EMAIL:-admin@example.com}
+      OM_INIT_SUPERADMIN_PASSWORD: ${OM_INIT_SUPERADMIN_PASSWORD:?}
+
+  db:
+    x-miget:
+      ram: "1024"
+      private: true
+
+  cache:
+    x-miget:
+      ram: "512"
+      private: true
+
+  search:
+    x-miget:
+      ram: "1024"
+      private: true
+
+volumes:
+  dbdata:
+    x-miget: { size: "10000", type: RWO }
+  searchdata:
+    x-miget: { size: "5000", type: RWO }
+  attachments:
+    x-miget: { size: "5000", type: RWO }
+  initmarker:
+    x-miget: { size: "100", type: RWO }

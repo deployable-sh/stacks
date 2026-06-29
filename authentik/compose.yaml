@@ -1,0 +1,55 @@
+x-authentik: &authentik
+  image: ghcr.io/goauthentik/server:2026.5
+  restart: unless-stopped
+  shm_size: 512mb
+
+x-authentik-env: &authentik-env
+  AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
+  AUTHENTIK_POSTGRESQL__HOST: db
+  AUTHENTIK_POSTGRESQL__PORT: "5432"
+  AUTHENTIK_POSTGRESQL__NAME: authentik
+  AUTHENTIK_POSTGRESQL__USER: authentik
+  AUTHENTIK_POSTGRESQL__PASSWORD: authentik-local-only
+  AUTHENTIK_POSTGRESQL__SSLMODE: disable
+  AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-}
+  AUTHENTIK_BOOTSTRAP_EMAIL: ${AUTHENTIK_BOOTSTRAP_EMAIL:-}
+
+services:
+  server:
+    <<: *authentik
+    command: server
+    environment:
+      <<: *authentik-env
+      AUTHENTIK_LISTEN__HTTP: "[::]:5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - media:/data
+      - templates:/templates
+    depends_on:
+      - db
+
+  worker:
+    <<: *authentik
+    command: worker
+    environment: *authentik-env
+    volumes:
+      - media:/data
+      - templates:/templates
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: authentik
+      POSTGRES_PASSWORD: authentik-local-only
+      POSTGRES_DB: authentik
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  media:
+  templates:
+  dbdata:

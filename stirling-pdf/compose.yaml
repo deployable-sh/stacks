@@ -1,0 +1,17 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:2.12.0
+    restart: unless-stopped
+    environment:
+      SERVER_PORT: "5000"
+      SECURITY_ENABLELOGIN: "true"
+      SECURITY_INITIALLOGIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      SECURITY_INITIALLOGIN_PASSWORD: ${ADMIN_PASSWORD}
+      JAVA_TOOL_OPTIONS: -Xmx768m
+    ports:
+      - "5000:5000"
+    volumes:
+      - configs:/configs
+
+volumes:
+  configs:

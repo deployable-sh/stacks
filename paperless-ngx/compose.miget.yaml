@@ -1,0 +1,26 @@
+services:
+  paperless:
+    x-miget:
+      ram: "2048"
+    environment:
+      PAPERLESS_DBHOST: ${{db.host}}
+      PAPERLESS_DBPORT: ${{db.port}}
+      PAPERLESS_DBNAME: ${{db.database}}
+      PAPERLESS_DBUSER: ${{db.username}}
+      PAPERLESS_DBPASS: ${{db.password}}
+
+  broker:
+    x-miget:
+      ram: "256"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+volumes:
+  paperless:
+    x-miget: { size: "20000", type: RWO }

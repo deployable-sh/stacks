@@ -1,0 +1,8 @@
+services:
+  phoenix:
+    x-miget:
+      ram: "2048"
+
+volumes:
+  phoenixdata:
+    x-miget: { size: "10000", type: RWO }

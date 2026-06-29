@@ -1,0 +1,39 @@
+services:
+  garage:
+    build: ./garage
+    restart: unless-stopped
+    environment:
+      GARAGE_RPC_SECRET: ${GARAGE_RPC_SECRET}
+      GARAGE_ADMIN_TOKEN: ${GARAGE_ADMIN_TOKEN}
+    ports:
+      - "3900"
+      - "3903"
+    volumes:
+      - garagemeta:/var/lib/garage/meta
+      - garagedata:/var/lib/garage/data
+
+  webui:
+    image: khairul169/garage-webui:latest
+    restart: unless-stopped
+    environment:
+      API_BASE_URL: http://garage:3903
+      API_ADMIN_KEY: ${GARAGE_ADMIN_TOKEN}
+      S3_ENDPOINT_URL: http://garage:3900
+    ports:
+      - "3909"
+    depends_on:
+      - garage
+
+  web:
+    build: ./proxy
+    restart: unless-stopped
+    environment:
+      PROXY_TARGET: http://webui:3909
+    ports:
+      - "5000:5000"
+    depends_on:
+      - webui
+
+volumes:
+  garagemeta:
+  garagedata:

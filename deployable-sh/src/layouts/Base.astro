@@ -1,0 +1,307 @@
+---
+import { SITE } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string[];
+  canonical?: string;
+  jsonLd?: object[];
+}
+
+const { title, description, keywords = [], canonical, jsonLd = [] } = Astro.props;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL('/og.png', SITE.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og.png', SITE.url).href} />
+
+    {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="/" class="logo" aria-label="deployable.sh home">
+          <span class="logo-prompt">$</span> deployable<span class="logo-tld">.sh</span><span class="cursor" aria-hidden="true"></span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/#catalogue">Catalogue</a>
+          <a href="/#how-it-works">How it works</a>
+          <a href="/button">Deploy button</a>
+          <a href={SITE.repoUrl} rel="noopener">GitHub</a>
+          <a href={SITE.migetAppUrl} class="nav-cta" rel="noopener">Deploy on Miget</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <p class="footer-logo"><span class="logo-prompt">$</span> deployable.sh</p>
+          <p class="footer-tag">{SITE.tagline}</p>
+          <p class="footer-note">
+            Pricing comparisons as of {SITE.pricingAsOf}. Sources linked on each page; vendors change prices - check theirs, and ours.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="/#catalogue">Catalogue</a>
+          <a href={SITE.repoUrl} rel="noopener">Templates on GitHub</a>
+          <a href={SITE.migetUrl} rel="noopener">Miget</a>
+          <a href={SITE.migetPlansUrl} rel="noopener">Miget plans</a>
+          <a href={SITE.migetDocsUrl} rel="noopener">Miget docs</a>
+          <a href="/llms.txt">llms.txt</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #0e0b1f;
+    --bg-raise: #120e26;
+    --bg-panel: #16112e;
+    --border: rgba(167, 139, 220, 0.16);
+    --border-bright: rgba(167, 139, 220, 0.32);
+    --text: #f4f1fa;
+    --text-muted: #9a93b5;
+    --text-dim: #6b6480;
+    --accent: #a78bdc;
+    --accent-dim: #6b46a8;
+    --accent-glow: rgba(107, 70, 168, 0.18);
+    --grad: linear-gradient(110deg, #3b2370, #6b46a8);
+    --amber: #ffc76b;
+    --red: #e07e8f;
+    --mono: 'SF Mono', ui-monospace, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+    --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    background: var(--bg);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+    background:
+      radial-gradient(circle 640px at 88% -6%, rgba(107, 70, 168, 0.30), transparent 60%),
+      radial-gradient(circle 520px at 2% 6%, rgba(107, 70, 168, 0.16), transparent 60%),
+      linear-gradient(rgba(167, 139, 220, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(167, 139, 220, 0.05) 1px, transparent 1px),
+      var(--bg);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px, 100% 100%;
+    background-attachment: fixed, fixed, scroll, scroll, fixed;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--sans);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.16;
+    color: var(--text);
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.875em;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+    color: var(--text);
+  }
+
+  pre {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  pre code { background: none; border: none; padding: 0; }
+
+  /* header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(14, 11, 31, 0.82);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .logo {
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .logo:hover { text-decoration: none; }
+  .logo-prompt { color: var(--accent); }
+  .logo-tld { color: var(--text-muted); }
+  .cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 2px;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    animation: blink 1.2s steps(2) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+  .site-nav { display: flex; gap: 1.5rem; align-items: center; }
+  .site-nav a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-family: var(--mono);
+  }
+  .site-nav a:hover { color: var(--text); text-decoration: none; }
+  .nav-cta {
+    color: #fff !important;
+    background: var(--grad);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .nav-cta:hover { filter: brightness(1.12); text-decoration: none; }
+  @media (max-width: 720px) {
+    .site-nav { gap: 0.9rem; }
+    .site-nav a:not(.nav-cta) { display: none; }
+  }
+
+  /* footer */
+  .site-footer {
+    margin-top: 5rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg-raise);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    padding: 2.5rem 1.25rem 3rem;
+  }
+  .footer-logo { font-family: var(--mono); font-weight: 700; margin: 0 0 0.25rem; }
+  .footer-tag { color: var(--text-muted); margin: 0 0 1rem; font-size: 0.9rem; }
+  .footer-note { color: var(--text-dim); font-size: 0.8rem; max-width: 48ch; margin: 0; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; font-family: var(--mono); }
+  .footer-links a { color: var(--text-muted); }
+  .footer-links a:hover { color: var(--accent); }
+  @media (max-width: 720px) { .footer-inner { grid-template-columns: 1fr; } }
+
+  /* shared bits */
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 99px;
+    border: 1px solid var(--border-bright);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .badge-accent { border-color: var(--accent-dim); color: var(--accent); background: var(--accent-glow); }
+  .badge-amber { border-color: #8a6a3a; color: var(--amber); background: rgba(255, 180, 84, 0.08); }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--grad); color: #fff; }
+  .btn-primary:hover { filter: brightness(1.12); text-decoration: none; }
+  .btn-ghost { border-color: var(--border-bright); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent-dim); color: var(--accent); text-decoration: none; }
+
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  table.data th, table.data td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.data th {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  table.data td:first-child { font-family: var(--mono); font-size: 0.85rem; }
+  table.data tr.hl td { background: var(--accent-glow); }
+
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.35rem;
+    margin: 3rem 0 1rem;
+  }
+  .section-title .hash { color: var(--accent); margin-right: 0.4rem; }
+
+  .table-scroll { overflow-x: auto; }
+</style>

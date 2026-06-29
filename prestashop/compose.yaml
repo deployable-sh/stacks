@@ -1,0 +1,42 @@
+services:
+  prestashop:
+    image: prestashop/prestashop:9
+    restart: unless-stopped
+    command: ["sh", "-c", "rm -rf /var/www/html/lost+found 2>/dev/null; sed -i 's/^Listen 80/Listen 5000/' /etc/apache2/ports.conf; sed -i 's/:80>/:5000>/' /etc/apache2/sites-available/000-default.conf; exec /tmp/docker_run.sh"]
+    environment:
+      PS_INSTALL_AUTO: "1"
+      PS_DOMAIN: ${PS_DOMAIN:-localhost:5000}
+      PS_ENABLE_SSL: ${PS_ENABLE_SSL:-0}
+      DB_SERVER: db
+      DB_PORT: "3306"
+      DB_NAME: prestashop
+      DB_USER: prestashop
+      DB_PASSWD: prestashop-local-only
+      ADMIN_MAIL: ${ADMIN_MAIL}
+      ADMIN_PASSWD: ${ADMIN_PASSWD}
+      PS_FOLDER_ADMIN: admin
+      PS_LANGUAGE: ${PS_LANGUAGE:-en}
+      PS_COUNTRY: ${PS_COUNTRY:-US}
+    ports:
+      - "5000:5000"
+    volumes:
+      - psdata:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root-local-only
+      MYSQL_USER: prestashop
+      MYSQL_PASSWORD: prestashop-local-only
+      MYSQL_DATABASE: prestashop
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  psdata:
+  dbdata:

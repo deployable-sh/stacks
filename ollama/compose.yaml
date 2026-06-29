@@ -1,0 +1,13 @@
+services:
+  ollama:
+    image: ollama/ollama:0.30.8
+    restart: unless-stopped
+    environment:
+      OLLAMA_HOST: "0.0.0.0:5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - models:/root/.ollama
+
+volumes:
+  models:

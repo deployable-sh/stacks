@@ -1,0 +1,11 @@
+services:
+  runner:
+    x-miget:
+      ram: "2048"
+      private: true
+
+volumes:
+  runnerconfig:
+    x-miget: { size: "100", type: RWO }
+  runnerhome:
+    x-miget: { size: "5000", type: RWO }

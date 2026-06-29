@@ -1,0 +1,8 @@
+services:
+  vaultwarden:
+    x-miget:
+      ram: "256"
+
+volumes:
+  vwdata:
+    x-miget: { size: "2000", type: RWO }

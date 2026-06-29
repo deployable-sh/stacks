@@ -1,0 +1,12 @@
+services:
+  budibase:
+    image: budibase/budibase:latest
+    restart: unless-stopped
+    command: ["sh", "-c", "sed -i 's/80 default_server/5000 default_server/g' /etc/nginx/sites-available/default && exec ./runner.sh"]
+    ports:
+      - "5000:5000"
+    volumes:
+      - bbdata:/data
+
+volumes:
+  bbdata:

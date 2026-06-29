@@ -1,0 +1,9 @@
+services:
+  factorio:
+    x-miget:
+      ram: "2048"
+      private: true
+
+volumes:
+  factoriodata:
+    x-miget: { size: "5000", type: RWO }

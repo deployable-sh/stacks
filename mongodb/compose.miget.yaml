@@ -1,0 +1,22 @@
+x-member: &member
+  x-miget:
+    ram: "1024"
+    private: true
+
+services:
+  mongo-1: *member
+  mongo-2: *member
+  mongo-3: *member
+
+  rs-init:
+    x-miget:
+      ram: "128"
+      private: true
+
+volumes:
+  mongodata-1:
+    x-miget: { size: "10000", type: RWO }
+  mongodata-2:
+    x-miget: { size: "10000", type: RWO }
+  mongodata-3:
+    x-miget: { size: "10000", type: RWO }

@@ -1,0 +1,21 @@
+x-node: &node
+  x-miget:
+    ram: "1024"
+    private: true
+
+services:
+  mysql-gr-1: *node
+  mysql-gr-2: *node
+  mysql-gr-3: *node
+  mysql-init:
+    x-miget:
+      ram: "256"
+      private: true
+
+volumes:
+  gr1-data:
+    x-miget: { size: "10000", type: RWO }
+  gr2-data:
+    x-miget: { size: "10000", type: RWO }
+  gr3-data:
+    x-miget: { size: "10000", type: RWO }

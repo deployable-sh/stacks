@@ -1,0 +1,13 @@
+services:
+  beszel:
+    build: .
+    restart: unless-stopped
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:5000}
+    ports:
+      - "5000:5000"
+    volumes:
+      - data:/beszel_data
+
+volumes:
+  data:

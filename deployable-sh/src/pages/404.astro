@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="404 · deployable.sh" description="Page not found.">
+  <section class="wrap nf">
+    <pre class="nf-term"><code><span class="p">$</span> deploy ./this-page
+<span class="err">error:</span> no such stack (404)</code></pre>
+    <p>That path doesn't exist. The <a href="/#catalogue">catalogue</a> does.</p>
+  </section>
+</Base>
+
+<style>
+  .nf { padding: 6rem 1.25rem; text-align: center; }
+  .nf-term { display: inline-block; text-align: left; margin-bottom: 1.5rem; }
+  .p { color: var(--accent); }
+  .err { color: var(--red); }
+  .nf p { color: var(--text-muted); }
+</style>
