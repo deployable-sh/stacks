@@ -5,6 +5,8 @@ export const meilisearch: AppBase = {
   name: 'Meilisearch',
   upstream: 'Meilisearch',
   upstreamUrl: 'https://www.meilisearch.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'Instant, typo-tolerant search in a single container - the Algolia experience at a flat self-hosted price.',
   category: 'Search & Vectors',

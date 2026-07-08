@@ -5,6 +5,8 @@ export const docuseal: AppBase = {
   name: 'DocuSeal',
   upstream: 'DocuSeal',
   upstreamUrl: 'https://www.docuseal.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'Open-source document signing - field builder, multiple submitters, verified PDF eSignatures - with no envelope counting.',
   category: 'Business Apps',

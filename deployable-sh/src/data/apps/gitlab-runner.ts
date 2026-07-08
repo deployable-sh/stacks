@@ -5,6 +5,8 @@ export const gitlabRunner: AppBase = {
   name: 'GitLab Runner',
   upstream: 'GitLab Runner',
   upstreamUrl: 'https://docs.gitlab.com/runner/',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'A shell-executor GitLab Runner that registers itself on first boot - your pipelines, zero compute-minute quota.',
   category: 'Dev Tools',

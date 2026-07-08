@@ -5,6 +5,8 @@ export const metabase: AppBase = {
   name: 'Metabase',
   upstream: 'Metabase OSS',
   upstreamUrl: 'https://www.metabase.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'BI dashboards non-analysts actually use - point-and-click questions over your databases, on a managed Postgres.',
   category: 'Monitoring & Analytics',

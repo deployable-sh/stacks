@@ -5,6 +5,8 @@ export const prefect: AppBase = {
   name: 'Prefect',
   upstream: 'Prefect 3',
   upstreamUrl: 'https://www.prefect.io',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'Python-native workflow orchestration - decorated functions become scheduled, observable flows; workers connect outbound.',
   category: 'Automation & Jobs',

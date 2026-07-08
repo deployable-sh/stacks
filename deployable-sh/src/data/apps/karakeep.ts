@@ -5,6 +5,8 @@ export const karakeep: AppBase = {
   name: 'Karakeep',
   upstream: 'Karakeep (formerly Hoarder)',
   upstreamUrl: 'https://karakeep.app',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'Bookmark everything - links, notes, images - archived, searchable, and AI-tagged on your own box.',
   category: 'Productivity & PM',
   status: 'stable',

@@ -5,6 +5,8 @@ export const ollama: AppBase = {
   name: 'Ollama',
   upstream: 'Ollama',
   upstreamUrl: 'https://ollama.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'Run open LLMs behind a simple API - llama, mistral, qwen. The local-model server (GPU recommended).',
   category: 'LLM Infrastructure',
   status: 'experimental',

@@ -5,6 +5,9 @@ export const zitadel: AppBase = {
   name: 'Zitadel',
   upstream: 'Zitadel',
   upstreamUrl: 'https://zitadel.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
+  licenseNote: 'moved Apache-2.0 -> AGPL-3.0 in v3 (2025)',
   tagline:
     'Passkeys-first, multi-tenant identity in one stateless Go binary - the lightest full IdP in the catalogue.',
   category: 'Auth & API Gateway',

@@ -5,6 +5,8 @@ export const valkeyCluster: AppBase = {
   name: 'Valkey Cluster',
   upstream: 'Valkey',
   upstreamUrl: 'https://valkey.io',
+  license: 'BSD-3-Clause',
+  licenseTier: 'permissive',
   tagline: 'Sharded, horizontally-scaled Valkey - 3 master shards + 3 replicas, keyspace partitioned. BSD.',
   category: 'Caches & Key-Value',
   status: 'experimental',

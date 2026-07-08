@@ -5,6 +5,8 @@ export const perconaXtradbCluster: AppBase = {
   name: 'Percona XtraDB Cluster',
   upstream: 'Percona XtraDB Cluster',
   upstreamUrl: 'https://www.percona.com/software/mysql-database/percona-xtradb-cluster',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline: 'Synchronous multi-primary MySQL HA (Galera) - 3 nodes, every node writable, no replica lag.',
   category: 'Databases',
   status: 'experimental',

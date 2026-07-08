@@ -5,6 +5,8 @@ export const clickhouse: AppBase = {
   name: 'ClickHouse Cluster',
   upstream: 'ClickHouse',
   upstreamUrl: 'https://clickhouse.com',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     '3-node ClickHouse cluster - one shard, three replicas, embedded Keeper. Real replicated OLAP without ZooKeeper pods.',
   category: 'Databases',

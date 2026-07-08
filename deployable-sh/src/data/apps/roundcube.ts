@@ -5,6 +5,8 @@ export const roundcube: AppBase = {
   name: 'Roundcube',
   upstream: 'Roundcube',
   upstreamUrl: 'https://roundcube.net',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline:
     'The standard open-source webmail - your UI over any IMAP provider, with sessions and contacts in your Postgres.',
   category: 'Email & Newsletters',

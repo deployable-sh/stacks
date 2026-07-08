@@ -5,6 +5,8 @@ export const valkey: AppBase = {
   name: 'Valkey',
   upstream: 'Valkey',
   upstreamUrl: 'https://valkey.io',
+  license: 'BSD-3-Clause',
+  licenseTier: 'permissive',
   tagline: 'The BSD-licensed, Redis-compatible in-memory store - cache, queues, streams - as a single node.',
   category: 'Caches & Key-Value',
   status: 'stable',

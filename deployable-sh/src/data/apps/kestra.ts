@@ -5,6 +5,9 @@ export const kestra: AppBase = {
   name: 'Kestra',
   upstream: 'Kestra',
   upstreamUrl: 'https://kestra.io',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
+  licenseNote: '+ optional EE',
   tagline:
     'Declarative workflow orchestration - flows are YAML authored in the UI, so there is no DAG-deployment problem at all.',
   category: 'Automation & Jobs',

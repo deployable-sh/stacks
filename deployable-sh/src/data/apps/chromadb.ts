@@ -5,6 +5,8 @@ export const chromadb: AppBase = {
   name: 'ChromaDB',
   upstream: 'Chroma',
   upstreamUrl: 'https://www.trychroma.com',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'Chroma vector database - the developer-friendly embedding store, single container + volume, internal-only.',
   category: 'Search & Vectors',

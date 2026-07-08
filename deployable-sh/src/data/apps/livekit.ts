@@ -5,6 +5,8 @@ export const livekit: AppBase = {
   name: 'LiveKit',
   upstream: 'LiveKit',
   upstreamUrl: 'https://livekit.io',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'The open-source WebRTC server behind modern voice AI - with the 10,000-port UDP problem collapsed to one.',
   category: 'Voice & Realtime',

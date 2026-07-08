@@ -5,6 +5,8 @@ export const linkwarden: AppBase = {
   name: 'Linkwarden',
   upstream: 'Linkwarden',
   upstreamUrl: 'https://linkwarden.app',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'A bookmark manager that preserves pages - screenshot, PDF, readable HTML - so your links never rot.',
   category: 'Productivity & PM',
   status: 'stable',

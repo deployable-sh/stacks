@@ -5,6 +5,8 @@ export const mysqlInnodbCluster: AppBase = {
   name: 'MySQL InnoDB Cluster',
   upstream: 'MySQL Group Replication',
   upstreamUrl: 'https://dev.mysql.com/doc/refman/8.4/en/group-replication.html',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline: 'Native MySQL HA via Group Replication - 3 nodes, automatic primary election and failover.',
   category: 'Databases',
   status: 'experimental',

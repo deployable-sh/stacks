@@ -5,6 +5,8 @@ export const paperlessNgx: AppBase = {
   name: 'Paperless-ngx',
   upstream: 'Paperless-ngx',
   upstreamUrl: 'https://docs.paperless-ngx.com',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline: 'Scan, OCR, and full-text-search every document you own - the paperless office, on your infrastructure.',
   category: 'Productivity & PM',
   status: 'stable',

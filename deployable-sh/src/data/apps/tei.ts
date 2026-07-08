@@ -5,6 +5,8 @@ export const tei: AppBase = {
   name: 'TEI Embeddings',
   upstream: 'Text Embeddings Inference (Hugging Face)',
   upstreamUrl: 'https://github.com/huggingface/text-embeddings-inference',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'A self-hosted embeddings API on CPU - bge-small in 512 MB, OpenAI-compatible, zero per-token bills.',
   category: 'LLM Infrastructure',

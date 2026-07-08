@@ -5,6 +5,8 @@ export const plausible: AppBase = {
   name: 'Plausible',
   upstream: 'Plausible Community Edition',
   upstreamUrl: 'https://plausible.io',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'Privacy-friendly web analytics - cookie-free, no consent banner, your visitor data on your own box.',
   category: 'Monitoring & Analytics',
   status: 'stable',

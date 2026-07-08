@@ -5,6 +5,8 @@ export const bagisto: AppBase = {
   name: 'Bagisto',
   upstream: 'Bagisto',
   upstreamUrl: 'https://bagisto.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'Laravel ecommerce you extend in PHP - catalog, checkout, multi-channel - on a self-hosted MySQL.',
   category: 'CMS & Publishing',
   status: 'stable',

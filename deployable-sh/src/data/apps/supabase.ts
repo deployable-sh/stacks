@@ -5,6 +5,9 @@ export const supabase: AppBase = {
   name: 'Supabase',
   upstream: 'Supabase',
   upstreamUrl: 'https://supabase.com',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
+  licenseNote: 'components Apache-2.0 / MIT / PostgreSQL',
   tagline:
     'The full self-hosted Supabase stack - Postgres, Auth, REST, Realtime, Storage, Studio - behind one Kong gateway.',
   category: 'Backend Platforms',

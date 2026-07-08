@@ -5,6 +5,8 @@ export const dockerRegistry: AppBase = {
   name: 'Docker Registry',
   upstream: 'CNCF Distribution',
   upstreamUrl: 'https://distribution.github.io/distribution/',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline: 'Your own private container registry - images on a Miget Bucket, unlimited repos, no pull-rate caps.',
   category: 'Dev Tools',
   status: 'stable',

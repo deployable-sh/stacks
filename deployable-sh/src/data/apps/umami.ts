@@ -5,6 +5,8 @@ export const umami: AppBase = {
   name: 'Umami',
   upstream: 'Umami',
   upstreamUrl: 'https://umami.is',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'Privacy-first web analytics - no cookies, no consent banner - on a managed Postgres, unlimited sites and events.',
   category: 'Monitoring & Analytics',

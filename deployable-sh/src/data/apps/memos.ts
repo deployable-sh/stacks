@@ -5,6 +5,8 @@ export const memos: AppBase = {
   name: 'Memos',
   upstream: 'Memos',
   upstreamUrl: 'https://usememos.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'The lightweight note hub - markdown thoughts captured in seconds, on your own $5 server.',
   category: 'Productivity & PM',
   status: 'stable',

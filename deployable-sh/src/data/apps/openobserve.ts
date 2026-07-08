@@ -5,6 +5,8 @@ export const openobserve: AppBase = {
   name: 'OpenObserve',
   upstream: 'OpenObserve',
   upstreamUrl: 'https://openobserve.ai',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'Logs, metrics, and traces in one binary - the Datadog/Splunk alternative that stores on your buckets.',
   category: 'Monitoring & Analytics',
   status: 'stable',

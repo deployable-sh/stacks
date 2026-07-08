@@ -5,6 +5,9 @@ export const agentBox: AppBase = {
   name: 'Agent Box',
   upstream: 'Claude Code + opencode + Kilo CLI',
   upstreamUrl: 'https://docs.anthropic.com/en/docs/claude-code',
+  license: 'Mixed',
+  licenseTier: 'mixed',
+  licenseNote: 'bundles Claude Code (proprietary) + opencode (MIT) + Kilo CLI',
   tagline:
     'Claude Code, opencode, and Kilo CLI in a persistent web terminal - start agent runs from anywhere, close the tab, reattach later.',
   category: 'AI Agents',

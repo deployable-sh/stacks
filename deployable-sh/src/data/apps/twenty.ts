@@ -5,6 +5,9 @@ export const twenty: AppBase = {
   name: 'Twenty CRM',
   upstream: 'Twenty',
   upstreamUrl: 'https://twenty.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
+  licenseNote: 'core AGPL, few EE-marked files',
   tagline:
     'The open-source CRM with a modern data model - pipelines, workflows, email sync - and no per-seat pricing.',
   category: 'Business Apps',

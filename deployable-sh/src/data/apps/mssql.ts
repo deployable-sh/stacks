@@ -5,6 +5,9 @@ export const mssql: AppBase = {
   name: 'SQL Server',
   upstream: 'Microsoft SQL Server 2025',
   upstreamUrl: 'https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker',
+  license: 'Proprietary',
+  licenseTier: 'proprietary',
+  licenseNote: 'official Microsoft image; default Express is free for production; you set ACCEPT_EULA',
   tagline:
     'Microsoft SQL Server 2025 on Linux - Express edition with its free production license, internal-only, one variable to accept the EULA.',
   category: 'Databases',

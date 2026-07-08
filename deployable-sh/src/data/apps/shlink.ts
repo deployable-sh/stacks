@@ -5,6 +5,8 @@ export const shlink: AppBase = {
   name: 'Shlink',
   upstream: 'Shlink',
   upstreamUrl: 'https://shlink.io',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'Self-hosted URL shortener - short links on your domain, full REST API, analytics that are yours.',
   category: 'Business Apps',
   status: 'stable',

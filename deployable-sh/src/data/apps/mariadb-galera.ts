@@ -5,6 +5,8 @@ export const mariadbGalera: AppBase = {
   name: 'MariaDB Galera',
   upstream: 'MariaDB 11.8 LTS + Galera',
   upstreamUrl: 'https://mariadb.org',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline:
     '3-node synchronous multi-primary MySQL-family HA on the official image - every node writes, any node can die.',
   category: 'Databases',

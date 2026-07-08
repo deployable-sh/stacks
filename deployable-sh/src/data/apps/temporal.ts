@@ -5,6 +5,8 @@ export const temporal: AppBase = {
   name: 'Temporal',
   upstream: 'Temporal',
   upstreamUrl: 'https://temporal.io',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'Durable execution - workflows as code that survive crashes, restarts, and deploys, with full history.',
   category: 'Automation & Jobs',
   status: 'experimental',

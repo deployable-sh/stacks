@@ -5,6 +5,8 @@ export const perconaServer: AppBase = {
   name: 'Percona Server',
   upstream: 'Percona Server for MySQL',
   upstreamUrl: 'https://www.percona.com/software/mysql-database/percona-server',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline: 'A drop-in MySQL replacement with deeper instrumentation and performance tuning, single node.',
   category: 'Databases',
   status: 'stable',

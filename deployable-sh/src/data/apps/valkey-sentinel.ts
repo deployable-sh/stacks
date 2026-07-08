@@ -5,6 +5,8 @@ export const valkeySentinel: AppBase = {
   name: 'Valkey Sentinel',
   upstream: 'Valkey',
   upstreamUrl: 'https://valkey.io',
+  license: 'BSD-3-Clause',
+  licenseTier: 'permissive',
   tagline: 'Highly-available Valkey with automatic failover - one master, two replicas, three sentinels. BSD.',
   category: 'Caches & Key-Value',
   status: 'stable',

@@ -5,6 +5,8 @@ export const freescout: AppBase = {
   name: 'FreeScout',
   upstream: 'FreeScout',
   upstreamUrl: 'https://freescout.net',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'The free help desk / shared inbox - email ticketing with no per-agent pricing, on a self-hosted MySQL.',
   category: 'Business Apps',
   status: 'stable',

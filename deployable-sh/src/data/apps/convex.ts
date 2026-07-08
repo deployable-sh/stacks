@@ -5,6 +5,9 @@ export const convex: AppBase = {
   name: 'Convex',
   upstream: 'Convex',
   upstreamUrl: 'https://convex.dev',
+  license: 'FSL-1.1',
+  licenseTier: 'source-available',
+  licenseNote: 'converts to Apache-2.0 after 2y',
   tagline:
     'Self-hosted Convex: the reactive backend (database + functions + scheduler) with its dashboard, on your infrastructure.',
   category: 'Backend Platforms',

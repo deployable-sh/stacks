@@ -5,6 +5,8 @@ export const bookstack: AppBase = {
   name: 'BookStack',
   upstream: 'BookStack',
   upstreamUrl: 'https://www.bookstackapp.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'A simple, beautiful wiki - shelves, books, chapters, pages. Confluence calm, on a self-hosted MariaDB.',
   category: 'Productivity & PM',
   status: 'stable',

@@ -5,6 +5,8 @@ export const mariadb: AppBase = {
   name: 'MariaDB',
   upstream: 'MariaDB',
   upstreamUrl: 'https://mariadb.org',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline: 'The community MySQL fork, as a single self-hosted node - drop-in compatible, on a flat plan.',
   category: 'Databases',
   status: 'stable',

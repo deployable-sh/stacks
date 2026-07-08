@@ -5,6 +5,8 @@ export const typesense: AppBase = {
   name: 'Typesense',
   upstream: 'Typesense',
   upstreamUrl: 'https://typesense.org',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline: 'The speed-obsessed instant-search engine - in-memory C++, typo tolerance, vectors - for $7/month.',
   category: 'Search & Vectors',
   status: 'stable',

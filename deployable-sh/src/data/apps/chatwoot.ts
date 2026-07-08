@@ -5,6 +5,9 @@ export const chatwoot: AppBase = {
   name: 'Chatwoot',
   upstream: 'Chatwoot (CE)',
   upstreamUrl: 'https://www.chatwoot.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
+  licenseNote: 'v4-ce, pure MIT',
   tagline:
     'Open-source customer support - shared inbox, live chat, channels, help center - with no per-agent pricing.',
   category: 'Business Apps',

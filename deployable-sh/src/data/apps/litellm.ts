@@ -5,6 +5,8 @@ export const litellm: AppBase = {
   name: 'LiteLLM',
   upstream: 'LiteLLM',
   upstreamUrl: 'https://docs.litellm.ai',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'One OpenAI-compatible gateway for every LLM provider - virtual keys, budgets, spend tracking - with no percentage fee.',
   category: 'LLM Infrastructure',

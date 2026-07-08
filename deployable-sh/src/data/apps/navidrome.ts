@@ -5,6 +5,8 @@ export const navidrome: AppBase = {
   name: 'Navidrome',
   upstream: 'Navidrome',
   upstreamUrl: 'https://www.navidrome.org',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline: 'Your own Subsonic music streaming server - one container, your library, no monthly rental.',
   category: 'Media',
   status: 'stable',

@@ -5,6 +5,8 @@ export const filebrowser: AppBase = {
   name: 'FileBrowser',
   upstream: 'FileBrowser',
   upstreamUrl: 'https://filebrowser.org',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'Upload, organize, and share files from a clean web UI - a 30 MB Go binary with share links and user scopes.',
   category: 'Object Storage',

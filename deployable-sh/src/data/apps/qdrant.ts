@@ -5,6 +5,8 @@ export const qdrant: AppBase = {
   name: 'Qdrant',
   upstream: 'Qdrant',
   upstreamUrl: 'https://qdrant.tech',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'Qdrant vector database - single container + volume, internal-only, with the dashboard a flag away.',
   category: 'Search & Vectors',

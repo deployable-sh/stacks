@@ -5,6 +5,9 @@ export const grafanaStack: AppBase = {
   name: 'Grafana Stack',
   upstream: 'Grafana + Prometheus + Loki',
   upstreamUrl: 'https://grafana.com/oss/',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
+  licenseNote: 'Grafana + Loki, AGPL since 2021',
   tagline:
     'Dashboards, metrics, and logs for your whole project - Grafana, Prometheus, and Loki pre-wired, for $13/month flat.',
   category: 'Monitoring & Analytics',

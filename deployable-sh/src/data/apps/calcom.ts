@@ -5,6 +5,8 @@ export const calcom: AppBase = {
   name: 'Cal.com',
   upstream: 'Cal.com',
   upstreamUrl: 'https://cal.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'Open-source scheduling - booking pages, availability, team round-robin. Calendly without the per-seat bill.',
   category: 'Scheduling',
   status: 'stable',

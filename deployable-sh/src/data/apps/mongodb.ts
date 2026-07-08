@@ -5,6 +5,9 @@ export const mongodb: AppBase = {
   name: 'MongoDB Replica Set',
   upstream: 'MongoDB',
   upstreamUrl: 'https://www.mongodb.com',
+  license: 'SSPL-1.0',
+  licenseTier: 'network',
+  licenseNote: 'mongo:8.0 — targets DBaaS resellers',
   tagline:
     '3-node MongoDB 8 replica set (rs0) on the stock image - self-initiating, internal-only, Atlas-shaped without the Atlas bill.',
   category: 'Databases',

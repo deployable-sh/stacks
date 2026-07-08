@@ -5,6 +5,8 @@ export const budibase: AppBase = {
   name: 'Budibase',
   upstream: 'Budibase',
   upstreamUrl: 'https://budibase.com',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline:
     'Low-code apps, forms, and approval workflows - the all-in-one image with zero required configuration.',
   category: 'Internal Tools',

@@ -5,6 +5,8 @@ export const mailpit: AppBase = {
   name: 'Mailpit',
   upstream: 'Mailpit',
   upstreamUrl: 'https://mailpit.axllent.org',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'The dev mail catcher - every test email from every app in your project, in one searchable UI, for $5/month.',
   category: 'Email & Newsletters',

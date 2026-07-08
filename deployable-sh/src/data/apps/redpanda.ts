@@ -5,6 +5,9 @@ export const redpanda: AppBase = {
   name: 'Redpanda',
   upstream: 'Redpanda',
   upstreamUrl: 'https://redpanda.com',
+  license: 'BSL-1.1',
+  licenseTier: 'source-available',
+  licenseNote: 'v24.3.1 Community Edition',
   tagline:
     '3-broker Redpanda cluster - Kafka-compatible streaming without the JVM or ZooKeeper, plus Redpanda Console.',
   category: 'Streaming & Messaging',

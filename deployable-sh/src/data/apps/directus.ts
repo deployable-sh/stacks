@@ -5,6 +5,9 @@ export const directus: AppBase = {
   name: 'Directus',
   upstream: 'Directus 11',
   upstreamUrl: 'https://directus.io',
+  license: 'BSL-1.1',
+  licenseTier: 'source-available',
+  licenseNote: 'converts to permissive over time',
   tagline:
     'Instant headless CMS and REST/GraphQL API over Postgres, with a data studio your editors will actually like.',
   category: 'CMS & Publishing',

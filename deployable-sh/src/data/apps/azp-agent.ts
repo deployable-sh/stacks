@@ -5,6 +5,8 @@ export const azpAgent: AppBase = {
   name: 'Azure Pipelines Agent',
   upstream: 'Azure Pipelines agent',
   upstreamUrl: 'https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/docker',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'A self-hosted Azure DevOps agent from Microsoft’s official recipe - $13/month vs $40/month per hosted parallel job.',
   category: 'Dev Tools',

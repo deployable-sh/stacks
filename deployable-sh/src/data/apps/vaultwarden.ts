@@ -5,6 +5,8 @@ export const vaultwarden: AppBase = {
   name: 'Vaultwarden',
   upstream: 'Vaultwarden',
   upstreamUrl: 'https://github.com/dani-garcia/vaultwarden',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'The Bitwarden-compatible server in Rust - official clients work unchanged, every premium feature included, 256 MiB of RAM.',
   category: 'Security',

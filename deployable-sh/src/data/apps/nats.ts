@@ -5,6 +5,8 @@ export const nats: AppBase = {
   name: 'NATS Cluster',
   upstream: 'NATS',
   upstreamUrl: 'https://nats.io',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline: '3-node cloud-native messaging - pub/sub, request/reply, and JetStream streams - at ~30 MB per node.',
   category: 'Streaming & Messaging',
   status: 'stable',

@@ -5,6 +5,8 @@ export const cronicle: AppBase = {
   name: 'Cronicle',
   upstream: 'Cronicle',
   upstreamUrl: 'https://github.com/jhuckaby/Cronicle',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'Cron with a UI: schedules, run history, chaining, retries, and alerts - in one 512 MiB container.',
   category: 'Automation & Jobs',

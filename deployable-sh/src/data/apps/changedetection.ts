@@ -5,6 +5,8 @@ export const changedetection: AppBase = {
   name: 'changedetection.io',
   upstream: 'changedetection.io',
   upstreamUrl: 'https://changedetection.io',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline: 'Watch any web page for changes - prices, stock, competitors - and get notified, for $5/month.',
   category: 'Monitoring & Analytics',
   status: 'stable',

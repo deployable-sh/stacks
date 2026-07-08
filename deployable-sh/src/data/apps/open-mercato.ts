@@ -5,6 +5,8 @@ export const openMercato: AppBase = {
   name: 'Open Mercato',
   upstream: 'Open Mercato',
   upstreamUrl: 'https://github.com/open-mercato/open-mercato',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'The AI-engineering foundation framework - multi-tenant CRM/ERP/commerce modules that start your business app at 80% done.',
   category: 'Internal Tools',

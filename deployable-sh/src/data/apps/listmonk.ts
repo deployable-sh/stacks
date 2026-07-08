@@ -5,6 +5,8 @@ export const listmonk: AppBase = {
   name: 'listmonk',
   upstream: 'listmonk',
   upstreamUrl: 'https://listmonk.app',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'Self-hosted newsletters and mailing lists - millions of subscribers on a flat plan, sent through any relay you like.',
   category: 'Email & Newsletters',

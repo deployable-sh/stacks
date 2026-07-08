@@ -5,6 +5,8 @@ export const sftpgo: AppBase = {
   name: 'SFTPGo',
   upstream: 'SFTPGo',
   upstreamUrl: 'https://sftpgo.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'The upload portal for Miget Buckets - per-user S3 storage, share-upload links for outsiders, optional SFTP.',
   category: 'Object Storage',

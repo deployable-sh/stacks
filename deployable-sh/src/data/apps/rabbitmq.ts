@@ -5,6 +5,8 @@ export const rabbitmq: AppBase = {
   name: 'RabbitMQ',
   upstream: 'RabbitMQ',
   upstreamUrl: 'https://www.rabbitmq.com',
+  license: 'MPL-2.0',
+  licenseTier: 'permissive',
   tagline:
     '3-node RabbitMQ 4.x cluster, quorum-queue ready, with the management UI - clusters itself on first boot.',
   category: 'Streaming & Messaging',

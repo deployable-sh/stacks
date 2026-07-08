@@ -5,6 +5,8 @@ export const owncast: AppBase = {
   name: 'Owncast',
   upstream: 'Owncast',
   upstreamUrl: 'https://owncast.online',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline: 'Your own live streaming server - Twitch without the platform cut, RTMP in, HLS out, on your domain.',
   category: 'Media',
   status: 'stable',

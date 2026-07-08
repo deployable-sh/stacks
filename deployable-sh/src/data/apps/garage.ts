@@ -5,6 +5,8 @@ export const garage: AppBase = {
   name: 'Garage',
   upstream: 'Garage (Deuxfleurs)',
   upstreamUrl: 'https://garagehq.deuxfleurs.fr',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'The maintained S3-compatible object store - where the self-hosting world went after MinIO archived.',
   category: 'Object Storage',

@@ -5,6 +5,9 @@ export const minio: AppBase = {
   name: 'MinIO',
   upstream: 'MinIO',
   upstreamUrl: 'https://min.io',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
+  licenseNote: 'aggressive on branding/trademark',
   tagline:
     'S3-compatible object storage you fully control - single node, 20 GB volume, web console included.',
   category: 'Object Storage',
