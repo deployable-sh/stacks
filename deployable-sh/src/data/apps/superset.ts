@@ -5,6 +5,8 @@ export const superset: AppBase = {
   name: 'Superset',
   upstream: 'Apache Superset',
   upstreamUrl: 'https://superset.apache.org',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'The Apache BI platform - dashboards, SQL Lab, alerts and reports - with no per-user pricing.',
   category: 'Monitoring & Analytics',

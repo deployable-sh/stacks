@@ -5,6 +5,8 @@ export const githubRunner: AppBase = {
   name: 'GitHub Actions Runner',
   upstream: 'actions/runner (via myoung34 image)',
   upstreamUrl: 'https://docs.github.com/en/actions/hosting-your-own-runners',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'A self-hosted GitHub Actions runner - your workflows on flat-price compute, zero per-minute billing.',
   category: 'Dev Tools',

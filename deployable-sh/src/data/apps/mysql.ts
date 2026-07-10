@@ -5,6 +5,8 @@ export const mysql: AppBase = {
   name: 'MySQL',
   upstream: 'MySQL',
   upstreamUrl: 'https://www.mysql.com',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline: 'The world`s most popular open-source database, as a single self-hosted node on a flat plan.',
   category: 'Databases',
   status: 'stable',

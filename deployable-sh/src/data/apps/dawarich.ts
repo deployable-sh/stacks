@@ -5,6 +5,8 @@ export const dawarich: AppBase = {
   name: 'Dawarich',
   upstream: 'Dawarich',
   upstreamUrl: 'https://dawarich.app',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'Self-hosted location history - a Google Maps Timeline replacement that keeps your movements yours.',
   category: 'Productivity & PM',
   status: 'experimental',

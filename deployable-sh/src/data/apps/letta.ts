@@ -5,6 +5,8 @@ export const letta: AppBase = {
   name: 'Letta',
   upstream: 'Letta (MemGPT)',
   upstreamUrl: 'https://www.letta.com',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'The MemGPT agent server - agents live server-side with self-editing persistent memory.',
   category: 'LLM Infrastructure',

@@ -5,6 +5,8 @@ export const nocodb: AppBase = {
   name: 'NocoDB',
   upstream: 'NocoDB',
   upstreamUrl: 'https://nocodb.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'The open-source Airtable alternative - smart spreadsheet over a real Postgres, no seat or record metering.',
   category: 'Internal Tools',

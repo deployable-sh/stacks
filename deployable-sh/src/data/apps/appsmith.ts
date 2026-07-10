@@ -5,6 +5,8 @@ export const appsmith: AppBase = {
   name: 'Appsmith',
   upstream: 'Appsmith CE',
   upstreamUrl: 'https://www.appsmith.com',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'The open-source internal-tool builder - drag-and-drop UI over your databases and APIs, unlimited users, no per-seat bill.',
   category: 'Internal Tools',

@@ -5,6 +5,8 @@ export const keycloak: AppBase = {
   name: 'Keycloak',
   upstream: 'Keycloak',
   upstreamUrl: 'https://www.keycloak.org',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'Keycloak IAM - OIDC, SAML, social login, user federation - backed by a managed Postgres, stateless and production-mode.',
   category: 'Auth & API Gateway',

@@ -5,6 +5,9 @@ export const n8n: AppBase = {
   name: 'n8n',
   upstream: 'n8n',
   upstreamUrl: 'https://n8n.io',
+  license: 'Sustainable Use License',
+  licenseTier: 'source-available',
+  licenseNote: 'fair-code; restricts hosting-as-a-service',
   tagline:
     'n8n in queue mode - editor plus horizontally scalable workers, with managed Postgres and Valkey auto-wired.',
   category: 'Automation & Jobs',

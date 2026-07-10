@@ -5,6 +5,9 @@ export const openclaw: AppBase = {
   name: 'OpenClaw',
   upstream: 'OpenClaw',
   upstreamUrl: 'https://openclaw.ai',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
+  licenseNote: 'coollabsio all-in-one image',
   tagline:
     'An autonomous AI agent you run yourself: web dashboard, scheduled tasks, plugins, persistent workspace.',
   category: 'AI Agents',

@@ -5,6 +5,8 @@ export const jenkins: AppBase = {
   name: 'Jenkins',
   upstream: 'Jenkins LTS',
   upstreamUrl: 'https://www.jenkins.io',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'The automation server that still runs the world’s CI - pipelines as code, 1,800+ plugins, your minutes are free.',
   category: 'Dev Tools',

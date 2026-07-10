@@ -5,6 +5,8 @@ export const livekitAgents: AppBase = {
   name: 'LiveKit Agents',
   upstream: 'LiveKit Agents (Python starter)',
   upstreamUrl: 'https://docs.livekit.io/agents/',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'A voice AI agent worker - ElevenLabs voice, Deepgram ears, your LLM brain - joining rooms with zero ingress.',
   category: 'Voice & Realtime',

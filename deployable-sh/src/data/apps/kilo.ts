@@ -5,6 +5,9 @@ export const kilo: AppBase = {
   name: 'Kilo (headless)',
   upstream: 'Kilo',
   upstreamUrl: 'https://kilo.ai',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
+  licenseNote: 'open-source AI coding agent',
   tagline:
     'Kilo in server mode - a persistent remote coding agent your IDE extension and CLI clients attach to.',
   category: 'AI Agents',

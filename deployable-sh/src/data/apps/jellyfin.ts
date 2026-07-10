@@ -5,6 +5,8 @@ export const jellyfin: AppBase = {
   name: 'Jellyfin',
   upstream: 'Jellyfin',
   upstreamUrl: 'https://jellyfin.org',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline: 'The free media server - stream your movies, TV, and music to any device. Plex without the paywall.',
   category: 'Media',
   status: 'stable',

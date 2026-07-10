@@ -5,6 +5,9 @@ export const phoenix: AppBase = {
   name: 'Phoenix',
   upstream: 'Arize Phoenix',
   upstreamUrl: 'https://phoenix.arize.com',
+  license: 'Elastic-2.0',
+  licenseTier: 'source-available',
+  licenseNote: 'Arize Phoenix, ELv2',
   tagline:
     'LLM tracing, evals, and a prompt playground in one container - the lightweight start to LLM observability.',
   category: 'LLM Infrastructure',

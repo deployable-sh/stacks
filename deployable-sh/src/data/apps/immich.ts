@@ -5,6 +5,8 @@ export const immich: AppBase = {
   name: 'Immich',
   upstream: 'Immich',
   upstreamUrl: 'https://immich.app',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'Self-hosted photos and video - a Google Photos alternative with real mobile apps, face and semantic search.',
   category: 'Media',
   status: 'experimental',

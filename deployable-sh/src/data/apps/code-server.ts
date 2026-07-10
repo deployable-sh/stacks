@@ -5,6 +5,8 @@ export const codeServer: AppBase = {
   name: 'code-server',
   upstream: 'code-server (Coder)',
   upstreamUrl: 'https://github.com/coder/code-server',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'VS Code in the browser - a persistent cloud dev environment with your extensions and a 10 GB workspace, from any device.',
   category: 'Dev Tools',

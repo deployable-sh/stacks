@@ -5,6 +5,9 @@ export const hermes: AppBase = {
   name: 'Hermes Agent',
   upstream: 'Hermes Agent (Nous Research)',
   upstreamUrl: 'https://hermes-agent.nousresearch.com',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
+  licenseNote: 'Nous Research',
   tagline:
     'Nous Research’s self-improving agent - learns skills from experience, with cron, hooks, and a web dashboard.',
   category: 'AI Agents',

@@ -5,6 +5,8 @@ export const ghost: AppBase = {
   name: 'Ghost',
   upstream: 'Ghost 6',
   upstreamUrl: 'https://ghost.org',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'Professional publishing - blog, newsletter, paid memberships - keeping 100% of your subscription revenue.',
   category: 'CMS & Publishing',

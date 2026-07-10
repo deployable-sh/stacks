@@ -5,6 +5,8 @@ export const cognee: AppBase = {
   name: 'Cognee',
   upstream: 'Cognee',
   upstreamUrl: 'https://www.cognee.ai',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'The memory engine for AI agents - knowledge graph + vector memory in one self-contained container.',
   category: 'LLM Infrastructure',

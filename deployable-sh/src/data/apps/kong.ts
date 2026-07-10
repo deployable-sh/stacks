@@ -5,6 +5,8 @@ export const kong: AppBase = {
   name: 'Kong Gateway',
   upstream: 'Kong Gateway (OSS)',
   upstreamUrl: 'https://konghq.com',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     'DB-backed Kong API gateway with Kong Manager behind basic auth - managed Postgres, zero config at deploy time.',
   category: 'Auth & API Gateway',

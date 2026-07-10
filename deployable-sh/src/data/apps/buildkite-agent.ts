@@ -5,6 +5,8 @@ export const buildkiteAgent: AppBase = {
   name: 'Buildkite Agent',
   upstream: 'Buildkite agent',
   upstreamUrl: 'https://buildkite.com/docs/agent/v3',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'The hybrid-CI agent - Buildkite runs the control plane, your jobs run here. One token, unmetered minutes.',
   category: 'Dev Tools',

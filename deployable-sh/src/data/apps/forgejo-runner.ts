@@ -5,6 +5,8 @@ export const forgejoRunner: AppBase = {
   name: 'Forgejo Runner',
   upstream: 'Forgejo Actions runner',
   upstreamUrl: 'https://forgejo.org/docs/latest/admin/actions/',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'CI for your Forgejo instance or Codeberg - GitHub-Actions-compatible workflows on your own compute.',
   category: 'Dev Tools',

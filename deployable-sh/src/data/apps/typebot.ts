@@ -5,6 +5,9 @@ export const typebot: AppBase = {
   name: 'Typebot',
   upstream: 'Typebot',
   upstreamUrl: 'https://typebot.io',
+  license: 'FSL-1.1',
+  licenseTier: 'source-available',
+  licenseNote: 'converts to Apache-2.0 after 2y',
   tagline:
     'Conversational forms that outconvert static ones - unlimited chats and seats on a managed Postgres.',
   category: 'Business Apps',

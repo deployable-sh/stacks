@@ -5,6 +5,8 @@ export const mariadbReplication: AppBase = {
   name: 'MariaDB Replication',
   upstream: 'MariaDB',
   upstreamUrl: 'https://mariadb.com/kb/en/standard-replication/',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline: 'Asynchronous primary/replica MariaDB - a writable primary streaming to a read-only replica.',
   category: 'Databases',
   status: 'stable',

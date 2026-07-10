@@ -5,6 +5,8 @@ export const parseable: AppBase = {
   name: 'Parseable',
   upstream: 'Parseable',
   upstreamUrl: 'https://www.parseable.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'A single-binary log lake on object storage - lean, S3-native, SQL-queryable, for $5/month.',
   category: 'Monitoring & Analytics',
   status: 'stable',

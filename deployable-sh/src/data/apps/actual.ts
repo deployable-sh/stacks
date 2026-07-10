@@ -5,6 +5,8 @@ export const actual: AppBase = {
   name: 'Actual Budget',
   upstream: 'Actual Budget',
   upstreamUrl: 'https://actualbudget.org',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'Local-first envelope budgeting - end-to-end encrypted, synced by a $5 server you own.',
   category: 'Productivity & PM',
   status: 'stable',

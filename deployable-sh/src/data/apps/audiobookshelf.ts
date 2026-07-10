@@ -5,6 +5,8 @@ export const audiobookshelf: AppBase = {
   name: 'AudioBookshelf',
   upstream: 'AudioBookshelf',
   upstreamUrl: 'https://www.audiobookshelf.org',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline: 'Your own audiobook and podcast server - native apps, progress sync, one container. Audible you own.',
   category: 'Media',
   status: 'stable',

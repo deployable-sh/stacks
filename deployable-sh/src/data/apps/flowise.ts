@@ -5,6 +5,9 @@ export const flowise: AppBase = {
   name: 'Flowise',
   upstream: 'Flowise',
   upstreamUrl: 'https://flowiseai.com',
+  license: 'Apache-2.0',
+  licenseTier: 'source-available',
+  licenseNote: 'core Apache-2.0; enterprise features commercial/gated',
   tagline:
     'Visual builder for LLM apps and agents - 100+ integrations, embeddable chat widgets, no prediction caps.',
   category: 'LLM Infrastructure',

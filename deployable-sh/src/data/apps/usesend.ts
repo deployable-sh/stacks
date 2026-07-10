@@ -5,6 +5,8 @@ export const usesend: AppBase = {
   name: 'useSend',
   upstream: 'useSend (formerly Unsend)',
   upstreamUrl: 'https://usesend.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'The open-source Resend - transactional + campaign email with a dashboard and API, delivered through your own SES.',
   category: 'Email & Newsletters',

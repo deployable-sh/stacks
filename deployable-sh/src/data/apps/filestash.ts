@@ -5,6 +5,8 @@ export const filestash: AppBase = {
   name: 'Filestash',
   upstream: 'Filestash',
   upstreamUrl: 'https://www.filestash.app',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'A polished web file manager over Miget Buckets - browse, preview, and share what lives in S3.',
   category: 'Object Storage',

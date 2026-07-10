@@ -5,6 +5,9 @@ export const authentik: AppBase = {
   name: 'authentik',
   upstream: 'authentik',
   upstreamUrl: 'https://goauthentik.io',
+  license: 'MIT',
+  licenseTier: 'permissive',
+  licenseNote: 'core MIT, EE gated',
   tagline:
     'The modern identity provider - OIDC, SAML, LDAP, and visual login flows - now Redis-free on a managed Postgres.',
   category: 'Auth & API Gateway',

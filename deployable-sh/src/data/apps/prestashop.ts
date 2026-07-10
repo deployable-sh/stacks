@@ -5,6 +5,8 @@ export const prestashop: AppBase = {
   name: 'PrestaShop',
   upstream: 'PrestaShop 9',
   upstreamUrl: 'https://www.prestashop-project.org',
+  license: 'OSL-3.0',
+  licenseTier: 'copyleft',
   tagline:
     'The European storefront standard - full shop with checkout and back office, auto-installed on a self-hosted MySQL, 0% of your GMV.',
   category: 'CMS & Publishing',

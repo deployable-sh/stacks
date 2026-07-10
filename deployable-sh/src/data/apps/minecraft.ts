@@ -5,6 +5,9 @@ export const minecraft: AppBase = {
   name: 'Minecraft Server',
   upstream: 'itzg/minecraft-server',
   upstreamUrl: 'https://docker-minecraft-server.readthedocs.io',
+  license: 'Proprietary',
+  licenseTier: 'proprietary',
+  licenseNote: 'server jar downloaded at runtime (nothing redistributed); operator accepts the Mojang EULA',
   tagline:
     'A Paper/Fabric/Forge Minecraft server on flat-price compute - your world, your mods, no per-slot pricing.',
   category: 'Game Servers',

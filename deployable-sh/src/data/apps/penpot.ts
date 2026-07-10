@@ -5,6 +5,8 @@ export const penpot: AppBase = {
   name: 'Penpot',
   upstream: 'Penpot',
   upstreamUrl: 'https://penpot.app',
+  license: 'MPL-2.0',
+  licenseTier: 'permissive',
   tagline: 'The open-source design & prototyping platform - the Figma alternative, with no per-seat ceiling.',
   category: 'Business Apps',
   status: 'stable',

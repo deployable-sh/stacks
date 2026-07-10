@@ -5,6 +5,8 @@ export const nodeRed: AppBase = {
   name: 'Node-RED',
   upstream: 'Node-RED (OpenJS)',
   upstreamUrl: 'https://nodered.org',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline: 'Flow-based automation for APIs, MQTT, and devices - with auth made mandatory, not optional.',
   category: 'Automation & Jobs',
   status: 'stable',

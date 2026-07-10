@@ -5,6 +5,8 @@ export const pocketbase: AppBase = {
   name: 'PocketBase',
   upstream: 'PocketBase',
   upstreamUrl: 'https://pocketbase.io',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'An entire backend in one container: SQLite, auth, realtime, file storage, and an admin UI. The simplest stack in the catalogue.',
   category: 'Backend Platforms',

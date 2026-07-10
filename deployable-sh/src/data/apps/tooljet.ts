@@ -5,6 +5,9 @@ export const tooljet: AppBase = {
   name: 'ToolJet',
   upstream: 'ToolJet CE',
   upstreamUrl: 'https://www.tooljet.ai',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
+  licenseNote: 'AGPL core + ELv2 enterprise dirs',
   tagline:
     'Low-code internal tools with 50+ connectors - one container on a managed Postgres, no app caps, no seat pricing.',
   category: 'Internal Tools',

@@ -5,6 +5,8 @@ export const miniflux: AppBase = {
   name: 'Miniflux',
   upstream: 'Miniflux',
   upstreamUrl: 'https://miniflux.app',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline: 'A minimalist, blazing-fast RSS reader - one Go binary on managed Postgres, your feeds on your own box.',
   category: 'Productivity & PM',
   status: 'stable',

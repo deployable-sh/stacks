@@ -5,6 +5,9 @@ export const bugsink: AppBase = {
   name: 'Bugsink',
   upstream: 'Bugsink',
   upstreamUrl: 'https://www.bugsink.com',
+  license: 'Source-available',
+  licenseTier: 'source-available',
+  licenseNote: 'Bugsink self-host license',
   tagline:
     'Error tracking compatible with Sentry SDKs in a single container - the lightest way to own your error data.',
   category: 'Error Tracking',

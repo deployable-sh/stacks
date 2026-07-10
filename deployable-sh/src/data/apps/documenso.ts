@@ -5,6 +5,8 @@ export const documenso: AppBase = {
   name: 'Documenso',
   upstream: 'Documenso',
   upstreamUrl: 'https://documenso.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline:
     'The polished open-source DocuSign alternative - teams, templates, API, and real PKCS#12 document sealing.',
   category: 'Business Apps',

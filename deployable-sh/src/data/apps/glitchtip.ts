@@ -5,6 +5,8 @@ export const glitchtip: AppBase = {
   name: 'GlitchTip',
   upstream: 'GlitchTip',
   upstreamUrl: 'https://glitchtip.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'Sentry-API-compatible error tracking at a fraction of self-hosted Sentry’s footprint - managed Postgres + Valkey, one secret.',
   category: 'Error Tracking',

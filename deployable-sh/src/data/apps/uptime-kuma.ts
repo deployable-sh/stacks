@@ -5,6 +5,8 @@ export const uptimeKuma: AppBase = {
   name: 'Uptime Kuma',
   upstream: 'Uptime Kuma',
   upstreamUrl: 'https://github.com/louislam/uptime-kuma',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline:
     'The beloved self-hosted uptime monitor - unlimited checks, 100+ notification providers, status pages - for $5/month.',
   category: 'Monitoring & Analytics',

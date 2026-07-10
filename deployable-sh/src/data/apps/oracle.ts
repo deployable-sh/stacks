@@ -5,6 +5,9 @@ export const oracle: AppBase = {
   name: 'Oracle Database Free',
   upstream: 'Oracle Database Free (26ai)',
   upstreamUrl: 'https://www.oracle.com/database/free/',
+  license: 'Proprietary',
+  licenseTier: 'proprietary',
+  licenseNote: 'Oracle Database Free - free for dev and production under Oracle Free Use Terms',
   tagline:
     'The actual Oracle Database, free for production under the FUTC license - 2 cores, 2 GB RAM, 12 GB data, zero invoices.',
   category: 'Databases',

@@ -5,6 +5,8 @@ export const logto: AppBase = {
   name: 'Logto',
   upstream: 'Logto',
   upstreamUrl: 'https://logto.io',
+  license: 'MPL-2.0',
+  licenseTier: 'permissive',
   tagline:
     'The open-source Auth0 experience - hosted sign-in pages, social logins, organizations, MFA - on one managed Postgres.',
   category: 'Auth & API Gateway',

@@ -5,6 +5,9 @@ export const langfuse: AppBase = {
   name: 'Langfuse',
   upstream: 'Langfuse',
   upstreamUrl: 'https://langfuse.com',
+  license: 'MIT',
+  licenseTier: 'permissive',
+  licenseNote: 'core MIT + EE',
   tagline:
     'Open-source LLM observability - tracing, evals, prompt management - the full v3 stack with no per-unit metering.',
   category: 'LLM Infrastructure',

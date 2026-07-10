@@ -5,6 +5,8 @@ export const forgejo: AppBase = {
   name: 'Forgejo',
   upstream: 'Forgejo (Codeberg e.V.)',
   upstreamUrl: 'https://forgejo.org',
+  license: 'GPL-3.0',
+  licenseTier: 'copyleft',
   tagline:
     'The community-governed git forge (Gitea fork) - repos, PRs, packages, and CI Actions on a 1 GiB container.',
   category: 'Dev Tools',

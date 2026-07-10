@@ -5,6 +5,9 @@ export const dify: AppBase = {
   name: 'Dify',
   upstream: 'Dify',
   upstreamUrl: 'https://dify.ai',
+  license: 'Apache-2.0 (+ conditions)',
+  licenseTier: 'source-available',
+  licenseNote: 'single-tenant self-host OK; multi-tenant SaaS + logo restricted',
   tagline:
     'The LLM app platform - visual builder, RAG, agents, observability - the catalogue’s heaviest stack, shipped honestly.',
   category: 'LLM Infrastructure',

@@ -5,6 +5,8 @@ export const searxng: AppBase = {
   name: 'SearXNG',
   upstream: 'SearXNG',
   upstreamUrl: 'https://docs.searxng.org',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'A private metasearch engine - 200+ engines, no tracking. Your search homepage and your RAG backend.',
   category: 'Search & Vectors',
   status: 'stable',

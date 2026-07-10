@@ -5,6 +5,8 @@ export const beszel: AppBase = {
   name: 'Beszel',
   upstream: 'Beszel',
   upstreamUrl: 'https://beszel.dev',
+  license: 'MIT',
+  licenseTier: 'permissive',
   tagline: 'A tiny, beautiful server monitoring hub - CPU, memory, disk, Docker stats, alerts. Datadog it is not.',
   category: 'Monitoring & Analytics',
   status: 'stable',

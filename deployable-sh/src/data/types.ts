@@ -47,6 +47,10 @@ export interface AppData {
   name: string;
   upstream: string; // upstream project name
   upstreamUrl: string;
+  /** Upstream license (SPDX-ish token), its risk tier, and an optional caveat */
+  license?: string;
+  licenseTier?: 'permissive' | 'copyleft' | 'network' | 'source-available' | 'proprietary' | 'mixed';
+  licenseNote?: string;
   tagline: string; // card + meta description seed, one sentence
   category: Category;
   status: 'stable' | 'experimental';

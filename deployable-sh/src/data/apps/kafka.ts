@@ -5,6 +5,8 @@ export const kafka: AppBase = {
   name: 'Apache Kafka',
   upstream: 'Apache Kafka',
   upstreamUrl: 'https://kafka.apache.org',
+  license: 'Apache-2.0',
+  licenseTier: 'permissive',
   tagline:
     '3-broker Apache Kafka cluster in KRaft mode (no ZooKeeper) with Kafbat UI - durable defaults, official images, env-only config.',
   category: 'Streaming & Messaging',

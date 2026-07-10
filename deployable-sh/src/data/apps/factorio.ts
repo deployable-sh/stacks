@@ -5,6 +5,9 @@ export const factorio: AppBase = {
   name: 'Factorio Server',
   upstream: 'factoriotools/factorio',
   upstreamUrl: 'https://github.com/factoriotools/factorio-docker',
+  license: 'Proprietary',
+  licenseTier: 'proprietary',
+  licenseNote: 'commercial game; the headless server is free to host, players own the game',
   tagline:
     'A headless Factorio server - the factory grows while everyone sleeps, for $13/month.',
   category: 'Game Servers',

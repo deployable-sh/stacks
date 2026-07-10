@@ -5,6 +5,8 @@ export const docmost: AppBase = {
   name: 'Docmost',
   upstream: 'Docmost',
   upstreamUrl: 'https://docmost.com',
+  license: 'AGPL-3.0',
+  licenseTier: 'network',
   tagline: 'A real Confluence / Notion alternative - collaborative wiki on managed Postgres + Valkey + Buckets, no per-seat bill.',
   category: 'Productivity & PM',
   status: 'stable',

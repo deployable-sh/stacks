@@ -5,6 +5,9 @@ export const openWebui: AppBase = {
   name: 'Open WebUI',
   upstream: 'Open WebUI',
   upstreamUrl: 'https://openwebui.com',
+  license: 'BSD-3-Clause (+ branding)',
+  licenseTier: 'source-available',
+  licenseNote: 'branding-preservation clause added',
   tagline:
     'The self-hosted AI chat workspace - any model behind one UI, RAG over your documents, no per-seat pricing.',
   category: 'LLM Infrastructure',

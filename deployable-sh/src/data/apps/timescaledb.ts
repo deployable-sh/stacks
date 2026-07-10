@@ -5,6 +5,9 @@ export const timescaledb: AppBase = {
   name: 'TimescaleDB',
   upstream: 'TimescaleDB',
   upstreamUrl: 'https://github.com/timescale/timescaledb',
+  license: 'Apache-2.0 / TSL',
+  licenseTier: 'source-available',
+  licenseNote: 'image bundles TSL features; Apache-2.0 core',
   tagline:
     'Postgres for time series - hypertables, columnar compression, continuous aggregates - in a single internal-only node.',
   category: 'Databases',

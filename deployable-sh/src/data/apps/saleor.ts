@@ -5,6 +5,8 @@ export const saleor: AppBase = {
   name: 'Saleor',
   upstream: 'Saleor',
   upstreamUrl: 'https://saleor.io',
+  license: 'BSD-3-Clause',
+  licenseTier: 'permissive',
   tagline:
     'Headless, GraphQL-first commerce (BSD-3) - the full API + dashboard stack without Saleor Cloud’s $1,599/month entry.',
   category: 'CMS & Publishing',

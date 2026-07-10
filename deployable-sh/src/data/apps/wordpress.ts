@@ -5,6 +5,8 @@ export const wordpress: AppBase = {
   name: 'WordPress',
   upstream: 'WordPress',
   upstreamUrl: 'https://wordpress.org',
+  license: 'GPL-2.0',
+  licenseTier: 'copyleft',
   tagline:
     'The CMS that runs half the web - official image, self-hosted MySQL, full plugin freedom, no visit caps.',
   category: 'CMS & Publishing',
