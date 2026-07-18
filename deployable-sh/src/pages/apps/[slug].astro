@@ -79,6 +79,7 @@ const jsonLd = [
           <img src="/deploy-to-miget.svg" alt="Deploy to Miget" width="174" height="40" style="display:block" />
         </a>
         <a class="btn btn-ghost" href={`${SITE.repoUrl}/tree/main/${app.slug}`} rel="noopener">View template source</a>
+        {app.guideUrl && <a class="btn btn-ghost" href={app.guideUrl} rel="noopener">Production guide</a>}
       </div>
       <p style="color:var(--text-dim);font-size:0.85rem;margin:0.7rem 0 0;font-family:var(--mono)">One-click deploy, from ${hobby.fit.usd}/mo on a Miget plan.</p>
     </header>

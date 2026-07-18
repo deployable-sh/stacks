@@ -7,6 +7,9 @@ on a main instance, execution on horizontally scalable workers, deployable
 locally with plain Docker Compose or to [Miget](https://miget.com) as a
 compose stack.
 
+Full production guide (sizing, costs, operational notes):
+[How to Self-Host n8n on Miget](https://miget.com/blog/how-to-self-host-n8n-on-miget)
+
 ## Topology
 
 | Service | Role | Public |
