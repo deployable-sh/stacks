@@ -38,6 +38,27 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE.url).href;
     <meta name="twitter:image" content={new URL('/ogv2.png', SITE.url).href} />
 
     {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        personalization_storage: 'denied',
+        functionality_storage: 'denied',
+        security_storage: 'granted',
+      });
+      try {
+        var saved = JSON.parse(localStorage.getItem('cookieConsent') || 'null');
+        if (saved) gtag('consent', 'update', saved);
+      } catch (e) {}
+      gtag('js', new Date());
+      gtag('config', 'G-MGWP1G928F');
+    </script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-MGWP1G928F"></script>
   </head>
   <body>
     <header class="site-header">
@@ -78,6 +99,36 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE.url).href;
         </nav>
       </div>
     </footer>
+
+    <div id="cookie-banner" hidden>
+      <p>We use Google Analytics to see which templates people find useful. No tracking until you say yes.</p>
+      <div class="cookie-actions">
+        <button id="cookie-accept" type="button">Accept</button>
+        <button id="cookie-decline" type="button">Decline</button>
+      </div>
+    </div>
+    <script is:inline>
+      (function () {
+        if (localStorage.getItem('cookieConsent')) return;
+        var banner = document.getElementById('cookie-banner');
+        banner.hidden = false;
+        function decide(granted) {
+          var consent = {
+            analytics_storage: granted ? 'granted' : 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            personalization_storage: granted ? 'granted' : 'denied',
+            functionality_storage: granted ? 'granted' : 'denied',
+          };
+          window.gtag ? gtag('consent', 'update', consent) : null;
+          localStorage.setItem('cookieConsent', JSON.stringify(consent));
+          banner.hidden = true;
+        }
+        document.getElementById('cookie-accept').addEventListener('click', function () { decide(true); });
+        document.getElementById('cookie-decline').addEventListener('click', function () { decide(false); });
+      })();
+    </script>
   </body>
 </html>
 
@@ -304,4 +355,32 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE.url).href;
   .section-title .hash { color: var(--accent); margin-right: 0.4rem; }
 
   .table-scroll { overflow-x: auto; }
+
+  #cookie-banner {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: 26rem;
+    margin-left: auto;
+    z-index: 100;
+    background: var(--bg-panel);
+    border: 1px solid var(--border, #2a2344);
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  #cookie-banner p { margin: 0 0 0.7rem; }
+  .cookie-actions { display: flex; gap: 0.5rem; }
+  .cookie-actions button {
+    font: inherit;
+    padding: 0.35rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--border, #2a2344);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+  }
+  #cookie-accept { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 </style>
