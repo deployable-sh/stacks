@@ -23,6 +23,7 @@ export const openWebui: AppBase = {
     'open webui litellm',
     'team llm workspace',
   ],
+  guideUrl: 'https://miget.com/blog/how-to-self-host-open-webui',
   intro: [
     'Team AI chat subscriptions charge per seat for what is mostly a UI: ChatGPT Business and Claude Team both land around $25 per user per month before anyone sends a token. Open WebUI is the self-hosted answer - a polished, fast chat workspace over any OpenAI-compatible API, with the team features (accounts, RBAC, shared prompts, document RAG) included.',
     'One container, one volume, one secret. Users sign up (first account is admin, the rest need approval), upload documents for retrieval, and chat against whatever models you connect. No GPU involved - models run at your API providers.',
