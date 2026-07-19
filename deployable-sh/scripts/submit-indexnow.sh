@@ -1,9 +1,4 @@
 #!/bin/sh
-# Submit the deployed sitemap to IndexNow (Bing, Yandex, Seznam, Naver;
-# Perplexity rides on Bing). Meant to run as a Miget cronjob using the site
-# image: it reads the sitemaps baked into the image - no network fetch of the
-# site itself - and POSTs every URL. The key is public by design; the key file
-# served from the site root is the authentication.
 set -eu
 
 KEY="${INDEXNOW_KEY:-a8aeec412745d412f048f43f5c70970d}"
