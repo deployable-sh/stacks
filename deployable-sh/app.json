@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "postdeploy": "/usr/local/bin/submit-indexnow"
+  }
+}
