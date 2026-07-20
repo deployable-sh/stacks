@@ -13,6 +13,7 @@ import { qdrant } from './qdrant';
 import { chromadb } from './chromadb';
 import { meilisearch } from './meilisearch';
 import { supabase } from './supabase';
+import { supabaseLite } from './supabase-lite';
 import { pocketbase } from './pocketbase';
 import { convex } from './convex';
 import { keycloak } from './keycloak';
@@ -179,6 +180,7 @@ const BASES: AppBase[] = [
   chromadb,
   meilisearch,
   supabase,
+  supabaseLite,
   pocketbase,
   convex,
   keycloak,
