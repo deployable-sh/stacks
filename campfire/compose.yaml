@@ -1,6 +1,6 @@
 services:
   campfire:
-    image: ghcr.io/basecamp/once-campfire:main
+    image: ghcr.io/basecamp/once-campfire:sha-df5ed25
     restart: unless-stopped
     environment:
       HTTP_PORT: "5000"

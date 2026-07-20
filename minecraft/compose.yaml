@@ -1,6 +1,6 @@
 services:
   minecraft:
-    image: itzg/minecraft-server:latest
+    image: itzg/minecraft-server:java25
     restart: unless-stopped
     environment:
       EULA: ${EULA}

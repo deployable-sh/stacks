@@ -1,6 +1,6 @@
 services:
   docuseal:
-    image: docuseal/docuseal:latest
+    image: docuseal/docuseal:3.1.5
     restart: unless-stopped
     environment:
       PORT: "5000"

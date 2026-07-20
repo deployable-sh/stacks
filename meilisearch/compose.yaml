@@ -1,6 +1,6 @@
 services:
   meilisearch:
-    image: getmeili/meilisearch:latest
+    image: getmeili/meilisearch:v1.50.0
     restart: unless-stopped
     command: ["/bin/sh", "-c", "[ -d /meili_data/data.ms ] && [ ! -f /meili_data/data.ms/VERSION ] && rm -rf /meili_data/data.ms; rm -rf /meili_data/lost+found 2>/dev/null; exec /bin/meilisearch"]
     environment:

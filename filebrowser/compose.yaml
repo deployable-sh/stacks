@@ -1,6 +1,6 @@
 services:
   filebrowser:
-    image: filebrowser/filebrowser:latest
+    image: filebrowser/filebrowser:v2.63.18
     restart: unless-stopped
     environment:
       FB_PORT: "5000"

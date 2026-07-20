@@ -1,6 +1,6 @@
 services:
   timescaledb:
-    image: timescale/timescaledb:latest-pg18
+    image: timescale/timescaledb:2.28.3-pg18
     restart: unless-stopped
     environment:
       POSTGRES_USER: app

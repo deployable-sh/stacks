@@ -1,6 +1,6 @@
 services:
   chroma:
-    image: chromadb/chroma:latest
+    image: chromadb/chroma:1.5.9
     restart: unless-stopped
     environment:
       IS_PERSISTENT: "TRUE"

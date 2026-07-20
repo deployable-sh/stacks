@@ -1,6 +1,6 @@
 services:
   runner:
-    image: myoung34/github-runner:latest
+    image: myoung34/github-runner:2.336.0
     restart: unless-stopped
     environment:
       ACCESS_TOKEN: ${ACCESS_TOKEN}

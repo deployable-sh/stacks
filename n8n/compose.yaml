@@ -1,5 +1,5 @@
 x-n8n: &n8n
-  image: n8nio/n8n:latest
+  image: n8nio/n8n:2.30.8-d519bdc
   restart: unless-stopped
 
 x-n8n-env: &n8n-env

@@ -1,6 +1,6 @@
 services:
   fizzy:
-    image: ghcr.io/basecamp/fizzy:main
+    image: ghcr.io/basecamp/fizzy:sha-62d3cad
     restart: unless-stopped
     environment:
       HTTP_PORT: "5000"

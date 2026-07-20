@@ -1,6 +1,6 @@
 services:
   litellm:
-    image: ghcr.io/berriai/litellm-database:main-stable
+    image: ghcr.io/berriai/litellm-database:v1.93.0
     restart: unless-stopped
     command: ["--port", "5000"]
     environment:

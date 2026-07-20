@@ -56,7 +56,7 @@ services:
       - kafkadata-3:/var/lib/kafka/data
 
   kafka-ui:
-    image: ghcr.io/kafbat/kafka-ui:latest
+    image: ghcr.io/kafbat/kafka-ui:v1.5.0
     restart: unless-stopped
     environment:
       KAFKA_CLUSTERS_0_NAME: kafka

@@ -1,6 +1,6 @@
 services:
   cronicle:
-    image: soulteary/cronicle:latest
+    image: soulteary/cronicle:0.9.80
     restart: unless-stopped
     hostname: cronicle
     environment:

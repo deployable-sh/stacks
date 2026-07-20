@@ -1,6 +1,6 @@
 services:
   usesend:
-    image: usesend/usesend:latest
+    image: usesend/usesend:v1.9.5
     command: ["sh", "-c", "cd /app && pnpx prisma@6.6.0 db push --schema ./apps/web/prisma/schema.prisma --skip-generate && node apps/web/server.js"]
     restart: unless-stopped
     environment:

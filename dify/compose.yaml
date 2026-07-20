@@ -125,7 +125,7 @@ services:
       - dbdata:/var/lib/postgresql/data
 
   vectordb:
-    image: qdrant/qdrant:latest
+    image: qdrant/qdrant:v1.18.3
     restart: unless-stopped
     environment:
       QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY}

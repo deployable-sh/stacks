@@ -1,6 +1,6 @@
 services:
   bugsink:
-    image: bugsink/bugsink:latest
+    image: bugsink/bugsink:2.4.0
     restart: unless-stopped
     environment:
       SECRET_KEY: ${SECRET_KEY}
