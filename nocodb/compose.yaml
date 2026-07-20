@@ -1,6 +1,6 @@
 services:
   nocodb:
-    image: nocodb/nocodb:latest
+    image: nocodb/nocodb:2026.07.0
     restart: unless-stopped
     environment:
       PORT: "5000"

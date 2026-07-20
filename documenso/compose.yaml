@@ -1,6 +1,6 @@
 services:
   documenso:
-    image: documenso/documenso:latest
+    image: documenso/documenso:v2.15.0
     restart: unless-stopped
     environment:
       PORT: "5000"

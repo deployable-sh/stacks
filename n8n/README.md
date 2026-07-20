@@ -61,6 +61,5 @@ Each worker processes up to 10 concurrent executions by default
 
 - `N8N_SECURE_COOKIE` is `false` locally (plain-http editor) and `true` on
   Miget (TLS at the ingress).
-- Upgrades: `n8nio/n8n:latest` tracks upstream; pin a tested tag for
-  anything you care about, and upgrade main + workers together (they must
-  run the same version).
+- Upgrades: the template pins a tested n8n version; bump the tag deliberately
+  and upgrade main + workers together (they must run the same version).

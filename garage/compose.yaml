@@ -13,7 +13,7 @@ services:
       - garagedata:/var/lib/garage/data
 
   webui:
-    image: khairul169/garage-webui:latest
+    image: khairul169/garage-webui:1.1.0
     restart: unless-stopped
     environment:
       API_BASE_URL: http://garage:3903

@@ -1,6 +1,6 @@
 services:
   metabase:
-    image: metabase/metabase:latest
+    image: metabase/metabase:v0.63.1.x
     restart: unless-stopped
     environment:
       MB_JETTY_PORT: "5000"

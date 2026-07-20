@@ -1,6 +1,6 @@
 services:
   livekit:
-    image: livekit/livekit-server:latest
+    image: livekit/livekit-server:v1.13.4
     restart: unless-stopped
     environment:
       LIVEKIT_CONFIG: |

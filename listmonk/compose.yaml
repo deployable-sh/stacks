@@ -1,6 +1,6 @@
 services:
   listmonk:
-    image: listmonk/listmonk:latest
+    image: listmonk/listmonk:v6.2.0
     restart: unless-stopped
     command:
       - sh

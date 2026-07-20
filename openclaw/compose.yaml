@@ -1,6 +1,6 @@
 services:
   openclaw:
-    image: coollabsio/openclaw:latest
+    image: coollabsio/openclaw:2026.7.1
     restart: unless-stopped
     environment:
       PORT: "5000"

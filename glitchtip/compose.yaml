@@ -1,5 +1,5 @@
 x-glitchtip: &glitchtip
-  image: glitchtip/glitchtip:latest
+  image: glitchtip/glitchtip:6.2.2
   restart: unless-stopped
 
 x-glitchtip-env: &glitchtip-env

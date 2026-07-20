@@ -1,6 +1,6 @@
 services:
   appsmith:
-    image: appsmith/appsmith-ce:latest
+    image: appsmith/appsmith-ce:v2.2
     restart: unless-stopped
     environment:
       PORT: "5000"
