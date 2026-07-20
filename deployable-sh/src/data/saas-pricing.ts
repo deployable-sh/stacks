@@ -188,6 +188,18 @@ export const SAAS_PRICING: Record<string, { rows: SaasCompareRow[]; note?: strin
     ],
     note: 'Hosted Pro is excellent value at small scale - self-hosting wins on data ownership and once the meters (egress, MAU, compute) start running.',
   },
+  'supabase-lite': {
+    rows: [
+      {
+        name: 'Supabase Cloud',
+        plan: 'Pro',
+        usd: 25,
+        priceNote: 'per org + metered compute/egress/storage/MAUs past included quotas',
+        url: 'https://supabase.com/pricing',
+      },
+    ],
+    note: 'The comparison flips versus the full stack: the lite core costs less than hosted Pro while keeping the always-on, no-meters, your-data advantages.',
+  },
   pocketbase: {
     rows: [
       {
