@@ -1,5 +1,10 @@
 services:
   qdrant:
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     image: qdrant/qdrant:v1.18.3
     restart: unless-stopped
     ports:
