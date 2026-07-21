@@ -8,6 +8,12 @@ x-mongo: &mongo
 
 services:
   mongo-1:
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ping:1}).ok' | grep -q 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     <<: *mongo
     ports:
       - "27017"
@@ -15,6 +21,12 @@ services:
       - mongodata-1:/data/db
 
   mongo-2:
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ping:1}).ok' | grep -q 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     <<: *mongo
     ports:
       - "27017"
@@ -22,6 +34,12 @@ services:
       - mongodata-2:/data/db
 
   mongo-3:
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ping:1}).ok' | grep -q 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     <<: *mongo
     ports:
       - "27017"

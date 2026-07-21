@@ -17,6 +17,12 @@ x-n8n-env: &n8n-env
 
 services:
   n8n:
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:5000/healthz >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     <<: *n8n
     environment:
       <<: *n8n-env
@@ -44,6 +50,11 @@ services:
       - queue
 
   db:
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     image: postgres:17
     restart: unless-stopped
     environment:
@@ -54,6 +65,11 @@ services:
       - dbdata:/var/lib/postgresql/data
 
   queue:
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     image: valkey/valkey:7.2
     restart: unless-stopped
 

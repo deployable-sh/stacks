@@ -1,5 +1,10 @@
 services:
   valkey:
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     build: .
     restart: unless-stopped
     environment:

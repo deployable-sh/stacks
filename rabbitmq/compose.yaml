@@ -5,6 +5,12 @@ x-rmq: &rmq
 
 services:
   rmq-1:
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     <<: *rmq
     hostname: rmq-1
     environment:
@@ -18,6 +24,12 @@ services:
       - rmqdata-1:/var/lib/rabbitmq/mnesia
 
   rmq-2:
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     <<: *rmq
     hostname: rmq-2
     environment:
@@ -31,6 +43,12 @@ services:
       - rmqdata-2:/var/lib/rabbitmq/mnesia
 
   rmq-3:
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     <<: *rmq
     hostname: rmq-3
     environment:

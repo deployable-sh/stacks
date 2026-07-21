@@ -1,5 +1,11 @@
 services:
   keycloak:
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/5000"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
     image: quay.io/keycloak/keycloak:26.2
     restart: unless-stopped
     command:
@@ -23,6 +29,11 @@ services:
       - db
 
   db:
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     image: postgres:17
     restart: unless-stopped
     environment:
