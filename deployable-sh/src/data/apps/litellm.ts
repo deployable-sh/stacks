@@ -23,6 +23,7 @@ export const litellm: AppBase = {
     'llm api gateway',
   ],
   guideUrl: 'https://miget.com/blog/how-to-self-host-litellm',
+  related: ['open-webui', 'langfuse', 'ollama'],
   intro: [
     'Every team using LLMs converges on the same needs: one endpoint instead of five SDKs, per-team API keys instead of the shared provider key in a Slack DM, budgets before the invoice surprise, and a log of who spent what on which model. LiteLLM is the open-source gateway that does exactly this - an OpenAI-compatible proxy in front of 100+ providers.',
     'This template runs the database-backed mode on a managed Postgres: virtual keys, teams, budgets, and spend logs all persist, and models are managed in the admin UI (/ui) with no config file - STORE_MODEL_IN_DB keeps provider credentials encrypted in the database.',

@@ -23,6 +23,7 @@ export const flowise: AppBase = {
     'visual agent builder',
     'flowise postgres',
   ],
+  related: ['ollama', 'qdrant', 'langfuse'],
   intro: [
     'Flowise is the visual layer of the LLM stack: drag models, vector stores, tools, and memory onto a canvas, wire them into chatflows or multi-agent flows, and ship the result as an API or an embeddable chat widget. For teams where not everyone writes LangChain by hand, it is the fastest route from idea to working assistant.',
     'This template runs Flowise v3 on a managed Postgres (flows, users, credentials) with a volume for uploaded files. v3 auth means accounts are created in the UI on first visit; four secrets in env keep sessions and stored provider credentials stable across redeploys.',

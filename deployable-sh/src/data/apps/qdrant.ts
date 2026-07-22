@@ -22,6 +22,7 @@ export const qdrant: AppBase = {
     'rag vector store',
     'qdrant setup',
   ],
+  related: ['open-webui', 'flowise', 'ollama'],
   intro: [
     'Qdrant is a vector database written in Rust: HNSW indexes, rich payload filtering, hybrid search, and a clean REST + gRPC API that every RAG framework (LangChain, LlamaIndex, Haystack) supports natively. If you are embedding documents and asking an LLM about them, this is the store in the middle.',
     'This template runs a single Qdrant node with a 10 GB persistent volume, internal-only by default - no API key is configured, so the project network is the security boundary. Your apps reach it at qdrant:6333 (REST) or :6334 (gRPC); nothing is exposed to the internet.',

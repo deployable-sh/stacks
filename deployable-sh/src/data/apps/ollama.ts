@@ -21,6 +21,7 @@ export const ollama: AppBase = {
     'ollama openai compatible api',
     'ollama miget',
   ],
+  related: ['open-webui', 'litellm', 'flowise'],
   intro: [
     'Ollama is the simplest way to run open large language models behind an HTTP API: pull a model (Llama, Mistral, Qwen, Gemma, Phi, and many more) and serve it with OpenAI-compatible endpoints, on infrastructure you own. OLLAMA_HOST puts the API on port 5000; there are no external dependencies.',
     'Read the caveat first, because it is the whole story: real inference wants a GPU. A PaaS typically does not pass one through, so on CPU you are limited to small models (~1-3B parameters) and responses are slow. Ollama still runs, and small models are genuinely useful for embeddings, classification, and lightweight chat - just size expectations to CPU. This template is marked experimental for exactly that reason.',
