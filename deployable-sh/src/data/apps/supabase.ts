@@ -24,6 +24,7 @@ export const supabase: AppBase = {
     'supabase kong gateway',
   ],
   guideUrl: 'https://miget.com/blog/how-to-self-host-supabase',
+  related: ['n8n', 'metabase', 'minio'],
   intro: [
     'Supabase is the open-source Firebase: Postgres at the core, with auth, auto-generated REST APIs, realtime subscriptions, file storage, and a polished Studio dashboard around it. The whole point of it being open source is that you can run it yourself - this template is the official self-hosting compose, adapted to deploy in one step.',
     'Only the Kong gateway is public: it fronts the APIs and serves Studio behind basic auth. Postgres runs Supabase’s own image (custom extensions and roles - deliberately not a managed database). Optional components ride compose profiles: supavisor (connection pooling), edge functions, and imgproxy enable only if you turn their profiles on.',

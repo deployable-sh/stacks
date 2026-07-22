@@ -23,6 +23,7 @@ export const supabaseLite: AppBase = {
     'firebase alternative cheap',
   ],
   guideUrl: 'https://miget.com/blog/how-to-self-host-supabase',
+  related: ['supabase', 'n8n', 'metabase'],
   intro: [
     'Most Supabase apps use three things: the database, auth, and the auto-generated REST API. The full self-hosted distribution ships eleven services to cover every feature - this template ships the four that carry those three workloads: supabase-postgres, GoTrue, PostgREST, and the Kong gateway in front.',
     'The payoff is footprint. The full stack wants 8-16 GiB; this core idles around 600 MiB and is sized to fit a 2 GiB plan. Studio and postgres-meta ride a compose profile - enable the dashboard when you are working on the schema, turn it off when you are not.',

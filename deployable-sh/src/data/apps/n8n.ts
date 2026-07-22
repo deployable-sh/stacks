@@ -24,6 +24,7 @@ export const n8n: AppBase = {
     'zapier alternative self-hosted',
   ],
   guideUrl: 'https://miget.com/blog/how-to-self-host-n8n-on-miget',
+  related: ['litellm', 'qdrant', 'ntfy'],
   intro: [
     'n8n is the workflow automation tool that took Zapier’s job for technical teams: 400+ integrations, a visual editor, and real code nodes when clicking runs out. Its production architecture is queue mode - the editor/webhook instance enqueues executions into Redis, and dedicated workers burn through them - and that is exactly what this template deploys.',
     'On Miget, db and queue become managed Postgres and Valkey, with connection env auto-wired onto both the main instance and the workers. One required variable (N8N_ENCRYPTION_KEY) and you have the architecture n8n’s own docs recommend for production.',

@@ -14,6 +14,14 @@ const { app } = Astro.props;
 const hobby = hobbyFit(app);
 const pageUrl = `${SITE.url}/apps/${app.slug}/`;
 
+const curated = (app.related ?? [])
+  .map((slug) => APPS.find((a) => a.slug === slug))
+  .filter((a): a is typeof app => Boolean(a));
+const relatedApps = curated.length
+  ? curated
+  : APPS.filter((a) => a.category === app.category && a.slug !== app.slug).slice(0, 4);
+const relatedTitle = curated.length ? 'works well with' : `more ${app.category.toLowerCase()}`;
+
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -169,6 +177,20 @@ docker compose up -d</code></pre>
       </div>
     </section>
 
+    {relatedApps.length > 0 && (
+      <section>
+        <h2 class="section-title"><span class="hash">#</span>{relatedTitle}</h2>
+        <ul class="related">
+          {relatedApps.map((r) => (
+            <li>
+              <a href={`/apps/${r.slug}/`}>{r.name}</a>
+              <span class="related-tag">{r.tagline}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     <section class="final-cta panel">
       <h2>Ship {app.name} today</h2>
       <p>
@@ -235,6 +257,18 @@ docker compose up -d</code></pre>
   .vars li { margin-bottom: 0.25rem; }
   .deploy-local { color: var(--text-muted); font-size: 0.9rem; }
   .deploy-grid pre { margin: 0.75rem 0; }
+
+  .related {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 0.6rem 1.5rem;
+  }
+  .related li { display: flex; flex-direction: column; gap: 0.15rem; }
+  .related a { font-weight: 600; }
+  .related-tag { font-size: 0.85rem; color: var(--text-dim); }
 
   .faq { display: flex; flex-direction: column; gap: 0.5rem; }
   .faq details {

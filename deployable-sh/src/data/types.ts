@@ -60,6 +60,8 @@ export interface AppData {
   keywords: string[];
   /** Optional long-form production guide (miget.com blog) */
   guideUrl?: string;
+  /** Curated complementary stacks (slugs); absent -> same-category siblings render instead */
+  related?: string[];
   /** Body copy: 2-3 paragraphs, plain text (rendered as <p>s) */
   intro: string[];
   features: string[];
