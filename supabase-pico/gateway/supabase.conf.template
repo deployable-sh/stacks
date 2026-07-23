@@ -37,6 +37,7 @@ map $http_authorization $auth_header {
 
 server {
   listen 5000;
+  listen [::]:5000;
   server_name _;
 
   # CORS for browser clients (Kong's cors plugin equivalent).
