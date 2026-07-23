@@ -32,6 +32,11 @@ services:
       # supabase-studio:3000 and the healthcheck probes it. Without this
       # the platform's PORT default moves studio to 5000.
       PORT: "3000"
+      # Studio's Node fetch uses only the first DNS answer; the compose
+      # alias Services are dual-stack but kong/meta bind IPv4 only, so the
+      # AAAA-first answer connects to a dead IPv6 VIP (ECONNREFUSED on the
+      # auth/meta API calls). Prefer A records.
+      NODE_OPTIONS: "--dns-result-order=ipv4first"
 
   meta:
     x-miget: { ram: "192", private: true }
