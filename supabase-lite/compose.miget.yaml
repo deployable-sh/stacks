@@ -15,8 +15,8 @@ services:
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
-      API_EXTERNAL_URL: ${MIGET_PUBLIC_URL}
-      SITE_URL: ${MIGET_PUBLIC_URL}
+      API_EXTERNAL_URL: ${{kong.public_url}}
+      SITE_URL: ${{kong.public_url}}
 
   rest:
     x-miget: { ram: "384", private: true }
@@ -33,7 +33,7 @@ services:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
-      SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
+      SUPABASE_PUBLIC_URL: ${{kong.public_url}}
       # Keep Next.js on the compose-declared port: kong routes to
       # supabase-studio:3000 and the healthcheck probes it. Without this
       # the platform's PORT default moves studio to 5000.
