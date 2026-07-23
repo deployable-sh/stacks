@@ -60,6 +60,7 @@ Platform ground rules baked into every template:
 | [`supabase`](supabase/) | Full Supabase stack behind Kong (uses **compose profiles**), experimental | Kong gateway |
 | [`supabase-lite`](supabase-lite/) | Supabase core (Postgres/Auth/REST + Studio) on a 2 GiB plan | Kong gateway |
 | [`supabase-nano`](supabase-nano/) | supabase-lite memory-tuned into 1 GiB, dashboard included | Kong gateway |
+| [`supabase-pico`](supabase-pico/) | headless Supabase API (Postgres/Auth/REST) in 512 MiB, nginx gateway | nginx gateway |
 | [`appsmith`](appsmith/) | Appsmith CE internal-tool builder (all-in-one image + nginx proxy) | builder UI |
 | [`tooljet`](tooljet/) | ToolJet CE low-code builder, **managed Postgres** | builder UI |
 | [`budibase`](budibase/) | Budibase low-code platform (all-in-one image + nginx proxy) | builder UI |

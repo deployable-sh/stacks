@@ -1,0 +1,31 @@
+services:
+  gateway:
+    x-miget:
+      ram: "16"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+
+  auth:
+    x-miget: { ram: "48", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      API_EXTERNAL_URL: ${MIGET_PUBLIC_URL}
+      SITE_URL: ${MIGET_PUBLIC_URL}
+
+  rest:
+    x-miget: { ram: "224", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+
+  db:
+    x-miget:
+      ram: "224"
+      private: true
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+
+volumes:
+  dbdata:
+    x-miget: { size: "4000", type: RWO }
