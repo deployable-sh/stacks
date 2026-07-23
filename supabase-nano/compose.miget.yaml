@@ -3,35 +3,64 @@ services:
     x-miget:
       ram: "128"
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
-      DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?}
-      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?}
+      # Miget pods are dual-stack; bind both families so the alias
+      # Service's IPv6 VIP accepts connections.
+      KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
+      JWT_SECRET: ${JWT_SECRET:?}
+      DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?Username you will use to log in to the Supabase dashboard}
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Password for the Supabase dashboard login}
 
   auth:
     x-miget: { ram: "64", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      # Base declares ${JWT_SECRET:-<demo default>} which bakes the default at
+      # parse time; re-point at the generated variable.
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
-      API_EXTERNAL_URL: ${MIGET_PUBLIC_URL}
-      SITE_URL: ${MIGET_PUBLIC_URL}
+      API_EXTERNAL_URL: ${{kong.public_url}}
+      SITE_URL: ${{kong.public_url}}
 
   rest:
     x-miget: { ram: "224", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
   studio:
     x-miget: { ram: "256", private: true }
+    # Thin wrapper (../studio) deriving per-deploy API keys from JWT_SECRET
+    # at startup -- same pattern and identical claims as ./kong.
+    build: ./studio
+    # Studio's healthcheck needs meta and db; without the gate it
+    # crash-loops through stack bring-up.
+    depends_on: [db, meta]
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      # Empty = derive at startup from JWT_SECRET (base's demo defaults would
+      # otherwise win and mismatch the generated secret).
+      SUPABASE_ANON_KEY: ""
+      SUPABASE_SERVICE_KEY: ""
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
-      SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
+      SUPABASE_PUBLIC_URL: ${{kong.public_url}}
+      # Keep Next.js on the compose-declared port: kong routes to
+      # supabase-studio:3000 and the healthcheck probes it. Without this
+      # the platform's PORT default moves studio to 5000.
+      PORT: "3000"
+      HOSTNAME: "::"
+      # Belt-and-suspenders: kong/meta now dual-bind, but keep A-first
+      # resolution for any remaining IPv4-only upstream. Preserve nano's
+      # base heap cap (--max-old-space-size=160) for the tight 256 MiB slot.
+      NODE_OPTIONS: "--max-old-space-size=160 --dns-result-order=ipv4first"
 
   meta:
     x-miget: { ram: "160", private: true }
     environment:
+      PG_META_HOST: "::"
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
 
