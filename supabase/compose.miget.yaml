@@ -22,10 +22,8 @@ services:
       # the platform's PORT default moves studio to 5000.
       PORT: "3000"
       HOSTNAME: "::"
-      # Studio's Node fetch uses only the first DNS answer; the compose
-      # alias Services are dual-stack but kong/meta bind IPv4 only, so the
-      # AAAA-first answer connects to a dead IPv6 VIP (ECONNREFUSED on the
-      # auth/meta API calls). Prefer A records.
+      # Belt-and-suspenders: kong/meta now dual-bind, but keep A-first
+      # resolution for any remaining IPv4-only upstream.
       NODE_OPTIONS: "--dns-result-order=ipv4first"
 
   auth:
