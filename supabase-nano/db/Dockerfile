@@ -17,4 +17,6 @@ CMD ["postgres", \
      "-c", "log_min_messages=fatal", \
      "-c", "shared_buffers=64MB", \
      "-c", "max_connections=40", \
-     "-c", "maintenance_work_mem=32MB"]
+     "-c", "maintenance_work_mem=16MB", \
+     "-c", "autovacuum_max_workers=1", \
+     "-c", "max_wal_size=256MB"]
