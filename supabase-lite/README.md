@@ -5,8 +5,8 @@
 The budget cut of the [supabase](../supabase) template: Postgres, Auth
 (GoTrue) and REST (PostgREST) behind the Kong gateway - the four services
 most Supabase apps actually use - plus the Studio dashboard. No Realtime,
-Storage, edge functions or pooler. The core four services fit a 2 GiB
-plan; Studio + postgres-meta add ~0.75 GiB on top.
+Storage, edge functions or pooler. The whole stack, dashboard included,
+fits a 2 GiB plan (~1.7 GiB allocated) with room to spare.
 
 Studio + postgres-meta deploy by default so the dashboard works out of
 the box. Don't need it? Locally run only the core four
