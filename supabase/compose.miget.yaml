@@ -14,6 +14,10 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
       SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
+      # Keep Next.js on the compose-declared port: kong routes to
+      # supabase-studio:3000 and the healthcheck probes it. Without this
+      # the platform's PORT default moves studio to 5000.
+      PORT: "3000"
 
   auth:
     x-miget: { ram: "512", private: true }
