@@ -3,12 +3,18 @@ services:
     x-miget:
       ram: "512"
     environment:
+      # Miget pods are dual-stack; bind both families so the alias
+      # Service's IPv6 VIP accepts connections.
+      KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?}
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?}
 
   studio:
     x-miget: { ram: "512", private: true }
+    # Studio's healthcheck needs meta and db; without the gate it
+    # crash-loops through stack bring-up.
+    depends_on: [db, meta]
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
@@ -18,10 +24,9 @@ services:
       # supabase-studio:3000 and the healthcheck probes it. Without this
       # the platform's PORT default moves studio to 5000.
       PORT: "3000"
-      # Studio's Node fetch uses only the first DNS answer; the compose
-      # alias Services are dual-stack but kong/meta bind IPv4 only, so the
-      # AAAA-first answer connects to a dead IPv6 VIP (ECONNREFUSED on the
-      # auth/meta API calls). Prefer A records.
+      HOSTNAME: "::"
+      # Belt-and-suspenders: kong/meta now dual-bind, but keep A-first
+      # resolution for any remaining IPv4-only upstream.
       NODE_OPTIONS: "--dns-result-order=ipv4first"
 
   auth:
@@ -35,6 +40,9 @@ services:
   rest:
     x-miget: { ram: "512", private: true }
     environment:
+      # "*" = any IPv4 or IPv6 -- storage (Node) resolves AAAA-first and the
+      # default PostgREST bind is IPv4 only.
+      PGRST_SERVER_HOST: "*"
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
@@ -48,6 +56,7 @@ services:
   storage:
     x-miget: { ram: "512", private: true }
     environment:
+      NODE_OPTIONS: "--dns-result-order=ipv4first"
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
@@ -55,6 +64,7 @@ services:
   meta:
     x-miget: { ram: "512", private: true }
     environment:
+      PG_META_HOST: "::"
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
 
