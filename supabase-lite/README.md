@@ -4,12 +4,14 @@
 
 The budget cut of the [supabase](../supabase) template: Postgres, Auth
 (GoTrue) and REST (PostgREST) behind the Kong gateway - the four services
-most Supabase apps actually use. No Realtime, Storage, edge functions or
-pooler. Core stack fits a 2 GiB plan.
+most Supabase apps actually use - plus the Studio dashboard. No Realtime,
+Storage, edge functions or pooler. The core four services fit a 2 GiB
+plan; Studio + postgres-meta add ~0.75 GiB on top.
 
-Studio + postgres-meta ride the `studio` compose profile - enable it on
-the stack (or `--profile studio` locally) when you want the dashboard,
-turn it off when you don't.
+Studio + postgres-meta deploy by default so the dashboard works out of
+the box. Don't need it? Locally run only the core four
+(`docker compose up db rest auth kong`); on Miget stop or remove the
+`studio` and `meta` apps - the APIs keep working without them.
 
 ## Topology
 
@@ -19,13 +21,13 @@ turn it off when you don't.
 | `auth` | GoTrue - signups, logins, JWTs | via kong |
 | `rest` | PostgREST auto API | via kong |
 | `db` | supabase-postgres (own image, own volume) | no |
-| `studio` + `meta` | dashboard (profile `studio`) | via kong |
+| `studio` + `meta` | dashboard | via kong |
 
 ## Local
 
 ```bash
 cp .env.upstream-example .env    # fill in the secrets
-docker compose -f compose.yaml --profile studio up -d --build
+docker compose up -d --build
 open http://localhost:5000       # Studio via Kong (dashboard basic auth)
 ```
 
