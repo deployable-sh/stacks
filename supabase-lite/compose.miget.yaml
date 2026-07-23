@@ -26,6 +26,9 @@ services:
 
   studio:
     x-miget: { ram: "384", private: true }
+    # Studio's healthcheck needs meta and db; without the gate it
+    # crash-loops through stack bring-up.
+    depends_on: [db, meta]
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}

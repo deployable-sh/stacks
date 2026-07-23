@@ -12,6 +12,9 @@ services:
 
   studio:
     x-miget: { ram: "512", private: true }
+    # Studio's healthcheck needs meta and db; without the gate it
+    # crash-loops through stack bring-up.
+    depends_on: [db, meta]
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
@@ -37,6 +40,9 @@ services:
   rest:
     x-miget: { ram: "512", private: true }
     environment:
+      # "*" = any IPv4 or IPv6 -- storage (Node) resolves AAAA-first and the
+      # default PostgREST bind is IPv4 only.
+      PGRST_SERVER_HOST: "*"
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
@@ -50,6 +56,7 @@ services:
   storage:
     x-miget: { ram: "512", private: true }
     environment:
+      NODE_OPTIONS: "--dns-result-order=ipv4first"
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
