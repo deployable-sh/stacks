@@ -6,14 +6,17 @@ services:
       # Miget pods are dual-stack; bind both families so the alias
       # Service's IPv6 VIP accepts connections.
       KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
       DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?Username you will use to log in to the Supabase dashboard}
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Password for the Supabase dashboard login}
 
   auth:
     x-miget: { ram: "128", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      # Base declares ${JWT_SECRET:-<demo default>} which bakes the default at
+      # parse time; re-point at the generated variable.
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       API_EXTERNAL_URL: ${{kong.public_url}}
       SITE_URL: ${{kong.public_url}}
@@ -21,16 +24,26 @@ services:
   rest:
     x-miget: { ram: "384", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
   studio:
     x-miget: { ram: "384", private: true }
+    # Thin wrapper (../studio) deriving per-deploy API keys from JWT_SECRET
+    # at startup -- same pattern and identical claims as ./kong.
+    build: ./studio
     # Studio's healthcheck needs meta and db; without the gate it
     # crash-loops through stack bring-up.
     depends_on: [db, meta]
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      # Empty = derive at startup from JWT_SECRET (base's demo defaults would
+      # otherwise win and mismatch the generated secret).
+      SUPABASE_ANON_KEY: ""
+      SUPABASE_SERVICE_KEY: ""
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
