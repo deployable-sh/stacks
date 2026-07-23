@@ -4,7 +4,6 @@ services:
     networks:
       default:
         aliases: [supabase-studio]
-    profiles: [studio]
     ports:
     - "3000"
     image: supabase/studio:2026.06.03-sha-0bca601
@@ -157,7 +156,6 @@ services:
     networks:
       default:
         aliases: [supabase-meta]
-    profiles: [studio]
     ports:
     - "8080"
     image: supabase/postgres-meta:v0.96.6
