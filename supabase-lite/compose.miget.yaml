@@ -1,14 +1,14 @@
 services:
   kong:
     x-miget:
-      ram: "512"
+      ram: "128"
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?}
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?}
 
   auth:
-    x-miget: { ram: "256", private: true }
+    x-miget: { ram: "128", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
@@ -16,13 +16,13 @@ services:
       SITE_URL: ${MIGET_PUBLIC_URL}
 
   rest:
-    x-miget: { ram: "256", private: true }
+    x-miget: { ram: "384", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
   studio:
-    x-miget: { ram: "512", private: true }
+    x-miget: { ram: "384", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
@@ -30,14 +30,14 @@ services:
       SUPABASE_PUBLIC_URL: ${MIGET_PUBLIC_URL}
 
   meta:
-    x-miget: { ram: "256", private: true }
+    x-miget: { ram: "192", private: true }
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
 
   db:
     x-miget:
-      ram: "768"
+      ram: "512"
       private: true
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
