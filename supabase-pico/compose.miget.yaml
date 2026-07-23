@@ -1,0 +1,41 @@
+services:
+  gateway:
+    x-miget:
+      ram: "16"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?}
+
+  auth:
+    x-miget: { ram: "48", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?}
+      # Base declares ${JWT_SECRET:-<demo default>} which bakes the default at
+      # parse time; re-point at the generated variable.
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      # gateway (nginx) is the public entrypoint for pico, so point the
+      # external URLs at it rather than at the platform default.
+      API_EXTERNAL_URL: ${{gateway.public_url}}
+      SITE_URL: ${{gateway.public_url}}
+
+  rest:
+    x-miget: { ram: "224", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?}
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      # nginx gateway may resolve the AAAA record; PostgREST defaults to an
+      # IPv4-only bind, so listen on all families for the dual-stack pod.
+      PGRST_SERVER_HOST: "*"
+
+  db:
+    x-miget:
+      ram: "224"
+      private: true
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+
+volumes:
+  dbdata:
+    x-miget: { size: "4000", type: RWO }

@@ -1,0 +1,106 @@
+# Thin replacement for Kong: route /auth/v1 and /rest/v1, enforce the apikey
+# allowlist, default the Authorization header, answer CORS. ${ANON_KEY} and
+# ${SERVICE_ROLE_KEY} are substituted by the nginx image's envsubst at start
+# (values derived from JWT_SECRET by derive-keys.sh when not provided).
+
+upstream gotrue {
+  server supabase-auth:9999;
+  keepalive 2;
+}
+upstream postgrest {
+  server supabase-rest:3000;
+  keepalive 2;
+}
+
+# apikey allowlist (Kong's key-auth): header or query parameter.
+map $http_apikey $key_from_header {
+  default 0;
+  "${ANON_KEY}" 1;
+  "${SERVICE_ROLE_KEY}" 1;
+}
+map $arg_apikey $key_from_query {
+  default 0;
+  "${ANON_KEY}" 1;
+  "${SERVICE_ROLE_KEY}" 1;
+}
+map "$key_from_header$key_from_query" $key_ok {
+  default 1;
+  "00" 0;
+}
+
+# Kong's request-transformer: requests without an Authorization header get
+# one built from the apikey; existing headers pass through untouched.
+map $http_authorization $auth_header {
+  "" "Bearer $http_apikey";
+  default $http_authorization;
+}
+
+server {
+  listen 5000;
+  listen [::]:5000;
+  server_name _;
+
+  # CORS for browser clients (Kong's cors plugin equivalent).
+  add_header Access-Control-Allow-Origin * always;
+  add_header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS" always;
+  add_header Access-Control-Allow-Headers "Accept, Accept-Profile, Apikey, Authorization, Content-Profile, Content-Type, Prefer, Range, X-Client-Info, X-Upsert, X-Supabase-Api-Version" always;
+  add_header Access-Control-Expose-Headers "Content-Range, X-Supabase-Api-Version" always;
+  add_header Access-Control-Max-Age 3600 always;
+  if ($request_method = OPTIONS) {
+    return 204;
+  }
+
+  proxy_http_version 1.1;
+  proxy_set_header Connection "";
+  proxy_set_header Host $host;
+  proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+  proxy_set_header X-Forwarded-Host $http_x_forwarded_host;
+
+  location = /health {
+    return 200 '{"status":"ok"}';
+  }
+
+  # Open auth endpoints - email verification links, OAuth callbacks and
+  # metadata arrive without an apikey.
+  location ~ ^/auth/v1/(verify|callback|authorize|sso/|\.well-known/) {
+    rewrite ^/auth/v1(/.*)$ $1 break;
+    proxy_pass http://gotrue;
+  }
+  location /sso/saml/ {
+    proxy_pass http://gotrue;
+  }
+  location /.well-known/oauth-authorization-server {
+    proxy_pass http://gotrue;
+  }
+
+  location /auth/v1/ {
+    if ($key_ok = 0) {
+      return 401 '{"message":"No API key found in request"}';
+    }
+    rewrite ^/auth/v1(/.*)$ $1 break;
+    proxy_pass http://gotrue;
+    proxy_set_header Authorization $auth_header;
+  }
+
+  location /rest/v1/ {
+    if ($key_ok = 0) {
+      return 401 '{"message":"No API key found in request"}';
+    }
+    rewrite ^/rest/v1(/.*)$ $1 break;
+    proxy_pass http://postgrest;
+    proxy_set_header Authorization $auth_header;
+  }
+
+  location = /graphql/v1 {
+    if ($key_ok = 0) {
+      return 401 '{"message":"No API key found in request"}';
+    }
+    proxy_pass http://postgrest/rpc/graphql;
+    proxy_set_header Authorization $auth_header;
+    proxy_set_header Content-Profile graphql_public;
+  }
+
+  location / {
+    return 404 '{"message":"supabase-pico serves /auth/v1 and /rest/v1 only - no dashboard. Run Studio locally against this instance when you need it."}';
+  }
+}
