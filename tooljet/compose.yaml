@@ -1,6 +1,6 @@
 services:
   tooljet:
-    image: tooljet/tooljet:v3.20.196-lts
+    image: tooljet/tooljet:v3.20.197-lts
     restart: unless-stopped
     command: ["npm", "run", "start:prod"]
     environment:

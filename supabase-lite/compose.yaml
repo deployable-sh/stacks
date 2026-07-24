@@ -87,7 +87,7 @@ services:
         aliases: [supabase-auth]
     ports:
     - "9999"
-    image: supabase/gotrue:v2.189.0
+    image: supabase/gotrue:v2.193.1
     restart: unless-stopped
     healthcheck:
       test:
@@ -139,7 +139,7 @@ services:
         aliases: [supabase-rest]
     ports:
     - "3000"
-    image: postgrest/postgrest:v14.12
+    image: postgrest/postgrest:v14.15
     restart: unless-stopped
     depends_on:
       db:

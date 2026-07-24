@@ -1,5 +1,5 @@
 x-mongo: &mongo
-  image: mongo:8.0
+  image: mongo:8.3
   restart: unless-stopped
   command:
     - mongod
@@ -47,7 +47,7 @@ services:
       - mongodata-3:/data/db
 
   rs-init:
-    image: mongo:8.0
+    image: mongo:8.3
     restart: unless-stopped
     depends_on:
       - mongo-1

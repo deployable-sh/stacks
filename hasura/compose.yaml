@@ -1,6 +1,6 @@
 services:
   hasura:
-    image: hasura/graphql-engine:v2.49.2
+    image: hasura/graphql-engine:v2.49.5
     restart: unless-stopped
     environment:
       HASURA_GRAPHQL_SERVER_PORT: "5000"

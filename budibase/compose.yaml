@@ -1,6 +1,6 @@
 services:
   budibase:
-    image: budibase/budibase:3.39.31
+    image: budibase/budibase:3.40.1
     restart: unless-stopped
     command: ["sh", "-c", "sed -i 's/80 default_server/5000 default_server/g' /etc/nginx/sites-available/default && exec ./runner.sh"]
     ports:

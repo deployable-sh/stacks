@@ -1,6 +1,6 @@
 services:
   outline:
-    image: outlinewiki/outline:1.8.1
+    image: outlinewiki/outline:1.9.2
     restart: unless-stopped
     environment:
       PORT: "5000"

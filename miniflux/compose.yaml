@@ -1,6 +1,6 @@
 services:
   miniflux:
-    image: ghcr.io/miniflux/miniflux:2.3.1
+    image: ghcr.io/miniflux/miniflux:2.3.2
     restart: unless-stopped
     environment:
       PORT: "5000"

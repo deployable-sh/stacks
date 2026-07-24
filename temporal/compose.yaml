@@ -15,7 +15,7 @@ services:
       - db
 
   ui:
-    image: temporalio/ui:2.51.0
+    image: temporalio/ui:2.52.1
     restart: unless-stopped
     environment:
       TEMPORAL_ADDRESS: temporal:7233

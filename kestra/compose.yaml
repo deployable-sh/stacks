@@ -1,6 +1,6 @@
 services:
   kestra:
-    image: kestra/kestra:v1.3.28
+    image: kestra/kestra:v1.3.29
     restart: unless-stopped
     command: server standalone
     environment:

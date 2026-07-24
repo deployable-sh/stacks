@@ -1,6 +1,6 @@
 services:
   infisical:
-    image: infisical/infisical:v0.161.0
+    image: infisical/infisical:v0.162.13
     restart: unless-stopped
     environment:
       PORT: "5000"

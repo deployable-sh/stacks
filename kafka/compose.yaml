@@ -1,5 +1,5 @@
 x-kafka: &kafka
-  image: apache/kafka:4.0.0
+  image: apache/kafka:4.3.1
   restart: unless-stopped
 
 x-kafka-env: &kafka-env

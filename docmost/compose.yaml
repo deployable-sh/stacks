@@ -1,6 +1,6 @@
 services:
   docmost:
-    image: docmost/docmost:0.24.0
+    image: docmost/docmost:0.95.0
     restart: unless-stopped
     environment:
       APP_URL: ${APP_URL:-http://localhost:5000}
