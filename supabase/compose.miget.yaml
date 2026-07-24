@@ -22,8 +22,12 @@ services:
       # Miget pods are dual-stack; bind both families so the alias
       # Service's IPv6 VIP accepts connections.
       KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
-      # kong's entrypoint derives the API keys from JWT_SECRET for kong.yml.
       JWT_SECRET: ${JWT_SECRET:?}
+      # Use the platform-derived API keys (not kong's own derivation) so kong's
+      # exact-match key-auth consumers equal the keys every other service and
+      # client uses -- byte-identical, regardless of JWT claim ordering.
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
       DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?Username you will use to log in to the Supabase dashboard}
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Password for the Supabase dashboard login}
 
