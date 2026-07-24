@@ -56,6 +56,11 @@ services:
       # Belt-and-suspenders: kong/meta now dual-bind, but keep A-first
       # resolution for any remaining IPv4-only upstream.
       NODE_OPTIONS: "--dns-result-order=ipv4first"
+    volumes:
+      # Shared with the functions service so Studio lists them, and persistent
+      # SQL snippets (the base leaves both folders unmounted -> Studio errors).
+      - functions-src:/app/edge-functions
+      - studio-snippets:/app/snippets
 
   auth:
     x-miget: { ram: "512", private: true }
@@ -106,6 +111,9 @@ services:
       SERVICE_KEY: ${SERVICE_ROLE_KEY}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
+    volumes:
+      # File backend persistence; shared with imgproxy for image transforms.
+      - storage-data:/var/lib/storage
 
   meta:
     x-miget: { ram: "512", private: true }
@@ -123,6 +131,8 @@ services:
 
   supavisor:
     x-miget: { ram: "1024", private: true }
+    # Bakes /etc/pooler/pooler.exs (upstream bind-mounts it; Miget has none).
+    build: ./supavisor
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       API_JWT_SECRET: ${JWT_SECRET}
@@ -133,6 +143,10 @@ services:
 
   functions:
     x-miget: { ram: "512", private: true }
+    # Wrapper bakes + seeds the default functions into the shared volume.
+    build: ./functions
+    volumes:
+      - functions-src:/home/deno/functions
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       SUPABASE_ANON_KEY: ${ANON_KEY}
@@ -142,10 +156,21 @@ services:
 
   imgproxy:
     x-miget: { ram: "512", private: true }
+    volumes:
+      - storage-data:/var/lib/storage
 
 volumes:
   dbdata:
     x-miget: { size: "20000", type: RWO }
   # Deno dependency cache for edge functions (opt-in `functions` profile).
   deno-cache:
-    x-miget: { size: "2000", type: RWO }
+    x-miget: { size: "2000", type: RWX }
+  # Storage file-backend data, shared with imgproxy.
+  storage-data:
+    x-miget: { size: "10000", type: RWX }
+  # Edge-functions source, shared between functions (serves) and studio (lists).
+  functions-src:
+    x-miget: { size: "1000", type: RWX }
+  # Studio SQL snippets.
+  studio-snippets:
+    x-miget: { size: "500", type: RWX }
