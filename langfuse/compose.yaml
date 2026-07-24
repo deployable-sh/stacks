@@ -55,7 +55,7 @@ services:
       - blob
 
   db:
-    image: postgres:17
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: langfuse
@@ -78,7 +78,7 @@ services:
       - chdata:/var/lib/clickhouse
 
   cache:
-    image: valkey/valkey:8
+    image: valkey/valkey:9
     command: ["sh", "-c", "exec valkey-server --requirepass \"$REDIS_AUTH\" --maxmemory-policy noeviction"]
     restart: unless-stopped
     environment:

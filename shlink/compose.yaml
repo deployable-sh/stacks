@@ -1,6 +1,6 @@
 services:
   shlink:
-    image: shlinkio/shlink:4.4.6
+    image: shlinkio/shlink:5.1.5
     restart: unless-stopped
     environment:
       PORT: "5000"
@@ -20,7 +20,7 @@ services:
       - db
 
   db:
-    image: postgres:16
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: shlink

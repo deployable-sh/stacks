@@ -54,7 +54,7 @@ services:
       - dbdata:/var/lib/postgresql/data
 
   redis:
-    image: valkey/valkey:7.2
+    image: valkey/valkey:9.1
     restart: unless-stopped
     volumes:
       - redisdata:/data

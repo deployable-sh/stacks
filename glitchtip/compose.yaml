@@ -43,7 +43,7 @@ services:
       - db
 
   db:
-    image: postgres:17
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: glitchtip
@@ -53,7 +53,7 @@ services:
       - dbdata:/var/lib/postgresql/data
 
   queue:
-    image: valkey/valkey:7.2
+    image: valkey/valkey:9.1
     restart: unless-stopped
 
 volumes:

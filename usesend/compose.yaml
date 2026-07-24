@@ -21,14 +21,14 @@ services:
       - broker
 
   broker:
-    image: valkey/valkey:8
+    image: valkey/valkey:9
     command: ["sh", "-c", "exec valkey-server --maxmemory-policy noeviction"]
     restart: unless-stopped
     ports:
       - "6379:6379"
 
   db:
-    image: postgres:16
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: usesend

@@ -81,7 +81,7 @@ services:
       - db
 
   broker:
-    image: valkey/valkey:8
+    image: valkey/valkey:9
     command: ["sh", "-c", "exec valkey-server --requirepass \"$REDIS_AUTH\" --maxmemory-policy noeviction"]
     restart: unless-stopped
     environment:
@@ -90,7 +90,7 @@ services:
       - "6379:6379"
 
   db:
-    image: postgres:16
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: superset

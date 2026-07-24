@@ -1,5 +1,5 @@
 x-gr: &gr
-  image: mysql:8.4
+  image: mysql:9.7
   restart: unless-stopped
   environment: &gr-env
     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}

@@ -1,6 +1,6 @@
 services:
   mariadb-primary:
-    image: mariadb:11.8
+    image: mariadb:12.3
     restart: unless-stopped
     command: ["--log-bin", "--server-id=1", "--log-basename=primary"]
     environment:
@@ -16,7 +16,7 @@ services:
       - primary-data:/var/lib/mysql
 
   mariadb-replica:
-    image: mariadb:11.8
+    image: mariadb:12.3
     restart: unless-stopped
     command: ["--server-id=2", "--read-only=ON"]
     environment:
