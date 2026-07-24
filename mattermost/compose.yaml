@@ -1,6 +1,6 @@
 services:
   mattermost:
-    image: mattermost/mattermost-team-edition:11.8
+    image: mattermost/mattermost-team-edition:11.9
     restart: unless-stopped
     environment:
       MM_SERVICESETTINGS_LISTENADDRESS: ":5000"

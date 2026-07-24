@@ -1,5 +1,5 @@
 x-chatwoot: &chatwoot
-  image: chatwoot/chatwoot:v4.15.1-ce
+  image: chatwoot/chatwoot:v4.16.1-ce
   restart: unless-stopped
 
 x-chatwoot-env: &chatwoot-env

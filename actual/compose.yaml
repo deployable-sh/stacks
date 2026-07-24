@@ -1,6 +1,6 @@
 services:
   actual:
-    image: ghcr.io/actualbudget/actual:26.6.0
+    image: ghcr.io/actualbudget/actual:26.7.0
     restart: unless-stopped
     environment:
       ACTUAL_PORT: "5000"

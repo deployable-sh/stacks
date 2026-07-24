@@ -1,6 +1,6 @@
 services:
   cognee:
-    image: cognee/cognee:1.1.2
+    image: cognee/cognee:1.4.0
     restart: unless-stopped
     environment:
       HTTP_PORT: "5000"

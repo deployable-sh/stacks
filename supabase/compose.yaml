@@ -78,7 +78,7 @@ services:
   auth:
     ports:
     - "9999"
-    image: supabase/gotrue:v2.189.0
+    image: supabase/gotrue:v2.193.1
     restart: unless-stopped
     healthcheck:
       test:
@@ -127,7 +127,7 @@ services:
   rest:
     ports:
     - "3000"
-    image: postgrest/postgrest:v14.12
+    image: postgrest/postgrest:v14.15
     restart: unless-stopped
     depends_on:
       db:
@@ -147,7 +147,7 @@ services:
   realtime:
     ports:
     - "4000"
-    image: supabase/realtime:v2.102.3
+    image: supabase/realtime:v2.119.3
     restart: unless-stopped
     depends_on:
       db:
@@ -182,7 +182,7 @@ services:
   storage:
     ports:
     - "5000"
-    image: supabase/storage-api:v1.60.4
+    image: supabase/storage-api:v1.67.18
     restart: unless-stopped
     depends_on:
       db:
@@ -222,7 +222,7 @@ services:
   imgproxy:
     ports:
     - "5001"
-    image: darthsim/imgproxy:v3.30.1
+    image: darthsim/imgproxy:v3.31.4
     restart: unless-stopped
     healthcheck:
       test:
@@ -259,7 +259,7 @@ services:
   functions:
     ports:
     - "9000"
-    image: supabase/edge-runtime:v1.74.0
+    image: supabase/edge-runtime:v1.74.2
     restart: unless-stopped
     volumes:
     - deno-cache:/root/.cache/deno
@@ -326,7 +326,7 @@ services:
     - log_min_messages=fatal
     build: ./db
   supavisor:
-    image: supabase/supavisor:2.9.5
+    image: supabase/supavisor:2.9.7
     restart: unless-stopped
     ports:
     - ${POSTGRES_PORT:-5432}:5432

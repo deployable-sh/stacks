@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.30.8
+    image: ollama/ollama:0.32.3
     restart: unless-stopped
     environment:
       OLLAMA_HOST: "0.0.0.0:5000"

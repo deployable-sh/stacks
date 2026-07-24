@@ -1,6 +1,6 @@
 services:
   freescout:
-    image: nfrastack/freescout:2.1.2-php8.4
+    image: nfrastack/freescout:2.1.5-php8.4
     restart: unless-stopped
     environment:
       APP_URL: ${APP_URL:-http://localhost:5000}

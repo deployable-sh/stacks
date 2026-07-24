@@ -28,7 +28,7 @@ x-api-env: &api-env
 
 services:
   api:
-    image: langgenius/dify-api:1.14.2
+    image: langgenius/dify-api:1.16.0
     restart: unless-stopped
     environment:
       <<: *api-env
@@ -38,7 +38,7 @@ services:
     depends_on: [db, redis, vectordb]
 
   worker:
-    image: langgenius/dify-api:1.14.2
+    image: langgenius/dify-api:1.16.0
     restart: unless-stopped
     environment:
       <<: *api-env
@@ -48,7 +48,7 @@ services:
     depends_on: [db, redis, vectordb]
 
   worker_beat:
-    image: langgenius/dify-api:1.14.2
+    image: langgenius/dify-api:1.16.0
     restart: unless-stopped
     environment:
       <<: *api-env
@@ -56,14 +56,14 @@ services:
     depends_on: [db, redis]
 
   web:
-    image: langgenius/dify-web:1.14.2
+    image: langgenius/dify-web:1.16.0
     restart: unless-stopped
     environment:
       CONSOLE_API_URL: ""
       APP_API_URL: ""
 
   plugin_daemon:
-    image: langgenius/dify-plugin-daemon:0.4.1-local
+    image: langgenius/dify-plugin-daemon:0.6.5-local
     restart: unless-stopped
     environment:
       DB_USERNAME: postgres
@@ -87,7 +87,7 @@ services:
     depends_on: [db, redis]
 
   sandbox:
-    image: langgenius/dify-sandbox:0.2.12
+    image: langgenius/dify-sandbox:0.2.15
     restart: unless-stopped
     environment:
       API_KEY: ${SANDBOX_API_KEY}

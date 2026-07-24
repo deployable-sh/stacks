@@ -1,6 +1,6 @@
 services:
   rocketchat:
-    image: rocketchat/rocket.chat:8.4.3
+    image: rocketchat/rocket.chat:8.6.1
     restart: unless-stopped
     environment:
       PORT: "5000"

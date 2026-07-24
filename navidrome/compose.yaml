@@ -1,6 +1,6 @@
 services:
   navidrome:
-    image: deluan/navidrome:0.62.0
+    image: deluan/navidrome:0.63.2
     restart: unless-stopped
     environment:
       ND_PORT: "5000"

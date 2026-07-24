@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: penpotapp/frontend:2.16.0
+    image: penpotapp/frontend:2.17.0
     restart: unless-stopped
     environment:
       PENPOT_FLAGS: disable-registration-domain-whitelist disable-email-verification
@@ -23,7 +23,7 @@ services:
       - frontend
 
   backend:
-    image: penpotapp/backend:2.16.0
+    image: penpotapp/backend:2.17.0
     restart: unless-stopped
     environment:
       PENPOT_FLAGS: disable-registration-domain-whitelist disable-email-verification enable-prepl-server
@@ -50,7 +50,7 @@ services:
       - broker
 
   exporter:
-    image: penpotapp/exporter:2.16.0
+    image: penpotapp/exporter:2.17.0
     restart: unless-stopped
     environment:
       PENPOT_PUBLIC_URI: http://frontend:8080

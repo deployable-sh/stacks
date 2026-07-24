@@ -61,7 +61,7 @@ services:
       - "6379"
 
   search:
-    image: getmeili/meilisearch:v1.11
+    image: getmeili/meilisearch:v1.50
     restart: unless-stopped
     environment:
       MEILI_ENV: production

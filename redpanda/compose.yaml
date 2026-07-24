@@ -1,5 +1,5 @@
 x-rp: &rp
-  image: docker.redpanda.com/redpandadata/redpanda:v24.3.1
+  image: docker.redpanda.com/redpandadata/redpanda:v24.3.18
   restart: unless-stopped
 
 services:
@@ -79,7 +79,7 @@ services:
       - rpdata-3:/var/lib/redpanda/data
 
   redpanda-console:
-    image: docker.redpanda.com/redpandadata/console:v2.8.0
+    image: docker.redpanda.com/redpandadata/console:v2.8.16
     restart: unless-stopped
     environment:
       KAFKA_BROKERS: rp-1:9092,rp-2:9092,rp-3:9092
