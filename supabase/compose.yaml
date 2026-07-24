@@ -222,7 +222,7 @@ services:
   imgproxy:
     ports:
     - "5001"
-    image: darthsim/imgproxy:v3.30.1
+    image: darthsim/imgproxy:v4.0.11
     restart: unless-stopped
     healthcheck:
       test:

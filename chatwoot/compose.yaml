@@ -57,7 +57,7 @@ services:
       - db
 
   broker:
-    image: valkey/valkey:8
+    image: valkey/valkey:9
     command: ["sh", "-c", "exec valkey-server --maxmemory-policy noeviction --requirepass \"$REDIS_PASSWORD\""]
     environment:
       REDIS_PASSWORD: ${REDIS_AUTH}

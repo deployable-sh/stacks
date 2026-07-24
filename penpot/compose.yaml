@@ -62,14 +62,14 @@ services:
       - broker
 
   broker:
-    image: valkey/valkey:8
+    image: valkey/valkey:9
     command: ["valkey-server", "--maxmemory-policy", "noeviction", "--protected-mode", "no"]
     restart: unless-stopped
     ports:
       - "6379"
 
   db:
-    image: postgres:15
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: penpot

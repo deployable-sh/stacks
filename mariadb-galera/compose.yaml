@@ -34,7 +34,7 @@ services:
 
   galera-2:
     <<: *galera-common
-    image: mariadb:11.8
+    image: mariadb:12.3
     command:
       - mariadbd
       - --wsrep_on=ON
@@ -50,7 +50,7 @@ services:
 
   galera-3:
     <<: *galera-common
-    image: mariadb:11.8
+    image: mariadb:12.3
     command:
       - mariadbd
       - --wsrep_on=ON

@@ -30,7 +30,7 @@ services:
       - redis
 
   db:
-    image: postgres:17
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: tooljet
@@ -40,7 +40,7 @@ services:
       - dbdata:/var/lib/postgresql/data
 
   redis:
-    image: redis:7
+    image: redis:8
     restart: unless-stopped
 
 volumes:
