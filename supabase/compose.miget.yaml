@@ -84,6 +84,10 @@ services:
     x-miget: { ram: "512", private: true }
     environment:
       NODE_OPTIONS: "--dns-result-order=ipv4first"
+      # File backend, so S3 is unused; GLOBAL_S3_BUCKET is only a logical
+      # default-bucket name (the base leaves it bare -> the platform would
+      # otherwise hex-fill it as if it were a secret).
+      GLOBAL_S3_BUCKET: supabase-storage
       JWT_SECRET: ${JWT_SECRET:?}
       AUTH_JWT_SECRET: ${JWT_SECRET}
       ANON_KEY: ${ANON_KEY}
