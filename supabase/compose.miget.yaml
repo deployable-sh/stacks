@@ -82,6 +82,10 @@ services:
 
   storage:
     x-miget: { ram: "512", private: true }
+    # Base healthcheck probes the service alias (dual-stack, AAAA-first) but
+    # storage binds IPv4 -> probe hits the dead v6 VIP. Self-check localhost.
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:5000/status"]
     environment:
       NODE_OPTIONS: "--dns-result-order=ipv4first"
       # File backend, so S3 is unused; GLOBAL_S3_BUCKET is only a logical
