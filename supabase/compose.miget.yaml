@@ -130,3 +130,6 @@ services:
 volumes:
   dbdata:
     x-miget: { size: "20000", type: RWO }
+  # Deno dependency cache for edge functions (opt-in `functions` profile).
+  deno-cache:
+    x-miget: { size: "2000", type: RWO }
