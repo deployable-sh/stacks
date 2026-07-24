@@ -1,3 +1,19 @@
+# JWT_SECRET is generated per deploy; ANON_KEY / SERVICE_ROLE_KEY are the
+# Supabase API keys, derived from it as HS256 JWTs by the platform (no
+# per-image derive wrapper). VAULT_ENC_KEY must be exactly 32 chars.
+x-miget:
+  variables:
+    VAULT_ENC_KEY: { generate: hex, length: 16 }
+    SECRET_KEY_BASE: { generate: hex, length: 64 }
+    ANON_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: anon, iss: supabase, iat: 1700000000, exp: 2000000000 }
+    SERVICE_ROLE_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: service_role, iss: supabase, iat: 1700000000, exp: 2000000000 }
+
 services:
   kong:
     x-miget:
@@ -6,7 +22,8 @@ services:
       # Miget pods are dual-stack; bind both families so the alias
       # Service's IPv6 VIP accepts connections.
       KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      # kong's entrypoint derives the API keys from JWT_SECRET for kong.yml.
+      JWT_SECRET: ${JWT_SECRET:?}
       DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?Username you will use to log in to the Supabase dashboard}
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Password for the Supabase dashboard login}
 
@@ -16,7 +33,10 @@ services:
     # crash-loops through stack bring-up.
     depends_on: [db, meta]
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
@@ -32,7 +52,8 @@ services:
   auth:
     x-miget: { ram: "512", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       API_EXTERNAL_URL: ${{kong.public_url}}
       SITE_URL: ${{kong.public_url}}
@@ -43,21 +64,30 @@ services:
       # "*" = any IPv4 or IPv6 -- storage (Node) resolves AAAA-first and the
       # default PostgREST bind is IPv4 only.
       PGRST_SERVER_HOST: "*"
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
   realtime:
     x-miget: { ram: "1024", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      API_JWT_SECRET: ${JWT_SECRET}
+      METRICS_JWT_SECRET: ${JWT_SECRET}
+      # realtime's own healthcheck sends Bearer ${ANON_KEY}; give it the real key.
+      ANON_KEY: ${ANON_KEY}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?}
 
   storage:
     x-miget: { ram: "512", private: true }
     environment:
       NODE_OPTIONS: "--dns-result-order=ipv4first"
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_KEY: ${SERVICE_ROLE_KEY}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
 
@@ -71,22 +101,26 @@ services:
   db:
     x-miget: { ram: "2048", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PGDATA: /var/lib/postgresql/data/pgdata
 
   supavisor:
     x-miget: { ram: "1024", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      API_JWT_SECRET: ${JWT_SECRET}
+      METRICS_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
-      VAULT_ENC_KEY: ${VAULT_ENC_KEY:-0123456789abcdef0123456789abcdef}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?}
+      VAULT_ENC_KEY: ${VAULT_ENC_KEY:?}
 
   functions:
     x-miget: { ram: "512", private: true }
     environment:
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+      JWT_SECRET: ${JWT_SECRET:?}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
 
@@ -96,3 +130,6 @@ services:
 volumes:
   dbdata:
     x-miget: { size: "20000", type: RWO }
+  # Deno dependency cache for edge functions (opt-in `functions` profile).
+  deno-cache:
+    x-miget: { size: "2000", type: RWO }
