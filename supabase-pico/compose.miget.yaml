@@ -1,9 +1,32 @@
+# JWT_SECRET is generated per deploy; ANON_KEY / SERVICE_ROLE_KEY are the
+# Supabase API keys, derived from it as HS256 JWTs by the platform (no
+# per-image derive wrapper).
+x-miget:
+  variables:
+    ANON_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: anon, iss: supabase, iat: 1700000000, exp: 2000000000 }
+    SERVICE_ROLE_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: service_role, iss: supabase, iat: 1700000000, exp: 2000000000 }
+
 services:
   gateway:
     x-miget:
       ram: "16"
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
+      # Use the platform-derived API keys (not derive-keys.sh's own
+      # derivation) so the nginx apikey map holds the exact strings every
+      # other service and client presents -- the map matches whole JWTs
+      # literally, so a key differing by a byte 401s. supabase.conf.template
+      # substitutes exactly these two names; supplying them makes
+      # derive-keys.sh's `[ -z "$ANON_KEY" ]` guard skip self-derivation
+      # (the script stays as the plain-docker fallback).
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
 
   auth:
     x-miget: { ram: "48", private: true }
