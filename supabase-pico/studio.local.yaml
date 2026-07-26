@@ -1,0 +1,39 @@
+# Studio for supabase-pico - runs on YOUR machine, not on the server.
+# Miget only reads compose.yaml + compose.miget.yaml, so this file never
+# deploys; the server stays dashboard-free.
+#
+# Against a local pico (same machine, shares its network and defaults):
+#   docker compose -f compose.yaml -f studio.local.yaml up studio meta
+#   open http://localhost:3000
+#
+# Against a deployed pico (db must be reachable, e.g. exposed TCP port):
+#   SUPABASE_PUBLIC_URL=https://<gateway-domain> \
+#   STUDIO_POSTGRES_HOST=<db-host> STUDIO_POSTGRES_PORT=<db-port> \
+#   POSTGRES_PASSWORD=... JWT_SECRET=... ANON_KEY=... SERVICE_ROLE_KEY=... \
+#   docker compose -f studio.local.yaml up
+services:
+  studio:
+    image: supabase/studio:2026.06.03-sha-0bca601
+    ports:
+    - 3000:3000
+    environment:
+      HOSTNAME: 0.0.0.0
+      STUDIO_PG_META_URL: http://meta:8080
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DEFAULT_ORGANIZATION_NAME: ${STUDIO_DEFAULT_ORGANIZATION:-Default Organization}
+      DEFAULT_PROJECT_NAME: ${STUDIO_DEFAULT_PROJECT:-Default Project}
+      SUPABASE_URL: ${SUPABASE_PUBLIC_URL:-http://supabase-gateway:5000}
+      SUPABASE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL:-http://localhost:5000}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      AUTH_JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-with-at-least-32-characters-long}
+  meta:
+    image: supabase/postgres-meta:v0.96.6
+    environment:
+      PG_META_PORT: 8080
+      PG_META_DB_HOST: ${STUDIO_POSTGRES_HOST:-supabase-db}
+      PG_META_DB_PORT: ${STUDIO_POSTGRES_PORT:-5432}
+      PG_META_DB_NAME: ${POSTGRES_DB:-postgres}
+      PG_META_DB_USER: supabase_admin
+      PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      CRYPTO_KEY: ${PG_META_CRYPTO_KEY:-}
