@@ -92,6 +92,7 @@ services:
   meta:
     x-miget: { ram: "512", private: true }
     environment:
+      NODE_OPTIONS: "--dns-result-order=ipv4first"
       PG_META_HOST: "::"
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}

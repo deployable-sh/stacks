@@ -13,6 +13,28 @@ the box. Don't need it? Locally run only the core four
 (`docker compose up db rest auth kong`); on Miget stop or remove the
 `studio` and `meta` apps - the APIs keep working without them.
 
+## The sizing
+
+Measured on Miget under 16 and 48 concurrent REST readers
+plus signup and write loops, with the supabase-js example in `example/`
+running concurrently, against hard no-swap memory limits.
+
+As in supabase-nano, the services with their own allocators grow into
+whatever limit they are given, so these numbers are the limits that keep
+the stack responsive rather than the memory it strictly needs.
+
+| Service | RAM | Peak @48 | What made it fit |
+|---|---|---|---|
+| `kong` | 192 | 164 | breaks below 160 -- see [supabase-nano](../supabase-nano#the-sizing) |
+| `auth` | 128 | 56 | GoTrue is small |
+| `rest` | 192 | 22 | `PGRST_DB_POOL=4` |
+| `studio` | 384 | 229 | V8 heap capped at 160 MiB. Uncapped it reached 353/384 and never released it |
+| `meta` | 160 | 85 | V8 heap capped at 96 MiB |
+| `db` | 512 | 146 | roomy on purpose, so Postgres keeps a real page cache |
+
+1568 MiB total. 30/30 requests at both concurrencies, 0 errors, 0 restarts,
+and the supabase-js example ran clean throughout.
+
 ## Topology
 
 | Service | Role | Public |
