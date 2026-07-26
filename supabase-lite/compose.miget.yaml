@@ -54,6 +54,13 @@ services:
 
   studio:
     x-miget: { ram: "384", private: true }
+    # Upstream's healthcheck spawns a whole Node runtime every 5s (~40Mi, ~460ms
+    # CPU). In a memory-capped pod that starves the probe itself: it times out
+    # and the liveness kill restarts a perfectly healthy Studio. Same check
+    # (GET /api/platform/profile must return 200) in pure bash over /dev/tcp:
+    # no new runtime, ~36ms.
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/3000 && printf 'GET /api/platform/profile HTTP/1.0\\r\\n\\r\\n' >&3 && head -1 <&3 | grep -q ' 200'"]
     # Studio's healthcheck needs meta and db; without the gate it
     # crash-loops through stack bring-up.
     depends_on: [db, meta]
