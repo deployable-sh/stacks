@@ -19,7 +19,8 @@ services:
       SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
 
   auth:
-    x-miget: { ram: "48", private: true }
+    # gotrue measured at 53Mi on dev -- 48 was below its actual usage.
+    x-miget: { ram: "96", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       GOTRUE_JWT_SECRET: ${JWT_SECRET}
@@ -28,7 +29,8 @@ services:
       SITE_URL: ${{gateway.public_url}}
 
   rest:
-    x-miget: { ram: "224", private: true }
+    # PostgREST measured at 8Mi on dev; 64 still leaves 8x headroom.
+    x-miget: { ram: "64", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       PGRST_JWT_SECRET: ${JWT_SECRET}
