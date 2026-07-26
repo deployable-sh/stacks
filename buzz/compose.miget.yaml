@@ -1,0 +1,35 @@
+services:
+  relay:
+    x-miget:
+      ram: "1024"
+    environment:
+      DATABASE_URL: ${{db.url}}
+      REDIS_URL: redis://:${{cache.password}}@${{cache.host}}:${{cache.port}}
+      RELAY_URL: ${{relay.public_url}}
+      BUZZ_MEDIA_BASE_URL: ${{relay.public_url}}/media
+      BUZZ_CORS_ORIGINS: ${{relay.public_url}}
+
+  blob:
+    x-miget:
+      ram: "512"
+      private: true
+
+  db:
+    x-miget:
+      managed: postgres
+      version: "17"
+      extensions: [pgcrypto]
+      cpu: "500m"
+      ram: "1Gi"
+      storage: "5Gi"
+
+  cache:
+    x-miget:
+      managed: valkey
+      ram: "256Mi"
+
+volumes:
+  gitdata:
+    x-miget: { size: "5000", type: RWO }
+  blobdata:
+    x-miget: { size: "10000", type: RWO }

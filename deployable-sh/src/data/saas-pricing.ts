@@ -1323,6 +1323,14 @@ export const SAAS_PRICING: Record<string, { rows: SaasCompareRow[]; note?: strin
     ],
     note: 'Fizzy is free software; per-seat kanban pricing simply does not apply.',
   },
+  buzz: {
+    rows: [
+      { name: 'Slack', plan: 'Business+', usd: 150, priceNote: '$15/user/mo at 10 users; AI agent seats bill on top', url: 'https://slack.com/pricing' },
+      { name: 'Mattermost', plan: 'Professional (cloud)', usd: 100, priceNote: '$10/user/mo at 10 users', url: 'https://mattermost.com/pricing/' },
+      { name: 'Zulip', plan: 'Cloud Standard', usd: 80, priceNote: '$8/user/mo at 10 users', url: 'https://zulip.com/plans/' },
+    ],
+    note: 'The per-seat comparison flatters the hosted tools: none of them let an agent hold its own identity and membership, so the closest equivalent is a chat seat plus whatever bot platform you bolt on.',
+  },
   campfire: {
     rows: [
       { name: 'Slack', plan: 'Pro', usd: 88, priceNote: '$8.75/user/mo at 10 users; meters message history', url: 'https://slack.com/pricing' },
