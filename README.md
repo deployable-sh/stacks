@@ -155,6 +155,7 @@ Platform ground rules baked into every template:
 | [`writebook`](writebook/) | Writebook (37signals) free book/docs publisher (Rails + Thruster, SQLite, `HTTP_PORT=5000`) | reader + admin |
 | [`fizzy`](fizzy/) | Fizzy (37signals) free kanban (Trello/Asana alt, Rails + Thruster, SQLite) | web UI |
 | [`campfire`](campfire/) | Campfire (37signals) free group chat (Slack alt, MIT, self-contained Rails, SQLite) | web UI |
+| [`buzz`](buzz/) | Buzz (Block) agent-native workspace on a Nostr relay, **managed Postgres + Valkey**, experimental | relay ws + invite page |
 | [`calcom`](calcom/) | Cal.com scheduling (Calendly alt, stateless), **managed Postgres** (citext) | booking app |
 | [`jellyfin`](jellyfin/) | Jellyfin media server (Plex alt, SQLite, network.xml port-5000 wrapper) | web player |
 | [`plausible`](plausible/) | Plausible CE web analytics (GA alt), **managed Postgres** + ClickHouse sidecar | dashboard |

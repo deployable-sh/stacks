@@ -121,6 +121,7 @@ import { immich } from './immich';
 import { writebook } from './writebook';
 import { fizzy } from './fizzy';
 import { campfire } from './campfire';
+import { buzz } from './buzz';
 import { calcom } from './calcom';
 import { jellyfin } from './jellyfin';
 import { plausible } from './plausible';
@@ -288,6 +289,7 @@ const BASES: AppBase[] = [
   writebook,
   fizzy,
   campfire,
+  buzz,
   calcom,
   jellyfin,
   plausible,
