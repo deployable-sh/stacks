@@ -105,6 +105,7 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
 
   supavisor:
+    profiles: !reset []
     x-miget: { ram: "1024", private: true }
     build: ./supavisor
     environment:
@@ -116,6 +117,7 @@ services:
       VAULT_ENC_KEY: ${VAULT_ENC_KEY:?}
 
   functions:
+    profiles: !reset []
     x-miget: { ram: "512", private: true }
     build: ./functions
     volumes:
@@ -128,6 +130,7 @@ services:
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
 
   imgproxy:
+    profiles: !reset []
     x-miget: { ram: "512", private: true }
     volumes:
       - storage-data:/var/lib/storage
