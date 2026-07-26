@@ -66,6 +66,7 @@ services:
   realtime:
     x-miget: { ram: "1024", private: true }
     environment:
+      SELF_HOST_TENANT_NAME: supabase-realtime
       JWT_SECRET: ${JWT_SECRET:?}
       API_JWT_SECRET: ${JWT_SECRET}
       METRICS_JWT_SECRET: ${JWT_SECRET}
