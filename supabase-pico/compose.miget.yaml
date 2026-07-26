@@ -1,6 +1,3 @@
-# JWT_SECRET is generated per deploy; ANON_KEY / SERVICE_ROLE_KEY are the
-# Supabase API keys, derived from it as HS256 JWTs by the platform (no
-# per-image derive wrapper).
 x-miget:
   variables:
     ANON_KEY:
@@ -18,13 +15,6 @@ services:
       ram: "16"
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
-      # Use the platform-derived API keys (not derive-keys.sh's own
-      # derivation) so the nginx apikey map holds the exact strings every
-      # other service and client presents -- the map matches whole JWTs
-      # literally, so a key differing by a byte 401s. supabase.conf.template
-      # substitutes exactly these two names; supplying them makes
-      # derive-keys.sh's `[ -z "$ANON_KEY" ]` guard skip self-derivation
-      # (the script stays as the plain-docker fallback).
       ANON_KEY: ${ANON_KEY}
       SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
 
@@ -32,12 +22,8 @@ services:
     x-miget: { ram: "48", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
-      # Base declares ${JWT_SECRET:-<demo default>} which bakes the default at
-      # parse time; re-point at the generated variable.
       GOTRUE_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
-      # gateway (nginx) is the public entrypoint for pico, so point the
-      # external URLs at it rather than at the platform default.
       API_EXTERNAL_URL: ${{gateway.public_url}}
       SITE_URL: ${{gateway.public_url}}
 
@@ -48,8 +34,6 @@ services:
       PGRST_JWT_SECRET: ${JWT_SECRET}
       PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
-      # nginx gateway may resolve the AAAA record; PostgREST defaults to an
-      # IPv4-only bind, so listen on all families for the dual-stack pod.
       PGRST_SERVER_HOST: "*"
 
   db:
@@ -57,10 +41,6 @@ services:
       ram: "224"
       private: true
     environment:
-      # db/jwt.sql writes this into app.settings.jwt_secret, which RLS
-      # policies validate against; the base's ${JWT_SECRET:-<demo>} would
-      # otherwise bake the demo default while every service signs with the
-      # generated one.
       JWT_SECRET: ${JWT_SECRET:?}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
