@@ -57,6 +57,11 @@ services:
       ram: "224"
       private: true
     environment:
+      # db/jwt.sql writes this into app.settings.jwt_secret, which RLS
+      # policies validate against; the base's ${JWT_SECRET:-<demo>} would
+      # otherwise bake the demo default while every service signs with the
+      # generated one.
+      JWT_SECRET: ${JWT_SECRET:?}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
 volumes:
