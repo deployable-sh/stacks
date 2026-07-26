@@ -14,16 +14,20 @@ Want Studio on the server? That's [supabase-nano](../supabase-nano)
 
 ## The sizing
 
-Measured under load (signups + RLS queries via supabase-js, 600 concurrent
-REST requests, pgbench from an external client) against hard no-swap
-memory limits:
+Measured on Miget under 16 and 48 concurrent REST readers
+plus a signup loop and a service-role write loop, against hard no-swap
+memory limits. Tripling the concurrency moved every service by at most
+1 MiB, so at this tier the footprint is baseline-dominated, not load-driven.
 
-| Service | RAM | Peak seen | What made it fit |
+| Service | RAM | Peak @48 | What made it fit |
 |---|---|---|---|
-| `gateway` | 16 | 3 | it's nginx with one worker |
-| `auth` | 48 | 33 | nothing - GoTrue is just small |
-| `rest` | 224 | fills its allowance | `PGRST_DB_POOL=2` (GHC expands to whatever it gets; never OOMs) |
-| `db` | 224 | ~120 | `shared_buffers=64MB`, 30 connections, pinned autovacuum/WAL |
+| `gateway` | 16 | 8 | it's nginx with one worker |
+| `auth` | 96 | 56 | GoTrue. 48 sat *below* its own peak on v2.189 and would OOM |
+| `rest` | 64 | 16 | `PGRST_DB_POOL=2` |
+| `db` | 224 | 137 | `shared_buffers=64MB`, 30 connections, pinned autovacuum/WAL |
+
+400 MiB allocated, ~217 MiB used at peak. 30/30 requests served at both
+concurrencies, 0 errors, 0 restarts.
 
 ## What the gateway does NOT do
 

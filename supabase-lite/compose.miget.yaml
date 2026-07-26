@@ -12,7 +12,7 @@ x-miget:
 services:
   kong:
     x-miget:
-      ram: "128"
+      ram: "192"
     environment:
       KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
       JWT_SECRET: ${JWT_SECRET:?}
@@ -33,12 +33,13 @@ services:
       SITE_URL: ${{kong.public_url}}
 
   rest:
-    x-miget: { ram: "384", private: true }
+    x-miget: { ram: "192", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       PGRST_JWT_SECRET: ${JWT_SECRET}
       PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      PGRST_DB_POOL: ${PGRST_DB_POOL:-4}
 
   studio:
     x-miget: { ram: "384", private: true }
@@ -55,15 +56,16 @@ services:
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
       PORT: "3000"
       HOSTNAME: "::"
-      NODE_OPTIONS: "--dns-result-order=ipv4first"
+      NODE_OPTIONS: "--max-old-space-size=160 --dns-result-order=ipv4first"
     volumes:
       - studio-functions:/app/edge-functions
       - studio-snippets:/app/snippets
 
   meta:
-    x-miget: { ram: "192", private: true }
+    x-miget: { ram: "160", private: true }
     environment:
       PG_META_HOST: "::"
+      NODE_OPTIONS: "--max-old-space-size=96 --dns-result-order=ipv4first"
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
 

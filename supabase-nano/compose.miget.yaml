@@ -12,7 +12,7 @@ x-miget:
 services:
   kong:
     x-miget:
-      ram: "160"
+      ram: "192"
     environment:
       KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
       JWT_SECRET: ${JWT_SECRET:?}
@@ -24,7 +24,7 @@ services:
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Password for the Supabase dashboard login}
 
   auth:
-    x-miget: { ram: "64", private: true }
+    x-miget: { ram: "96", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       GOTRUE_JWT_SECRET: ${JWT_SECRET}
@@ -33,7 +33,7 @@ services:
       SITE_URL: ${{kong.public_url}}
 
   rest:
-    x-miget: { ram: "128", private: true }
+    x-miget: { ram: "64", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       PGRST_JWT_SECRET: ${JWT_SECRET}
@@ -55,7 +55,7 @@ services:
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
       PORT: "3000"
       HOSTNAME: "::"
-      NODE_OPTIONS: "--max-old-space-size=160 --dns-result-order=ipv4first"
+      NODE_OPTIONS: "--max-old-space-size=128 --dns-result-order=ipv4first"
     volumes:
       - studio-functions:/app/edge-functions
       - studio-snippets:/app/snippets
@@ -64,6 +64,7 @@ services:
     x-miget: { ram: "160", private: true }
     environment:
       PG_META_HOST: "::"
+      NODE_OPTIONS: "--max-old-space-size=96 --dns-result-order=ipv4first"
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
 

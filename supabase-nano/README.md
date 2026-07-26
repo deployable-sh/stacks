@@ -11,18 +11,25 @@ For hobby projects, demos and side products; heavier workloads want
 
 ## The sizing
 
-Measured under load (signups + RLS queries via supabase-js, 600 concurrent
-REST requests, Studio browsing, pgbench at 10k tps) against hard no-swap
-memory limits:
+Measured on Miget under 16 and 48 concurrent REST readers
+plus signup and write loops, against hard no-swap memory limits.
 
-| Service | RAM | Peak seen | What made it fit |
+**Peak usage is not the sizing input here.** `kong`, `studio` and `meta`
+each grow to fill whatever limit they are given, so "peak seen" tracks the
+limit rather than demand -- kong measured 127/128, 151/160 and 164/192 on
+the same workload. What matters is the limit below which the service stops
+performing.
+
+| Service | RAM | Peak @48 | What made it fit |
 |---|---|---|---|
-| `kong` | 128 | 105 | 1 nginx worker, proxy buffers 8x160k |
-| `auth` | 64 | 33 | nothing - GoTrue is just small |
-| `rest` | 224 | 174 | `PGRST_DB_POOL=2` |
-| `studio` | 256 | 196 | V8 heap capped at 160 MiB |
-| `meta` | 160 | 80 | V8 heap capped at 96 MiB |
-| `db` | 192 | 121 | `shared_buffers=64MB`, `max_connections=40` |
+| `kong` | 192 | 164 | **breaks below 160.** At 128 it still reports 127/128 and never OOMs, but throughput collapses: 21/30 requests at 4965 ms |
+| `auth` | 96 | 56 | GoTrue is small, but 64 left it at 87% |
+| `rest` | 64 | 17 | `PGRST_DB_POOL=2` |
+| `studio` | 320 | 285 | V8 heap capped at 128 MiB; RSS settles near cap + ~140 |
+| `meta` | 160 | 89 | V8 heap capped at 96 MiB |
+| `db` | 192 | 129 | `shared_buffers=64MB`, `max_connections=40` |
+
+1024 MiB total. 30/30 requests at both concurrencies, 0 errors, 0 restarts.
 
 ## Trade-offs (read before production)
 
