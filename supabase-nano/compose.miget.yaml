@@ -1,0 +1,104 @@
+# JWT_SECRET is generated per deploy; ANON_KEY / SERVICE_ROLE_KEY are the
+# Supabase API keys, derived from it as HS256 JWTs by the platform (no
+# per-image derive wrapper).
+x-miget:
+  variables:
+    ANON_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: anon, iss: supabase, iat: 1700000000, exp: 2000000000 }
+    SERVICE_ROLE_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: service_role, iss: supabase, iat: 1700000000, exp: 2000000000 }
+
+services:
+  kong:
+    x-miget:
+      ram: "128"
+    environment:
+      # Miget pods are dual-stack; bind both families so the alias
+      # Service's IPv6 VIP accepts connections.
+      KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
+      JWT_SECRET: ${JWT_SECRET:?}
+      # Use the platform-derived API keys (not kong's own derivation) so kong's
+      # exact-match key-auth consumers equal the keys every other service and
+      # client uses. Setting ANON_KEY/SERVICE_ROLE_KEY skips the entrypoint's
+      # self-derivation; SUPABASE_ANON_KEY/SUPABASE_SERVICE_KEY are what kong.yml
+      # actually reads.
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?Username you will use to log in to the Supabase dashboard}
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Password for the Supabase dashboard login}
+
+  auth:
+    x-miget: { ram: "64", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?}
+      # Base declares ${JWT_SECRET:-<demo default>} which bakes the default at
+      # parse time; re-point at the generated variable.
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      API_EXTERNAL_URL: ${{kong.public_url}}
+      SITE_URL: ${{kong.public_url}}
+
+  rest:
+    x-miget: { ram: "224", private: true }
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?}
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+
+  studio:
+    x-miget: { ram: "256", private: true }
+    # Studio's healthcheck needs meta and db; without the gate it
+    # crash-loops through stack bring-up.
+    depends_on: [db, meta]
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?}
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
+      SUPABASE_PUBLIC_URL: ${{kong.public_url}}
+      # Keep Next.js on the compose-declared port: kong routes to
+      # supabase-studio:3000 and the healthcheck probes it. Without this
+      # the platform's PORT default moves studio to 5000.
+      PORT: "3000"
+      HOSTNAME: "::"
+      # Belt-and-suspenders: kong/meta now dual-bind, but keep A-first
+      # resolution for any remaining IPv4-only upstream. Preserve nano's
+      # base heap cap (--max-old-space-size=160) for the tight 256 MiB slot.
+      NODE_OPTIONS: "--max-old-space-size=160 --dns-result-order=ipv4first"
+    volumes:
+      # The base leaves both management folders unmounted -> Studio's Edge
+      # Functions and SQL Snippets tabs error. nano has no functions service,
+      # so edge-functions is an empty (but present) folder.
+      - studio-functions:/app/edge-functions
+      - studio-snippets:/app/snippets
+
+  meta:
+    x-miget: { ram: "160", private: true }
+    environment:
+      PG_META_HOST: "::"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
+
+  db:
+    x-miget:
+      ram: "192"
+      private: true
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+
+volumes:
+  studio-functions:
+    x-miget: { size: "500", type: RWX }
+  studio-snippets:
+    x-miget: { size: "500", type: RWX }
+  dbdata:
+    x-miget: { size: "4000", type: RWO }
