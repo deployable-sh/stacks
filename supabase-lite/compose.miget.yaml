@@ -1,3 +1,17 @@
+# JWT_SECRET is generated per deploy; ANON_KEY / SERVICE_ROLE_KEY are the
+# Supabase API keys, derived from it as HS256 JWTs by the platform (no
+# per-image derive wrapper).
+x-miget:
+  variables:
+    ANON_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: anon, iss: supabase, iat: 1700000000, exp: 2000000000 }
+    SERVICE_ROLE_KEY:
+      derive: hs256_jwt
+      from: JWT_SECRET
+      claims: { role: service_role, iss: supabase, iat: 1700000000, exp: 2000000000 }
+
 services:
   kong:
     x-miget:
@@ -7,6 +21,15 @@ services:
       # Service's IPv6 VIP accepts connections.
       KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
       JWT_SECRET: ${JWT_SECRET:?}
+      # Use the platform-derived API keys (not kong's own derivation) so kong's
+      # exact-match key-auth consumers equal the keys every other service and
+      # client uses. Setting ANON_KEY/SERVICE_ROLE_KEY skips the entrypoint's
+      # self-derivation; SUPABASE_ANON_KEY/SUPABASE_SERVICE_KEY are what kong.yml
+      # actually reads.
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
       DASHBOARD_USERNAME: ${DASHBOARD_USERNAME:?Username you will use to log in to the Supabase dashboard}
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Password for the Supabase dashboard login}
 
@@ -31,19 +54,14 @@ services:
 
   studio:
     x-miget: { ram: "384", private: true }
-    # Thin wrapper (../studio) deriving per-deploy API keys from JWT_SECRET
-    # at startup -- same pattern and identical claims as ./kong.
-    build: ./studio
     # Studio's healthcheck needs meta and db; without the gate it
     # crash-loops through stack bring-up.
     depends_on: [db, meta]
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
       AUTH_JWT_SECRET: ${JWT_SECRET}
-      # Empty = derive at startup from JWT_SECRET (base's demo defaults would
-      # otherwise win and mismatch the generated secret).
-      SUPABASE_ANON_KEY: ""
-      SUPABASE_SERVICE_KEY: ""
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
@@ -55,6 +73,12 @@ services:
       # Belt-and-suspenders: kong/meta now dual-bind, but keep A-first
       # resolution for any remaining IPv4-only upstream.
       NODE_OPTIONS: "--dns-result-order=ipv4first"
+    volumes:
+      # The base leaves both management folders unmounted -> Studio's Edge
+      # Functions and SQL Snippets tabs error. lite has no functions service,
+      # so edge-functions is an empty (but present) folder.
+      - studio-functions:/app/edge-functions
+      - studio-snippets:/app/snippets
 
   meta:
     x-miget: { ram: "192", private: true }
@@ -71,5 +95,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
 volumes:
+  studio-functions:
+    x-miget: { size: "500", type: RWX }
+  studio-snippets:
+    x-miget: { size: "500", type: RWX }
   dbdata:
     x-miget: { size: "8000", type: RWO }
