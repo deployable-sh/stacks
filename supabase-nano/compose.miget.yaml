@@ -1,6 +1,3 @@
-# JWT_SECRET is generated per deploy; ANON_KEY / SERVICE_ROLE_KEY are the
-# Supabase API keys, derived from it as HS256 JWTs by the platform (no
-# per-image derive wrapper).
 x-miget:
   variables:
     ANON_KEY:
@@ -15,18 +12,10 @@ x-miget:
 services:
   kong:
     x-miget:
-      # 114Mi observed on dev.
       ram: "160"
     environment:
-      # Miget pods are dual-stack; bind both families so the alias
-      # Service's IPv6 VIP accepts connections.
       KONG_PROXY_LISTEN: "0.0.0.0:5000, [::]:5000"
       JWT_SECRET: ${JWT_SECRET:?}
-      # Use the platform-derived API keys (not kong's own derivation) so kong's
-      # exact-match key-auth consumers equal the keys every other service and
-      # client uses. Setting ANON_KEY/SERVICE_ROLE_KEY skips the entrypoint's
-      # self-derivation; SUPABASE_ANON_KEY/SUPABASE_SERVICE_KEY are what kong.yml
-      # actually reads.
       ANON_KEY: ${ANON_KEY}
       SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
       SUPABASE_ANON_KEY: ${ANON_KEY}
@@ -38,15 +27,12 @@ services:
     x-miget: { ram: "64", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
-      # Base declares ${JWT_SECRET:-<demo default>} which bakes the default at
-      # parse time; re-point at the generated variable.
       GOTRUE_JWT_SECRET: ${JWT_SECRET}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       API_EXTERNAL_URL: ${{kong.public_url}}
       SITE_URL: ${{kong.public_url}}
 
   rest:
-    # 8Mi observed on dev; PostgREST is a lean Haskell binary.
     x-miget: { ram: "128", private: true }
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
@@ -55,17 +41,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
   studio:
-    # 227Mi observed on dev -- 256 left no headroom for probes.
     x-miget: { ram: "320", private: true }
-    # Upstream's healthcheck spawns a whole Node runtime every 5s (~40Mi, ~460ms
-    # CPU). In a memory-capped pod that starves the probe itself: it times out
-    # and the liveness kill restarts a perfectly healthy Studio. Same check
-    # (GET /api/platform/profile must return 200) in pure bash over /dev/tcp:
-    # no new runtime, ~36ms.
     healthcheck:
       test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/3000 && printf 'GET /api/platform/profile HTTP/1.0\\r\\n\\r\\n' >&3 && head -1 <&3 | grep -q ' 200'"]
-    # Studio's healthcheck needs meta and db; without the gate it
-    # crash-loops through stack bring-up.
     depends_on: [db, meta]
     environment:
       JWT_SECRET: ${JWT_SECRET:?}
@@ -75,19 +53,10 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
       PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY:?}
       SUPABASE_PUBLIC_URL: ${{kong.public_url}}
-      # Keep Next.js on the compose-declared port: kong routes to
-      # supabase-studio:3000 and the healthcheck probes it. Without this
-      # the platform's PORT default moves studio to 5000.
       PORT: "3000"
       HOSTNAME: "::"
-      # Belt-and-suspenders: kong/meta now dual-bind, but keep A-first
-      # resolution for any remaining IPv4-only upstream. Preserve nano's
-      # base heap cap (--max-old-space-size=160) for the tight 256 MiB slot.
       NODE_OPTIONS: "--max-old-space-size=160 --dns-result-order=ipv4first"
     volumes:
-      # The base leaves both management folders unmounted -> Studio's Edge
-      # Functions and SQL Snippets tabs error. nano has no functions service,
-      # so edge-functions is an empty (but present) folder.
       - studio-functions:/app/edge-functions
       - studio-snippets:/app/snippets
 
@@ -103,10 +72,6 @@ services:
       ram: "192"
       private: true
     environment:
-      # db/jwt.sql writes this into app.settings.jwt_secret, which RLS
-      # policies validate against; the base's ${JWT_SECRET:-<demo>} would
-      # otherwise bake the demo default while every service signs with the
-      # generated one.
       JWT_SECRET: ${JWT_SECRET:?}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
