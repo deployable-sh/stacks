@@ -5,6 +5,9 @@ services:
     - "3000"
     image: supabase/studio:2026.06.03-sha-0bca601
     restart: unless-stopped
+    volumes:
+    - ./functions:/app/edge-functions:ro,z
+    - ./snippets:/app/snippets:z
     healthcheck:
       test:
       - CMD-SHELL
@@ -184,6 +187,8 @@ services:
     - "5000"
     image: supabase/storage-api:v1.60.4
     restart: unless-stopped
+    volumes:
+    - ./storage:/var/lib/storage:z
     depends_on:
       db:
         condition: service_healthy
@@ -224,6 +229,8 @@ services:
     - "5001"
     image: darthsim/imgproxy:v3.30.1
     restart: unless-stopped
+    volumes:
+    - ./storage:/var/lib/storage:z
     healthcheck:
       test:
       - CMD
@@ -263,6 +270,7 @@ services:
     restart: unless-stopped
     volumes:
     - deno-cache:/root/.cache/deno
+    - ./functions:/home/deno/functions:z
     depends_on:
       kong:
         condition: service_healthy
