@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import AppCard from '../components/AppCard.astro';
 import { appsByCategory, APPS } from '../data/apps';
+import { categorySlug } from '../lib/categories';
 import { SITE, HOBBY_PLANS } from '../config';
 
 const categories = appsByCategory();
@@ -108,7 +109,9 @@ const jsonLd = [
     {[...categories.entries()].map(([category, apps]) =>
       apps.length > 0 && (
         <div class="cat">
-          <h2 class="section-title"><span class="hash">#</span>{category.toLowerCase()}</h2>
+          <h2 class="section-title">
+            <span class="hash">#</span><a href={`/categories/${categorySlug(category)}/`}>{category.toLowerCase()}</a>
+          </h2>
           <div class="grid">
             {apps.map((app) => <AppCard app={app} />)}
           </div>
