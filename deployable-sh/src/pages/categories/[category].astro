@@ -1,0 +1,178 @@
+---
+// Category landing pages: /categories/<slug>/
+// The home page groups the catalogue by category but only as client-side
+// filters, so these groupings had no URLs of their own. Each page is a real
+// listing with the stacks, their measured footprints and the cheapest plan
+// that fits - generated from catalogue data, nothing per-category invented.
+import Base from '../../layouts/Base.astro';
+import AppCard from '../../components/AppCard.astro';
+import { APPS } from '../../data/apps';
+import { hobbyFit, fmtRam } from '../../lib/sizing';
+import { SITE } from '../../config';
+import type { Category } from '../../data/types';
+import { categorySlug } from '../../lib/categories';
+
+/** What someone searching for this category is actually looking for. */
+const INTENT: Partial<Record<Category, string>> = {
+  Databases: 'a managed database without the managed-database bill',
+  'Caches & Key-Value': 'a Redis-compatible cache you control',
+  'Streaming & Messaging': 'a queue or event log that survives production',
+  'Search & Vectors': 'search and vector storage for your own data',
+  'Backend Platforms': 'a backend-as-a-service you own end to end',
+  'Auth & API Gateway': 'identity and gateway pieces without per-user pricing',
+  'Monitoring & Analytics': 'metrics and analytics that do not sample your data away',
+  'Error Tracking': 'error tracking without per-event quotas',
+  'CMS & Publishing': 'a place to publish that you actually own',
+  'Dev Tools': 'the development plumbing every team ends up needing',
+  'Internal Tools': 'internal apps built fast, hosted cheap',
+  'Business Apps': 'business software you host rather than rent per seat',
+  'Productivity & PM': 'project tracking without per-seat pricing',
+  Scheduling: 'booking and scheduling on your own domain',
+  'Automation & Jobs': 'workflow automation without execution metering',
+  'Email & Newsletters': 'sending email from infrastructure you control',
+  'Object Storage': 'S3-compatible storage without egress surprises',
+  Security: 'secrets and security tooling kept in-house',
+  'LLM Infrastructure': 'the plumbing between your apps and language models',
+  'AI Agents': 'long-running agents on infrastructure you control',
+  'Voice & Realtime': 'realtime audio and video you host yourself',
+  Media: 'your own media library, streamed from your own disk',
+  'Game Servers': 'a game server that stays up between sessions',
+};
+
+export function getStaticPaths() {
+  const byCategory = new Map<Category, typeof APPS>();
+  for (const app of APPS) {
+    const list = byCategory.get(app.category) ?? [];
+    list.push(app);
+    byCategory.set(app.category, list);
+  }
+  return [...byCategory.entries()]
+    .filter(([, apps]) => apps.length > 0)
+    .map(([category, apps]) => ({
+      params: { category: categorySlug(category) },
+      props: { category, apps: apps.slice().sort((a, b) => a.name.localeCompare(b.name)) },
+    }));
+}
+
+const { category, apps } = Astro.props;
+const pageUrl = `${SITE.url}/categories/${categorySlug(category)}/`;
+const intent = INTENT[category as Category] ?? 'production-shaped stacks you host yourself';
+
+const cheapest = apps.reduce((min, a) => Math.min(min, hobbyFit(a).fit.usd), Infinity);
+const withPricing = apps.filter((a) => a.saasCompare.length > 0);
+const lowerCat = category.toLowerCase();
+
+const title = `Self-Hosted ${category}: ${apps.length} Docker Compose Stacks`;
+const description = `${apps.length} production-shaped ${lowerCat} stacks you can self-host: one vanilla compose.yaml each, measured RAM footprints, and one-step deploys from $${cheapest}/month flat. For anyone who wants ${intent}.`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description,
+    url: pageUrl,
+    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: apps.length,
+      itemListElement: apps.map((a, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: a.name,
+        url: `${SITE.url}/apps/${a.slug}/`,
+      })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'deployable.sh', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: category, item: pageUrl },
+    ],
+  },
+];
+---
+
+<Base
+  title={`Self-Hosted ${category} · deployable.sh`}
+  description={description}
+  keywords={[`self hosted ${lowerCat}`, `${lowerCat} docker compose`, `open source ${lowerCat}`, `managed ${lowerCat} alternative`]}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">deployable.sh</a> <span>/</span>
+      <span class="crumb-here">{lowerCat}</span>
+    </nav>
+
+    <header class="app-hero">
+      <h1>Self-Hosted {category}</h1>
+      <p class="hero-tag">
+        {apps.length} stack{apps.length === 1 ? '' : 's'} for anyone who wants {intent}. Each one is a vanilla
+        <code>compose.yaml</code> that runs locally with <code>docker compose up</code>, with a measured RAM footprint
+        and a one-step deploy to Miget from <strong>${cheapest}/month</strong> flat.
+      </p>
+    </header>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>the stacks</h2>
+      <div class="grid">
+        {apps.map((app) => <AppCard app={app} />)}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>what each one needs</h2>
+      <p class="lead">
+        RAM and disk are what the compose file allocates, not guesses, and the plan is the smallest one that holds it.
+        Databases and caches come managed and included on Miget rather than billed per instance.
+      </p>
+      <div class="table-scroll">
+        <table class="data">
+          <thead>
+            <tr><th>Stack</th><th>Services</th><th>RAM</th><th>Disk</th><th>Fits plan</th></tr>
+          </thead>
+          <tbody>
+            {apps.map((app) => {
+              const fit = hobbyFit(app).fit;
+              return (
+                <tr>
+                  <td><a href={`/apps/${app.slug}/`}>{app.name}</a></td>
+                  <td>{app.services}</td>
+                  <td>{fmtRam(app.ramMiB)}</td>
+                  <td>{app.diskGB} GB</td>
+                  <td>${fit.usd}/mo</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {withPricing.length > 0 && (
+        <p class="note">
+          Cost against the managed equivalents, per stack:
+          {withPricing.map((a, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={`/apps/${a.slug}/pricing/`}>{a.name}</a>
+            </>
+          ))}.
+        </p>
+      )}
+    </section>
+
+    <section class="final-cta panel">
+      <h2>Browse the rest of the catalogue</h2>
+      <p>
+        {APPS.length} stacks in total, from databases and queues to AI infrastructure - all MIT licensed, all runnable
+        locally, all deployable in one step.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="/#catalogue">All stacks</a>
+        <a class="btn btn-ghost" href={SITE.repoUrl} rel="noopener">View the repo</a>
+      </div>
+    </section>
+  </article>
+</Base>
