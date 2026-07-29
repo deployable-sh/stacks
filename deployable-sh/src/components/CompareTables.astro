@@ -76,6 +76,12 @@ const paas = paasEstimates(app).sort((a, b) => b.usd - a.usd);
       </tbody>
     </table>
   </div>
+  {app.saasCompare.length > 0 && (
+    <p class="foot">
+      Full breakdown of what {app.name} costs managed versus self-hosted, with production sizing:
+      <a href={`/apps/${app.slug}/pricing/`}>{app.name} pricing</a>.
+    </p>
+  )}
   <p class="foot">
     Estimates assume RAM fully allocated at published on-demand rates - and sticker price isn't the whole comparison:
     the cheaper rows buy burstable shared CPUs, per-service wiring instead of a compose deploy, and managed databases

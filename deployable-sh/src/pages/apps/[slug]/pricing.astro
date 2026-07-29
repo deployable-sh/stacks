@@ -1,0 +1,216 @@
+---
+// Per-app pricing page: /apps/<slug>/pricing/
+// Only generated for apps that have real managed-service price rows, so this
+// route can never produce an empty comparison. Everything on the page comes
+// from data already in the repo (measured RAM/disk, the plan ladder, and the
+// SaaS rows with their sources) - nothing here is invented per app.
+import Base from '../../../layouts/Base.astro';
+import { APPS } from '../../../data/apps';
+import { hobbyFit, proFit, paasEstimates, fmtRam } from '../../../lib/sizing';
+import { SITE } from '../../../config';
+
+export function getStaticPaths() {
+  return APPS.filter((app) => app.saasCompare.length > 0).map((app) => ({
+    params: { slug: app.slug },
+    props: { app },
+  }));
+}
+
+const { app } = Astro.props;
+const hobby = hobbyFit(app);
+const pro = proFit(app);
+const paas = paasEstimates(app).sort((a, b) => b.usd - a.usd);
+const pageUrl = `${SITE.url}/apps/${app.slug}/pricing/`;
+
+const priced = app.saasCompare.filter((r) => r.usd !== null) as (typeof app.saasCompare[number] & { usd: number })[];
+const cheapestManaged = priced.length ? priced.reduce((a, b) => (a.usd <= b.usd ? a : b)) : null;
+const usageBased = app.saasCompare.filter((r) => r.usd === null);
+const saving = cheapestManaged ? cheapestManaged.usd - hobby.fit.usd : null;
+const savingPct =
+  cheapestManaged && cheapestManaged.usd > 0
+    ? Math.round(((cheapestManaged.usd - hobby.fit.usd) / cheapestManaged.usd) * 100)
+    : null;
+
+const title = `${app.name} Pricing: Managed vs Self-Hosted`;
+const description = cheapestManaged
+  ? `What ${app.name} costs: ${cheapestManaged.name} ${cheapestManaged.plan} is ~$${cheapestManaged.usd}/month, while the self-hosted stack fits a $${hobby.fit.usd}/month flat plan (${fmtRam(app.ramMiB)} across ${app.services} services, measured). Real numbers, sources linked.`
+  : `What ${app.name} costs managed versus self-hosted: the managed options are usage-billed, while this stack fits a $${hobby.fit.usd}/month flat plan (${fmtRam(app.ramMiB)}, measured).`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `${app.name} (self-hosted on Miget)`,
+    description,
+    url: pageUrl,
+    offers: {
+      '@type': 'Offer',
+      price: hobby.fit.usd.toFixed(2),
+      priceCurrency: 'USD',
+      url: SITE.migetPlansUrl,
+      availability: 'https://schema.org/InStock',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'deployable.sh', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: app.name, item: `${SITE.url}/apps/${app.slug}/` },
+      { '@type': 'ListItem', position: 3, name: 'Pricing', item: pageUrl },
+    ],
+  },
+];
+---
+
+<Base
+  title={`${title} · deployable.sh`}
+  description={description}
+  keywords={[`${app.name.toLowerCase()} pricing`, `${app.name.toLowerCase()} cost`, `self-hosted ${app.name.toLowerCase()}`, `${app.name.toLowerCase()} vs managed`]}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">deployable.sh</a> <span>/</span>
+      <a href={`/apps/${app.slug}/`}>{app.slug}</a> <span>/</span>
+      <span class="crumb-here">pricing</span>
+    </nav>
+
+    <header class="app-hero">
+      <h1>{title}</h1>
+      <p class="hero-tag">
+        {cheapestManaged ? (
+          <>
+            The cheapest managed {app.name} starts at about <strong>${cheapestManaged.usd}/month</strong>.
+            Self-hosted, this stack measures {fmtRam(app.ramMiB)} across {app.services} service{app.services === 1 ? '' : 's'},
+            which fits a <strong>${hobby.fit.usd}/month</strong> flat plan with room left over.
+          </>
+        ) : (
+          <>
+            Managed {app.name} is billed by usage. Self-hosted, this stack measures {fmtRam(app.ramMiB)} across{' '}
+            {app.services} service{app.services === 1 ? '' : 's'} and fits a <strong>${hobby.fit.usd}/month</strong> flat plan.
+          </>
+        )}
+      </p>
+    </header>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>the numbers</h2>
+      <p class="lead">
+        Managed prices as of {SITE.pricingAsOf}, each linked to its source. The self-hosted row is not an estimate:
+        the RAM figure is what this stack allocates in its compose file, and the plan is the smallest one that holds it.
+      </p>
+      <div class="table-scroll">
+        <table class="data">
+          <thead>
+            <tr><th>Option</th><th>Plan</th><th>Monthly</th><th>What you get</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-miget">
+              <td>Self-hosted on Miget <span class="pick">★</span></td>
+              <td>{fmtRam(hobby.fit.ramMiB)}, {hobby.fit.vcpu} vCPU</td>
+              <td><strong>${hobby.fit.usd}</strong></td>
+              <td>the whole stack, flat - no per-user or per-request metering, and the plan holds your other apps too</td>
+            </tr>
+            {app.saasCompare.map((row) => (
+              <tr>
+                <td><a href={row.url} rel="noopener nofollow">{row.name}</a></td>
+                <td>{row.plan}</td>
+                <td>{row.usd === null ? 'usage-based' : `~$${row.usd}`}</td>
+                <td>{row.priceNote}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {app.saasCompareNote && <p class="note">{app.saasCompareNote}</p>}
+    </section>
+
+    {saving !== null && saving > 0 && (
+      <section>
+        <h2 class="section-title"><span class="hash">#</span>the difference, plainly</h2>
+        <p class="lead">
+          ${saving}/month, or about {savingPct}%, against the cheapest managed tier - ${saving * 12} over a year.
+          Worth stating what that money buys and what it costs, because the honest answer is not "it is just cheaper".
+        </p>
+        <ul class="features">
+          <li><strong>You gain</strong> a bill that does not move with usage, no execution or seat metering, and root on your own data.</li>
+          <li><strong>You gain</strong> spare capacity: the plan is sized for this stack, and anything else you deploy inside it is free.</li>
+          <li><strong>You take on</strong> upgrades, backups and the pager. Managed services charge for exactly that, and for some teams it is worth every dollar.</li>
+          <li><strong>You should not</strong> switch for the saving alone if your team has nobody who wants to own it.</li>
+        </ul>
+      </section>
+    )}
+
+    {usageBased.length > 0 && (
+      <section>
+        <h2 class="section-title"><span class="hash">#</span>on usage-based pricing</h2>
+        <p class="lead">
+          {usageBased.map((r) => r.name).join(', ')} {usageBased.length === 1 ? 'bills' : 'bill'} by usage rather than a
+          fixed monthly price, so a table cannot compare it honestly. The structural difference is the one that matters:
+          a flat plan has a known worst case, and a meter does not.
+        </p>
+      </section>
+    )}
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>what it costs on other platforms</h2>
+      <p class="lead">
+        Same stack, published rates elsewhere - estimates from each platform's own pricing page, not quotes.
+        {app.services > 1 && ' Per-service platforms are the expensive case here, because every container in this stack is its own paid service.'}
+      </p>
+      <div class="table-scroll">
+        <table class="data">
+          <thead><tr><th>Platform</th><th>Estimated monthly</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr class="row-miget">
+              <td>Miget <span class="pick">★</span></td>
+              <td><strong>${hobby.fit.usd}</strong></td>
+              <td>flat plan, {fmtRam(hobby.fit.ramMiB)} - databases included, no meters</td>
+            </tr>
+            {paas.map((p) => (
+              <tr>
+                <td><a href={p.url} rel="noopener nofollow">{p.name}</a></td>
+                <td>~${p.usd}</td>
+                <td>{p.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"><span class="hash">#</span>sizing, if you outgrow the small plan</h2>
+      <p class="lead">
+        The ${hobby.fit.usd} plan is the smallest that fits. For production traffic you generally want the next tier up,
+        and dedicated vCPU if the workload is CPU-bound rather than idle-waiting.
+      </p>
+      <div class="table-scroll">
+        <table class="data">
+          <thead><tr><th>Use case</th><th>Plan</th><th>Monthly</th></tr></thead>
+          <tbody>
+            <tr><td>Fits the stack</td><td>{fmtRam(hobby.fit.ramMiB)}, {hobby.fit.vcpu} vCPU shared</td><td>${hobby.fit.usd}</td></tr>
+            {hobby.comfortable && (
+              <tr><td>Comfortable, room for your own apps</td><td>{fmtRam(hobby.comfortable.ramMiB)}, {hobby.comfortable.vcpu} vCPU shared</td><td>${hobby.comfortable.usd}</td></tr>
+            )}
+            <tr><td>Dedicated vCPU (production)</td><td>{fmtRam(pro.fit.ramMiB)}, {pro.fit.vcpu} vCPU dedicated</td><td>${pro.fit.usd}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      {app.sizingNote && <p class="note">{app.sizingNote}</p>}
+    </section>
+
+    <section class="final-cta panel">
+      <h2>Run {app.name} yourself</h2>
+      <p>
+        The compose file is open source and runs locally with <code>docker compose up</code>. One step to deploy it to
+        Miget on the ${hobby.fit.usd}/month plan, databases included.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href={`/apps/${app.slug}/`}>{app.name} stack details</a>
+        <a class="btn btn-ghost" href={SITE.repoUrl + '/tree/main/' + app.slug} rel="noopener">View the compose file</a>
+      </div>
+    </section>
+  </article>
+</Base>
