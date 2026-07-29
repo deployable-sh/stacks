@@ -10,7 +10,7 @@ services:
       ram: "1024"
       private: true
     environment:
-      FRONTEND_URL: ${MIGET_PUBLIC_URL}
+      FRONTEND_URL: ${{web.public_url}}
 
   migrate:
     x-miget:
