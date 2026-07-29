@@ -1,3 +1,12 @@
+# Keep the scheme the client actually used. TLS terminates upstream, so
+# $scheme here is always http; overwriting X-Forwarded-Proto with it makes
+# Logto see a mismatch against ADMIN_ENDPOINT and serve the sign-in app
+# instead of the console.
+map $http_x_forwarded_proto $forwarded_proto {
+    default $http_x_forwarded_proto;
+    ""      $scheme;
+}
+
 server {
     listen 5000;
 
@@ -5,6 +14,6 @@ server {
         proxy_pass ${PROXY_TARGET};
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
     }
 }
