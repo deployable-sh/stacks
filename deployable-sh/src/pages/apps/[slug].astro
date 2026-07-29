@@ -5,6 +5,7 @@ import CompareTables from '../../components/CompareTables.astro';
 import { APPS } from '../../data/apps';
 import { hobbyFit, fmtRam } from '../../lib/sizing';
 import { SITE } from '../../config';
+import { stackTitle } from '../../lib/titles';
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
@@ -60,7 +61,7 @@ const jsonLd = [
 ---
 
 <Base
-  title={`${app.seoTitle} · deployable.sh`}
+  title={`${stackTitle(app)} · deployable.sh`}
   description={app.seoDescription}
   keywords={app.keywords}
   jsonLd={jsonLd}
