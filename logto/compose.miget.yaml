@@ -3,8 +3,8 @@ services:
     x-miget:
       ram: "1024"
     environment:
-      ENDPOINT: ${MIGET_PUBLIC_URL}
-      ADMIN_ENDPOINT: ${MIGET_PUBLIC_URL}
+      ENDPOINT: ${{logto.public_url}}
+      ADMIN_ENDPOINT: ${{logto.public_url}}
   web-admin:
     x-miget:
       ram: "512"
