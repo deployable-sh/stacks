@@ -16,11 +16,13 @@ export const wordpress: AppBase = {
     'Deploy WordPress (official image) in one step with a self-hosted MySQL - full plugin and theme freedom, persistent uploads, no visit caps. Cheaper than WordPress.com Business and WP Engine.',
   keywords: [
     'wordpress docker compose',
+    'wordpress docker',
     'self-host wordpress',
     'wordpress.com alternative',
     'wp engine alternative',
     'wordpress mysql docker',
     'cheap wordpress hosting',
+    'wordpress hosting price',
   ],
   intro: [
     'WordPress needs no introduction - it needs decent hosting. The hosted offerings gate the interesting parts: WordPress.com only allows plugins from its $25/month Business tier, WP Engine meters visits. Self-hosted WordPress is just WordPress: every plugin, every theme, your files.',
