@@ -24,6 +24,7 @@ export const wordpress: AppBase = {
     'cheap wordpress hosting',
     'wordpress hosting price',
   ],
+  guideUrl: 'https://miget.com/blog/wordpress-docker-compose',
   intro: [
     'WordPress needs no introduction - it needs decent hosting. The hosted offerings gate the interesting parts: WordPress.com only allows plugins from its $25/month Business tier, WP Engine meters visits. Self-hosted WordPress is just WordPress: every plugin, every theme, your files.',
     'This template runs the official image behind a thin nginx proxy (the Apache variant listens on :80, the platform publishes :5000) with the X-Forwarded-Proto handling already wired, so https behind the platform’s TLS ingress works without the classic redirect loop. The MySQL container is deployed and connected automatically.',
