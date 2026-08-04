@@ -23,3 +23,22 @@ trusted, so issuer URLs come out as the app's https domain.
 
 All state lives in Postgres, the Keycloak pod itself is stateless.
 Keycloak is RAM-hungry (JVM + Quarkus): 2 GB default here.
+
+## Running it anywhere else
+
+`hostname-strict` is off, which Keycloak permits only when the proxy in
+front overwrites the `Host` header. That holds behind the Miget ingress.
+It does not hold for a proxy you configure yourself, and there the default
+is unsafe: a request carrying `Host: evil.example.com` makes Keycloak
+advertise `http://evil.example.com/realms/master` as its issuer, so
+tokens, redirects and password-reset links point at somebody else's domain.
+
+Set `KC_HOSTNAME` to the public URL and the issuer is pinned regardless of
+what any header claims:
+
+```bash
+KC_HOSTNAME=https://id.example.com docker compose up -d
+```
+
+Keycloak logs `If hostname is specified, hostname-strict is effectively
+ignored` when it takes effect. Leave the variable empty for local work.
