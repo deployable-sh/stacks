@@ -14,16 +14,23 @@ services:
       NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS: ${SIGNING_CERT_B64}
       NEXT_PRIVATE_SIGNING_PASSPHRASE: ${SIGNING_PASSPHRASE:-}
       NEXT_PRIVATE_SMTP_TRANSPORT: smtp-auth
-      NEXT_PRIVATE_SMTP_HOST: ${SMTP_HOST}
+      NEXT_PRIVATE_SMTP_HOST: ${SMTP_HOST:?SMTP server hostname; signing requests are sent by email and will not work without one}
       NEXT_PRIVATE_SMTP_PORT: ${SMTP_PORT:-587}
       NEXT_PRIVATE_SMTP_USERNAME: ${SMTP_USERNAME:-}
       NEXT_PRIVATE_SMTP_PASSWORD: ${SMTP_PASSWORD:-}
       NEXT_PRIVATE_SMTP_FROM_NAME: ${SMTP_FROM_NAME:-Documenso}
-      NEXT_PRIVATE_SMTP_FROM_ADDRESS: ${SMTP_FROM_ADDRESS}
+      NEXT_PRIVATE_SMTP_FROM_ADDRESS: ${SMTP_FROM_ADDRESS:?Address signing emails are sent from}
     ports:
       - "5000:5000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:5000/api/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
 
   db:
     image: postgres:17
@@ -34,6 +41,11 @@ services:
       POSTGRES_DB: documenso
     volumes:
       - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   dbdata:
