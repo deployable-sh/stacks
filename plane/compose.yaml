@@ -1,3 +1,5 @@
+name: plane
+
 services:
   plane:
     image: makeplane/plane-aio-community:v1.3.1

@@ -1,3 +1,5 @@
+name: docker-registry
+
 services:
   registry:
     build: .

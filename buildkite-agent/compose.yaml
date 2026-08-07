@@ -1,3 +1,5 @@
+name: buildkite-agent
+
 services:
   agent:
     image: buildkite/agent:3-ubuntu

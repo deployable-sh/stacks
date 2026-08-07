@@ -1,3 +1,5 @@
+name: ollama
+
 services:
   ollama:
     image: ollama/ollama:0.30.8

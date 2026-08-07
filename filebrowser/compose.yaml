@@ -1,3 +1,5 @@
+name: filebrowser
+
 services:
   filebrowser:
     image: filebrowser/filebrowser:v2.63.18

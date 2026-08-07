@@ -1,3 +1,5 @@
+name: mailpit
+
 services:
   mailpit:
     image: axllent/mailpit:v1.30.5

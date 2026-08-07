@@ -1,3 +1,5 @@
+name: documenso
+
 services:
   documenso:
     image: documenso/documenso:v2.15.0

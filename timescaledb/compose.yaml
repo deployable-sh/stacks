@@ -1,3 +1,5 @@
+name: timescaledb
+
 services:
   timescaledb:
     image: timescale/timescaledb:2.28.3-pg18

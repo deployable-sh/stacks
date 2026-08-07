@@ -1,3 +1,5 @@
+name: flowise
+
 services:
   flowise:
     image: flowiseai/flowise:3.1.3

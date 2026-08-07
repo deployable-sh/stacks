@@ -1,3 +1,5 @@
+name: nocodb
+
 services:
   nocodb:
     image: nocodb/nocodb:2026.07.0

@@ -1,3 +1,5 @@
+name: actual
+
 services:
   actual:
     image: ghcr.io/actualbudget/actual:26.6.0

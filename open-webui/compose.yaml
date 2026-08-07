@@ -1,3 +1,5 @@
+name: open-webui
+
 services:
   open-webui:
     healthcheck:

@@ -1,3 +1,5 @@
+name: glitchtip
+
 x-glitchtip: &glitchtip
   image: glitchtip/glitchtip:6.2.2
   restart: unless-stopped

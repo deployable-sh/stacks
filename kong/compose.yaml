@@ -1,3 +1,5 @@
+name: kong
+
 services:
   kong:
     build: .

@@ -1,3 +1,5 @@
+name: bagisto
+
 services:
   bagisto:
     build: .

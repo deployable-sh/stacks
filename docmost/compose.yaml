@@ -1,3 +1,5 @@
+name: docmost
+
 services:
   docmost:
     image: docmost/docmost:0.24.0

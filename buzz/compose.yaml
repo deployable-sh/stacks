@@ -1,3 +1,5 @@
+name: buzz
+
 services:
   relay:
     image: ghcr.io/block/buzz:0.2.0

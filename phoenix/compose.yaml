@@ -1,3 +1,5 @@
+name: phoenix
+
 services:
   phoenix:
     image: arizephoenix/phoenix:version-17

@@ -1,3 +1,5 @@
+name: prefect
+
 services:
   prefect:
     image: prefecthq/prefect:3-latest

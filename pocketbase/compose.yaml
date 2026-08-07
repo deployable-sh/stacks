@@ -1,3 +1,5 @@
+name: pocketbase
+
 services:
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:0.39.8

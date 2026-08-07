@@ -1,3 +1,5 @@
+name: bugsink
+
 services:
   bugsink:
     image: bugsink/bugsink:2.4.0

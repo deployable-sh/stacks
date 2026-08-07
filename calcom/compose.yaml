@@ -1,3 +1,5 @@
+name: calcom
+
 services:
   calcom:
     image: calcom/cal.com:v6.2.0

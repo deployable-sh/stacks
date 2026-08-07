@@ -1,3 +1,5 @@
+name: cognee
+
 services:
   cognee:
     image: cognee/cognee:1.1.2

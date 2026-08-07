@@ -1,3 +1,5 @@
+name: cronicle
+
 services:
   cronicle:
     image: soulteary/cronicle:0.9.80

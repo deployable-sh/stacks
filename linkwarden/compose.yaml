@@ -1,3 +1,5 @@
+name: linkwarden
+
 services:
   linkwarden:
     image: ghcr.io/linkwarden/linkwarden:v2.14.1

@@ -1,3 +1,5 @@
+name: langfuse
+
 x-langfuse-env: &langfuse-env
   DATABASE_URL: postgresql://langfuse:langfuse-local-only@db:5432/langfuse
   SALT: ${SALT}

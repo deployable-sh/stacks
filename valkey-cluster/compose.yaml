@@ -1,3 +1,5 @@
+name: valkey-cluster
+
 services:
   valkey-node-1:
     build: .

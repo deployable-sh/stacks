@@ -1,3 +1,5 @@
+name: redpanda
+
 x-rp: &rp
   image: docker.redpanda.com/redpandadata/redpanda:v24.3.1
   restart: unless-stopped

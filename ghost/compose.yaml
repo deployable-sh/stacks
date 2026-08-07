@@ -1,3 +1,5 @@
+name: ghost
+
 services:
   ghost:
     image: ghost:6

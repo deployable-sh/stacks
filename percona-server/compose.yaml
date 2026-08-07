@@ -1,3 +1,5 @@
+name: percona-server
+
 services:
   percona:
     image: percona/percona-server:8.0

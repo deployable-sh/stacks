@@ -1,3 +1,5 @@
+name: directus
+
 services:
   directus:
     image: directus/directus:11

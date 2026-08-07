@@ -1,3 +1,5 @@
+name: oracle
+
 services:
   oracle:
     image: gvenzl/oracle-free:23

@@ -1,3 +1,5 @@
+name: docuseal
+
 services:
   docuseal:
     image: docuseal/docuseal:3.1.5

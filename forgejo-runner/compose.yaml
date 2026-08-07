@@ -1,3 +1,5 @@
+name: forgejo-runner
+
 services:
   runner:
     build: .

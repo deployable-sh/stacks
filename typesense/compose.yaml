@@ -1,3 +1,5 @@
+name: typesense
+
 services:
   typesense:
     image: typesense/typesense:30.2

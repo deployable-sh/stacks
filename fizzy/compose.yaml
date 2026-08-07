@@ -1,3 +1,5 @@
+name: fizzy
+
 services:
   fizzy:
     image: ghcr.io/basecamp/fizzy:sha-62d3cad

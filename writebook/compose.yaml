@@ -1,3 +1,5 @@
+name: writebook
+
 services:
   writebook:
     image: ghcr.io/basecamp/writebook:v1.2.0

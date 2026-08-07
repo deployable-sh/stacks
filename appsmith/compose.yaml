@@ -1,3 +1,5 @@
+name: appsmith
+
 services:
   appsmith:
     image: appsmith/appsmith-ce:v2.2

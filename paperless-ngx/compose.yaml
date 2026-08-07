@@ -1,3 +1,5 @@
+name: paperless-ngx
+
 services:
   paperless:
     image: ghcr.io/paperless-ngx/paperless-ngx:2.20.15

@@ -1,3 +1,5 @@
+name: campfire
+
 services:
   campfire:
     image: ghcr.io/basecamp/once-campfire:sha-df5ed25

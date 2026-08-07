@@ -1,3 +1,5 @@
+name: hasura
+
 services:
   hasura:
     image: hasura/graphql-engine:v2.49.2

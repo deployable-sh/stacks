@@ -1,3 +1,5 @@
+name: openobserve
+
 services:
   openobserve:
     image: public.ecr.aws/zinclabs/openobserve:v0.90.0

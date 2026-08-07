@@ -1,3 +1,5 @@
+name: owncast
+
 services:
   owncast:
     build: .

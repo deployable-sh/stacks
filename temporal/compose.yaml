@@ -1,3 +1,5 @@
+name: temporal
+
 services:
   temporal:
     image: temporalio/auto-setup:1.29.7

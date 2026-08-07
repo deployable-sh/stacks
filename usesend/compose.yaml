@@ -1,3 +1,5 @@
+name: usesend
+
 services:
   usesend:
     image: usesend/usesend:v1.9.5

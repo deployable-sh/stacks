@@ -1,3 +1,5 @@
+name: agent-box
+
 services:
   agent-box:
     build: .
