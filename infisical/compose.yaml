@@ -1,3 +1,5 @@
+name: infisical
+
 services:
   infisical:
     image: infisical/infisical:v0.161.0

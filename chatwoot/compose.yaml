@@ -1,3 +1,5 @@
+name: chatwoot
+
 x-chatwoot: &chatwoot
   image: chatwoot/chatwoot:v4.15.1-ce
   restart: unless-stopped

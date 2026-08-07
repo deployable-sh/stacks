@@ -1,3 +1,5 @@
+name: miniflux
+
 services:
   miniflux:
     image: ghcr.io/miniflux/miniflux:2.3.1

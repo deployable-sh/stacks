@@ -1,3 +1,5 @@
+name: shlink
+
 services:
   shlink:
     image: shlinkio/shlink:4.4.6

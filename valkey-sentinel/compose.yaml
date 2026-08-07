@@ -1,3 +1,5 @@
+name: valkey-sentinel
+
 services:
   valkey-master:
     build: .

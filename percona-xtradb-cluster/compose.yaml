@@ -1,3 +1,5 @@
+name: percona-xtradb-cluster
+
 x-pxc: &pxc
   image: percona/percona-xtradb-cluster:8.4
   restart: unless-stopped

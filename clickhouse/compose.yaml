@@ -1,3 +1,5 @@
+name: clickhouse
+
 x-ch: &ch
   build: .
   image: miget-clickhouse:local

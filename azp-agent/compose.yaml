@@ -1,3 +1,5 @@
+name: azp-agent
+
 services:
   agent:
     build: .

@@ -1,3 +1,5 @@
+name: litellm
+
 services:
   litellm:
     healthcheck:

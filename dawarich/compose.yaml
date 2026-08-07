@@ -1,3 +1,5 @@
+name: dawarich
+
 services:
   web:
     build: .

@@ -1,3 +1,5 @@
+name: rabbitmq
+
 x-rmq: &rmq
   build: .
   image: miget-rabbitmq:local

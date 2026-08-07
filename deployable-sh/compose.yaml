@@ -1,3 +1,5 @@
+name: deployable-sh
+
 services:
   deployable-sh:
     build: .

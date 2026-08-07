@@ -1,3 +1,5 @@
+name: mariadb-galera
+
 x-galera-env: &galera-env
   MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
 

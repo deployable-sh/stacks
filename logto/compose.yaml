@@ -1,3 +1,5 @@
+name: logto
+
 services:
   logto:
     build: ./core

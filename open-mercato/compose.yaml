@@ -1,3 +1,5 @@
+name: open-mercato
+
 services:
   app:
     build:

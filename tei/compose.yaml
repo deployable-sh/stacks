@@ -1,3 +1,5 @@
+name: tei
+
 services:
   tei:
     image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.9

@@ -1,3 +1,5 @@
+name: factorio
+
 services:
   factorio:
     image: factoriotools/factorio:stable

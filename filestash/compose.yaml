@@ -1,3 +1,5 @@
+name: filestash
+
 services:
   filestash:
     image: machines/filestash:latest

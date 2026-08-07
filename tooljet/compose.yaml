@@ -1,3 +1,5 @@
+name: tooljet
+
 services:
   tooljet:
     image: tooljet/tooljet:v3.20.196-lts

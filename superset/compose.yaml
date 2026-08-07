@@ -1,3 +1,5 @@
+name: superset
+
 x-superset: &superset
   image: apache/superset:6.1.0-dev
   restart: unless-stopped

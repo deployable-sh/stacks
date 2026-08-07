@@ -1,3 +1,5 @@
+name: convex
+
 services:
   backend:
     image: ghcr.io/get-convex/convex-backend:abdd9b30f89c0e7c18c4213b99cd10e4bad33f8c

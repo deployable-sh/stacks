@@ -1,3 +1,5 @@
+name: rocketchat
+
 services:
   rocketchat:
     image: rocketchat/rocket.chat:8.4.3

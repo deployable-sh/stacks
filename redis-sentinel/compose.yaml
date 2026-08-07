@@ -1,3 +1,5 @@
+name: redis-sentinel
+
 services:
   redis-master:
     build: .

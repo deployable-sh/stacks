@@ -1,3 +1,5 @@
+name: redis-cluster
+
 services:
   redis-node-1:
     build: .

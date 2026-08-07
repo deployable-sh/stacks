@@ -1,3 +1,5 @@
+name: forgejo
+
 services:
   forgejo:
     image: codeberg.org/forgejo/forgejo:15

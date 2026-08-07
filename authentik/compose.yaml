@@ -1,3 +1,5 @@
+name: authentik
+
 x-authentik: &authentik
   image: ghcr.io/goauthentik/server:2026.5
   restart: unless-stopped

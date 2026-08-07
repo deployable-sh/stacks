@@ -1,3 +1,5 @@
+name: kestra
+
 services:
   kestra:
     image: kestra/kestra:v1.3.28

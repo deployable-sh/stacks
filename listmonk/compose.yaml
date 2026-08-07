@@ -1,3 +1,5 @@
+name: listmonk
+
 services:
   listmonk:
     image: listmonk/listmonk:v6.2.0

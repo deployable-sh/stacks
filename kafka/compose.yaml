@@ -1,3 +1,5 @@
+name: kafka
+
 x-kafka: &kafka
   image: apache/kafka:4.0.0
   restart: unless-stopped

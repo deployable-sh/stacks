@@ -1,3 +1,5 @@
+name: umami
+
 services:
   umami:
     image: ghcr.io/umami-software/umami:postgresql-latest

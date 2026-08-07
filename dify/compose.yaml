@@ -1,3 +1,5 @@
+name: dify
+
 x-api-env: &api-env
   SECRET_KEY: ${SECRET_KEY}
   DB_USERNAME: postgres

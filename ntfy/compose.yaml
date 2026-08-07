@@ -1,3 +1,5 @@
+name: ntfy
+
 services:
   ntfy:
     image: binwiederhier/ntfy:v2.24.0

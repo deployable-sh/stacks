@@ -1,3 +1,5 @@
+name: typebot
+
 x-shared-env: &shared-env
   DATABASE_URL: postgresql://typebot:typebot-local-only@db:5432/typebot
   ENCRYPTION_SECRET: ${ENCRYPTION_SECRET}

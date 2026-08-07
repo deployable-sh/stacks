@@ -1,3 +1,5 @@
+name: navidrome
+
 services:
   navidrome:
     image: deluan/navidrome:0.62.0

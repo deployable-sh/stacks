@@ -1,3 +1,5 @@
+name: budibase
+
 services:
   budibase:
     image: budibase/budibase:3.39.31

@@ -1,3 +1,5 @@
+name: karakeep
+
 services:
   karakeep:
     image: ghcr.io/karakeep-app/karakeep:0.32.0

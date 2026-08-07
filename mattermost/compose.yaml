@@ -1,3 +1,5 @@
+name: mattermost
+
 services:
   mattermost:
     image: mattermost/mattermost-team-edition:11.8

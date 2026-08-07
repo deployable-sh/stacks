@@ -1,3 +1,5 @@
+name: roundcube
+
 services:
   roundcube:
     image: roundcube/roundcubemail:1.7.x-apache

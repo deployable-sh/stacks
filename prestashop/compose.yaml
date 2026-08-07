@@ -1,3 +1,5 @@
+name: prestashop
+
 services:
   prestashop:
     image: prestashop/prestashop:9

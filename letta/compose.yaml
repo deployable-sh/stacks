@@ -1,3 +1,5 @@
+name: letta
+
 services:
   letta:
     image: letta/letta:0.16.8

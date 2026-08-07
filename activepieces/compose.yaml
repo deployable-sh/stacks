@@ -1,3 +1,5 @@
+name: activepieces
+
 services:
   activepieces:
     image: activepieces/activepieces:0.85.2

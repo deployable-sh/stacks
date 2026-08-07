@@ -1,3 +1,5 @@
+name: chromadb
+
 services:
   chroma:
     image: chromadb/chroma:1.5.9

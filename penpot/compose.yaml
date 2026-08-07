@@ -1,3 +1,5 @@
+name: penpot
+
 services:
   frontend:
     image: penpotapp/frontend:2.16.0

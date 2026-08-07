@@ -1,3 +1,5 @@
+name: memos
+
 services:
   memos:
     image: neosmemo/memos:0.29.1

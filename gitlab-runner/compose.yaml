@@ -1,3 +1,5 @@
+name: gitlab-runner
+
 services:
   runner:
     build: .
