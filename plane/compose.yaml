@@ -2,7 +2,7 @@ name: plane
 
 services:
   plane:
-    image: makeplane/plane-aio-community:v1.3.1
+    image: makeplane/plane-aio-community:v1.4.1
     restart: unless-stopped
     environment:
       SITE_ADDRESS: ":5000"

@@ -2,7 +2,7 @@ name: activepieces
 
 services:
   activepieces:
-    image: activepieces/activepieces:0.85.2
+    image: activepieces/activepieces:0.87.0
     restart: unless-stopped
     environment:
       AP_PORT: "5000"

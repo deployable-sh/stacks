@@ -2,7 +2,7 @@ name: code-server
 
 services:
   code-server:
-    image: codercom/code-server:4.129.0-trixie
+    image: codercom/code-server:4.131.0-trixie
     restart: unless-stopped
     command:
       - --bind-addr

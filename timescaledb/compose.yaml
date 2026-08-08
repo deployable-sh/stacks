@@ -2,7 +2,7 @@ name: timescaledb
 
 services:
   timescaledb:
-    image: timescale/timescaledb:2.28.3-pg18
+    image: timescale/timescaledb:2.29.1-pg18
     restart: unless-stopped
     environment:
       POSTGRES_USER: app

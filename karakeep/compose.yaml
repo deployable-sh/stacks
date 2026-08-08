@@ -2,7 +2,7 @@ name: karakeep
 
 services:
   karakeep:
-    image: ghcr.io/karakeep-app/karakeep:0.32.0
+    image: ghcr.io/karakeep-app/karakeep:0.33.1
     restart: unless-stopped
     environment:
       PORT: "5000"
@@ -23,7 +23,7 @@ services:
       - data:/data
 
   meilisearch:
-    image: getmeili/meilisearch:v1.41.0
+    image: getmeili/meilisearch:v1.52.0
     restart: unless-stopped
     environment:
       MEILI_NO_ANALYTICS: "true"
