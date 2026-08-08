@@ -8,7 +8,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 60s
-    image: ghcr.io/open-webui/open-webui:v0.10.2
+    image: ghcr.io/open-webui/open-webui:v0.11.0
     restart: unless-stopped
     environment:
       PORT: "5000"

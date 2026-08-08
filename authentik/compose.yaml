@@ -1,7 +1,7 @@
 name: authentik
 
 x-authentik: &authentik
-  image: ghcr.io/goauthentik/server:2026.5
+  image: ghcr.io/goauthentik/server:2026.8
   restart: unless-stopped
   shm_size: 512mb
 

@@ -2,7 +2,7 @@ name: unleash
 
 services:
   unleash:
-    image: unleashorg/unleash-server:8.0.0
+    image: unleashorg/unleash-server:8.1.0
     restart: unless-stopped
     environment:
       HTTP_PORT: "5000"

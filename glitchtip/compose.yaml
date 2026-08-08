@@ -1,7 +1,7 @@
 name: glitchtip
 
 x-glitchtip: &glitchtip
-  image: glitchtip/glitchtip:6.2.2
+  image: glitchtip/glitchtip:6.2.5
   restart: unless-stopped
 
 x-glitchtip-env: &glitchtip-env
