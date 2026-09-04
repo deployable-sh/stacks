@@ -130,7 +130,7 @@ services:
   rest:
     ports:
     - "3000"
-    image: postgrest/postgrest:v14.12
+    image: postgrest/postgrest:v16.2
     restart: unless-stopped
     depends_on:
       db:
@@ -227,7 +227,7 @@ services:
   imgproxy:
     ports:
     - "5001"
-    image: darthsim/imgproxy:v3.30.1
+    image: darthsim/imgproxy:v4.0.14
     restart: unless-stopped
     volumes:
     - ./storage:/var/lib/storage:z

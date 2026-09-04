@@ -2,7 +2,7 @@ name: paperless-ngx
 
 services:
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.15
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.1.3
     restart: unless-stopped
     environment:
       PAPERLESS_PORT: "5000"
@@ -31,14 +31,14 @@ services:
       - broker
 
   broker:
-    image: valkey/valkey:8
+    image: valkey/valkey:9
     command: ["valkey-server", "--maxmemory-policy", "noeviction", "--protected-mode", "no"]
     restart: unless-stopped
     ports:
       - "6379"
 
   db:
-    image: postgres:16
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: paperless
