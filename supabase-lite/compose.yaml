@@ -142,7 +142,7 @@ services:
         aliases: [supabase-rest]
     ports:
     - "3000"
-    image: postgrest/postgrest:v14.12
+    image: postgrest/postgrest:v16.2
     restart: unless-stopped
     depends_on:
       db:
