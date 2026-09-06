@@ -2,7 +2,7 @@ name: vaultwarden
 
 services:
   vaultwarden:
-    image: vaultwarden/server:1.36.0
+    image: vaultwarden/server:1.37.2
     restart: unless-stopped
     environment:
       ROCKET_PORT: "5000"
