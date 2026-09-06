@@ -2,7 +2,7 @@ name: livekit
 
 services:
   livekit:
-    image: livekit/livekit-server:v1.13.4
+    image: livekit/livekit-server:v1.13.6
     restart: unless-stopped
     environment:
       LIVEKIT_CONFIG: |

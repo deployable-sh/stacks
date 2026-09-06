@@ -67,7 +67,7 @@ services:
       - dbdata:/var/lib/postgresql/data
 
   clickhouse:
-    image: clickhouse/clickhouse-server:26.6.1.1193
+    image: clickhouse/clickhouse-server:26.8.2.7
     restart: unless-stopped
     environment:
       CLICKHOUSE_DB: default
