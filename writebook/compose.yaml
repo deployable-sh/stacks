@@ -2,7 +2,7 @@ name: writebook
 
 services:
   writebook:
-    image: ghcr.io/basecamp/writebook:v1.2.0
+    image: ghcr.io/basecamp/writebook:v1.2.2
     restart: unless-stopped
     environment:
       HTTP_PORT: "5000"
