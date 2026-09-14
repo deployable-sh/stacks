@@ -2,7 +2,7 @@ name: actual
 
 services:
   actual:
-    image: ghcr.io/actualbudget/actual:26.6.0
+    image: ghcr.io/actualbudget/actual:26.9.0
     restart: unless-stopped
     environment:
       ACTUAL_PORT: "5000"
