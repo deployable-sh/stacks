@@ -1,0 +1,1993 @@
+{
+  "version": "3",
+  "templates": [
+    {
+      "type": 3,
+      "title": "Activepieces",
+      "name": "activepieces",
+      "description": "Activepieces - open-source automation: a visual flow builder with 280+ pieces (apps), branching and loops, AI agents, and MCP support - the Zapier/n8n alternative.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "activepieces/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Actual",
+      "name": "actual",
+      "description": "Actual - local-first envelope budgeting (the YNAB methodology, open source): budgets live on your devices, end-to-end encrypted, and this server syncs them. MIT, tiny, beloved - PikaPods features it on their homepage.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "actual/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Agent Box",
+      "name": "agent-box",
+      "description": "Remote AI coding agents on Miget: a persistent box with Claude Code, opencode and Kilo CLI preinstalled, reachable from any browser as a web terminal (ttyd + tmux) behind basic auth.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "agent-box/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Appsmith",
+      "name": "appsmith",
+      "description": "Appsmith CE - the open-source low-code builder for internal tools: drag-and-drop UI over your databases and APIs, with JS everywhere you need logic. All-in-one image (embedded MongoDB, Redis and Postgres).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "appsmith/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Audiobookshelf",
+      "name": "audiobookshelf",
+      "description": "AudioBookshelf - a self-hosted audiobook and podcast server: a clean web player, native iOS and Android apps with offline playback and progress sync, multi-user support, bookmarks, sleep timers, and built-in podcast search and",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "audiobookshelf/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Authentik",
+      "name": "authentik",
+      "description": "authentik - the modern open-source identity provider: OIDC, SAML, LDAP, SCIM, proxy auth, and visually-designed login flows (MFA, conditional access) without writing code.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "authentik/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Azp Agent",
+      "name": "azp-agent",
+      "description": "A self-hosted Azure Pipelines agent (Azure DevOps), built from Microsoft's official Dockerfile recipe - the agent ships no container image, this is the documented path.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "azp-agent/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Bagisto",
+      "name": "bagisto",
+      "description": "Bagisto - the open-source Laravel ecommerce platform: catalog, cart, checkout, multi-channel and multi-currency storefronts, and a full admin. MIT-licensed.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "bagisto/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Beszel",
+      "name": "beszel",
+      "description": "Beszel - a lightweight server monitoring hub: CPU, memory, disk, network, temperatures, and Docker container stats, with history and configurable alerts (email, webhooks, ntfy, and more).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "beszel/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Bookstack",
+      "name": "bookstack",
+      "description": "BookStack - a simple, self-hosted wiki and documentation platform organized as shelves, books, chapters, and pages. WYSIWYG and markdown editors, full-text search, draw.io diagrams, page revisions, roles and permissions, and an API.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "bookstack/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Budibase",
+      "name": "budibase",
+      "description": "Budibase - open-source low-code platform for internal tools, forms, and approval workflows. All-in-one image (embedded CouchDB, Redis, MinIO, app server and worker) behind a thin nginx proxy.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "budibase/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Bugsink",
+      "name": "bugsink",
+      "description": "Bugsink, self-hosted error tracking compatible with the Sentry SDKs, in a single container. The lightest way to own your error data: one app + one managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "bugsink/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Buildkite Agent",
+      "name": "buildkite-agent",
+      "description": "A Buildkite agent: Buildkite hosts the UI and orchestration, your agents run the jobs - the hybrid-CI model where compute was always meant to be yours. This is the cleanest runner in the catalogue: official image, one token, done.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "buildkite-agent/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Buzz",
+      "name": "buzz",
+      "description": "Buzz - a self-hosted workspace where humans and AI agents share the same rooms. Under the hood it is a Nostr relay: every message, reaction, workflow step, review approval, and git event is a signed event in one log, whether the author is",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "buzz/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Calcom",
+      "name": "calcom",
+      "description": "Cal.com - open-source scheduling: personal and team booking pages, availability rules, round-robin and collective events, workflows and reminders, and two-way calendar sync (Google, Office 365, CalDAV). A self-hosted Calendly alternative.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "calcom/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Campfire",
+      "name": "campfire",
+      "description": "Campfire - 37signals' free, open-source group chat: rooms, direct messages, file sharing, full-text search, @mentions, sounds, and Web Push. It was the first ONCE app (a one-time paid product) and is now MIT-licensed and free.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "campfire/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Changedetection",
+      "name": "changedetection",
+      "description": "changedetection.io - watch any web page for changes (prices, stock, content, competitors' pages) with filters, diffs, and notifications to 80+ targets (the in-project `ntfy` template included). Single container, one volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "changedetection/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Chatwoot",
+      "name": "chatwoot",
+      "description": "Chatwoot - open-source customer support: shared team inbox, website live-chat widget, email and social channels, help center, and automations. This template runs the community-edition image (`v4-ce`, pure MIT - no enterprise code).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "chatwoot/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Chromadb",
+      "name": "chromadb",
+      "description": "Chroma vector database, single container + volume, internal-only (Chroma has no built-in auth; the project network is the boundary, like the MongoDB template).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "chromadb/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Clickhouse",
+      "name": "clickhouse",
+      "description": "3-node ClickHouse cluster, one shard, three replicas, with embedded ClickHouse Keeper (no separate ZooKeeper pods). Internal-only; 20 GB per node.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "clickhouse/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Code Server",
+      "name": "code-server",
+      "description": "code-server - VS Code in the browser: a persistent cloud development environment with your extensions, terminal, and a 10 GB home volume, reachable from any device.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "code-server/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Cognee",
+      "name": "cognee",
+      "description": "Cognee - the memory engine for AI agents: ingest documents, chats, and data; cognify them into a knowledge graph + vector index; query the result as long-term memory.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "cognee/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Convex",
+      "name": "convex",
+      "description": "Convex backend-as-a-service, self-hosted: reactive database + functions + scheduler, with the dashboard. SQLite state on a volume; the open-source backend serves one deployment.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "convex/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Cronicle",
+      "name": "cronicle",
+      "description": "Cronicle, a cron replacement with a web UI: schedules, run history, chaining, retries, and alerts. Single container, two small volumes (job data + logs).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "cronicle/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Dawarich",
+      "name": "dawarich",
+      "description": "Dawarich - self-hosted location history: a privacy-first replacement for Google Maps Timeline.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "dawarich/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Dify",
+      "name": "dify",
+      "description": "Dify - the LLM application platform: a visual builder for chatbots, agents, and workflows, with built-in RAG, model management, and observability.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "dify/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Directus",
+      "name": "directus",
+      "description": "Directus 11 - an instant headless CMS and REST/GraphQL API over Postgres, with a data studio your editors will actually enjoy. One app container + a managed Postgres + an uploads volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "directus/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Docker Registry",
+      "name": "docker-registry",
+      "description": "Your own private container registry - the CNCF Distribution registry (the same engine behind Docker Hub) - with https, basic-auth, and image storage on a Miget Bucket so the service itself holds no state. Listens natively on port 5000.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "docker-registry/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Docmost",
+      "name": "docmost",
+      "description": "Docmost - open-source collaborative wiki and documentation: real-time block editing, nested spaces, granular permissions, diagrams (Draw.io, Excalidraw, Mermaid), inline comments, and full-text search.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "docmost/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Documenso",
+      "name": "documenso",
+      "description": "Documenso - the open-source DocuSign alternative: signing workflows, templates, teams, and an API, with real PKCS#12 document sealing. One app container + a managed Postgres; no volumes (the signing cert rides env as base64).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "documenso/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Docuseal",
+      "name": "docuseal",
+      "description": "DocuSeal - open-source document signing: a WYSIWYG field builder (12 field types), multiple submitters, automatic PDF eSignatures with verification, API and webhooks. The signing core is fully functional in the free AGPL edition.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "docuseal/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Factorio",
+      "name": "factorio",
+      "description": "Headless Factorio via factoriotools/factorio - the community-standard image. Saves, mods, and server settings live on the `/factorio` volume; a new map generates on first boot and the latest save loads thereafter.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "factorio/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Filebrowser",
+      "name": "filebrowser",
+      "description": "FileBrowser - a fast web UI over a file volume: upload, organize, preview, edit, and share files via public links, with per-user scopes. Apache-2.0, non-root, ~30 MB of Go.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "filebrowser/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Filestash",
+      "name": "filestash",
+      "description": "Filestash - the polished web file manager over S3: browse, upload, preview (images, video, office docs), edit, and share files that live in Miget Buckets. AGPL, very actively maintained, runs in 128 MB.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "filestash/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Fizzy",
+      "name": "fizzy",
+      "description": "Fizzy - 37signals' free, open-source kanban: fast, focused boards for bugs, issues, ideas, and small projects.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "fizzy/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Flowise",
+      "name": "flowise",
+      "description": "Flowise - the visual builder for LLM apps: drag-and-drop chatflows and agentflows over 100+ integrations (models, vector stores, tools), with APIs and embeddable chat widgets. One app container + a managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "flowise/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Forgejo",
+      "name": "forgejo",
+      "description": "Forgejo - the community-governed git forge (the hard fork of Gitea, run by the non-profit Codeberg e.V.): repositories, issues, pull requests, packages, and CI via Forgejo Actions. One light Go binary + a managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "forgejo/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Forgejo Runner",
+      "name": "forgejo-runner",
+      "description": "A Forgejo Actions runner in `host` mode - CI for your self-hosted Forgejo or for Codeberg, with jobs running as shell steps in this container (no Docker daemon needed). GitHub-Actions-compatible workflow syntax.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "forgejo-runner/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Freescout",
+      "name": "freescout",
+      "description": "FreeScout - the free, open-source help desk and shared inbox: email-based ticketing, multiple mailboxes, saved replies, tags, and a module ecosystem. The Help Scout / Zendesk alternative, AGPL. Self-hosted MySQL.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "freescout/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Garage",
+      "name": "garage",
+      "description": "Garage - the S3-compatible object store the self-hosting community moved to after MinIO archived its open source in 2026: a single static Rust binary, AGPL, actively released, designed for exactly this job.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "garage/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Ghost",
+      "name": "ghost",
+      "description": "Ghost 6 - professional publishing: blog, newsletter, paid memberships, and a clean editor. One app container + a self-hosted MySQL (Ghost requires MySQL 8 in production - SQLite is dev-only upstream).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "ghost/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Github Runner",
+      "name": "github-runner",
+      "description": "A self-hosted GitHub Actions runner: your workflows, your hardware, zero per-minute billing. Uses `myoung34/github-runner` (the de-facto env-driven runner image) with PAT-based auto-registration.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "github-runner/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Gitlab Runner",
+      "name": "gitlab-runner",
+      "description": "A self-hosted GitLab Runner in shell mode: jobs run inside this container, your own compute, no CI-minute quota. Registers itself on first boot and persists registration on a volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "gitlab-runner/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Glitchtip",
+      "name": "glitchtip",
+      "description": "GlitchTip, open-source, Sentry-API-compatible error tracking (point any Sentry SDK at its DSN) at a fraction of self-hosted Sentry's footprint.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "glitchtip/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Grafana Stack",
+      "name": "grafana-stack",
+      "description": "Grafana + Prometheus + Loki - dashboards, metrics, and logs for everything in your project, at a flat price instead of per-host or per-GB-ingested SaaS pricing.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "grafana-stack/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Hasura",
+      "name": "hasura",
+      "description": "Hasura v2 CE - instant GraphQL over Postgres: track tables and get queries, mutations, and live subscriptions with row-level permissions, remote schemas, and event triggers. Stateless single container; everything lives in the database.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "hasura/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Hermes",
+      "name": "hermes",
+      "description": "Hermes Agent (Nous Research), a self-improving AI agent with a learning loop (skills from experience), cron, hooks, and a web dashboard. Official image, single container + `/opt/data` volume (sessions, memories, skills, config all persist).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "hermes/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Immich",
+      "name": "immich",
+      "description": "Immich - self-hosted photo and video management: a genuine Google Photos alternative with first-class iOS and Android apps, automatic phone backup, face recognition, smart and semantic search, albums, shared libraries, and a timeline.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "immich/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Infisical",
+      "name": "infisical",
+      "description": "Infisical - the open-source secrets manager: projects with environments, secret versioning, references, dynamic secrets, and first-class integrations (Kubernetes operator, CI runners, Terraform, SDKs).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "infisical/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Jellyfin",
+      "name": "jellyfin",
+      "description": "Jellyfin - the free, self-hosted media server: stream your movies, TV shows, music, and photos to any device through a web UI and native apps (Android, iOS, Android TV, Roku, Kodi, and more).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "jellyfin/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Jenkins",
+      "name": "jenkins",
+      "description": "Jenkins LTS - the automation server: pipelines as code, 1,800+ plugins, and webhooks from every forge. Controller with the built-in node, which runs jobs in-controller - the honest shape for small teams on a PaaS.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "jenkins/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Kafka",
+      "name": "kafka",
+      "description": "3-node Apache Kafka cluster in KRaft mode (no ZooKeeper) with Kafbat UI, deployable locally with plain Docker Compose or to Miget as a compose stack.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "kafka/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Karakeep",
+      "name": "karakeep",
+      "description": "Karakeep (formerly Hoarder) - a self-hosted \"bookmark everything\" app: save links, notes, and images, and it automatically crawls and archives the page (so your links never rot), takes a screenshot, full-text indexes everything, and can",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "karakeep/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Kestra",
+      "name": "kestra",
+      "description": "Kestra - the declarative workflow orchestrator: flows are YAML, authored and versioned in the UI, with hundreds of plugins (HTTP, SQL, dbt, file ops, notifications) and schedules/triggers.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "kestra/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Keycloak",
+      "name": "keycloak",
+      "description": "Keycloak, identity & access management (OIDC, SAML, social login, user federation) backed by a managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "keycloak/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Kilo",
+      "name": "kilo",
+      "description": "Kilo, open-source AI coding agent, running in server mode (`kilo serve`) on Miget: a persistent remote agent whose HTTP+SSE API your Kilo clients attach to (IDE extension, `kilo attach`, or the Cloud Agents web UI via Remote Connections).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "kilo/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Kong",
+      "name": "kong",
+      "description": "DB-backed Kong Gateway (OSS) in front of your project's apps, deployable locally with plain Docker Compose or to Miget as a compose stack.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "kong/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Langfuse",
+      "name": "langfuse",
+      "description": "Langfuse v3 - open-source LLM engineering platform: tracing, evaluations, prompt management, and usage dashboards. This template mirrors the official self-host topology.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "langfuse/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Letta",
+      "name": "letta",
+      "description": "Letta (the MemGPT lineage) - an agent server with memory as the core primitive: agents live server-side with self-editing persistent memory, and clients (SDKs, the hosted ADE at app.letta.com) connect to them over the REST API.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "letta/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Linkwarden",
+      "name": "linkwarden",
+      "description": "Linkwarden - a bookmark manager that actually keeps your links: every save is preserved as a screenshot, PDF, readable HTML, and an archive.org snapshot, so a dead page is still readable years later.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "linkwarden/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Listmonk",
+      "name": "listmonk",
+      "description": "listmonk - high-performance self-hosted newsletters and mailing lists: subscribers, campaigns, templates, double-opt-in, and analytics in one Go binary on Postgres. Replace per-subscriber SaaS pricing with a flat plan.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "listmonk/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Litellm",
+      "name": "litellm",
+      "description": "LiteLLM proxy - one OpenAI-compatible endpoint in front of every LLM provider (Anthropic, OpenAI, Gemini, Bedrock, Mistral, local, \u2026) with virtual keys, per-key budgets, spend tracking, fallbacks and retries.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "litellm/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Livekit",
+      "name": "livekit",
+      "description": "LiveKit - the Apache-2.0 WebRTC server powering modern voice agents and video apps: rooms, tracks, selective forwarding, and the Agents framework ecosystem. Single Go binary.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "livekit/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Livekit Agents",
+      "name": "livekit-agents",
+      "description": "A voice AI agent worker on the LiveKit Agents framework: it joins LiveKit rooms and converses - Deepgram for ears, ElevenLabs for voice, any OpenAI-compatible LLM for the brain (the catalogue's `litellm` gateway slots in via",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "livekit-agents/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Logto",
+      "name": "logto",
+      "description": "Logto - the open-source Auth0 experience: pre-built hosted sign-in pages, OIDC/OAuth, social logins, organizations, MFA, and clean SDKs for every framework. MPL-2.0, one container + a managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "logto/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mailpit",
+      "name": "mailpit",
+      "description": "Mailpit - the modern dev mail catcher (MailHog's actively-maintained successor, MIT): an SMTP sink plus a fast web UI with search, HTML preview, link checking, and an API. Stop sending test emails to real inboxes.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mailpit/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mariadb",
+      "name": "mariadb",
+      "description": "MariaDB 11.8 - the community-developed MySQL fork, as a single self-hosted node. Drop-in compatible with MySQL for most applications, configured through the official image's environment variables, with data on a volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mariadb/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mariadb Galera",
+      "name": "mariadb-galera",
+      "description": "3-node MariaDB 11.8 LTS cluster with Galera synchronous multi-primary replication - every node accepts writes, any node can die. Runs the OFFICIAL mariadb image (the Galera library ships in it); clustering is pure command-line flags.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mariadb-galera/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mariadb Replication",
+      "name": "mariadb-replication",
+      "description": "Asynchronous MariaDB replication: one primary accepts writes and streams its binary log to a read-only replica. This is the classic read-scaling / hot-standby topology.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mariadb-replication/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mattermost",
+      "name": "mattermost",
+      "description": "Mattermost - open-source team chat: channels, threads, DMs, voice calls, slash commands, integrations, and plugins. Team Edition image on a managed Postgres - it listens on :5000 directly, so no proxy.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mattermost/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Meilisearch",
+      "name": "meilisearch",
+      "description": "Meilisearch, instant, typo-tolerant search in a single container + volume. Public on its app domain; protected by the master key (`MEILI_ENV=production` rejects keyless requests).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "meilisearch/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Memos",
+      "name": "memos",
+      "description": "Memos - the lightweight note hub: quick markdown notes with tags, search, and selective sharing. A single Go binary on SQLite, MIT-licensed - the \"capture a thought in two seconds\" tool, on your infrastructure.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "memos/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Metabase",
+      "name": "metabase",
+      "description": "Metabase OSS - the BI tool non-analysts actually use: point-and-click questions, dashboards, and SQL when you want it. One JVM container + a managed Postgres for the app database.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "metabase/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Minecraft",
+      "name": "minecraft",
+      "description": "Minecraft Java Edition via itzg/minecraft-server - the standard image: env-driven, supports Paper/Fabric/Forge/Vanilla, and downloads the server jar at runtime (nothing redistributed).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "minecraft/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Miniflux",
+      "name": "miniflux",
+      "description": "Miniflux - a minimalist, blazing-fast RSS/Atom reader: a clean distraction-free UI, keyboard-driven, with full-text fetching, a REST API, and Google Reader / Fever API compatibility (so mobile clients like Reeder and NetNewsWire connect).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "miniflux/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Minio",
+      "name": "minio",
+      "description": "MinIO, S3-compatible object storage, single node + 20 GB volume, with the web console as the public entrypoint.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "minio/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mongodb",
+      "name": "mongodb",
+      "description": "3-node MongoDB 8 replica set (`rs0`), deployable locally with plain Docker Compose or to Miget as a compose stack.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mongodb/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mssql",
+      "name": "mssql",
+      "description": "Official SQL Server on Linux container (SQL Server 2025), Express edition by default - the edition Microsoft licenses for production at no cost. Single node + 10 GB volume, internal-only (databases never get a public domain).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mssql/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mysql",
+      "name": "mysql",
+      "description": "MySQL 8.4 LTS - the world's most popular open- source relational database, as a single self-hosted node. Configured entirely through the official image's environment variables, with data on a volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mysql/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Mysql Innodb Cluster",
+      "name": "mysql-innodb-cluster",
+      "description": "3-node high availability using MySQL Group Replication - the engine that MySQL InnoDB Cluster is built on.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "mysql-innodb-cluster/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "N8N",
+      "name": "n8n",
+      "description": "n8n workflow automation in queue mode, editor/API/webhooks on a main instance, execution on horizontally scalable workers, deployable locally with plain Docker Compose or to Miget as a compose stack.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "n8n/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Nats",
+      "name": "nats",
+      "description": "NATS - the lightweight, blazing-fast messaging system: subjects, pub/sub, request/reply, and JetStream for persistent streams and key-value/object stores.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "nats/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Navidrome",
+      "name": "navidrome",
+      "description": "Navidrome - self-hosted music streaming: a fast, modern, Subsonic/OpenSubsonic-compatible server for a music library you actually own. Stream from any Subsonic app (Symfonium, play:Sub, DSub, Feishin, Amperfy) or the built-in web player.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "navidrome/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Nocodb",
+      "name": "nocodb",
+      "description": "NocoDB - the open-source Airtable alternative: a smart-spreadsheet UI over a real database, with grid/gallery/kanban/form views, APIs, webhooks, and automations. One app container + a managed Postgres + a small volume for file attachments.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "nocodb/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Node Red",
+      "name": "node-red",
+      "description": "Node-RED - the OpenJS Foundation's flow-based automation tool: wire APIs, webhooks, MQTT, schedules, and devices together in a visual editor, with thousands of community nodes.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "node-red/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Ntfy",
+      "name": "ntfy",
+      "description": "ntfy - push notifications as an HTTP primitive: `curl -d \"backup done\" https://your-domain/alerts` and every subscribed phone (iOS/Android apps) and browser gets it. Topics, priorities, attachments, scheduled delivery - one tiny Go binary.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "ntfy/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Odoo",
+      "name": "odoo",
+      "description": "Odoo Community 18 - the open-source business suite: CRM, sales, inventory, accounting, projects, manufacturing, website, and ecommerce, with a vast app store. LGPL-3 Community edition on a managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "odoo/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Ollama",
+      "name": "ollama",
+      "description": "Ollama - run open large language models locally behind a simple HTTP API. Pull a model (Llama, Mistral, Qwen, Gemma, Phi, and many more) and serve it from your own infrastructure, with OpenAI-compatible endpoints.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "ollama/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Open Mercato",
+      "name": "open-mercato",
+      "description": "Open Mercato - the MIT \"AI-engineering foundation framework\": multi-tenant CRM/ERP/commerce modules on Next.js with RBAC, dynamic entities, and an agent-ready repo layout (specs + skills checked in). Start business apps at \"80% done\".",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "open-mercato/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Open Webui",
+      "name": "open-webui",
+      "description": "Open WebUI - the self-hosted AI chat workspace: ChatGPT-style UI over any OpenAI-compatible API, with RAG over uploaded documents, multi-user accounts, RBAC, and prompt/model presets. Single container + volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "open-webui/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Openclaw",
+      "name": "openclaw",
+      "description": "OpenClaw, an autonomous AI agent you run yourself: web dashboard, scheduled tasks, plugins, persistent workspace. This template uses the coollabsio all-in-one image (nginx + gateway, env-driven).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "openclaw/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Openobserve",
+      "name": "openobserve",
+      "description": "OpenObserve - logs, metrics, and traces in a single Rust binary: the open-source Datadog/Splunk/Elasticsearch alternative.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "openobserve/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Oracle",
+      "name": "oracle",
+      "description": "Oracle Database Free (the 26ai line) - the actual Oracle Database, free for development AND production under the Oracle Free Use Terms and Conditions, within software-enforced caps: 2 cores, 2 GB RAM, 12 GB user data, one instance per",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "oracle/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Outline",
+      "name": "outline",
+      "description": "Outline - the team wiki that feels like a product: a genuinely fast editor, nested collections, full-text search, granular permissions, and a public API.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "outline/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Owncast",
+      "name": "owncast",
+      "description": "Owncast - your own self-hosted live streaming server: a Twitch / YouTube Live alternative with a built-in web video player, live chat, and federation.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "owncast/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Paperless Ngx",
+      "name": "paperless-ngx",
+      "description": "Paperless-ngx - the document management system that ends the filing cabinet: feed it scans and PDFs, it OCRs, tags, indexes, and makes everything full-text searchable. The most-loved self-hosted document app, on your infrastructure.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "paperless-ngx/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Parseable",
+      "name": "parseable",
+      "description": "Parseable - a single-binary log lake built for object storage: ingest logs over HTTP, store them as compressed Parquet on S3, query with SQL. Rust, lean (runs in 512 MB), and S3-native by design - a natural fit for Miget Buckets.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "parseable/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Penpot",
+      "name": "penpot",
+      "description": "Penpot - the open-source design and prototyping platform (the Figma alternative): SVG-native, web-based, with real design-to-dev handoff. MPL-2.0. Frontend + backend + exporter on a managed Postgres and a noeviction Valkey.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "penpot/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Percona Server",
+      "name": "percona-server",
+      "description": "Percona Server for MySQL - a free, fully MySQL-compatible drop-in with extra instrumentation (detailed `INFORMATION_SCHEMA` and `PERFORMANCE_SCHEMA` tables), improved diagnostics, and performance enhancements.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "percona-server/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Percona Xtradb Cluster",
+      "name": "percona-xtradb-cluster",
+      "description": "Percona XtraDB Cluster - synchronous, multi-primary MySQL high availability built on Galera.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "percona-xtradb-cluster/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Phoenix",
+      "name": "phoenix",
+      "description": "Phoenix - LLM tracing, evaluations, datasets, and a prompt playground in ONE container, OpenTelemetry-native.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "phoenix/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Plane",
+      "name": "plane",
+      "description": "Plane - open-source project management: issues, cycles (sprints), modules, a roadmap, Gantt and kanban views, pages, and analytics. A self-hosted Jira / Linear / ClickUp alternative.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "plane/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Plausible",
+      "name": "plausible",
+      "description": "Plausible - privacy-friendly web analytics: a lightweight, cookie-free, open-source Google Analytics alternative. A clean single-page dashboard, no personal data collection, no consent banner needed, and a script ~75x smaller than GA.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "plausible/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Pocketbase",
+      "name": "pocketbase",
+      "description": "Pocketbase, an entire backend (SQLite, auth, realtime subscriptions, file storage, admin UI) in one container. The simplest template in the catalogue: one service, one 2 GB volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "pocketbase/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Prefect",
+      "name": "prefect",
+      "description": "Prefect 3 - workflow orchestration for Python people: flows are decorated functions, deployments schedule them, and the UI shows every run. The server here holds UI/API/schedules; your flow code runs in WORKERS that connect outbound.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "prefect/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Prestashop",
+      "name": "prestashop",
+      "description": "PrestaShop 9 - the open-source storefront that runs a huge share of European e-commerce: catalogue, checkout, multi-language/multi-currency, and a vast module marketplace.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "prestashop/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Qdrant",
+      "name": "qdrant",
+      "description": "Qdrant vector database, single container + volume, internal-only by default (no API key is configured; the project network is the boundary).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "qdrant/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Rabbitmq",
+      "name": "rabbitmq",
+      "description": "3-node RabbitMQ 4.x cluster (quorum-queue ready), deployable locally with plain Docker Compose or to Miget as a compose stack.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "rabbitmq/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Redis",
+      "name": "redis",
+      "description": "Redis - the in-memory data store used for caching, queues, pub/sub, streams, rate-limiting, and rich data structures. This is a single node, password-protected, with append-only persistence on a volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "redis/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Redis Cluster",
+      "name": "redis-cluster",
+      "description": "Redis Cluster - horizontally-scaled Redis where the keyspace is partitioned across multiple master shards, each with a replica. This template runs 6 nodes (3 masters + 3 replicas) and a one-shot init that forms the cluster.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "redis-cluster/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Redis Sentinel",
+      "name": "redis-sentinel",
+      "description": "Redis Sentinel - high availability for Redis with automatic failover. This template runs one master, two replicas, and three sentinels that watch the master and promote a replica if it goes down.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "redis-sentinel/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Redpanda",
+      "name": "redpanda",
+      "description": "3-broker Redpanda cluster (Kafka-compatible, no ZooKeeper/JVM) with Redpanda Console, deployable locally with plain Docker Compose or to Miget as a compose stack.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "redpanda/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Rocketchat",
+      "name": "rocketchat",
+      "description": "Rocket.Chat - the open-source team communication platform: channels, DMs, threads, voice/video, an apps marketplace, and omnichannel (livechat/email/social). MIT core. The app is stateless - all state lives in MongoDB.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "rocketchat/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Roundcube",
+      "name": "roundcube",
+      "description": "Roundcube - the standard open-source webmail client: folders, search, contacts, filters, and a clean responsive skin.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "roundcube/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Saleor",
+      "name": "saleor",
+      "description": "Saleor - headless, GraphQL-first e-commerce (BSD-3): the API your custom storefront talks to, with a polished dashboard for the team. Official images, mirrored from the saleor-platform compose.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "saleor/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Searxng",
+      "name": "searxng",
+      "description": "SearXNG - a privacy-respecting metasearch engine: it queries 200+ search engines and aggregates the results with no tracking, no profiling, and no ads.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "searxng/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Sftpgo",
+      "name": "sftpgo",
+      "description": "SFTPGo - the upload portal for Miget Buckets: create users whose storage IS an S3 bucket (custom endpoint, path-style, optional key prefix per user), give outsiders share-upload links, and optionally front it all with SFTP or WebDAV.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "sftpgo/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Shlink",
+      "name": "shlink",
+      "description": "Shlink - a self-hosted URL shortener: short links on your own domain with a full REST API, QR codes, rich visit analytics (with optional GeoIP), tags, device-based redirect rules, and link expiration.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "shlink/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Stirling Pdf",
+      "name": "stirling-pdf",
+      "description": "Stirling-PDF - 50+ PDF tools in the browser: merge, split, compress, OCR, convert, sign, redact, watermark.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "stirling-pdf/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Supabase",
+      "name": "supabase",
+      "description": "The full Supabase stack, Postgres (supabase image with extensions), Auth (GoTrue), REST (PostgREST), Realtime, Storage, postgres-meta, Studio, behind the Kong gateway, adapted from the official self-hosting compose.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "supabase/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Supabase Lite",
+      "name": "supabase-lite",
+      "description": "The budget cut of the supabase template: Postgres, Auth (GoTrue) and REST (PostgREST) behind the Kong gateway - the four services most Supabase apps actually use - plus the Studio dashboard. No Realtime, Storage, edge functions or pooler.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "supabase-lite/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Supabase Nano",
+      "name": "supabase-nano",
+      "description": "supabase-lite squeezed into a 1 GiB plan - the same six services (Postgres, Auth, REST, Kong, Studio, postgres-meta), memory- tuned until the whole stack, dashboard included, allocates exactly 1024 MiB.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "supabase-nano/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Supabase Pico",
+      "name": "supabase-pico",
+      "description": "Supabase's API surface - Postgres, Auth (GoTrue) and REST (PostgREST) - in 512 MiB total.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "supabase-pico/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Superset",
+      "name": "superset",
+      "description": "Superset - the Apache BI platform: dashboards, the no-code chart builder, SQL Lab, and alerts/reports, over practically every database.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "superset/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Tei",
+      "name": "tei",
+      "description": "TEI - Hugging Face's Rust embeddings server: small models like `BAAI/bge-small-en-v1.5` (384-dim) serve real RAG workloads from CPU in ~512 MB, over both TEI's native API and an OpenAI-compatible `/v1/embeddings` endpoint.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "tei/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Temporal",
+      "name": "temporal",
+      "description": "Temporal - durable execution: write workflows as ordinary code and Temporal makes them crash-proof, with automatic retries, timers that survive restarts, and a complete event history.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "temporal/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Timescaledb",
+      "name": "timescaledb",
+      "description": "TimescaleDB - Postgres with the timescaledb extension: hypertables, columnar compression, and continuous aggregates for time-series workloads. Single node + 20 GB volume, internal-only (databases never get a public domain).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "timescaledb/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Tooljet",
+      "name": "tooljet",
+      "description": "ToolJet CE - open-source low-code platform for internal tools: visual app builder, 50+ datasource connectors, JS/Python where you need logic. One app container + a managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "tooljet/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Twenty",
+      "name": "twenty",
+      "description": "Twenty - the open-source CRM rethought for this decade: a modern data model (any object, custom fields), pipelines, notes, tasks, email sync, and workflows.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "twenty/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Typebot",
+      "name": "typebot",
+      "description": "Typebot - the open-source conversational form builder: drag-and-drop bot flows that outconvert static forms, embeds for any site, and results analytics. Two stateless apps (builder + viewer) on one managed Postgres.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "typebot/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Typesense",
+      "name": "typesense",
+      "description": "Typesense - the typo-tolerant instant-search engine built for raw speed: a C++ binary with in-memory indexes, facets, filtering, vector + hybrid search, and an InstantSearch-compatible adapter.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "typesense/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Umami",
+      "name": "umami",
+      "description": "Umami v3 - privacy-first web analytics: no cookies, no cross-site tracking, GDPR/PECR-friendly, with a clean dashboard and a ~2 KB tracking script. One stateless container + a managed Postgres (Umami v3 dropped MySQL - Postgres only).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "umami/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Unleash",
+      "name": "unleash",
+      "description": "Unleash - the open-source feature flag and toggle platform: gradual rollouts, user/segment targeting, A/B testing, kill switches, and SDKs for every language. Single stateless container on a managed Postgres (no Redis).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "unleash/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Uptime Kuma",
+      "name": "uptime-kuma",
+      "description": "Uptime Kuma v2 - self-hosted uptime monitoring: HTTP(S)/TCP/DNS/ping checks, alerting to 100+ notification providers, and public status pages. Single container, SQLite on a small volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "uptime-kuma/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Usesend",
+      "name": "usesend",
+      "description": "useSend (formerly Unsend) - the open-source Resend alternative: transactional email API, campaigns, contacts, and delivery analytics, with the actual sending done by your AWS SES (~$0.10 per 1,000 emails - deliverability is SES's job, the",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "usesend/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Valkey",
+      "name": "valkey",
+      "description": "Valkey - the BSD-licensed, Redis-compatible in-memory data store, forked and stewarded by the Linux Foundation after Redis changed its license. Drop-in for Redis clients: caching, queues, pub/sub, streams, and data structures.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "valkey/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Valkey Cluster",
+      "name": "valkey-cluster",
+      "description": "Horizontally-scaled Valkey where the keyspace is partitioned across multiple master shards, each with a replica - the same design as Redis Cluster, BSD-licensed and Redis-protocol compatible.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "valkey-cluster/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Valkey Sentinel",
+      "name": "valkey-sentinel",
+      "description": "High availability for Valkey with automatic failover, using Valkey's built-in Sentinel (the same design as Redis Sentinel). One master, two replicas, and three sentinels that watch the master and promote a replica if it fails.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "valkey-sentinel/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Vaultwarden",
+      "name": "vaultwarden",
+      "description": "Vaultwarden - the Bitwarden-compatible server in Rust: the official Bitwarden browser extensions, mobile and desktop apps, and CLI all connect to it unchanged. One ~tiny container + a 2 GB volume (SQLite, attachments, keys).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "vaultwarden/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Wordpress",
+      "name": "wordpress",
+      "description": "The official WordPress image (Apache variant) behind a thin nginx proxy, backed by a self-hosted MySQL. Plugins, themes and uploads persist on the `/var/www/html` volume.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "wordpress/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Writebook",
+      "name": "writebook",
+      "description": "Writebook - 37signals' free, self-hosted publishing tool: write and share books, manuals, and documentation with a clean, fast reader. It is a Rails app (the same stack behind Basecamp and HEY) fronted by Thruster, 37signals' HTTP/2 proxy.",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "writebook/compose.yaml"
+      }
+    },
+    {
+      "type": 3,
+      "title": "Zitadel",
+      "name": "zitadel",
+      "description": "Zitadel - modern identity infrastructure: OIDC, SAML, passkeys-first login, multi-tenant organizations, and JS actions for custom logic. One stateless Go binary on Postgres - the lightest full IdP in the catalogue (~512 MB).",
+      "categories": [
+        "deployable.sh"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/deployable-sh/stacks",
+        "stackfile": "zitadel/compose.yaml"
+      }
+    }
+  ]
+}
