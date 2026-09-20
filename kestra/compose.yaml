@@ -2,7 +2,7 @@ name: kestra
 
 services:
   kestra:
-    image: kestra/kestra:v1.3.28
+    image: kestra/kestra:v2.0.2
     restart: unless-stopped
     command: server standalone
     environment:
@@ -47,7 +47,7 @@ services:
       - db
 
   db:
-    image: postgres:16
+    image: postgres:18
     restart: unless-stopped
     environment:
       POSTGRES_USER: kestra
