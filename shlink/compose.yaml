@@ -2,7 +2,7 @@ name: shlink
 
 services:
   shlink:
-    image: shlinkio/shlink:4.4.6
+    image: shlinkio/shlink:4.6.0
     restart: unless-stopped
     environment:
       PORT: "5000"

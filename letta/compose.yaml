@@ -2,7 +2,7 @@ name: letta
 
 services:
   letta:
-    image: letta/letta:0.16.8
+    image: letta/letta:0.32.13
     restart: unless-stopped
     environment:
       LETTA_PG_URI: postgresql://letta:letta-local-only@db:5432/letta
