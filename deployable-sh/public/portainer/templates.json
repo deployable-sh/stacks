@@ -7,27 +7,49 @@
       "name": "activepieces",
       "description": "Activepieces - open-source automation: a visual flow builder with 280+ pieces (apps), branching and loops, AI agents, and MCP support - the Zapier/n8n alternative.",
       "categories": [
-        "deployable.sh"
+        "Automation & Jobs"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "activepieces/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/activepieces.png",
+      "env": [
+        {
+          "name": "AP_ENCRYPTION_KEY",
+          "label": "AP_ENCRYPTION_KEY"
+        },
+        {
+          "name": "AP_FRONTEND_URL",
+          "label": "AP_FRONTEND_URL",
+          "description": "The app's public URL (https domain on Miget) - webhook callbacks use it.",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "AP_JWT_SECRET",
+          "label": "AP_JWT_SECRET"
+        },
+        {
+          "name": "AP_REDIS_PASSWORD",
+          "label": "AP_REDIS_PASSWORD"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Actual",
+      "title": "Actual Budget",
       "name": "actual",
       "description": "Actual - local-first envelope budgeting (the YNAB methodology, open source): budgets live on your devices, end-to-end encrypted, and this server syncs them. MIT, tiny, beloved - PikaPods features it on their homepage.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "actual/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/actual-budget.png"
     },
     {
       "type": 3,
@@ -35,13 +57,28 @@
       "name": "agent-box",
       "description": "Remote AI coding agents on Miget: a persistent box with Claude Code, opencode and Kilo CLI preinstalled, reachable from any browser as a web terminal (ttyd + tmux) behind basic auth.",
       "categories": [
-        "deployable.sh"
+        "AI Agents"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "agent-box/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "label": "ANTHROPIC_API_KEY"
+        },
+        {
+          "name": "TTYD_PASSWORD",
+          "label": "TTYD_PASSWORD"
+        },
+        {
+          "name": "TTYD_USERNAME",
+          "label": "TTYD_USERNAME",
+          "default": "agent"
+        }
+      ]
     },
     {
       "type": 3,
@@ -49,55 +86,107 @@
       "name": "appsmith",
       "description": "Appsmith CE - the open-source low-code builder for internal tools: drag-and-drop UI over your databases and APIs, with JS everywhere you need logic. All-in-one image (embedded MongoDB, Redis and Postgres).",
       "categories": [
-        "deployable.sh"
+        "Internal Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "appsmith/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/appsmith.png",
+      "env": [
+        {
+          "name": "APPSMITH_ENCRYPTION_PASSWORD",
+          "label": "APPSMITH_ENCRYPTION_PASSWORD",
+          "description": "Encrypt datasource credentials (AES-256)."
+        },
+        {
+          "name": "APPSMITH_ENCRYPTION_SALT",
+          "label": "APPSMITH_ENCRYPTION_SALT"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Audiobookshelf",
+      "title": "AudioBookshelf",
       "name": "audiobookshelf",
       "description": "AudioBookshelf - a self-hosted audiobook and podcast server: a clean web player, native iOS and Android apps with offline playback and progress sync, multi-user support, bookmarks, sleep timers, and built-in podcast search and",
       "categories": [
-        "deployable.sh"
+        "Media"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "audiobookshelf/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/audiobookshelf.png"
     },
     {
       "type": 3,
-      "title": "Authentik",
+      "title": "authentik",
       "name": "authentik",
       "description": "authentik - the modern open-source identity provider: OIDC, SAML, LDAP, SCIM, proxy auth, and visually-designed login flows (MFA, conditional access) without writing code.",
       "categories": [
-        "deployable.sh"
+        "Auth & API Gateway"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "authentik/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/authentik.png",
+      "env": [
+        {
+          "name": "AUTHENTIK_BOOTSTRAP_EMAIL",
+          "label": "AUTHENTIK_BOOTSTRAP_EMAIL"
+        },
+        {
+          "name": "AUTHENTIK_BOOTSTRAP_PASSWORD",
+          "label": "AUTHENTIK_BOOTSTRAP_PASSWORD",
+          "description": "First-startup admin (akadmin)."
+        },
+        {
+          "name": "AUTHENTIK_SECRET_KEY",
+          "label": "AUTHENTIK_SECRET_KEY"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Azp Agent",
+      "title": "Azure Pipelines Agent",
       "name": "azp-agent",
       "description": "A self-hosted Azure Pipelines agent (Azure DevOps), built from Microsoft's official Dockerfile recipe - the agent ships no container image, this is the documented path.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "azp-agent/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "AZP_AGENT_NAME",
+          "label": "AZP_AGENT_NAME",
+          "default": "miget-agent"
+        },
+        {
+          "name": "AZP_POOL",
+          "label": "AZP_POOL",
+          "default": "Default"
+        },
+        {
+          "name": "AZP_TOKEN",
+          "label": "AZP_TOKEN",
+          "description": "PAT with \"Agent Pools (read, manage)\" scope, org level."
+        },
+        {
+          "name": "AZP_URL",
+          "label": "AZP_URL",
+          "description": "Your Azure DevOps organization URL.",
+          "default": "https://dev.azure.com/your-org"
+        }
+      ]
     },
     {
       "type": 3,
@@ -105,13 +194,27 @@
       "name": "bagisto",
       "description": "Bagisto - the open-source Laravel ecommerce platform: catalog, cart, checkout, multi-channel and multi-currency storefronts, and a full admin. MIT-licensed.",
       "categories": [
-        "deployable.sh"
+        "CMS & Publishing"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "bagisto/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/bagisto.png",
+      "env": [
+        {
+          "name": "APP_KEY",
+          "label": "APP_KEY",
+          "description": "SET EXPLICITLY (base64:32-bytes) - auto-gen per boot would orphan sessions/encrypted data on container recreation."
+        },
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -119,27 +222,49 @@
       "name": "beszel",
       "description": "Beszel - a lightweight server monitoring hub: CPU, memory, disk, network, temperatures, and Docker container stats, with history and configurable alerts (email, webhooks, ntfy, and more).",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "beszel/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/beszel.png",
+      "env": [
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Bookstack",
+      "title": "BookStack",
       "name": "bookstack",
       "description": "BookStack - a simple, self-hosted wiki and documentation platform organized as shelves, books, chapters, and pages. WYSIWYG and markdown editors, full-text search, draw.io diagrams, page revisions, roles and permissions, and an API.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "bookstack/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/bookstack.png",
+      "env": [
+        {
+          "name": "APP_KEY",
+          "label": "APP_KEY",
+          "description": "Laravel app key."
+        },
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -147,13 +272,14 @@
       "name": "budibase",
       "description": "Budibase - open-source low-code platform for internal tools, forms, and approval workflows. All-in-one image (embedded CouchDB, Redis, MinIO, app server and worker) behind a thin nginx proxy.",
       "categories": [
-        "deployable.sh"
+        "Internal Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "budibase/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/budibase.png"
     },
     {
       "type": 3,
@@ -161,13 +287,35 @@
       "name": "bugsink",
       "description": "Bugsink, self-hosted error tracking compatible with the Sentry SDKs, in a single container. The lightest way to own your error data: one app + one managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "Error Tracking"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "bugsink/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/bugsink.png",
+      "env": [
+        {
+          "name": "ADMIN_EMAIL",
+          "label": "ADMIN_EMAIL",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "BASE_URL",
+          "label": "BASE_URL",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "SECRET_KEY",
+          "label": "SECRET_KEY",
+          "description": "Copy to .env for local `docker compose up`."
+        }
+      ]
     },
     {
       "type": 3,
@@ -175,13 +323,26 @@
       "name": "buildkite-agent",
       "description": "A Buildkite agent: Buildkite hosts the UI and orchestration, your agents run the jobs - the hybrid-CI model where compute was always meant to be yours. This is the cleanest runner in the catalogue: official image, one token, done.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "buildkite-agent/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "BUILDKITE_AGENT_TAGS",
+          "label": "BUILDKITE_AGENT_TAGS",
+          "description": "Pipelines target agents by tags, e.g.",
+          "default": "queue=miget"
+        },
+        {
+          "name": "BUILDKITE_AGENT_TOKEN",
+          "label": "BUILDKITE_AGENT_TOKEN",
+          "description": "Agent token: Buildkite > Agents > Reveal Agent Token."
+        }
+      ]
     },
     {
       "type": 3,
@@ -189,27 +350,96 @@
       "name": "buzz",
       "description": "Buzz - a self-hosted workspace where humans and AI agents share the same rooms. Under the hood it is a Nostr relay: every message, reaction, workflow step, review approval, and git event is a signed event in one log, whether the author is",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "buzz/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "BUZZ_CORS_ORIGINS",
+          "label": "BUZZ_CORS_ORIGINS",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "BUZZ_GIT_HOOK_HMAC_SECRET",
+          "label": "BUZZ_GIT_HOOK_HMAC_SECRET",
+          "description": "Signs the relay's own git hooks, 32+ chars: openssl rand -hex 32"
+        },
+        {
+          "name": "BUZZ_MEDIA_BASE_URL",
+          "label": "BUZZ_MEDIA_BASE_URL",
+          "default": "http://localhost:5000/media"
+        },
+        {
+          "name": "BUZZ_RELAY_PRIVATE_KEY",
+          "label": "BUZZ_RELAY_PRIVATE_KEY",
+          "description": "Relay signing identity, exactly 64 hex chars: openssl rand -hex 32 Events signed with it stop verifying if it changes, so keep it stable once a relay has data."
+        },
+        {
+          "name": "BUZZ_REQUIRE_AUTH_TOKEN",
+          "label": "BUZZ_REQUIRE_AUTH_TOKEN"
+        },
+        {
+          "name": "BUZZ_REQUIRE_RELAY_MEMBERSHIP",
+          "label": "BUZZ_REQUIRE_RELAY_MEMBERSHIP",
+          "default": "false"
+        },
+        {
+          "name": "MINIO_ROOT_PASSWORD",
+          "label": "MINIO_ROOT_PASSWORD",
+          "description": "MinIO root password for the media bucket: openssl rand -hex 16"
+        },
+        {
+          "name": "RELAY_OWNER_PUBKEY",
+          "label": "RELAY_OWNER_PUBKEY"
+        },
+        {
+          "name": "RELAY_URL",
+          "label": "RELAY_URL",
+          "default": "ws://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Calcom",
+      "title": "Cal.com",
       "name": "calcom",
       "description": "Cal.com - open-source scheduling: personal and team booking pages, availability rules, round-robin and collective events, workflows and reminders, and two-way calendar sync (Google, Office 365, CalDAV). A self-hosted Calendly alternative.",
       "categories": [
-        "deployable.sh"
+        "Scheduling"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "calcom/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "CALENDSO_ENCRYPTION_KEY",
+          "label": "CALENDSO_ENCRYPTION_KEY",
+          "description": "AES-256 encryption key (exactly 32 bytes)."
+        },
+        {
+          "name": "NEXTAUTH_SECRET",
+          "label": "NEXTAUTH_SECRET",
+          "description": "NextAuth session secret."
+        },
+        {
+          "name": "NEXTAUTH_URL",
+          "label": "NEXTAUTH_URL",
+          "default": "http://localhost:5000/api/auth"
+        },
+        {
+          "name": "NEXT_PUBLIC_WEBAPP_URL",
+          "label": "NEXT_PUBLIC_WEBAPP_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ],
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/cal-com.png"
     },
     {
       "type": 3,
@@ -217,27 +447,56 @@
       "name": "campfire",
       "description": "Campfire - 37signals' free, open-source group chat: rooms, direct messages, file sharing, full-text search, @mentions, sounds, and Web Push. It was the first ONCE app (a one-time paid product) and is now MIT-licensed and free.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "campfire/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE",
+          "description": "Rails secret - a long random string."
+        },
+        {
+          "name": "SENTRY_DSN",
+          "label": "SENTRY_DSN",
+          "description": "Optional: error reporting."
+        },
+        {
+          "name": "VAPID_PRIVATE_KEY",
+          "label": "VAPID_PRIVATE_KEY"
+        },
+        {
+          "name": "VAPID_PUBLIC_KEY",
+          "label": "VAPID_PUBLIC_KEY",
+          "description": "Optional: Web Push (browser/mobile notifications)."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Changedetection",
+      "title": "changedetection.io",
       "name": "changedetection",
       "description": "changedetection.io - watch any web page for changes (prices, stock, content, competitors' pages) with filters, diffs, and notifications to 80+ targets (the in-project `ntfy` template included). Single container, one volume.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "changedetection/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/changedetection.png",
+      "env": [
+        {
+          "name": "BASE_URL",
+          "label": "BASE_URL",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -245,21 +504,69 @@
       "name": "chatwoot",
       "description": "Chatwoot - open-source customer support: shared team inbox, website live-chat widget, email and social channels, help center, and automations. This template runs the community-edition image (`v4-ce`, pure MIT - no enterprise code).",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "chatwoot/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/chatwoot.png",
+      "env": [
+        {
+          "name": "ENABLE_ACCOUNT_SIGNUP",
+          "label": "ENABLE_ACCOUNT_SIGNUP",
+          "description": "Leave true for onboarding; set false once your team is in.",
+          "default": "true"
+        },
+        {
+          "name": "FRONTEND_URL",
+          "label": "FRONTEND_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "MAILER_SENDER_EMAIL",
+          "label": "MAILER_SENDER_EMAIL",
+          "description": "Agent notifications + transactional email (mailpit for testing).",
+          "default": "Chatwoot <support@example.com>"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE",
+          "description": "Alphanumeric only: head /dev/urandom | tr -dc A-Za-z0-9 | head -c 63"
+        },
+        {
+          "name": "SMTP_ADDRESS",
+          "label": "SMTP_ADDRESS"
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP_PASSWORD"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "SMTP_USERNAME"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Chromadb",
+      "title": "ChromaDB",
       "name": "chromadb",
       "description": "Chroma vector database, single container + volume, internal-only (Chroma has no built-in auth; the project network is the boundary, like the MongoDB template).",
       "categories": [
-        "deployable.sh"
+        "Search & Vectors"
       ],
       "platform": "linux",
       "repository": {
@@ -269,31 +576,46 @@
     },
     {
       "type": 3,
-      "title": "Clickhouse",
+      "title": "ClickHouse Cluster",
       "name": "clickhouse",
       "description": "3-node ClickHouse cluster, one shard, three replicas, with embedded ClickHouse Keeper (no separate ZooKeeper pods). Internal-only; 20 GB per node.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "clickhouse/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/clickhouse.png",
+      "env": [
+        {
+          "name": "CLICKHOUSE_PASSWORD",
+          "label": "CLICKHOUSE_PASSWORD",
+          "description": "Password for the `app` user (admin rights via access management)."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Code Server",
+      "title": "code-server",
       "name": "code-server",
       "description": "code-server - VS Code in the browser: a persistent cloud development environment with your extensions, terminal, and a 10 GB home volume, reachable from any device.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "code-server/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "PASSWORD",
+          "label": "PASSWORD",
+          "description": "Browser login password."
+        }
+      ]
     },
     {
       "type": 3,
@@ -301,13 +623,58 @@
       "name": "cognee",
       "description": "Cognee - the memory engine for AI agents: ingest documents, chats, and data; cognify them into a knowledge graph + vector index; query the result as long-term memory.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "cognee/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "CORS_ALLOWED_ORIGINS",
+          "label": "CORS_ALLOWED_ORIGINS"
+        },
+        {
+          "name": "EMBEDDING_ENDPOINT",
+          "label": "EMBEDDING_ENDPOINT"
+        },
+        {
+          "name": "EMBEDDING_MODEL",
+          "label": "EMBEDDING_MODEL",
+          "default": "openai/text-embedding-3-large"
+        },
+        {
+          "name": "EMBEDDING_PROVIDER",
+          "label": "EMBEDDING_PROVIDER",
+          "default": "openai"
+        },
+        {
+          "name": "FASTAPI_USERS_JWT_SECRET",
+          "label": "FASTAPI_USERS_JWT_SECRET",
+          "description": "Override the insecure default."
+        },
+        {
+          "name": "LLM_API_KEY",
+          "label": "LLM_API_KEY",
+          "description": "The only hard requirement - LLM access for fact extraction."
+        },
+        {
+          "name": "LLM_ENDPOINT",
+          "label": "LLM_ENDPOINT"
+        },
+        {
+          "name": "LLM_MODEL",
+          "label": "LLM_MODEL",
+          "default": "openai/gpt-4o-mini"
+        },
+        {
+          "name": "LLM_PROVIDER",
+          "label": "LLM_PROVIDER",
+          "description": "OpenAI default; or route through the litellm template: LLM_PROVIDER=custom LLM_ENDPOINT=http://litellm:5000/v1 LLM_MODEL=openai/<model-name-in-litellm>",
+          "default": "openai"
+        }
+      ]
     },
     {
       "type": 3,
@@ -315,13 +682,35 @@
       "name": "convex",
       "description": "Convex backend-as-a-service, self-hosted: reactive database + functions + scheduler, with the dashboard. SQLite state on a volume; the open-source backend serves one deployment.",
       "categories": [
-        "deployable.sh"
+        "Backend Platforms"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "convex/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "CONVEX_CLOUD_ORIGIN",
+          "label": "CONVEX_CLOUD_ORIGIN",
+          "description": "Local: the proxies' published ports.",
+          "default": "http://127.0.0.1:5000"
+        },
+        {
+          "name": "CONVEX_SITE_ORIGIN",
+          "label": "CONVEX_SITE_ORIGIN",
+          "default": "http://127.0.0.1:5001"
+        },
+        {
+          "name": "INSTANCE_NAME",
+          "label": "INSTANCE_NAME",
+          "default": "convex-self-hosted"
+        },
+        {
+          "name": "INSTANCE_SECRET",
+          "label": "INSTANCE_SECRET"
+        }
+      ]
     },
     {
       "type": 3,
@@ -329,13 +718,14 @@
       "name": "cronicle",
       "description": "Cronicle, a cron replacement with a web UI: schedules, run history, chaining, retries, and alerts. Single container, two small volumes (job data + logs).",
       "categories": [
-        "deployable.sh"
+        "Automation & Jobs"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "cronicle/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/cronicle.png"
     },
     {
       "type": 3,
@@ -343,13 +733,43 @@
       "name": "dawarich",
       "description": "Dawarich - self-hosted location history: a privacy-first replacement for Google Maps Timeline.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "dawarich/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/dawarich.png",
+      "env": [
+        {
+          "name": "APPLICATION_HOSTS",
+          "label": "APPLICATION_HOSTS",
+          "description": "Rails host allowlist - MUST include the app's domain or requests are blocked.",
+          "default": "localhost"
+        },
+        {
+          "name": "APPLICATION_PROTOCOL",
+          "label": "APPLICATION_PROTOCOL",
+          "default": "http"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "label": "DB_PASSWORD",
+          "description": "Password for the PostGIS database (used by the app and the db service)."
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE",
+          "description": "Rails secret - a long random string."
+        },
+        {
+          "name": "TIME_ZONE",
+          "label": "TIME_ZONE",
+          "description": "Default time zone for the UI.",
+          "default": "UTC"
+        }
+      ]
     },
     {
       "type": 3,
@@ -357,13 +777,45 @@
       "name": "dify",
       "description": "Dify - the LLM application platform: a visual builder for chatbots, agents, and workflows, with built-in RAG, model management, and observability.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "dify/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/dify.png",
+      "env": [
+        {
+          "name": "DB_PASSWORD",
+          "label": "DB_PASSWORD"
+        },
+        {
+          "name": "INNER_API_KEY",
+          "label": "INNER_API_KEY"
+        },
+        {
+          "name": "PLUGIN_DAEMON_KEY",
+          "label": "PLUGIN_DAEMON_KEY"
+        },
+        {
+          "name": "QDRANT_API_KEY",
+          "label": "QDRANT_API_KEY"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        },
+        {
+          "name": "SANDBOX_API_KEY",
+          "label": "SANDBOX_API_KEY"
+        },
+        {
+          "name": "SECRET_KEY",
+          "label": "SECRET_KEY"
+        }
+      ]
     },
     {
       "type": 3,
@@ -371,13 +823,37 @@
       "name": "directus",
       "description": "Directus 11 - an instant headless CMS and REST/GraphQL API over Postgres, with a data studio your editors will actually enjoy. One app container + a managed Postgres + an uploads volume.",
       "categories": [
-        "deployable.sh"
+        "CMS & Publishing"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "directus/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/directus.png",
+      "env": [
+        {
+          "name": "ADMIN_EMAIL",
+          "label": "ADMIN_EMAIL",
+          "description": "Bootstrap admin (applied on first init only).",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "PUBLIC_URL",
+          "label": "PUBLIC_URL",
+          "description": "Full public URL (set to the app's https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "SECRET",
+          "label": "SECRET",
+          "description": "Session/crypto secret - set explicitly so sessions survive restarts."
+        }
+      ]
     },
     {
       "type": 3,
@@ -385,13 +861,57 @@
       "name": "docker-registry",
       "description": "Your own private container registry - the CNCF Distribution registry (the same engine behind Docker Hub) - with https, basic-auth, and image storage on a Miget Bucket so the service itself holds no state. Listens natively on port 5000.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "docker-registry/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/docker.png",
+      "env": [
+        {
+          "name": "REGISTRY_AUTH_PASSWORD",
+          "label": "REGISTRY_AUTH_PASSWORD"
+        },
+        {
+          "name": "REGISTRY_AUTH_REALM",
+          "label": "REGISTRY_AUTH_REALM",
+          "default": "Registry"
+        },
+        {
+          "name": "REGISTRY_AUTH_USER",
+          "label": "REGISTRY_AUTH_USER",
+          "description": "Basic-auth credentials.",
+          "default": "admin"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_ACCESSKEY",
+          "label": "REGISTRY_STORAGE_S3_ACCESSKEY"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_BUCKET",
+          "label": "REGISTRY_STORAGE_S3_BUCKET"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_FORCEPATHSTYLE",
+          "label": "REGISTRY_STORAGE_S3_FORCEPATHSTYLE",
+          "default": "true"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_REGION",
+          "label": "REGISTRY_STORAGE_S3_REGION",
+          "description": "Storage."
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_REGIONENDPOINT",
+          "label": "REGISTRY_STORAGE_S3_REGIONENDPOINT"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_SECRETKEY",
+          "label": "REGISTRY_STORAGE_S3_SECRETKEY"
+        }
+      ]
     },
     {
       "type": 3,
@@ -399,13 +919,59 @@
       "name": "docmost",
       "description": "Docmost - open-source collaborative wiki and documentation: real-time block editing, nested spaces, granular permissions, diagrams (Draw.io, Excalidraw, Mermaid), inline comments, and full-text search.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "docmost/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/docmost.png",
+      "env": [
+        {
+          "name": "APP_SECRET",
+          "label": "APP_SECRET",
+          "description": "Long random string - signs sessions and tokens."
+        },
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "AWS_S3_ACCESS_KEY_ID",
+          "label": "AWS_S3_ACCESS_KEY_ID"
+        },
+        {
+          "name": "AWS_S3_BUCKET",
+          "label": "AWS_S3_BUCKET"
+        },
+        {
+          "name": "AWS_S3_ENDPOINT",
+          "label": "AWS_S3_ENDPOINT"
+        },
+        {
+          "name": "AWS_S3_FORCE_PATH_STYLE",
+          "label": "AWS_S3_FORCE_PATH_STYLE",
+          "default": "true"
+        },
+        {
+          "name": "AWS_S3_REGION",
+          "label": "AWS_S3_REGION",
+          "default": "auto"
+        },
+        {
+          "name": "AWS_S3_SECRET_ACCESS_KEY",
+          "label": "AWS_S3_SECRET_ACCESS_KEY"
+        },
+        {
+          "name": "STORAGE_DRIVER",
+          "label": "STORAGE_DRIVER",
+          "description": "Attachment storage.",
+          "default": "local"
+        }
+      ]
     },
     {
       "type": 3,
@@ -413,55 +979,181 @@
       "name": "documenso",
       "description": "Documenso - the open-source DocuSign alternative: signing workflows, templates, teams, and an API, with real PKCS#12 document sealing. One app container + a managed Postgres; no volumes (the signing cert rides env as base64).",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "documenso/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/documenso.png",
+      "env": [
+        {
+          "name": "NEXTAUTH_SECRET",
+          "label": "NEXTAUTH_SECRET"
+        },
+        {
+          "name": "NEXT_PRIVATE_ENCRYPTION_KEY",
+          "label": "NEXT_PRIVATE_ENCRYPTION_KEY"
+        },
+        {
+          "name": "NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY",
+          "label": "NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY"
+        },
+        {
+          "name": "NEXT_PUBLIC_WEBAPP_URL",
+          "label": "NEXT_PUBLIC_WEBAPP_URL",
+          "description": "Public URL (the app's https domain on Miget; runtime-injected).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "SIGNING_CERT_B64",
+          "label": "SIGNING_CERT_B64",
+          "description": "PKCS#12 signing certificate as base64."
+        },
+        {
+          "name": "SIGNING_PASSPHRASE",
+          "label": "SIGNING_PASSPHRASE"
+        },
+        {
+          "name": "SMTP_FROM_ADDRESS",
+          "label": "SMTP_FROM_ADDRESS",
+          "default": "sign@example.com"
+        },
+        {
+          "name": "SMTP_FROM_NAME",
+          "label": "SMTP_FROM_NAME",
+          "default": "Documenso"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST",
+          "description": "Signing emails (mailpit:1025 for testing)."
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP_PASSWORD"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "SMTP_USERNAME"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Docuseal",
+      "title": "DocuSeal",
       "name": "docuseal",
       "description": "DocuSeal - open-source document signing: a WYSIWYG field builder (12 field types), multiple submitters, automatic PDF eSignatures with verification, API and webhooks. The signing core is fully functional in the free AGPL edition.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "docuseal/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/docuseal.png",
+      "env": [
+        {
+          "name": "FORCE_SSL",
+          "label": "FORCE_SSL"
+        },
+        {
+          "name": "HOST",
+          "label": "HOST",
+          "description": "The app's public host (domain on Miget); FORCE_SSL = the same domain.",
+          "default": "localhost:5000"
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE"
+        },
+        {
+          "name": "SMTP_ADDRESS",
+          "label": "SMTP_ADDRESS",
+          "description": "Signature-request emails (point at mailpit:1025 for testing)."
+        },
+        {
+          "name": "SMTP_AUTHENTICATION",
+          "label": "SMTP_AUTHENTICATION",
+          "default": "plain"
+        },
+        {
+          "name": "SMTP_FROM",
+          "label": "SMTP_FROM"
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP_PASSWORD"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "SMTP_USERNAME"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Factorio",
+      "title": "Factorio Server",
       "name": "factorio",
       "description": "Headless Factorio via factoriotools/factorio - the community-standard image. Saves, mods, and server settings live on the `/factorio` volume; a new map generates on first boot and the latest save loads thereafter.",
       "categories": [
-        "deployable.sh"
+        "Game Servers"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "factorio/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "SAVE_NAME",
+          "label": "SAVE_NAME",
+          "default": "miget"
+        },
+        {
+          "name": "UPDATE_MODS_ON_START",
+          "label": "UPDATE_MODS_ON_START",
+          "default": "false"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Filebrowser",
+      "title": "FileBrowser",
       "name": "filebrowser",
       "description": "FileBrowser - a fast web UI over a file volume: upload, organize, preview, edit, and share files via public links, with per-user scopes. Apache-2.0, non-root, ~30 MB of Go.",
       "categories": [
-        "deployable.sh"
+        "Object Storage"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "filebrowser/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "FB_PASSWORD",
+          "label": "FB_PASSWORD"
+        },
+        {
+          "name": "FB_USERNAME",
+          "label": "FB_USERNAME",
+          "default": "admin"
+        }
+      ],
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/file-browser.png"
     },
     {
       "type": 3,
@@ -469,13 +1161,21 @@
       "name": "filestash",
       "description": "Filestash - the polished web file manager over S3: browse, upload, preview (images, video, office docs), edit, and share files that live in Miget Buckets. AGPL, very actively maintained, runs in 128 MB.",
       "categories": [
-        "deployable.sh"
+        "Object Storage"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "filestash/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/filestash.png",
+      "env": [
+        {
+          "name": "APPLICATION_URL",
+          "label": "APPLICATION_URL",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -483,13 +1183,58 @@
       "name": "fizzy",
       "description": "Fizzy - 37signals' free, open-source kanban: fast, focused boards for bugs, issues, ideas, and small projects.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "fizzy/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/fizzy.png",
+      "env": [
+        {
+          "name": "BASE_URL",
+          "label": "BASE_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "MAILER_FROM_ADDRESS",
+          "label": "MAILER_FROM_ADDRESS",
+          "description": "Optional: email for invites and notifications."
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE",
+          "description": "Rails secret - a long random string."
+        },
+        {
+          "name": "SMTP_ADDRESS",
+          "label": "SMTP_ADDRESS"
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP_PASSWORD"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "SMTP_USERNAME"
+        },
+        {
+          "name": "VAPID_PRIVATE_KEY",
+          "label": "VAPID_PRIVATE_KEY"
+        },
+        {
+          "name": "VAPID_PUBLIC_KEY",
+          "label": "VAPID_PUBLIC_KEY",
+          "description": "Optional: Web Push (browser notifications)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -497,13 +1242,40 @@
       "name": "flowise",
       "description": "Flowise - the visual builder for LLM apps: drag-and-drop chatflows and agentflows over 100+ integrations (models, vector stores, tools), with APIs and embeddable chat widgets. One app container + a managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "flowise/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/flowise.png",
+      "env": [
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "description": "Public URL (set to the app's https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "EXPRESS_SESSION_SECRET",
+          "label": "EXPRESS_SESSION_SECRET"
+        },
+        {
+          "name": "FLOWISE_SECRETKEY_OVERWRITE",
+          "label": "FLOWISE_SECRETKEY_OVERWRITE",
+          "description": "Fixed key for stored credential encryption (survives recreations)."
+        },
+        {
+          "name": "JWT_AUTH_TOKEN_SECRET",
+          "label": "JWT_AUTH_TOKEN_SECRET",
+          "description": "Session/JWT signing."
+        },
+        {
+          "name": "JWT_REFRESH_TOKEN_SECRET",
+          "label": "JWT_REFRESH_TOKEN_SECRET"
+        }
+      ]
     },
     {
       "type": 3,
@@ -511,13 +1283,22 @@
       "name": "forgejo",
       "description": "Forgejo - the community-governed git forge (the hard fork of Gitea, run by the non-profit Codeberg e.V.): repositories, issues, pull requests, packages, and CI via Forgejo Actions. One light Go binary + a managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "forgejo/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/forgejo.png",
+      "env": [
+        {
+          "name": "ROOT_URL",
+          "label": "ROOT_URL",
+          "description": "Full public URL with trailing slash (the app's https domain on Miget) - the web UI and clone URLs embed it.",
+          "default": "http://localhost:5000/"
+        }
+      ]
     },
     {
       "type": 3,
@@ -525,27 +1306,85 @@
       "name": "forgejo-runner",
       "description": "A Forgejo Actions runner in `host` mode - CI for your self-hosted Forgejo or for Codeberg, with jobs running as shell steps in this container (no Docker daemon needed). GitHub-Actions-compatible workflow syntax.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "forgejo-runner/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/forgejo.png",
+      "env": [
+        {
+          "name": "FORGEJO_URL",
+          "label": "FORGEJO_URL",
+          "description": "Your Forgejo instance (in-project: http://forgejo:5000) or Codeberg.",
+          "default": "https://codeberg.org"
+        },
+        {
+          "name": "RUNNER_CAPACITY",
+          "label": "RUNNER_CAPACITY",
+          "default": "1"
+        },
+        {
+          "name": "RUNNER_LABELS",
+          "label": "RUNNER_LABELS",
+          "description": "Jobs target this via runs-on.",
+          "default": "miget:host"
+        },
+        {
+          "name": "RUNNER_TOKEN",
+          "label": "RUNNER_TOKEN"
+        },
+        {
+          "name": "RUNNER_UUID",
+          "label": "RUNNER_UUID",
+          "description": "From the runner you create in the UI: Settings > Actions > Runners."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Freescout",
+      "title": "FreeScout",
       "name": "freescout",
       "description": "FreeScout - the free, open-source help desk and shared inbox: email-based ticketing, multiple mailboxes, saved replies, tags, and a module ecosystem. The Help Scout / Zendesk alternative, AGPL. Self-hosted MySQL.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "freescout/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/freescout.png",
+      "env": [
+        {
+          "name": "ADMIN_EMAIL",
+          "label": "ADMIN_EMAIL",
+          "description": "First admin account (created on first boot).",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "ADMIN_FIRST_NAME",
+          "label": "ADMIN_FIRST_NAME",
+          "default": "Admin"
+        },
+        {
+          "name": "ADMIN_LAST_NAME",
+          "label": "ADMIN_LAST_NAME",
+          "default": "User"
+        },
+        {
+          "name": "ADMIN_PASS",
+          "label": "ADMIN_PASS"
+        },
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -553,13 +1392,24 @@
       "name": "garage",
       "description": "Garage - the S3-compatible object store the self-hosting community moved to after MinIO archived its open source in 2026: a single static Rust binary, AGPL, actively released, designed for exactly this job.",
       "categories": [
-        "deployable.sh"
+        "Object Storage"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "garage/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/garage.png",
+      "env": [
+        {
+          "name": "GARAGE_ADMIN_TOKEN",
+          "label": "GARAGE_ADMIN_TOKEN"
+        },
+        {
+          "name": "GARAGE_RPC_SECRET",
+          "label": "GARAGE_RPC_SECRET"
+        }
+      ]
     },
     {
       "type": 3,
@@ -567,55 +1417,132 @@
       "name": "ghost",
       "description": "Ghost 6 - professional publishing: blog, newsletter, paid memberships, and a clean editor. One app container + a self-hosted MySQL (Ghost requires MySQL 8 in production - SQLite is dev-only upstream).",
       "categories": [
-        "deployable.sh"
+        "CMS & Publishing"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "ghost/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/ghost.png",
+      "env": [
+        {
+          "name": "GHOST_URL",
+          "label": "GHOST_URL",
+          "description": "Full public URL of the site (set to the app's https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Github Runner",
+      "title": "GitHub Actions Runner",
       "name": "github-runner",
       "description": "A self-hosted GitHub Actions runner: your workflows, your hardware, zero per-minute billing. Uses `myoung34/github-runner` (the de-facto env-driven runner image) with PAT-based auto-registration.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "github-runner/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/github.png",
+      "env": [
+        {
+          "name": "ACCESS_TOKEN",
+          "label": "ACCESS_TOKEN",
+          "description": "Fine-grained or classic PAT."
+        },
+        {
+          "name": "EPHEMERAL",
+          "label": "EPHEMERAL",
+          "description": "true = runner deregisters after each job (clean-slate; pairs with replicas)",
+          "default": "false"
+        },
+        {
+          "name": "LABELS",
+          "label": "LABELS",
+          "default": "self-hosted,linux,x64,miget"
+        },
+        {
+          "name": "ORG_NAME",
+          "label": "ORG_NAME",
+          "description": "For org scope (set RUNNER_SCOPE=org and leave REPO_URL empty):"
+        },
+        {
+          "name": "REPO_URL",
+          "label": "REPO_URL",
+          "description": "For repo scope:"
+        },
+        {
+          "name": "RUNNER_NAME_PREFIX",
+          "label": "RUNNER_NAME_PREFIX",
+          "default": "miget"
+        },
+        {
+          "name": "RUNNER_SCOPE",
+          "label": "RUNNER_SCOPE",
+          "description": "repo | org",
+          "default": "repo"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Gitlab Runner",
+      "title": "GitLab Runner",
       "name": "gitlab-runner",
       "description": "A self-hosted GitLab Runner in shell mode: jobs run inside this container, your own compute, no CI-minute quota. Registers itself on first boot and persists registration on a volume.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "gitlab-runner/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/gitlab.png",
+      "env": [
+        {
+          "name": "CI_SERVER_TOKEN",
+          "label": "CI_SERVER_TOKEN",
+          "description": "Runner authentication token (glrt-...): create the runner in GitLab (Settings > CI/CD > Runners > New runner) - tags and run-untagged are set there, server-side"
+        },
+        {
+          "name": "CI_SERVER_URL",
+          "label": "CI_SERVER_URL",
+          "description": "gitlab.com or your self-managed GitLab.",
+          "default": "https://gitlab.com"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Glitchtip",
+      "title": "GlitchTip",
       "name": "glitchtip",
       "description": "GlitchTip, open-source, Sentry-API-compatible error tracking (point any Sentry SDK at its DSN) at a fraction of self-hosted Sentry's footprint.",
       "categories": [
-        "deployable.sh"
+        "Error Tracking"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "glitchtip/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/glitchtip.png",
+      "env": [
+        {
+          "name": "GLITCHTIP_DOMAIN",
+          "label": "GLITCHTIP_DOMAIN",
+          "description": "Public URL; set to the web app's https domain on Miget (after first deploy).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "SECRET_KEY",
+          "label": "SECRET_KEY",
+          "description": "Copy to .env for local `docker compose up`."
+        }
+      ]
     },
     {
       "type": 3,
@@ -623,13 +1550,32 @@
       "name": "grafana-stack",
       "description": "Grafana + Prometheus + Loki - dashboards, metrics, and logs for everything in your project, at a flat price instead of per-host or per-GB-ingested SaaS pricing.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "grafana-stack/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/grafana.png",
+      "env": [
+        {
+          "name": "GF_ADMIN_PASSWORD",
+          "label": "GF_ADMIN_PASSWORD",
+          "description": "Grafana admin login (user defaults to admin)."
+        },
+        {
+          "name": "GF_ADMIN_USER",
+          "label": "GF_ADMIN_USER",
+          "default": "admin"
+        },
+        {
+          "name": "GF_ROOT_URL",
+          "label": "GF_ROOT_URL",
+          "description": "Set to the app's https domain on Miget (OAuth/links).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -637,27 +1583,52 @@
       "name": "hasura",
       "description": "Hasura v2 CE - instant GraphQL over Postgres: track tables and get queries, mutations, and live subscriptions with row-level permissions, remote schemas, and event triggers. Stateless single container; everything lives in the database.",
       "categories": [
-        "deployable.sh"
+        "Backend Platforms"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "hasura/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "HASURA_ADMIN_SECRET",
+          "label": "HASURA_ADMIN_SECRET"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Hermes",
+      "title": "Hermes Agent",
       "name": "hermes",
       "description": "Hermes Agent (Nous Research), a self-improving AI agent with a learning loop (skills from experience), cron, hooks, and a web dashboard. Official image, single container + `/opt/data` volume (sessions, memories, skills, config all persist).",
       "categories": [
-        "deployable.sh"
+        "AI Agents"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "hermes/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "label": "ANTHROPIC_API_KEY"
+        },
+        {
+          "name": "HERMES_PASSWORD",
+          "label": "HERMES_PASSWORD"
+        },
+        {
+          "name": "HERMES_SESSION_SECRET",
+          "label": "HERMES_SESSION_SECRET"
+        },
+        {
+          "name": "HERMES_USERNAME",
+          "label": "HERMES_USERNAME",
+          "default": "admin"
+        }
+      ]
     },
     {
       "type": 3,
@@ -665,13 +1636,21 @@
       "name": "immich",
       "description": "Immich - self-hosted photo and video management: a genuine Google Photos alternative with first-class iOS and Android apps, automatic phone backup, face recognition, smart and semantic search, albums, shared libraries, and a timeline.",
       "categories": [
-        "deployable.sh"
+        "Media"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "immich/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/immich.png",
+      "env": [
+        {
+          "name": "DB_PASSWORD",
+          "label": "DB_PASSWORD",
+          "description": "Database password (used by both immich-server and the database service)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -679,13 +1658,35 @@
       "name": "infisical",
       "description": "Infisical - the open-source secrets manager: projects with environments, secret versioning, references, dynamic secrets, and first-class integrations (Kubernetes operator, CI runners, Terraform, SDKs).",
       "categories": [
-        "deployable.sh"
+        "Security"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "infisical/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/infisical.png",
+      "env": [
+        {
+          "name": "AUTH_SECRET",
+          "label": "AUTH_SECRET"
+        },
+        {
+          "name": "ENCRYPTION_KEY",
+          "label": "ENCRYPTION_KEY"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        },
+        {
+          "name": "SITE_URL",
+          "label": "SITE_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -693,13 +1694,21 @@
       "name": "jellyfin",
       "description": "Jellyfin - the free, self-hosted media server: stream your movies, TV shows, music, and photos to any device through a web UI and native apps (Android, iOS, Android TV, Roku, Kodi, and more).",
       "categories": [
-        "deployable.sh"
+        "Media"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "jellyfin/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/jellyfin.png",
+      "env": [
+        {
+          "name": "PUBLISHED_SERVER_URL",
+          "label": "PUBLISHED_SERVER_URL",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -707,27 +1716,29 @@
       "name": "jenkins",
       "description": "Jenkins LTS - the automation server: pipelines as code, 1,800+ plugins, and webhooks from every forge. Controller with the built-in node, which runs jobs in-controller - the honest shape for small teams on a PaaS.",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "jenkins/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/jenkins.png"
     },
     {
       "type": 3,
-      "title": "Kafka",
+      "title": "Apache Kafka",
       "name": "kafka",
       "description": "3-node Apache Kafka cluster in KRaft mode (no ZooKeeper) with Kafbat UI, deployable locally with plain Docker Compose or to Miget as a compose stack.",
       "categories": [
-        "deployable.sh"
+        "Streaming & Messaging"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "kafka/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/apache-kafka.png"
     },
     {
       "type": 3,
@@ -735,13 +1746,41 @@
       "name": "karakeep",
       "description": "Karakeep (formerly Hoarder) - a self-hosted \"bookmark everything\" app: save links, notes, and images, and it automatically crawls and archives the page (so your links never rot), takes a screenshot, full-text indexes everything, and can",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "karakeep/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/karakeep.png",
+      "env": [
+        {
+          "name": "MEILI_MASTER_KEY",
+          "label": "MEILI_MASTER_KEY",
+          "description": "Meilisearch master key - must be identical on the app and Meilisearch."
+        },
+        {
+          "name": "NEXTAUTH_SECRET",
+          "label": "NEXTAUTH_SECRET",
+          "description": "Session secret."
+        },
+        {
+          "name": "NEXTAUTH_URL",
+          "label": "NEXTAUTH_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "OLLAMA_BASE_URL",
+          "label": "OLLAMA_BASE_URL"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OPENAI_API_KEY",
+          "description": "Optional AI auto-tagging."
+        }
+      ]
     },
     {
       "type": 3,
@@ -749,13 +1788,50 @@
       "name": "kestra",
       "description": "Kestra - the declarative workflow orchestrator: flows are YAML, authored and versioned in the UI, with hundreds of plugins (HTTP, SQL, dbt, file ops, notifications) and schedules/triggers.",
       "categories": [
-        "deployable.sh"
+        "Automation & Jobs"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "kestra/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/kestra.png",
+      "env": [
+        {
+          "name": "DB_HOST",
+          "label": "DB_HOST",
+          "default": "db"
+        },
+        {
+          "name": "DB_NAME",
+          "label": "DB_NAME",
+          "default": "kestra"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "label": "DB_PASSWORD"
+        },
+        {
+          "name": "DB_PORT",
+          "label": "DB_PORT",
+          "default": "5432"
+        },
+        {
+          "name": "DB_USER",
+          "label": "DB_USER",
+          "default": "kestra"
+        },
+        {
+          "name": "KESTRA_ADMIN_EMAIL",
+          "label": "KESTRA_ADMIN_EMAIL",
+          "description": "Basic auth on the UI/API.",
+          "default": "admin@kestra.local"
+        },
+        {
+          "name": "KESTRA_ADMIN_PASSWORD",
+          "label": "KESTRA_ADMIN_PASSWORD"
+        }
+      ]
     },
     {
       "type": 3,
@@ -763,41 +1839,101 @@
       "name": "keycloak",
       "description": "Keycloak, identity & access management (OIDC, SAML, social login, user federation) backed by a managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "Auth & API Gateway"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "keycloak/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/keycloak.png",
+      "env": [
+        {
+          "name": "KC_ADMIN_PASSWORD",
+          "label": "KC_ADMIN_PASSWORD"
+        },
+        {
+          "name": "KC_ADMIN_USERNAME",
+          "label": "KC_ADMIN_USERNAME",
+          "description": "Bootstrap admin, used to create the first admin account on an empty DB.",
+          "default": "admin"
+        },
+        {
+          "name": "KC_HOSTNAME",
+          "label": "KC_HOSTNAME",
+          "description": "Public URL Keycloak should advertise, e.g."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Kilo",
+      "title": "Kilo (headless)",
       "name": "kilo",
       "description": "Kilo, open-source AI coding agent, running in server mode (`kilo serve`) on Miget: a persistent remote agent whose HTTP+SSE API your Kilo clients attach to (IDE extension, `kilo attach`, or the Cloud Agents web UI via Remote Connections).",
       "categories": [
-        "deployable.sh"
+        "AI Agents"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "kilo/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "label": "ANTHROPIC_API_KEY"
+        },
+        {
+          "name": "KILO_SERVER_PASSWORD",
+          "label": "KILO_SERVER_PASSWORD"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Kong",
+      "title": "Kong Gateway",
       "name": "kong",
       "description": "DB-backed Kong Gateway (OSS) in front of your project's apps, deployable locally with plain Docker Compose or to Miget as a compose stack.",
       "categories": [
-        "deployable.sh"
+        "Auth & API Gateway"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "kong/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "ADMIN_USERNAME",
+          "label": "ADMIN_USERNAME",
+          "description": "Basic-auth credentials for Kong Manager (the `admin` service).",
+          "default": "admin"
+        },
+        {
+          "name": "KONG_PG_DATABASE",
+          "label": "KONG_PG_DATABASE",
+          "default": "kong"
+        },
+        {
+          "name": "KONG_PG_HOST",
+          "label": "KONG_PG_HOST",
+          "description": "Local development values, copy to .env for `docker compose up`.",
+          "default": "db"
+        },
+        {
+          "name": "KONG_PG_PASSWORD",
+          "label": "KONG_PG_PASSWORD"
+        },
+        {
+          "name": "KONG_PG_USER",
+          "label": "KONG_PG_USER",
+          "default": "kong"
+        }
+      ]
     },
     {
       "type": 3,
@@ -805,13 +1941,48 @@
       "name": "langfuse",
       "description": "Langfuse v3 - open-source LLM engineering platform: tracing, evaluations, prompt management, and usage dashboards. This template mirrors the official self-host topology.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "langfuse/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/langfuse.png",
+      "env": [
+        {
+          "name": "CLICKHOUSE_PASSWORD",
+          "label": "CLICKHOUSE_PASSWORD"
+        },
+        {
+          "name": "ENCRYPTION_KEY",
+          "label": "ENCRYPTION_KEY"
+        },
+        {
+          "name": "MINIO_ROOT_PASSWORD",
+          "label": "MINIO_ROOT_PASSWORD"
+        },
+        {
+          "name": "NEXTAUTH_SECRET",
+          "label": "NEXTAUTH_SECRET"
+        },
+        {
+          "name": "NEXTAUTH_URL",
+          "label": "NEXTAUTH_URL",
+          "description": "Public URL of the web app (set to the https domain after first deploy).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -base64 24"
+        },
+        {
+          "name": "SALT",
+          "label": "SALT",
+          "default": "# openssl rand -base64 32"
+        }
+      ]
     },
     {
       "type": 3,
@@ -819,13 +1990,29 @@
       "name": "letta",
       "description": "Letta (the MemGPT lineage) - an agent server with memory as the core primitive: agents live server-side with self-editing persistent memory, and clients (SDKs, the hosted ADE at app.letta.com) connect to them over the REST API.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "letta/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "label": "ANTHROPIC_API_KEY"
+        },
+        {
+          "name": "LETTA_SERVER_PASSWORD",
+          "label": "LETTA_SERVER_PASSWORD",
+          "description": "API password (clients send it as a bearer token)."
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OPENAI_API_KEY",
+          "description": "At least one model provider (billed to you)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -833,69 +2020,154 @@
       "name": "linkwarden",
       "description": "Linkwarden - a bookmark manager that actually keeps your links: every save is preserved as a screenshot, PDF, readable HTML, and an archive.org snapshot, so a dead page is still readable years later.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "linkwarden/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/linkwarden.png",
+      "env": [
+        {
+          "name": "DISABLE_REGISTRATION",
+          "label": "DISABLE_REGISTRATION",
+          "description": "Set true after creating your accounts.",
+          "default": "false"
+        },
+        {
+          "name": "NEXTAUTH_SECRET",
+          "label": "NEXTAUTH_SECRET"
+        },
+        {
+          "name": "NEXTAUTH_URL",
+          "label": "NEXTAUTH_URL",
+          "description": "IMPORTANT: include the /api/v1/auth suffix.",
+          "default": "http://localhost:5000/api/v1/auth"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Listmonk",
+      "title": "listmonk",
       "name": "listmonk",
       "description": "listmonk - high-performance self-hosted newsletters and mailing lists: subscribers, campaigns, templates, double-opt-in, and analytics in one Go binary on Postgres. Replace per-subscriber SaaS pricing with a flat plan.",
       "categories": [
-        "deployable.sh"
+        "Email & Newsletters"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "listmonk/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/listmonk.png",
+      "env": [
+        {
+          "name": "LISTMONK_ADMIN_PASSWORD",
+          "label": "LISTMONK_ADMIN_PASSWORD"
+        },
+        {
+          "name": "LISTMONK_ADMIN_USER",
+          "label": "LISTMONK_ADMIN_USER",
+          "description": "First-run admin (used to bootstrap; manage users in the UI after).",
+          "default": "admin"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Litellm",
+      "title": "LiteLLM",
       "name": "litellm",
       "description": "LiteLLM proxy - one OpenAI-compatible endpoint in front of every LLM provider (Anthropic, OpenAI, Gemini, Bedrock, Mistral, local, \u2026) with virtual keys, per-key budgets, spend tracking, fallbacks and retries.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "litellm/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/litellm.png",
+      "env": [
+        {
+          "name": "LITELLM_MASTER_KEY",
+          "label": "LITELLM_MASTER_KEY",
+          "description": "Admin/master key - must start with sk-."
+        },
+        {
+          "name": "LITELLM_SALT_KEY",
+          "label": "LITELLM_SALT_KEY",
+          "description": "Encrypts provider API keys stored in the DB."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Livekit",
+      "title": "LiveKit",
       "name": "livekit",
       "description": "LiveKit - the Apache-2.0 WebRTC server powering modern voice agents and video apps: rooms, tracks, selective forwarding, and the Agents framework ecosystem. Single Go binary.",
       "categories": [
-        "deployable.sh"
+        "Voice & Realtime"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "livekit/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "LIVEKIT_API_KEY",
+          "label": "LIVEKIT_API_KEY",
+          "description": "API key/secret pair (any opaque strings)."
+        },
+        {
+          "name": "LIVEKIT_API_SECRET",
+          "label": "LIVEKIT_API_SECRET"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Livekit Agents",
+      "title": "LiveKit Agents",
       "name": "livekit-agents",
       "description": "A voice AI agent worker on the LiveKit Agents framework: it joins LiveKit rooms and converses - Deepgram for ears, ElevenLabs for voice, any OpenAI-compatible LLM for the brain (the catalogue's `litellm` gateway slots in via",
       "categories": [
-        "deployable.sh"
+        "Voice & Realtime"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "livekit-agents/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "DEEPGRAM_API_KEY",
+          "label": "DEEPGRAM_API_KEY"
+        },
+        {
+          "name": "ELEVEN_API_KEY",
+          "label": "ELEVEN_API_KEY",
+          "description": "Provider keys (use what your agent's pipeline needs; billed to you)."
+        },
+        {
+          "name": "LIVEKIT_API_KEY",
+          "label": "LIVEKIT_API_KEY"
+        },
+        {
+          "name": "LIVEKIT_API_SECRET",
+          "label": "LIVEKIT_API_SECRET"
+        },
+        {
+          "name": "LIVEKIT_URL",
+          "label": "LIVEKIT_URL",
+          "description": "Your LiveKit server (in-project: ws://livekit:5000) or LiveKit Cloud.",
+          "default": "ws://livekit:5000"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OPENAI_API_KEY"
+        }
+      ]
     },
     {
       "type": 3,
@@ -903,13 +2175,27 @@
       "name": "logto",
       "description": "Logto - the open-source Auth0 experience: pre-built hosted sign-in pages, OIDC/OAuth, social logins, organizations, MFA, and clean SDKs for every framework. MPL-2.0, one container + a managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "Auth & API Gateway"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "logto/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/logto.png",
+      "env": [
+        {
+          "name": "ADMIN_ENDPOINT",
+          "label": "ADMIN_ENDPOINT",
+          "default": "http://localhost:5001"
+        },
+        {
+          "name": "ENDPOINT",
+          "label": "ENDPOINT",
+          "description": "Public URLs of the two apps (set to the https domains on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -917,55 +2203,131 @@
       "name": "mailpit",
       "description": "Mailpit - the modern dev mail catcher (MailHog's actively-maintained successor, MIT): an SMTP sink plus a fast web UI with search, HTML preview, link checking, and an API. Stop sending test emails to real inboxes.",
       "categories": [
-        "deployable.sh"
+        "Email & Newsletters"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mailpit/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mailpit.png",
+      "env": [
+        {
+          "name": "MP_UI_AUTH",
+          "label": "MP_UI_AUTH",
+          "description": "Web UI basic auth (user:password).",
+          "default": "admin:change-me"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Mariadb",
+      "title": "MariaDB",
       "name": "mariadb",
       "description": "MariaDB 11.8 - the community-developed MySQL fork, as a single self-hosted node. Drop-in compatible with MySQL for most applications, configured through the official image's environment variables, with data on a volume.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mariadb/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mariadb.png",
+      "env": [
+        {
+          "name": "MARIADB_DATABASE",
+          "label": "MARIADB_DATABASE",
+          "description": "Application database + user created on first boot.",
+          "default": "app"
+        },
+        {
+          "name": "MARIADB_PASSWORD",
+          "label": "MARIADB_PASSWORD"
+        },
+        {
+          "name": "MARIADB_ROOT_PASSWORD",
+          "label": "MARIADB_ROOT_PASSWORD",
+          "description": "Root password (required)."
+        },
+        {
+          "name": "MARIADB_USER",
+          "label": "MARIADB_USER",
+          "default": "app"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Mariadb Galera",
+      "title": "MariaDB Galera",
       "name": "mariadb-galera",
       "description": "3-node MariaDB 11.8 LTS cluster with Galera synchronous multi-primary replication - every node accepts writes, any node can die. Runs the OFFICIAL mariadb image (the Galera library ships in it); clustering is pure command-line flags.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mariadb-galera/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mariadb.png",
+      "env": [
+        {
+          "name": "MARIADB_APP_PASSWORD",
+          "label": "MARIADB_APP_PASSWORD"
+        },
+        {
+          "name": "MARIADB_ROOT_PASSWORD",
+          "label": "MARIADB_ROOT_PASSWORD"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Mariadb Replication",
+      "title": "MariaDB Replication",
       "name": "mariadb-replication",
       "description": "Asynchronous MariaDB replication: one primary accepts writes and streams its binary log to a read-only replica. This is the classic read-scaling / hot-standby topology.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mariadb-replication/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mariadb.png",
+      "env": [
+        {
+          "name": "MARIADB_DATABASE",
+          "label": "MARIADB_DATABASE",
+          "description": "Application database + user (created on the primary, replicates down).",
+          "default": "app"
+        },
+        {
+          "name": "MARIADB_PASSWORD",
+          "label": "MARIADB_PASSWORD"
+        },
+        {
+          "name": "MARIADB_REPLICATION_PASSWORD",
+          "label": "MARIADB_REPLICATION_PASSWORD"
+        },
+        {
+          "name": "MARIADB_REPLICATION_USER",
+          "label": "MARIADB_REPLICATION_USER",
+          "description": "Replication account (created on the primary, used by the replica).",
+          "default": "repl"
+        },
+        {
+          "name": "MARIADB_ROOT_PASSWORD",
+          "label": "MARIADB_ROOT_PASSWORD",
+          "description": "Root password (both nodes - must match)."
+        },
+        {
+          "name": "MARIADB_USER",
+          "label": "MARIADB_USER",
+          "default": "app"
+        }
+      ]
     },
     {
       "type": 3,
@@ -973,13 +2335,22 @@
       "name": "mattermost",
       "description": "Mattermost - open-source team chat: channels, threads, DMs, voice calls, slash commands, integrations, and plugins. Team Edition image on a managed Postgres - it listens on :5000 directly, so no proxy.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mattermost/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mattermost.png",
+      "env": [
+        {
+          "name": "MM_SITE_URL",
+          "label": "MM_SITE_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -987,13 +2358,21 @@
       "name": "meilisearch",
       "description": "Meilisearch, instant, typo-tolerant search in a single container + volume. Public on its app domain; protected by the master key (`MEILI_ENV=production` rejects keyless requests).",
       "categories": [
-        "deployable.sh"
+        "Search & Vectors"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "meilisearch/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/meilisearch.png",
+      "env": [
+        {
+          "name": "MEILI_MASTER_KEY",
+          "label": "MEILI_MASTER_KEY",
+          "description": "Master key, every request must present it (or a derived API key)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1001,13 +2380,14 @@
       "name": "memos",
       "description": "Memos - the lightweight note hub: quick markdown notes with tags, search, and selective sharing. A single Go binary on SQLite, MIT-licensed - the \"capture a thought in two seconds\" tool, on your infrastructure.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "memos/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/memos.png"
     },
     {
       "type": 3,
@@ -1015,27 +2395,65 @@
       "name": "metabase",
       "description": "Metabase OSS - the BI tool non-analysts actually use: point-and-click questions, dashboards, and SQL when you want it. One JVM container + a managed Postgres for the app database.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "metabase/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/metabase.png",
+      "env": [
+        {
+          "name": "MB_SITE_URL",
+          "label": "MB_SITE_URL",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Minecraft",
+      "title": "Minecraft Server",
       "name": "minecraft",
       "description": "Minecraft Java Edition via itzg/minecraft-server - the standard image: env-driven, supports Paper/Fabric/Forge/Vanilla, and downloads the server jar at runtime (nothing redistributed).",
       "categories": [
-        "deployable.sh"
+        "Game Servers"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "minecraft/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/minecraft.png",
+      "env": [
+        {
+          "name": "EULA",
+          "label": "EULA",
+          "description": "Mojang's EULA (https://aka.ms/MinecraftEULA) - YOU accept it."
+        },
+        {
+          "name": "MEMORY",
+          "label": "MEMORY",
+          "description": "JVM heap.",
+          "default": "2G"
+        },
+        {
+          "name": "MOTD",
+          "label": "MOTD",
+          "default": "A Miget Minecraft Server"
+        },
+        {
+          "name": "TYPE",
+          "label": "TYPE",
+          "description": "PAPER (recommended), VANILLA, FABRIC, FORGE, ...",
+          "default": "PAPER"
+        },
+        {
+          "name": "VERSION",
+          "label": "VERSION",
+          "default": "LATEST"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1043,105 +2461,200 @@
       "name": "miniflux",
       "description": "Miniflux - a minimalist, blazing-fast RSS/Atom reader: a clean distraction-free UI, keyboard-driven, with full-text fetching, a REST API, and Google Reader / Fever API compatibility (so mobile clients like Reeder and NetNewsWire connect).",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "miniflux/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/miniflux.png",
+      "env": [
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "ADMIN_USERNAME",
+          "label": "ADMIN_USERNAME",
+          "description": "First admin (created on first boot via CREATE_ADMIN=1).",
+          "default": "admin"
+        },
+        {
+          "name": "BASE_URL",
+          "label": "BASE_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Minio",
+      "title": "MinIO",
       "name": "minio",
       "description": "MinIO, S3-compatible object storage, single node + 20 GB volume, with the web console as the public entrypoint.",
       "categories": [
-        "deployable.sh"
+        "Object Storage"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "minio/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/minio.png",
+      "env": [
+        {
+          "name": "MINIO_ROOT_PASSWORD",
+          "label": "MINIO_ROOT_PASSWORD"
+        },
+        {
+          "name": "MINIO_ROOT_USER",
+          "label": "MINIO_ROOT_USER",
+          "default": "minio-admin"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Mongodb",
+      "title": "MongoDB Replica Set",
       "name": "mongodb",
       "description": "3-node MongoDB 8 replica set (`rs0`), deployable locally with plain Docker Compose or to Miget as a compose stack.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mongodb/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mongodb.png"
     },
     {
       "type": 3,
-      "title": "Mssql",
+      "title": "SQL Server",
       "name": "mssql",
       "description": "Official SQL Server on Linux container (SQL Server 2025), Express edition by default - the edition Microsoft licenses for production at no cost. Single node + 10 GB volume, internal-only (databases never get a public domain).",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mssql/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ACCEPT_EULA",
+          "label": "ACCEPT_EULA",
+          "description": "Setting Y accepts the Microsoft SQL Server EULA.",
+          "default": "Y"
+        },
+        {
+          "name": "MSSQL_PID",
+          "label": "MSSQL_PID",
+          "description": "Express has a free production license (50 GB/db, 1.4 GB buffer pool, 4 cores).",
+          "default": "Express"
+        },
+        {
+          "name": "MSSQL_SA_PASSWORD",
+          "label": "MSSQL_SA_PASSWORD",
+          "description": "sa password: min 8 chars, 3 of 4 classes (upper/lower/digit/symbol)."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Mysql",
+      "title": "MySQL",
       "name": "mysql",
       "description": "MySQL 8.4 LTS - the world's most popular open- source relational database, as a single self-hosted node. Configured entirely through the official image's environment variables, with data on a volume.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mysql/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mysql.png",
+      "env": [
+        {
+          "name": "MYSQL_DATABASE",
+          "label": "MYSQL_DATABASE",
+          "description": "Application database + user created on first boot.",
+          "default": "app"
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "label": "MYSQL_PASSWORD"
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Root password (required)."
+        },
+        {
+          "name": "MYSQL_USER",
+          "label": "MYSQL_USER",
+          "default": "app"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Mysql Innodb Cluster",
+      "title": "MySQL InnoDB Cluster",
       "name": "mysql-innodb-cluster",
       "description": "3-node high availability using MySQL Group Replication - the engine that MySQL InnoDB Cluster is built on.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "mysql-innodb-cluster/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/mysql.png",
+      "env": [
+        {
+          "name": "MYSQL_REPLICATION_PASSWORD",
+          "label": "MYSQL_REPLICATION_PASSWORD",
+          "description": "Group Replication recovery account password (created by the init on every node)."
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Root password (all nodes - must match)."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "N8N",
+      "title": "n8n",
       "name": "n8n",
       "description": "n8n workflow automation in queue mode, editor/API/webhooks on a main instance, execution on horizontally scalable workers, deployable locally with plain Docker Compose or to Miget as a compose stack.",
       "categories": [
-        "deployable.sh"
+        "Automation & Jobs"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "n8n/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/n8n.png",
+      "env": [
+        {
+          "name": "N8N_ENCRYPTION_KEY",
+          "label": "N8N_ENCRYPTION_KEY",
+          "description": "Copy to .env for local `docker compose up`."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Nats",
+      "title": "NATS Cluster",
       "name": "nats",
       "description": "NATS - the lightweight, blazing-fast messaging system: subjects, pub/sub, request/reply, and JetStream for persistent streams and key-value/object stores.",
       "categories": [
-        "deployable.sh"
+        "Streaming & Messaging"
       ],
       "platform": "linux",
       "repository": {
@@ -1155,55 +2668,102 @@
       "name": "navidrome",
       "description": "Navidrome - self-hosted music streaming: a fast, modern, Subsonic/OpenSubsonic-compatible server for a music library you actually own. Stream from any Subsonic app (Symfonium, play:Sub, DSub, Feishin, Amperfy) or the built-in web player.",
       "categories": [
-        "deployable.sh"
+        "Media"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "navidrome/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/navidrome.png"
     },
     {
       "type": 3,
-      "title": "Nocodb",
+      "title": "NocoDB",
       "name": "nocodb",
       "description": "NocoDB - the open-source Airtable alternative: a smart-spreadsheet UI over a real database, with grid/gallery/kanban/form views, APIs, webhooks, and automations. One app container + a managed Postgres + a small volume for file attachments.",
       "categories": [
-        "deployable.sh"
+        "Internal Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "nocodb/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/nocodb.png",
+      "env": [
+        {
+          "name": "NC_AUTH_JWT_SECRET",
+          "label": "NC_AUTH_JWT_SECRET",
+          "description": "Auth token signing secret - set explicitly so logins survive recreation."
+        },
+        {
+          "name": "NC_SITE_URL",
+          "label": "NC_SITE_URL",
+          "description": "Public URL used in invite/share emails.",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Node Red",
+      "title": "Node-RED",
       "name": "node-red",
       "description": "Node-RED - the OpenJS Foundation's flow-based automation tool: wire APIs, webhooks, MQTT, schedules, and devices together in a visual editor, with thousands of community nodes.",
       "categories": [
-        "deployable.sh"
+        "Automation & Jobs"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "node-red/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/node-red.png",
+      "env": [
+        {
+          "name": "NODERED_PASSWORD_HASH",
+          "label": "NODERED_PASSWORD_HASH",
+          "description": "bcrypt hash - generate with: docker run --rm -it nodered/node-red:4.1 node-red admin hash-pw"
+        },
+        {
+          "name": "NODERED_USERNAME",
+          "label": "NODERED_USERNAME",
+          "default": "admin"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Ntfy",
+      "title": "ntfy",
       "name": "ntfy",
       "description": "ntfy - push notifications as an HTTP primitive: `curl -d \"backup done\" https://your-domain/alerts` and every subscribed phone (iOS/Android apps) and browser gets it. Topics, priorities, attachments, scheduled delivery - one tiny Go binary.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "ntfy/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/ntfy.png",
+      "env": [
+        {
+          "name": "NTFY_AUTH_DEFAULT_ACCESS",
+          "label": "NTFY_AUTH_DEFAULT_ACCESS",
+          "default": "deny-all"
+        },
+        {
+          "name": "NTFY_AUTH_USERS",
+          "label": "NTFY_AUTH_USERS",
+          "description": "Declarative users: name:bcrypt:role (comma-separated)."
+        },
+        {
+          "name": "NTFY_BASE_URL",
+          "label": "NTFY_BASE_URL",
+          "description": "The app's public URL (https domain on Miget) - links/attachments embed it.",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1211,13 +2771,27 @@
       "name": "odoo",
       "description": "Odoo Community 18 - the open-source business suite: CRM, sales, inventory, accounting, projects, manufacturing, website, and ecommerce, with a vast app store. LGPL-3 Community edition on a managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "odoo/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/odoo.png",
+      "env": [
+        {
+          "name": "ODOO_ADMIN_PASSWORD",
+          "label": "ODOO_ADMIN_PASSWORD",
+          "description": "Master password - gates database create/drop/backup in the DB manager."
+        },
+        {
+          "name": "ODOO_LIST_DB",
+          "label": "ODOO_LIST_DB",
+          "description": "True lets the web DB-manager create databases (needs a CREATEDB role).",
+          "default": "True"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1225,13 +2799,14 @@
       "name": "ollama",
       "description": "Ollama - run open large language models locally behind a simple HTTP API. Pull a model (Llama, Mistral, Qwen, Gemma, Phi, and many more) and serve it from your own infrastructure, with OpenAI-compatible endpoints.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "ollama/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/ollama.png"
     },
     {
       "type": 3,
@@ -1239,69 +2814,200 @@
       "name": "open-mercato",
       "description": "Open Mercato - the MIT \"AI-engineering foundation framework\": multi-tenant CRM/ERP/commerce modules on Next.js with RBAC, dynamic entities, and an agent-ready repo layout (specs + skills checked in). Start business apps at \"80% done\".",
       "categories": [
-        "deployable.sh"
+        "Internal Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "open-mercato/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "APP_URL",
+          "label": "APP_URL",
+          "description": "Public URL (set to the app's https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT_SECRET"
+        },
+        {
+          "name": "MEILISEARCH_MASTER_KEY",
+          "label": "MEILISEARCH_MASTER_KEY"
+        },
+        {
+          "name": "OM_INIT_SUPERADMIN_EMAIL",
+          "label": "OM_INIT_SUPERADMIN_EMAIL",
+          "description": "Superadmin created on first init.",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "OM_INIT_SUPERADMIN_PASSWORD",
+          "label": "OM_INIT_SUPERADMIN_PASSWORD"
+        },
+        {
+          "name": "TENANT_DATA_ENCRYPTION_KEY",
+          "label": "TENANT_DATA_ENCRYPTION_KEY"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Open Webui",
+      "title": "Open WebUI",
       "name": "open-webui",
       "description": "Open WebUI - the self-hosted AI chat workspace: ChatGPT-style UI over any OpenAI-compatible API, with RAG over uploaded documents, multi-user accounts, RBAC, and prompt/model presets. Single container + volume.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "open-webui/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/open-webui.png",
+      "env": [
+        {
+          "name": "OPENAI_API_BASE_URL",
+          "label": "OPENAI_API_BASE_URL",
+          "description": "Any OpenAI-compatible endpoint.",
+          "default": "https://api.openai.com/v1"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OPENAI_API_KEY"
+        },
+        {
+          "name": "WEBUI_SECRET_KEY",
+          "label": "WEBUI_SECRET_KEY",
+          "description": "Session/JWT signing - persistent, or logins reset on redeploy."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Openclaw",
+      "title": "OpenClaw",
       "name": "openclaw",
       "description": "OpenClaw, an autonomous AI agent you run yourself: web dashboard, scheduled tasks, plugins, persistent workspace. This template uses the coollabsio all-in-one image (nginx + gateway, env-driven).",
       "categories": [
-        "deployable.sh"
+        "AI Agents"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "openclaw/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/openclaw.png",
+      "env": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "label": "ANTHROPIC_API_KEY"
+        },
+        {
+          "name": "AUTH_PASSWORD",
+          "label": "AUTH_PASSWORD"
+        },
+        {
+          "name": "AUTH_USERNAME",
+          "label": "AUTH_USERNAME",
+          "default": "admin"
+        },
+        {
+          "name": "OPENCLAW_ALLOWED_ORIGINS",
+          "label": "OPENCLAW_ALLOWED_ORIGINS",
+          "description": "Set to the app's https domain on Miget (after first deploy):"
+        },
+        {
+          "name": "OPENCLAW_GATEWAY_TOKEN",
+          "label": "OPENCLAW_GATEWAY_TOKEN"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Openobserve",
+      "title": "OpenObserve",
       "name": "openobserve",
       "description": "OpenObserve - logs, metrics, and traces in a single Rust binary: the open-source Datadog/Splunk/Elasticsearch alternative.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "openobserve/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/openobserve.png",
+      "env": [
+        {
+          "name": "ZO_LOCAL_MODE_STORAGE",
+          "label": "ZO_LOCAL_MODE_STORAGE",
+          "description": "Storage: \"disk\" (default, uses the volume) or \"s3\" (Miget Buckets).",
+          "default": "disk"
+        },
+        {
+          "name": "ZO_ROOT_USER_EMAIL",
+          "label": "ZO_ROOT_USER_EMAIL",
+          "description": "Root account (created on first start).",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "ZO_ROOT_USER_PASSWORD",
+          "label": "ZO_ROOT_USER_PASSWORD"
+        },
+        {
+          "name": "ZO_S3_ACCESS_KEY",
+          "label": "ZO_S3_ACCESS_KEY"
+        },
+        {
+          "name": "ZO_S3_BUCKET_NAME",
+          "label": "ZO_S3_BUCKET_NAME"
+        },
+        {
+          "name": "ZO_S3_PROVIDER",
+          "label": "ZO_S3_PROVIDER",
+          "default": "s3"
+        },
+        {
+          "name": "ZO_S3_REGION_NAME",
+          "label": "ZO_S3_REGION_NAME",
+          "default": "us-east-1"
+        },
+        {
+          "name": "ZO_S3_SECRET_KEY",
+          "label": "ZO_S3_SECRET_KEY"
+        },
+        {
+          "name": "ZO_S3_SERVER_URL",
+          "label": "ZO_S3_SERVER_URL"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Oracle",
+      "title": "Oracle Database Free",
       "name": "oracle",
       "description": "Oracle Database Free (the 26ai line) - the actual Oracle Database, free for development AND production under the Oracle Free Use Terms and Conditions, within software-enforced caps: 2 cores, 2 GB RAM, 12 GB user data, one instance per",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "oracle/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/oracle.png",
+      "env": [
+        {
+          "name": "APP_USER_PASSWORD",
+          "label": "APP_USER_PASSWORD",
+          "description": "Password for the `app` schema user in FREEPDB1."
+        },
+        {
+          "name": "ORACLE_PASSWORD",
+          "label": "ORACLE_PASSWORD",
+          "description": "SYS / SYSTEM / PDBADMIN password."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1309,13 +3015,80 @@
       "name": "outline",
       "description": "Outline - the team wiki that feels like a product: a genuinely fast editor, nested collections, full-text search, granular permissions, and a public API.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "outline/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/outline.png",
+      "env": [
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        },
+        {
+          "name": "S3_ACCESS_KEY",
+          "label": "S3_ACCESS_KEY",
+          "description": "A Miget Bucket (private visibility) - uploads/avatars live here, which makes the app container stateless."
+        },
+        {
+          "name": "S3_BUCKET_NAME",
+          "label": "S3_BUCKET_NAME",
+          "default": "outline-uploads"
+        },
+        {
+          "name": "S3_BUCKET_URL",
+          "label": "S3_BUCKET_URL",
+          "default": "https://s3.eu-east-1.miget.io"
+        },
+        {
+          "name": "S3_REGION",
+          "label": "S3_REGION",
+          "default": "us-east-1"
+        },
+        {
+          "name": "S3_SECRET_KEY",
+          "label": "S3_SECRET_KEY"
+        },
+        {
+          "name": "SECRET_KEY",
+          "label": "SECRET_KEY"
+        },
+        {
+          "name": "SMTP_FROM_EMAIL",
+          "label": "SMTP_FROM_EMAIL"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST",
+          "description": "Magic-link login emails (mailpit for testing)."
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP_PASSWORD"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "SMTP_USERNAME"
+        },
+        {
+          "name": "URL",
+          "label": "URL",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "UTILS_SECRET",
+          "label": "UTILS_SECRET"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1323,27 +3096,67 @@
       "name": "owncast",
       "description": "Owncast - your own self-hosted live streaming server: a Twitch / YouTube Live alternative with a built-in web video player, live chat, and federation.",
       "categories": [
-        "deployable.sh"
+        "Media"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "owncast/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/owncast.png"
     },
     {
       "type": 3,
-      "title": "Paperless Ngx",
+      "title": "Paperless-ngx",
       "name": "paperless-ngx",
       "description": "Paperless-ngx - the document management system that ends the filing cabinet: feed it scans and PDFs, it OCRs, tags, indexes, and makes everything full-text searchable. The most-loved self-hosted document app, on your infrastructure.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "paperless-ngx/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/paperless-ngx.png",
+      "env": [
+        {
+          "name": "PAPERLESS_ADMIN_PASSWORD",
+          "label": "PAPERLESS_ADMIN_PASSWORD"
+        },
+        {
+          "name": "PAPERLESS_ADMIN_USER",
+          "label": "PAPERLESS_ADMIN_USER",
+          "description": "First-run admin (idempotent superuser).",
+          "default": "admin"
+        },
+        {
+          "name": "PAPERLESS_OCR_LANGUAGE",
+          "label": "PAPERLESS_OCR_LANGUAGE",
+          "description": "ISO 639-2 OCR language(s), e.g.",
+          "default": "eng"
+        },
+        {
+          "name": "PAPERLESS_SECRET_KEY",
+          "label": "PAPERLESS_SECRET_KEY"
+        },
+        {
+          "name": "PAPERLESS_TIME_ZONE",
+          "label": "PAPERLESS_TIME_ZONE",
+          "default": "Etc/UTC"
+        },
+        {
+          "name": "PAPERLESS_URL",
+          "label": "PAPERLESS_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1351,13 +3164,48 @@
       "name": "parseable",
       "description": "Parseable - a single-binary log lake built for object storage: ingest logs over HTTP, store them as compressed Parquet on S3, query with SQL. Rust, lean (runs in 512 MB), and S3-native by design - a natural fit for Miget Buckets.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "parseable/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/parseable.png",
+      "env": [
+        {
+          "name": "P_PASSWORD",
+          "label": "P_PASSWORD"
+        },
+        {
+          "name": "P_S3_ACCESS_KEY",
+          "label": "P_S3_ACCESS_KEY"
+        },
+        {
+          "name": "P_S3_BUCKET",
+          "label": "P_S3_BUCKET"
+        },
+        {
+          "name": "P_S3_REGION",
+          "label": "P_S3_REGION",
+          "default": "us-east-1"
+        },
+        {
+          "name": "P_S3_SECRET_KEY",
+          "label": "P_S3_SECRET_KEY"
+        },
+        {
+          "name": "P_S3_URL",
+          "label": "P_S3_URL",
+          "description": "Leave P_S3_URL empty for local-disk mode."
+        },
+        {
+          "name": "P_USERNAME",
+          "label": "P_USERNAME",
+          "description": "Admin login.",
+          "default": "admin"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1365,13 +3213,58 @@
       "name": "penpot",
       "description": "Penpot - the open-source design and prototyping platform (the Figma alternative): SVG-native, web-based, with real design-to-dev handoff. MPL-2.0. Frontend + backend + exporter on a managed Postgres and a noeviction Valkey.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "penpot/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/penpot.png",
+      "env": [
+        {
+          "name": "PENPOT_OBJECTS_STORAGE_BACKEND",
+          "label": "PENPOT_OBJECTS_STORAGE_BACKEND",
+          "description": "Recommended on Miget: store assets in a Bucket and drop the RWX volume.",
+          "default": "fs"
+        },
+        {
+          "name": "PENPOT_PUBLIC_URI",
+          "label": "PENPOT_PUBLIC_URI",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "PENPOT_SECRET_KEY",
+          "label": "PENPOT_SECRET_KEY"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        },
+        {
+          "name": "S3_ACCESS_KEY",
+          "label": "S3_ACCESS_KEY"
+        },
+        {
+          "name": "S3_BUCKET_NAME",
+          "label": "S3_BUCKET_NAME"
+        },
+        {
+          "name": "S3_ENDPOINT",
+          "label": "S3_ENDPOINT"
+        },
+        {
+          "name": "S3_REGION",
+          "label": "S3_REGION",
+          "default": "us-east-1"
+        },
+        {
+          "name": "S3_SECRET_KEY",
+          "label": "S3_SECRET_KEY"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1379,27 +3272,71 @@
       "name": "percona-server",
       "description": "Percona Server for MySQL - a free, fully MySQL-compatible drop-in with extra instrumentation (detailed `INFORMATION_SCHEMA` and `PERFORMANCE_SCHEMA` tables), improved diagnostics, and performance enhancements.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "percona-server/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "MYSQL_DATABASE",
+          "label": "MYSQL_DATABASE",
+          "description": "Application database + user created on first boot.",
+          "default": "app"
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "label": "MYSQL_PASSWORD"
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Root password (required)."
+        },
+        {
+          "name": "MYSQL_USER",
+          "label": "MYSQL_USER",
+          "default": "app"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Percona Xtradb Cluster",
+      "title": "Percona XtraDB Cluster",
       "name": "percona-xtradb-cluster",
       "description": "Percona XtraDB Cluster - synchronous, multi-primary MySQL high availability built on Galera.",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "percona-xtradb-cluster/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "MYSQL_DATABASE",
+          "label": "MYSQL_DATABASE",
+          "description": "Application database + user, created on bootstrap (replicates to joiners).",
+          "default": "app"
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "label": "MYSQL_PASSWORD"
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Root password (all nodes - must match)."
+        },
+        {
+          "name": "MYSQL_USER",
+          "label": "MYSQL_USER",
+          "default": "app"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1407,13 +3344,20 @@
       "name": "phoenix",
       "description": "Phoenix - LLM tracing, evaluations, datasets, and a prompt playground in ONE container, OpenTelemetry-native.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "phoenix/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "PHOENIX_SECRET",
+          "label": "PHOENIX_SECRET",
+          "description": "32+ characters."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1421,13 +3365,58 @@
       "name": "plane",
       "description": "Plane - open-source project management: issues, cycles (sprints), modules, a roadmap, Gantt and kanban views, pages, and analytics. A self-hosted Jira / Linear / ClickUp alternative.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "plane/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/plane.png",
+      "env": [
+        {
+          "name": "AWS_REGION",
+          "label": "AWS_REGION",
+          "description": "Optional S3 region label (leave blank for MinIO).",
+          "default": "us-east-1"
+        },
+        {
+          "name": "CORS_ALLOWED_ORIGINS",
+          "label": "CORS_ALLOWED_ORIGINS",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "MINIO_BUCKET",
+          "label": "MINIO_BUCKET",
+          "default": "uploads"
+        },
+        {
+          "name": "MINIO_ROOT_PASSWORD",
+          "label": "MINIO_ROOT_PASSWORD"
+        },
+        {
+          "name": "MINIO_ROOT_USER",
+          "label": "MINIO_ROOT_USER",
+          "description": "In-stack MinIO credentials + bucket (file storage).",
+          "default": "minio-access"
+        },
+        {
+          "name": "RABBITMQ_PASSWORD",
+          "label": "RABBITMQ_PASSWORD",
+          "description": "RabbitMQ password (Miget only - must match AMQP_URL in compose.miget.yaml)."
+        },
+        {
+          "name": "SECRET_KEY",
+          "label": "SECRET_KEY",
+          "description": "Django secret - a long random string."
+        },
+        {
+          "name": "WEB_URL",
+          "label": "WEB_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1435,27 +3424,42 @@
       "name": "plausible",
       "description": "Plausible - privacy-friendly web analytics: a lightweight, cookie-free, open-source Google Analytics alternative. A clean single-page dashboard, no personal data collection, no consent banner needed, and a script ~75x smaller than GA.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "plausible/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/plausible.png",
+      "env": [
+        {
+          "name": "BASE_URL",
+          "label": "BASE_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE",
+          "description": "Secret key base - at least 64 bytes."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Pocketbase",
+      "title": "PocketBase",
       "name": "pocketbase",
       "description": "Pocketbase, an entire backend (SQLite, auth, realtime subscriptions, file storage, admin UI) in one container. The simplest template in the catalogue: one service, one 2 GB volume.",
       "categories": [
-        "deployable.sh"
+        "Backend Platforms"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "pocketbase/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/pocketbase.png"
     },
     {
       "type": 3,
@@ -1463,27 +3467,75 @@
       "name": "prefect",
       "description": "Prefect 3 - workflow orchestration for Python people: flows are decorated functions, deployments schedule them, and the UI shows every run. The server here holds UI/API/schedules; your flow code runs in WORKERS that connect outbound.",
       "categories": [
-        "deployable.sh"
+        "Automation & Jobs"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "prefect/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "PREFECT_AUTH_STRING",
+          "label": "PREFECT_AUTH_STRING",
+          "description": "Basic auth, \"user:password\" - clients use the same value in PREFECT_API_AUTH_STRING.",
+          "default": "admin:"
+        },
+        {
+          "name": "PREFECT_SERVER_UI_API_URL",
+          "label": "PREFECT_SERVER_UI_API_URL",
+          "description": "Browser-facing API URL (https://<domain>/api on Miget).",
+          "default": "http://localhost:5000/api"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Prestashop",
+      "title": "PrestaShop",
       "name": "prestashop",
       "description": "PrestaShop 9 - the open-source storefront that runs a huge share of European e-commerce: catalogue, checkout, multi-language/multi-currency, and a vast module marketplace.",
       "categories": [
-        "deployable.sh"
+        "CMS & Publishing"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "prestashop/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/prestashop.png",
+      "env": [
+        {
+          "name": "ADMIN_MAIL",
+          "label": "ADMIN_MAIL",
+          "description": "Back-office login (at /admin).",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "ADMIN_PASSWD",
+          "label": "ADMIN_PASSWD"
+        },
+        {
+          "name": "PS_COUNTRY",
+          "label": "PS_COUNTRY",
+          "default": "US"
+        },
+        {
+          "name": "PS_DOMAIN",
+          "label": "PS_DOMAIN",
+          "description": "The shop's domain - BAKED INTO THE DATABASE at install time.",
+          "default": "localhost:5000"
+        },
+        {
+          "name": "PS_ENABLE_SSL",
+          "label": "PS_ENABLE_SSL",
+          "default": "0"
+        },
+        {
+          "name": "PS_LANGUAGE",
+          "label": "PS_LANGUAGE",
+          "default": "en"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1491,27 +3543,29 @@
       "name": "qdrant",
       "description": "Qdrant vector database, single container + volume, internal-only by default (no API key is configured; the project network is the boundary).",
       "categories": [
-        "deployable.sh"
+        "Search & Vectors"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "qdrant/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/qdrant.png"
     },
     {
       "type": 3,
-      "title": "Rabbitmq",
+      "title": "RabbitMQ",
       "name": "rabbitmq",
       "description": "3-node RabbitMQ 4.x cluster (quorum-queue ready), deployable locally with plain Docker Compose or to Miget as a compose stack.",
       "categories": [
-        "deployable.sh"
+        "Streaming & Messaging"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "rabbitmq/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/rabbitmq.png"
     },
     {
       "type": 3,
@@ -1519,13 +3573,21 @@
       "name": "redis",
       "description": "Redis - the in-memory data store used for caching, queues, pub/sub, streams, rate-limiting, and rich data structures. This is a single node, password-protected, with append-only persistence on a volume.",
       "categories": [
-        "deployable.sh"
+        "Caches & Key-Value"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "redis/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/redis.png",
+      "env": [
+        {
+          "name": "REDIS_PASSWORD",
+          "label": "REDIS_PASSWORD",
+          "description": "Redis password (requirepass)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1533,13 +3595,21 @@
       "name": "redis-cluster",
       "description": "Redis Cluster - horizontally-scaled Redis where the keyspace is partitioned across multiple master shards, each with a replica. This template runs 6 nodes (3 masters + 3 replicas) and a one-shot init that forms the cluster.",
       "categories": [
-        "deployable.sh"
+        "Caches & Key-Value"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "redis-cluster/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/redis.png",
+      "env": [
+        {
+          "name": "REDIS_PASSWORD",
+          "label": "REDIS_PASSWORD",
+          "description": "Shared Redis password (all nodes + the cluster-forming init)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1547,13 +3617,21 @@
       "name": "redis-sentinel",
       "description": "Redis Sentinel - high availability for Redis with automatic failover. This template runs one master, two replicas, and three sentinels that watch the master and promote a replica if it goes down.",
       "categories": [
-        "deployable.sh"
+        "Caches & Key-Value"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "redis-sentinel/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/redis.png",
+      "env": [
+        {
+          "name": "REDIS_PASSWORD",
+          "label": "REDIS_PASSWORD",
+          "description": "Shared Redis password (master, replicas, and sentinel auth)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1561,7 +3639,7 @@
       "name": "redpanda",
       "description": "3-broker Redpanda cluster (Kafka-compatible, no ZooKeeper/JVM) with Redpanda Console, deployable locally with plain Docker Compose or to Miget as a compose stack.",
       "categories": [
-        "deployable.sh"
+        "Streaming & Messaging"
       ],
       "platform": "linux",
       "repository": {
@@ -1571,17 +3649,32 @@
     },
     {
       "type": 3,
-      "title": "Rocketchat",
+      "title": "Rocket.Chat",
       "name": "rocketchat",
       "description": "Rocket.Chat - the open-source team communication platform: channels, DMs, threads, voice/video, an apps marketplace, and omnichannel (livechat/email/social). MIT core. The app is stateless - all state lives in MongoDB.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "rocketchat/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "MONGO_URL",
+          "label": "MONGO_URL",
+          "description": "MongoDB replica set.",
+          "default": "mongodb://mongo:27017/rocketchat?replicaSet=rs0"
+        },
+        {
+          "name": "ROOT_URL",
+          "label": "ROOT_URL",
+          "description": "The app's public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ],
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/rocket-chat.png"
     },
     {
       "type": 3,
@@ -1589,13 +3682,37 @@
       "name": "roundcube",
       "description": "Roundcube - the standard open-source webmail client: folders, search, contacts, filters, and a clean responsive skin.",
       "categories": [
-        "deployable.sh"
+        "Email & Newsletters"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "roundcube/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/roundcube.png",
+      "env": [
+        {
+          "name": "IMAP_HOST",
+          "label": "IMAP_HOST",
+          "description": "Your existing mail provider (this is a CLIENT - bring any IMAP/SMTP).",
+          "default": "ssl://imap.fastmail.com"
+        },
+        {
+          "name": "IMAP_PORT",
+          "label": "IMAP_PORT",
+          "default": "993"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_SERVER",
+          "label": "SMTP_SERVER",
+          "default": "tls://smtp.fastmail.com"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1603,41 +3720,119 @@
       "name": "saleor",
       "description": "Saleor - headless, GraphQL-first e-commerce (BSD-3): the API your custom storefront talks to, with a polished dashboard for the team. Official images, mirrored from the saleor-platform compose.",
       "categories": [
-        "deployable.sh"
+        "CMS & Publishing"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "saleor/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ADMIN_EMAIL",
+          "label": "ADMIN_EMAIL",
+          "description": "Superuser bootstrap (dashboard login).",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "ALLOWED_CLIENT_HOSTS",
+          "label": "ALLOWED_CLIENT_HOSTS",
+          "default": "localhost"
+        },
+        {
+          "name": "ALLOWED_HOSTS",
+          "label": "ALLOWED_HOSTS",
+          "default": "localhost,api"
+        },
+        {
+          "name": "API_URL",
+          "label": "API_URL",
+          "default": "http://localhost:5000/graphql/"
+        },
+        {
+          "name": "DASHBOARD_URL",
+          "label": "DASHBOARD_URL",
+          "default": "http://localhost:5001"
+        },
+        {
+          "name": "EMAIL_URL",
+          "label": "EMAIL_URL",
+          "default": "consolemail://"
+        },
+        {
+          "name": "PUBLIC_URL",
+          "label": "PUBLIC_URL",
+          "description": "Set these to real domains on Miget after first deploy:",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -base64 24"
+        },
+        {
+          "name": "SECRET_KEY",
+          "label": "SECRET_KEY"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Searxng",
+      "title": "SearXNG",
       "name": "searxng",
       "description": "SearXNG - a privacy-respecting metasearch engine: it queries 200+ search engines and aggregates the results with no tracking, no profiling, and no ads.",
       "categories": [
-        "deployable.sh"
+        "Search & Vectors"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "searxng/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/searxng.png",
+      "env": [
+        {
+          "name": "SEARXNG_BASE_URL",
+          "label": "SEARXNG_BASE_URL",
+          "description": "The app's public URL (https domain on Miget), with a trailing slash.",
+          "default": "http://localhost:5000/"
+        },
+        {
+          "name": "SEARXNG_SECRET",
+          "label": "SEARXNG_SECRET",
+          "description": "Secret key - a long random string."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Sftpgo",
+      "title": "SFTPGo",
       "name": "sftpgo",
       "description": "SFTPGo - the upload portal for Miget Buckets: create users whose storage IS an S3 bucket (custom endpoint, path-style, optional key prefix per user), give outsiders share-upload links, and optionally front it all with SFTP or WebDAV.",
       "categories": [
-        "deployable.sh"
+        "Object Storage"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "sftpgo/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/sftpgo.png",
+      "env": [
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "ADMIN_USERNAME",
+          "label": "ADMIN_USERNAME",
+          "default": "admin"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1645,27 +3840,64 @@
       "name": "shlink",
       "description": "Shlink - a self-hosted URL shortener: short links on your own domain with a full REST API, QR codes, rich visit analytics (with optional GeoIP), tags, device-based redirect rules, and link expiration.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "shlink/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/shlink.png",
+      "env": [
+        {
+          "name": "DEFAULT_DOMAIN",
+          "label": "DEFAULT_DOMAIN",
+          "description": "The short domain Shlink generates links on (its https domain on Miget, e.g.",
+          "default": "localhost:5000"
+        },
+        {
+          "name": "GEOLITE_LICENSE_KEY",
+          "label": "GEOLITE_LICENSE_KEY",
+          "description": "Optional: a MaxMind GeoLite2 license key enables geographic visit stats."
+        },
+        {
+          "name": "INITIAL_API_KEY",
+          "label": "INITIAL_API_KEY",
+          "description": "Your first API key, created on startup."
+        },
+        {
+          "name": "IS_HTTPS_ENABLED",
+          "label": "IS_HTTPS_ENABLED",
+          "default": "false"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Stirling Pdf",
+      "title": "Stirling-PDF",
       "name": "stirling-pdf",
       "description": "Stirling-PDF - 50+ PDF tools in the browser: merge, split, compress, OCR, convert, sign, redact, watermark.",
       "categories": [
-        "deployable.sh"
+        "Productivity & PM"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "stirling-pdf/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/stirling-pdf.png",
+      "env": [
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "ADMIN_USERNAME",
+          "label": "ADMIN_USERNAME",
+          "description": "Applied on FIRST startup only (before the user DB exists).",
+          "default": "admin"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1673,13 +3905,267 @@
       "name": "supabase",
       "description": "The full Supabase stack, Postgres (supabase image with extensions), Auth (GoTrue), REST (PostgREST), Realtime, Storage, postgres-meta, Studio, behind the Kong gateway, adapted from the official self-hosting compose.",
       "categories": [
-        "deployable.sh"
+        "Backend Platforms"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "supabase/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/supabase.png",
+      "env": [
+        {
+          "name": "ADDITIONAL_REDIRECT_URLS",
+          "label": "ADDITIONAL_REDIRECT_URLS"
+        },
+        {
+          "name": "ANON_KEY",
+          "label": "ANON_KEY"
+        },
+        {
+          "name": "ANON_KEY_ASYMMETRIC",
+          "label": "ANON_KEY_ASYMMETRIC"
+        },
+        {
+          "name": "API_EXTERNAL_URL",
+          "label": "API_EXTERNAL_URL"
+        },
+        {
+          "name": "DASHBOARD_PASSWORD",
+          "label": "DASHBOARD_PASSWORD"
+        },
+        {
+          "name": "DASHBOARD_USERNAME",
+          "label": "DASHBOARD_USERNAME"
+        },
+        {
+          "name": "DISABLE_SIGNUP",
+          "label": "DISABLE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_ANONYMOUS_USERS",
+          "label": "ENABLE_ANONYMOUS_USERS",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_EMAIL_AUTOCONFIRM",
+          "label": "ENABLE_EMAIL_AUTOCONFIRM",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_EMAIL_SIGNUP",
+          "label": "ENABLE_EMAIL_SIGNUP",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_PHONE_AUTOCONFIRM",
+          "label": "ENABLE_PHONE_AUTOCONFIRM",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_PHONE_SIGNUP",
+          "label": "ENABLE_PHONE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "FUNCTIONS_VERIFY_JWT",
+          "label": "FUNCTIONS_VERIFY_JWT",
+          "default": "false"
+        },
+        {
+          "name": "GLOBAL_S3_BUCKET",
+          "label": "GLOBAL_S3_BUCKET"
+        },
+        {
+          "name": "IMGPROXY_AUTO_WEBP",
+          "label": "IMGPROXY_AUTO_WEBP",
+          "default": "true"
+        },
+        {
+          "name": "JWT_EXPIRY",
+          "label": "JWT_EXPIRY",
+          "default": "3600"
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT_SECRET"
+        },
+        {
+          "name": "MAILER_URLPATHS_CONFIRMATION",
+          "label": "MAILER_URLPATHS_CONFIRMATION",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "label": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_INVITE",
+          "label": "MAILER_URLPATHS_INVITE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_RECOVERY",
+          "label": "MAILER_URLPATHS_RECOVERY",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OPENAI_API_KEY"
+        },
+        {
+          "name": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "label": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "default": "public"
+        },
+        {
+          "name": "PGRST_DB_MAX_ROWS",
+          "label": "PGRST_DB_MAX_ROWS",
+          "default": "1000"
+        },
+        {
+          "name": "PGRST_DB_SCHEMAS",
+          "label": "PGRST_DB_SCHEMAS",
+          "default": "public,storage,graphql_public"
+        },
+        {
+          "name": "PG_META_CRYPTO_KEY",
+          "label": "PG_META_CRYPTO_KEY"
+        },
+        {
+          "name": "POOLER_DB_POOL_SIZE",
+          "label": "POOLER_DB_POOL_SIZE",
+          "default": "5"
+        },
+        {
+          "name": "POOLER_DEFAULT_POOL_SIZE",
+          "label": "POOLER_DEFAULT_POOL_SIZE",
+          "default": "20"
+        },
+        {
+          "name": "POOLER_MAX_CLIENT_CONN",
+          "label": "POOLER_MAX_CLIENT_CONN",
+          "default": "100"
+        },
+        {
+          "name": "POOLER_PROXY_PORT_TRANSACTION",
+          "label": "POOLER_PROXY_PORT_TRANSACTION",
+          "default": "6543"
+        },
+        {
+          "name": "POOLER_TENANT_ID",
+          "label": "POOLER_TENANT_ID",
+          "default": "supabase"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "POSTGRES_DB",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_HOST",
+          "label": "POSTGRES_HOST",
+          "default": "supabase-db"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD"
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "label": "POSTGRES_PORT",
+          "default": "5432"
+        },
+        {
+          "name": "REGION",
+          "label": "REGION",
+          "default": "local"
+        },
+        {
+          "name": "S3_PROTOCOL_ACCESS_KEY_ID",
+          "label": "S3_PROTOCOL_ACCESS_KEY_ID"
+        },
+        {
+          "name": "S3_PROTOCOL_ACCESS_KEY_SECRET",
+          "label": "S3_PROTOCOL_ACCESS_KEY_SECRET"
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE"
+        },
+        {
+          "name": "SERVICE_ROLE_KEY",
+          "label": "SERVICE_ROLE_KEY"
+        },
+        {
+          "name": "SERVICE_ROLE_KEY_ASYMMETRIC",
+          "label": "SERVICE_ROLE_KEY_ASYMMETRIC"
+        },
+        {
+          "name": "SITE_URL",
+          "label": "SITE_URL"
+        },
+        {
+          "name": "SMTP_ADMIN_EMAIL",
+          "label": "SMTP_ADMIN_EMAIL",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST"
+        },
+        {
+          "name": "SMTP_PASS",
+          "label": "SMTP_PASS"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_SENDER_NAME",
+          "label": "SMTP_SENDER_NAME",
+          "default": "Supabase"
+        },
+        {
+          "name": "SMTP_USER",
+          "label": "SMTP_USER"
+        },
+        {
+          "name": "STORAGE_TENANT_ID",
+          "label": "STORAGE_TENANT_ID",
+          "default": "supabase"
+        },
+        {
+          "name": "STUDIO_DEFAULT_ORGANIZATION",
+          "label": "STUDIO_DEFAULT_ORGANIZATION",
+          "default": "Default Organization"
+        },
+        {
+          "name": "STUDIO_DEFAULT_PROJECT",
+          "label": "STUDIO_DEFAULT_PROJECT",
+          "default": "Default Project"
+        },
+        {
+          "name": "SUPABASE_PUBLIC_URL",
+          "label": "SUPABASE_PUBLIC_URL"
+        },
+        {
+          "name": "SUPABASE_PUBLISHABLE_KEY",
+          "label": "SUPABASE_PUBLISHABLE_KEY"
+        },
+        {
+          "name": "SUPABASE_SECRET_KEY",
+          "label": "SUPABASE_SECRET_KEY"
+        },
+        {
+          "name": "VAULT_ENC_KEY",
+          "label": "VAULT_ENC_KEY"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1687,13 +4173,202 @@
       "name": "supabase-lite",
       "description": "The budget cut of the supabase template: Postgres, Auth (GoTrue) and REST (PostgREST) behind the Kong gateway - the four services most Supabase apps actually use - plus the Studio dashboard. No Realtime, Storage, edge functions or pooler.",
       "categories": [
-        "deployable.sh"
+        "Backend Platforms"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "supabase-lite/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/supabase.png",
+      "env": [
+        {
+          "name": "ADDITIONAL_REDIRECT_URLS",
+          "label": "ADDITIONAL_REDIRECT_URLS"
+        },
+        {
+          "name": "ANON_KEY",
+          "label": "ANON_KEY"
+        },
+        {
+          "name": "ANON_KEY_ASYMMETRIC",
+          "label": "ANON_KEY_ASYMMETRIC"
+        },
+        {
+          "name": "API_EXTERNAL_URL",
+          "label": "API_EXTERNAL_URL"
+        },
+        {
+          "name": "DASHBOARD_PASSWORD",
+          "label": "DASHBOARD_PASSWORD"
+        },
+        {
+          "name": "DASHBOARD_USERNAME",
+          "label": "DASHBOARD_USERNAME"
+        },
+        {
+          "name": "DISABLE_SIGNUP",
+          "label": "DISABLE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_ANONYMOUS_USERS",
+          "label": "ENABLE_ANONYMOUS_USERS",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_EMAIL_AUTOCONFIRM",
+          "label": "ENABLE_EMAIL_AUTOCONFIRM",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_EMAIL_SIGNUP",
+          "label": "ENABLE_EMAIL_SIGNUP",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_PHONE_AUTOCONFIRM",
+          "label": "ENABLE_PHONE_AUTOCONFIRM",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_PHONE_SIGNUP",
+          "label": "ENABLE_PHONE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "JWT_EXPIRY",
+          "label": "JWT_EXPIRY",
+          "default": "3600"
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT_SECRET"
+        },
+        {
+          "name": "MAILER_URLPATHS_CONFIRMATION",
+          "label": "MAILER_URLPATHS_CONFIRMATION",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "label": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_INVITE",
+          "label": "MAILER_URLPATHS_INVITE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_RECOVERY",
+          "label": "MAILER_URLPATHS_RECOVERY",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OPENAI_API_KEY"
+        },
+        {
+          "name": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "label": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "default": "public"
+        },
+        {
+          "name": "PGRST_DB_MAX_ROWS",
+          "label": "PGRST_DB_MAX_ROWS",
+          "default": "1000"
+        },
+        {
+          "name": "PGRST_DB_SCHEMAS",
+          "label": "PGRST_DB_SCHEMAS",
+          "default": "public,graphql_public"
+        },
+        {
+          "name": "PG_META_CRYPTO_KEY",
+          "label": "PG_META_CRYPTO_KEY"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "POSTGRES_DB",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_HOST",
+          "label": "POSTGRES_HOST",
+          "default": "supabase-db"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD"
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "label": "POSTGRES_PORT",
+          "default": "5432"
+        },
+        {
+          "name": "SERVICE_ROLE_KEY",
+          "label": "SERVICE_ROLE_KEY"
+        },
+        {
+          "name": "SERVICE_ROLE_KEY_ASYMMETRIC",
+          "label": "SERVICE_ROLE_KEY_ASYMMETRIC"
+        },
+        {
+          "name": "SITE_URL",
+          "label": "SITE_URL"
+        },
+        {
+          "name": "SMTP_ADMIN_EMAIL",
+          "label": "SMTP_ADMIN_EMAIL",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST"
+        },
+        {
+          "name": "SMTP_PASS",
+          "label": "SMTP_PASS"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_SENDER_NAME",
+          "label": "SMTP_SENDER_NAME",
+          "default": "Supabase"
+        },
+        {
+          "name": "SMTP_USER",
+          "label": "SMTP_USER"
+        },
+        {
+          "name": "STUDIO_DEFAULT_ORGANIZATION",
+          "label": "STUDIO_DEFAULT_ORGANIZATION",
+          "default": "Default Organization"
+        },
+        {
+          "name": "STUDIO_DEFAULT_PROJECT",
+          "label": "STUDIO_DEFAULT_PROJECT",
+          "default": "Default Project"
+        },
+        {
+          "name": "SUPABASE_PUBLIC_URL",
+          "label": "SUPABASE_PUBLIC_URL"
+        },
+        {
+          "name": "SUPABASE_PUBLISHABLE_KEY",
+          "label": "SUPABASE_PUBLISHABLE_KEY"
+        },
+        {
+          "name": "SUPABASE_SECRET_KEY",
+          "label": "SUPABASE_SECRET_KEY"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1701,13 +4376,207 @@
       "name": "supabase-nano",
       "description": "supabase-lite squeezed into a 1 GiB plan - the same six services (Postgres, Auth, REST, Kong, Studio, postgres-meta), memory- tuned until the whole stack, dashboard included, allocates exactly 1024 MiB.",
       "categories": [
-        "deployable.sh"
+        "Backend Platforms"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "supabase-nano/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/supabase.png",
+      "env": [
+        {
+          "name": "ADDITIONAL_REDIRECT_URLS",
+          "label": "ADDITIONAL_REDIRECT_URLS"
+        },
+        {
+          "name": "ANON_KEY",
+          "label": "ANON_KEY"
+        },
+        {
+          "name": "ANON_KEY_ASYMMETRIC",
+          "label": "ANON_KEY_ASYMMETRIC"
+        },
+        {
+          "name": "API_EXTERNAL_URL",
+          "label": "API_EXTERNAL_URL"
+        },
+        {
+          "name": "DASHBOARD_PASSWORD",
+          "label": "DASHBOARD_PASSWORD"
+        },
+        {
+          "name": "DASHBOARD_USERNAME",
+          "label": "DASHBOARD_USERNAME"
+        },
+        {
+          "name": "DISABLE_SIGNUP",
+          "label": "DISABLE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_ANONYMOUS_USERS",
+          "label": "ENABLE_ANONYMOUS_USERS",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_EMAIL_AUTOCONFIRM",
+          "label": "ENABLE_EMAIL_AUTOCONFIRM",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_EMAIL_SIGNUP",
+          "label": "ENABLE_EMAIL_SIGNUP",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_PHONE_AUTOCONFIRM",
+          "label": "ENABLE_PHONE_AUTOCONFIRM",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_PHONE_SIGNUP",
+          "label": "ENABLE_PHONE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "JWT_EXPIRY",
+          "label": "JWT_EXPIRY",
+          "default": "3600"
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT_SECRET"
+        },
+        {
+          "name": "MAILER_URLPATHS_CONFIRMATION",
+          "label": "MAILER_URLPATHS_CONFIRMATION",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "label": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_INVITE",
+          "label": "MAILER_URLPATHS_INVITE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_RECOVERY",
+          "label": "MAILER_URLPATHS_RECOVERY",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OPENAI_API_KEY"
+        },
+        {
+          "name": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "label": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "default": "public"
+        },
+        {
+          "name": "PGRST_DB_MAX_ROWS",
+          "label": "PGRST_DB_MAX_ROWS",
+          "default": "1000"
+        },
+        {
+          "name": "PGRST_DB_POOL",
+          "label": "PGRST_DB_POOL",
+          "default": "2"
+        },
+        {
+          "name": "PGRST_DB_SCHEMAS",
+          "label": "PGRST_DB_SCHEMAS",
+          "default": "public,graphql_public"
+        },
+        {
+          "name": "PG_META_CRYPTO_KEY",
+          "label": "PG_META_CRYPTO_KEY"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "POSTGRES_DB",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_HOST",
+          "label": "POSTGRES_HOST",
+          "default": "supabase-db"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD"
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "label": "POSTGRES_PORT",
+          "default": "5432"
+        },
+        {
+          "name": "SERVICE_ROLE_KEY",
+          "label": "SERVICE_ROLE_KEY"
+        },
+        {
+          "name": "SERVICE_ROLE_KEY_ASYMMETRIC",
+          "label": "SERVICE_ROLE_KEY_ASYMMETRIC"
+        },
+        {
+          "name": "SITE_URL",
+          "label": "SITE_URL"
+        },
+        {
+          "name": "SMTP_ADMIN_EMAIL",
+          "label": "SMTP_ADMIN_EMAIL",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST"
+        },
+        {
+          "name": "SMTP_PASS",
+          "label": "SMTP_PASS"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_SENDER_NAME",
+          "label": "SMTP_SENDER_NAME",
+          "default": "Supabase"
+        },
+        {
+          "name": "SMTP_USER",
+          "label": "SMTP_USER"
+        },
+        {
+          "name": "STUDIO_DEFAULT_ORGANIZATION",
+          "label": "STUDIO_DEFAULT_ORGANIZATION",
+          "default": "Default Organization"
+        },
+        {
+          "name": "STUDIO_DEFAULT_PROJECT",
+          "label": "STUDIO_DEFAULT_PROJECT",
+          "default": "Default Project"
+        },
+        {
+          "name": "SUPABASE_PUBLIC_URL",
+          "label": "SUPABASE_PUBLIC_URL"
+        },
+        {
+          "name": "SUPABASE_PUBLISHABLE_KEY",
+          "label": "SUPABASE_PUBLISHABLE_KEY"
+        },
+        {
+          "name": "SUPABASE_SECRET_KEY",
+          "label": "SUPABASE_SECRET_KEY"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1715,13 +4584,161 @@
       "name": "supabase-pico",
       "description": "Supabase's API surface - Postgres, Auth (GoTrue) and REST (PostgREST) - in 512 MiB total.",
       "categories": [
-        "deployable.sh"
+        "Backend Platforms"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "supabase-pico/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/supabase.png",
+      "env": [
+        {
+          "name": "ADDITIONAL_REDIRECT_URLS",
+          "label": "ADDITIONAL_REDIRECT_URLS"
+        },
+        {
+          "name": "ANON_KEY",
+          "label": "ANON_KEY"
+        },
+        {
+          "name": "API_EXTERNAL_URL",
+          "label": "API_EXTERNAL_URL"
+        },
+        {
+          "name": "DISABLE_SIGNUP",
+          "label": "DISABLE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_ANONYMOUS_USERS",
+          "label": "ENABLE_ANONYMOUS_USERS",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_EMAIL_AUTOCONFIRM",
+          "label": "ENABLE_EMAIL_AUTOCONFIRM",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_EMAIL_SIGNUP",
+          "label": "ENABLE_EMAIL_SIGNUP",
+          "default": "true"
+        },
+        {
+          "name": "ENABLE_PHONE_AUTOCONFIRM",
+          "label": "ENABLE_PHONE_AUTOCONFIRM",
+          "default": "false"
+        },
+        {
+          "name": "ENABLE_PHONE_SIGNUP",
+          "label": "ENABLE_PHONE_SIGNUP",
+          "default": "false"
+        },
+        {
+          "name": "JWT_EXPIRY",
+          "label": "JWT_EXPIRY",
+          "default": "3600"
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT_SECRET"
+        },
+        {
+          "name": "MAILER_URLPATHS_CONFIRMATION",
+          "label": "MAILER_URLPATHS_CONFIRMATION",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "label": "MAILER_URLPATHS_EMAIL_CHANGE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_INVITE",
+          "label": "MAILER_URLPATHS_INVITE",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "MAILER_URLPATHS_RECOVERY",
+          "label": "MAILER_URLPATHS_RECOVERY",
+          "default": "/auth/v1/verify"
+        },
+        {
+          "name": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "label": "PGRST_DB_EXTRA_SEARCH_PATH",
+          "default": "public"
+        },
+        {
+          "name": "PGRST_DB_MAX_ROWS",
+          "label": "PGRST_DB_MAX_ROWS",
+          "default": "1000"
+        },
+        {
+          "name": "PGRST_DB_POOL",
+          "label": "PGRST_DB_POOL",
+          "default": "2"
+        },
+        {
+          "name": "PGRST_DB_SCHEMAS",
+          "label": "PGRST_DB_SCHEMAS",
+          "default": "public,graphql_public"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "label": "POSTGRES_DB",
+          "default": "postgres"
+        },
+        {
+          "name": "POSTGRES_HOST",
+          "label": "POSTGRES_HOST",
+          "default": "supabase-db"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD"
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "label": "POSTGRES_PORT",
+          "default": "5432"
+        },
+        {
+          "name": "SERVICE_ROLE_KEY",
+          "label": "SERVICE_ROLE_KEY"
+        },
+        {
+          "name": "SITE_URL",
+          "label": "SITE_URL"
+        },
+        {
+          "name": "SMTP_ADMIN_EMAIL",
+          "label": "SMTP_ADMIN_EMAIL",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST"
+        },
+        {
+          "name": "SMTP_PASS",
+          "label": "SMTP_PASS"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_SENDER_NAME",
+          "label": "SMTP_SENDER_NAME",
+          "default": "Supabase"
+        },
+        {
+          "name": "SMTP_USER",
+          "label": "SMTP_USER"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1729,27 +4746,50 @@
       "name": "superset",
       "description": "Superset - the Apache BI platform: dashboards, the no-code chart builder, SQL Lab, and alerts/reports, over practically every database.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "superset/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "ADMIN_PASSWORD"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        },
+        {
+          "name": "SUPERSET_SECRET_KEY",
+          "label": "SUPERSET_SECRET_KEY"
+        }
+      ],
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/apache-superset.png"
     },
     {
       "type": 3,
-      "title": "Tei",
+      "title": "TEI Embeddings",
       "name": "tei",
       "description": "TEI - Hugging Face's Rust embeddings server: small models like `BAAI/bge-small-en-v1.5` (384-dim) serve real RAG workloads from CPU in ~512 MB, over both TEI's native API and an OpenAI-compatible `/v1/embeddings` endpoint.",
       "categories": [
-        "deployable.sh"
+        "LLM Infrastructure"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "tei/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "MODEL_ID",
+          "label": "MODEL_ID",
+          "default": "BAAI/bge-small-en-v1.5"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1757,55 +4797,112 @@
       "name": "temporal",
       "description": "Temporal - durable execution: write workflows as ordinary code and Temporal makes them crash-proof, with automatic retries, timers that survive restarts, and a complete event history.",
       "categories": [
-        "deployable.sh"
+        "Automation & Jobs"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "temporal/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "SKIP_DB_CREATE",
+          "label": "SKIP_DB_CREATE",
+          "description": "Local dev creates both databases automatically.",
+          "default": "false"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Timescaledb",
+      "title": "TimescaleDB",
       "name": "timescaledb",
       "description": "TimescaleDB - Postgres with the timescaledb extension: hypertables, columnar compression, and continuous aggregates for time-series workloads. Single node + 20 GB volume, internal-only (databases never get a public domain).",
       "categories": [
-        "deployable.sh"
+        "Databases"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "timescaledb/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "POSTGRES_PASSWORD",
+          "label": "POSTGRES_PASSWORD",
+          "description": "Password for the `app` Postgres user."
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Tooljet",
+      "title": "ToolJet",
       "name": "tooljet",
       "description": "ToolJet CE - open-source low-code platform for internal tools: visual app builder, 50+ datasource connectors, JS/Python where you need logic. One app container + a managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "Internal Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "tooljet/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/tooljet.png",
+      "env": [
+        {
+          "name": "LOCKBOX_MASTER_KEY",
+          "label": "LOCKBOX_MASTER_KEY",
+          "description": "Datasource credential encryption - losing it orphans saved datasources."
+        },
+        {
+          "name": "PGRST_JWT_SECRET",
+          "label": "PGRST_JWT_SECRET",
+          "description": "ToolJet Database (PostgREST) JWT."
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE",
+          "description": "Session cookies."
+        },
+        {
+          "name": "TOOLJET_HOST",
+          "label": "TOOLJET_HOST",
+          "description": "Public URL of the instance (scheme required).",
+          "default": "http://localhost:5000"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Twenty",
+      "title": "Twenty CRM",
       "name": "twenty",
       "description": "Twenty - the open-source CRM rethought for this decade: a modern data model (any object, custom fields), pipelines, notes, tasks, email sync, and workflows.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "twenty/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "ENCRYPTION_KEY",
+          "label": "ENCRYPTION_KEY"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -base64 24"
+        },
+        {
+          "name": "SERVER_URL",
+          "label": "SERVER_URL",
+          "description": "Must EXACTLY match the public URL (https domain on Miget).",
+          "default": "http://localhost:5000"
+        }
+      ],
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/twenty-crm.png"
     },
     {
       "type": 3,
@@ -1813,13 +4910,66 @@
       "name": "typebot",
       "description": "Typebot - the open-source conversational form builder: drag-and-drop bot flows that outconvert static forms, embeds for any site, and results analytics. Two stateless apps (builder + viewer) on one managed Postgres.",
       "categories": [
-        "deployable.sh"
+        "Business Apps"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "typebot/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/typebot.png",
+      "env": [
+        {
+          "name": "ADMIN_EMAIL",
+          "label": "ADMIN_EMAIL",
+          "description": "This account gets the unlimited plan in your instance.",
+          "default": "admin@example.com"
+        },
+        {
+          "name": "DISABLE_SIGNUP",
+          "label": "DISABLE_SIGNUP",
+          "description": "Set true after your team has signed up.",
+          "default": "false"
+        },
+        {
+          "name": "ENCRYPTION_SECRET",
+          "label": "ENCRYPTION_SECRET",
+          "description": "EXACTLY 32 characters, identical on both apps: openssl rand -base64 24 | tr -d '\\n'"
+        },
+        {
+          "name": "NEXTAUTH_URL",
+          "label": "NEXTAUTH_URL",
+          "description": "Public URLs (the two apps' https domains on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "NEXT_PUBLIC_SMTP_FROM",
+          "label": "NEXT_PUBLIC_SMTP_FROM"
+        },
+        {
+          "name": "NEXT_PUBLIC_VIEWER_URL",
+          "label": "NEXT_PUBLIC_VIEWER_URL",
+          "default": "http://localhost:5001"
+        },
+        {
+          "name": "SMTP_HOST",
+          "label": "SMTP_HOST",
+          "description": "Magic-link login emails (mailpit works for testing)."
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "label": "SMTP_PASSWORD"
+        },
+        {
+          "name": "SMTP_PORT",
+          "label": "SMTP_PORT",
+          "default": "587"
+        },
+        {
+          "name": "SMTP_USERNAME",
+          "label": "SMTP_USERNAME"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1827,13 +4977,21 @@
       "name": "typesense",
       "description": "Typesense - the typo-tolerant instant-search engine built for raw speed: a C++ binary with in-memory indexes, facets, filtering, vector + hybrid search, and an InstantSearch-compatible adapter.",
       "categories": [
-        "deployable.sh"
+        "Search & Vectors"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "typesense/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/typesense.png",
+      "env": [
+        {
+          "name": "TYPESENSE_API_KEY",
+          "label": "TYPESENSE_API_KEY",
+          "description": "Admin API key - derive scoped search-only keys for clients."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1841,13 +4999,21 @@
       "name": "umami",
       "description": "Umami v3 - privacy-first web analytics: no cookies, no cross-site tracking, GDPR/PECR-friendly, with a clean dashboard and a ~2 KB tracking script. One stateless container + a managed Postgres (Umami v3 dropped MySQL - Postgres only).",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "umami/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/umami.png",
+      "env": [
+        {
+          "name": "APP_SECRET",
+          "label": "APP_SECRET",
+          "description": "Signs auth tokens - unique per install."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1855,13 +5021,25 @@
       "name": "unleash",
       "description": "Unleash - the open-source feature flag and toggle platform: gradual rollouts, user/segment targeting, A/B testing, kill switches, and SDKs for every language. Single stateless container on a managed Postgres (no Redis).",
       "categories": [
-        "deployable.sh"
+        "Dev Tools"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "unleash/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "DATABASE_SSL",
+          "label": "DATABASE_SSL",
+          "description": "Set to '{\"rejectUnauthorized\":false}' for a TLS Postgres without a CA."
+        },
+        {
+          "name": "INIT_ADMIN_API_TOKENS",
+          "label": "INIT_ADMIN_API_TOKENS",
+          "description": "Optional: seed an admin API token (e.g."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1869,27 +5047,68 @@
       "name": "uptime-kuma",
       "description": "Uptime Kuma v2 - self-hosted uptime monitoring: HTTP(S)/TCP/DNS/ping checks, alerting to 100+ notification providers, and public status pages. Single container, SQLite on a small volume.",
       "categories": [
-        "deployable.sh"
+        "Monitoring & Analytics"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "uptime-kuma/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/uptime-kuma.png"
     },
     {
       "type": 3,
-      "title": "Usesend",
+      "title": "useSend",
       "name": "usesend",
       "description": "useSend (formerly Unsend) - the open-source Resend alternative: transactional email API, campaigns, contacts, and delivery analytics, with the actual sending done by your AWS SES (~$0.10 per 1,000 emails - deliverability is SES's job, the",
       "categories": [
-        "deployable.sh"
+        "Email & Newsletters"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "usesend/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "label": "AWS_ACCESS_KEY_ID",
+          "description": "AWS SES credentials - useSend delivers through YOUR SES."
+        },
+        {
+          "name": "AWS_DEFAULT_REGION",
+          "label": "AWS_DEFAULT_REGION",
+          "default": "us-east-1"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "label": "AWS_SECRET_ACCESS_KEY"
+        },
+        {
+          "name": "GITHUB_ID",
+          "label": "GITHUB_ID",
+          "description": "GitHub OAuth app (login provider) - callback: <NEXTAUTH_URL>/api/auth/callback/github"
+        },
+        {
+          "name": "GITHUB_SECRET",
+          "label": "GITHUB_SECRET"
+        },
+        {
+          "name": "NEXTAUTH_SECRET",
+          "label": "NEXTAUTH_SECRET"
+        },
+        {
+          "name": "NEXTAUTH_URL",
+          "label": "NEXTAUTH_URL",
+          "description": "Public URL (the app's https domain on Miget).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "REDIS_AUTH",
+          "label": "REDIS_AUTH",
+          "default": "# openssl rand -hex 24"
+        }
+      ]
     },
     {
       "type": 3,
@@ -1897,13 +5116,21 @@
       "name": "valkey",
       "description": "Valkey - the BSD-licensed, Redis-compatible in-memory data store, forked and stewarded by the Linux Foundation after Redis changed its license. Drop-in for Redis clients: caching, queues, pub/sub, streams, and data structures.",
       "categories": [
-        "deployable.sh"
+        "Caches & Key-Value"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "valkey/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/valkey.png",
+      "env": [
+        {
+          "name": "VALKEY_PASSWORD",
+          "label": "VALKEY_PASSWORD",
+          "description": "Valkey password (requirepass)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1911,13 +5138,21 @@
       "name": "valkey-cluster",
       "description": "Horizontally-scaled Valkey where the keyspace is partitioned across multiple master shards, each with a replica - the same design as Redis Cluster, BSD-licensed and Redis-protocol compatible.",
       "categories": [
-        "deployable.sh"
+        "Caches & Key-Value"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "valkey-cluster/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/valkey.png",
+      "env": [
+        {
+          "name": "VALKEY_PASSWORD",
+          "label": "VALKEY_PASSWORD",
+          "description": "Shared Valkey password (all nodes + the cluster-forming init)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1925,13 +5160,21 @@
       "name": "valkey-sentinel",
       "description": "High availability for Valkey with automatic failover, using Valkey's built-in Sentinel (the same design as Redis Sentinel). One master, two replicas, and three sentinels that watch the master and promote a replica if it fails.",
       "categories": [
-        "deployable.sh"
+        "Caches & Key-Value"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "valkey-sentinel/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/valkey.png",
+      "env": [
+        {
+          "name": "VALKEY_PASSWORD",
+          "label": "VALKEY_PASSWORD",
+          "description": "Shared Valkey password (master, replicas, and sentinel auth)."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1939,27 +5182,48 @@
       "name": "vaultwarden",
       "description": "Vaultwarden - the Bitwarden-compatible server in Rust: the official Bitwarden browser extensions, mobile and desktop apps, and CLI all connect to it unchanged. One ~tiny container + a 2 GB volume (SQLite, attachments, keys).",
       "categories": [
-        "deployable.sh"
+        "Security"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "vaultwarden/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/vaultwarden.png",
+      "env": [
+        {
+          "name": "ADMIN_TOKEN",
+          "label": "ADMIN_TOKEN",
+          "description": "Optional admin page token - argon2 PHC hash, NOT plaintext: docker run --rm -it vaultwarden/server /vaultwarden hash --preset owasp In .env files, keep the hash"
+        },
+        {
+          "name": "DOMAIN",
+          "label": "DOMAIN",
+          "description": "Full public URL of the instance (https in production - WebAuthn and email links depend on it).",
+          "default": "http://localhost:5000"
+        },
+        {
+          "name": "SIGNUPS_ALLOWED",
+          "label": "SIGNUPS_ALLOWED",
+          "description": "Close after creating your accounts (org invitations still work).",
+          "default": "true"
+        }
+      ]
     },
     {
       "type": 3,
-      "title": "Wordpress",
+      "title": "WordPress",
       "name": "wordpress",
       "description": "The official WordPress image (Apache variant) behind a thin nginx proxy, backed by a self-hosted MySQL. Plugins, themes and uploads persist on the `/var/www/html` volume.",
       "categories": [
-        "deployable.sh"
+        "CMS & Publishing"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "wordpress/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/wordpress.png"
     },
     {
       "type": 3,
@@ -1967,13 +5231,20 @@
       "name": "writebook",
       "description": "Writebook - 37signals' free, self-hosted publishing tool: write and share books, manuals, and documentation with a clean, fast reader. It is a Rails app (the same stack behind Basecamp and HEY) fronted by Thruster, 37signals' HTTP/2 proxy.",
       "categories": [
-        "deployable.sh"
+        "CMS & Publishing"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "writebook/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "SECRET_KEY_BASE",
+          "label": "SECRET_KEY_BASE",
+          "description": "Rails secret - a long random string."
+        }
+      ]
     },
     {
       "type": 3,
@@ -1981,13 +5252,37 @@
       "name": "zitadel",
       "description": "Zitadel - modern identity infrastructure: OIDC, SAML, passkeys-first login, multi-tenant organizations, and JS actions for custom logic. One stateless Go binary on Postgres - the lightest full IdP in the catalogue (~512 MB).",
       "categories": [
-        "deployable.sh"
+        "Auth & API Gateway"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/deployable-sh/stacks",
         "stackfile": "zitadel/compose.yaml"
-      }
+      },
+      "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/zitadel.png",
+      "env": [
+        {
+          "name": "ZITADEL_EXTERNALDOMAIN",
+          "label": "ZITADEL_EXTERNALDOMAIN",
+          "description": "BAKED AT FIRST SETUP - set the final domain before first deploy.",
+          "default": "localhost"
+        },
+        {
+          "name": "ZITADEL_EXTERNALPORT",
+          "label": "ZITADEL_EXTERNALPORT",
+          "default": "5000"
+        },
+        {
+          "name": "ZITADEL_EXTERNALSECURE",
+          "label": "ZITADEL_EXTERNALSECURE",
+          "default": "false"
+        },
+        {
+          "name": "ZITADEL_MASTERKEY",
+          "label": "ZITADEL_MASTERKEY",
+          "description": "Exactly 32 characters: tr -dc A-Za-z0-9 </dev/urandom | head -c 32"
+        }
+      ]
     }
   ]
 }
