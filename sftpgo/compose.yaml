@@ -2,7 +2,7 @@ name: sftpgo
 
 services:
   sftpgo:
-    image: drakkan/sftpgo:v2.7.5
+    image: drakkan/sftpgo:v2.7.6
     restart: unless-stopped
     environment:
       SFTPGO_HTTPD__BINDINGS__0__ADDRESS: 0.0.0.0
