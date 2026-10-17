@@ -2,7 +2,7 @@ name: filebrowser
 
 services:
   filebrowser:
-    image: filebrowser/filebrowser:v2.63.18
+    image: filebrowser/filebrowser:v2.63.23
     restart: unless-stopped
     environment:
       FB_PORT: "5000"
