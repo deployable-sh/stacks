@@ -2,7 +2,7 @@ name: buildkite-agent
 
 services:
   agent:
-    image: buildkite/agent:3-ubuntu
+    image: buildkite/agent:4-ubuntu
     restart: unless-stopped
     environment:
       BUILDKITE_AGENT_TOKEN: ${BUILDKITE_AGENT_TOKEN}

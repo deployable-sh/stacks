@@ -25,7 +25,7 @@ services:
       - db
 
   db:
-    image: mysql:8
+    image: mysql:26
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root-local-only
