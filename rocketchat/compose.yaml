@@ -14,7 +14,7 @@ services:
       - mongo
 
   mongo:
-    image: mongo:8
+    image: mongo:9
     restart: unless-stopped
     command:
       - sh
