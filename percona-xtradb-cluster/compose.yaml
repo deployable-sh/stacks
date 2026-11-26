@@ -1,7 +1,7 @@
 name: percona-xtradb-cluster
 
 x-pxc: &pxc
-  image: percona/percona-xtradb-cluster:8.4
+  image: percona/percona-xtradb-cluster:9.7
   restart: unless-stopped
   stop_grace_period: 2m
 

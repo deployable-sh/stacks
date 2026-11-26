@@ -1,7 +1,7 @@
 name: glitchtip
 
 x-glitchtip: &glitchtip
-  image: glitchtip/glitchtip:6.2.2
+  image: glitchtip/glitchtip:7.0.0
   restart: unless-stopped
 
 x-glitchtip-env: &glitchtip-env
@@ -45,7 +45,7 @@ services:
       - db
 
   db:
-    image: postgres:17
+    image: postgres:19
     restart: unless-stopped
     environment:
       POSTGRES_USER: glitchtip
@@ -55,7 +55,7 @@ services:
       - dbdata:/var/lib/postgresql/data
 
   queue:
-    image: valkey/valkey:7.2
+    image: valkey/valkey:9.2
     restart: unless-stopped
 
 volumes:
