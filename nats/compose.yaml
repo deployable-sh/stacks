@@ -1,7 +1,7 @@
 name: nats
 
 x-node: &node
-  image: nats:2.14-alpine
+  image: nats:2.15-alpine
   restart: unless-stopped
   healthcheck:
     test: ["CMD", "wget", "--spider", "-q", "http://localhost:8222/healthz?js-server-only=true"]

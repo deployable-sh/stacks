@@ -1,7 +1,7 @@
 name: kafka
 
 x-kafka: &kafka
-  image: apache/kafka:4.0.0
+  image: apache/kafka:4.4.0
   restart: unless-stopped
 
 x-kafka-env: &kafka-env
@@ -64,7 +64,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 60s
-    image: ghcr.io/kafbat/kafka-ui:v1.5.0
+    image: ghcr.io/kafbat/kafka-ui:v1.5.1
     restart: unless-stopped
     environment:
       KAFKA_CLUSTERS_0_NAME: kafka
